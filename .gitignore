@@ -1,0 +1,10 @@
+.env
+config/settings.yaml
+__pycache__/
+*.pyc
+data/inputs/*
+data/outputs/*
+!data/inputs/.gitkeep
+!data/outputs/.gitkeep
+*.sqlite
+.venv/

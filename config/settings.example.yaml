@@ -1,0 +1,17 @@
+goal:
+  weekly_positive_replies: 10
+  target_positive_rate: 0.0075   # 0.75%, midpoint of 0.5-1%
+sending:
+  daily_per_inbox: 30
+  max_bounce_rate: 0.02
+  warmup_weeks: 3
+sequence:
+  touches: 5
+  spacing_days: [0, 3, 4, 5, 6]
+compliance:
+  geography: US
+  physical_address: "TODO: required by CAN-SPAM"
+  unsubscribe_required: true
+budget:
+  per_opportunity_usd: null      # set when you decide the figure
+  priority: [verification, sending_infra, incentives, hosting]
