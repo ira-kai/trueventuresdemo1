@@ -1,10 +1,6 @@
+node_modules/
+.next/
 .env
-config/settings.yaml
-__pycache__/
-*.pyc
-data/inputs/*
-data/outputs/*
-!data/inputs/.gitkeep
-!data/outputs/.gitkeep
-*.sqlite
-.venv/
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
