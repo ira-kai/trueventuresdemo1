@@ -1,0 +1,99 @@
+{
+  "name": "DEMO PRODUCT \u2014 replace me",
+  "oneLiner": "PLACEHOLDER product profile. Sequence + landing-page quality is only as good as this file. Replace with your real product before sending anything.",
+  "placeholder": true,
+  "segments": [
+    {
+      "key": "eng-leader",
+      "label": "Engineering leaders",
+      "match": {
+        "titles": [
+          "cto",
+          "vp eng",
+          "vp of engineering",
+          "head of engineering",
+          "director of engineering",
+          "engineering manager",
+          "svp engineering"
+        ],
+        "industries": [
+          "software",
+          "saas",
+          "fintech",
+          "technology"
+        ]
+      },
+      "pain": "keeping reliability steady while you ship faster",
+      "okr": "deploy frequency and incident MTTR",
+      "proofPoints": [
+        "illustrative: a ~200-engineer org cut mean-time-to-resolution by roughly 40% in a quarter",
+        "illustrative: teams typically recover ~3-5 eng hours/week per on-call rotation"
+      ]
+    },
+    {
+      "key": "data-leader",
+      "label": "Data & analytics leaders",
+      "match": {
+        "titles": [
+          "chief data officer",
+          "vp data",
+          "head of analytics",
+          "head of data",
+          "director of data",
+          "vp analytics"
+        ],
+        "industries": [
+          "software",
+          "saas",
+          "ecommerce",
+          "retail",
+          "fintech"
+        ]
+      },
+      "pain": "getting to an answer when the data's spread across tools",
+      "okr": "self-serve analytics adoption and reporting turnaround",
+      "proofPoints": [
+        "illustrative: analyst teams cut routine reporting turnaround from days to hours",
+        "illustrative: self-serve adoption among non-analysts roughly doubled"
+      ]
+    },
+    {
+      "key": "ops-leader",
+      "label": "Operations leaders",
+      "match": {
+        "titles": [
+          "coo",
+          "vp operations",
+          "head of ops",
+          "director of operations",
+          "vp of operations"
+        ],
+        "industries": [
+          "logistics",
+          "manufacturing",
+          "healthcare",
+          "retail",
+          "ecommerce"
+        ]
+      },
+      "pain": "scaling the workflow without scaling headcount",
+      "okr": "cost-per-transaction and cycle time",
+      "proofPoints": [
+        "illustrative: a mid-market ops team automated ~60% of a manual intake workflow",
+        "illustrative: cycle time on a core process dropped by about a third"
+      ]
+    }
+  ],
+  "defaultSegment": {
+    "key": "general",
+    "label": "General",
+    "match": {
+      "titles": []
+    },
+    "pain": "doing more with the team you already have",
+    "okr": "the efficiency metric your team is measured on",
+    "proofPoints": [
+      "illustrative: teams commonly recover several hours per person per week"
+    ]
+  }
+}
