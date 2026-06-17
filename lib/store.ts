@@ -1,9 +1,11 @@
-// Storage abstraction. On Vercel there is no persistent local disk, so anything
-// stateful (suppression, prospects, experiments) must live in a hosted store.
+// Storage abstraction. On Vercel serverless there is no persistent local disk or
+// shared memory between invocations, so stateful data (suppression, prospects,
+// events, experiments) must live in a hosted store.
 //
-// This ships with an in-memory dev implementation so the app runs locally and
-// builds cleanly. For production, swap `store` for a Vercel KV / Postgres-backed
-// implementation of the same `KVStore` interface — nothing else changes.
+// Selection is automatic:
+//   - Vercel KV present (KV_REST_API_URL + KV_REST_API_TOKEN) -> VercelKVStore
+//   - otherwise                                               -> MemoryStore (dev)
+// Nothing else in the codebase changes — they implement the same KVStore.
 
 export interface KVStore {
   get<T>(key: string): Promise<T | null>;
@@ -12,9 +14,10 @@ export interface KVStore {
   delete(key: string): Promise<void>;
 }
 
+// In-memory: used in dev and scripts. Verified by demo.ts / simulate.ts.
 class MemoryStore implements KVStore {
   private m = new Map<string, unknown>();
-  async get<T>(key: string) { return (this.m.has(key) ? (this.m.get(key) as T) : null); }
+  async get<T>(key: string) { return this.m.has(key) ? (this.m.get(key) as T) : null; }
   async set<T>(key: string, value: T) { this.m.set(key, value); }
   async list<T>(prefix: string) {
     const out: T[] = [];
@@ -24,5 +27,37 @@ class MemoryStore implements KVStore {
   async delete(key: string) { this.m.delete(key); }
 }
 
-// TODO(prod): replace with Vercel KV/Postgres impl behind this same interface.
-export const store: KVStore = new MemoryStore();
+// Vercel KV (Redis-backed, REST). Works on serverless. Unverified without creds;
+// the interface mirrors MemoryStore so behavior is identical.
+class VercelKVStore implements KVStore {
+  async get<T>(key: string): Promise<T | null> {
+    const { kv } = await import("@vercel/kv");
+    return (await kv.get<T>(key)) ?? null;
+  }
+  async set<T>(key: string, value: T): Promise<void> {
+    const { kv } = await import("@vercel/kv");
+    await kv.set(key, value as unknown as string);
+  }
+  async list<T>(prefix: string): Promise<T[]> {
+    const { kv } = await import("@vercel/kv");
+    const keys = await kv.keys(`${prefix}*`);
+    if (!keys.length) return [];
+    const vals = await kv.mget<T[]>(...keys);
+    return vals.filter((v): v is T => v != null);
+  }
+  async delete(key: string): Promise<void> {
+    const { kv } = await import("@vercel/kv");
+    await kv.del(key);
+  }
+}
+
+function selectStore(): KVStore {
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    return new VercelKVStore();
+  }
+  return new MemoryStore();
+}
+
+export const store: KVStore = selectStore();
+export const usingPersistentStore =
+  !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
