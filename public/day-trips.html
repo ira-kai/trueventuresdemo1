@@ -9,23 +9,7 @@
   --line:#DBD6C8; --line2:#E7E3D8;
   --accent:#55654A; --accent2:#8A6A44;
   --sel:#DDE2D5;
-  color-scheme:light dark;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --paper:#191814; --paper2:#211F1A; --card:#201E19;
-    --ink:#EDEAE0; --ink2:#A29C8D; --ink3:#7B7566;
-    --line:#332F28; --line2:#2A2721;
-    --accent:#9DB08C; --accent2:#C29C6C;
-    --sel:#2C332A;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#191814; --paper2:#211F1A; --card:#201E19;
-  --ink:#EDEAE0; --ink2:#A29C8D; --ink3:#7B7566;
-  --line:#332F28; --line2:#2A2721;
-  --accent:#9DB08C; --accent2:#C29C6C;
-  --sel:#2C332A;
+  color-scheme:light;
 }
 
 *{box-sizing:border-box}
@@ -109,6 +93,15 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .panel{display:none; padding:0 0 34px}
 .entry.open .panel{display:block}
 @media (min-width:601px){ .panel{padding-left:114px} }
+.plate{position:relative; height:200px; margin-top:24px; overflow:hidden; background:var(--card)}
+.plate canvas{display:block; width:100%; height:100%}
+.plate img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0;
+  transition:opacity .45s ease; filter:grayscale(.34) sepia(.16) contrast(1.06) saturate(.8)}
+.plate.has-photo img{opacity:1}
+.plate .credit{position:absolute; right:8px; bottom:6px; opacity:0; transition:opacity .45s;
+  background:rgb(250 248 243 / .82); padding:1px 6px; border-radius:2px}
+.plate.has-photo .credit{opacity:1}
+@media (max-width:600px){ .plate{height:164px} }
 .sec{padding-top:22px}
 .sec + .sec{margin-top:0}
 .sec h3{font-family:"IBM Plex Mono",monospace; font-size:.66rem; font-weight:500; letter-spacing:.14em;
@@ -224,6 +217,7 @@ footer h3{margin-bottom:2px}
     <p><strong>The drive times assume a weekend.</strong> Every number is a door-to-door estimate from The Q Playa on a Saturday or Sunday with normal traffic, not a mileage calculation &mdash; and rounded up, because nothing in this city takes the time the map says. Treat them as planning numbers. Every entry has a <strong>Directions</strong> link that opens Maps with our address already set as the origin, which is where you get the real number for the hour you're actually leaving.</p>
     <p><strong>Menus.</strong> Each restaurant has a <strong>Menu</strong> link that goes straight to that exact restaurant's current menu, and a <strong>Map</strong> link for hours and the phone number. These resolve at the moment you tap them, so they keep working after a restaurant redesigns its site.</p>
     <p><strong>Michelin.</strong> Stars and Bib Gourmands come from the California guide and get reshuffled every year, so read them as worth checking rather than as fact. Book the starred rooms weeks ahead.</p>
+    <p><strong>The plates.</strong> Each entry opens with an engraved plate, drawn by the page itself in one ink. Where this page is served from a normal web address it also fetches a photograph of the place from Wikipedia and lays it over the engraving, credited. The artifact viewer on claude.ai blocks outside images by policy, so there you get the engravings alone &mdash; same file, both behaviours, nothing broken either way.</p>
     <p><strong>Stamps and photos.</strong> Marking a place visited moves it out of this list into <strong>Been there</strong>, where you can set the date and add photos. Photos are resized and stored in this browser on this device &mdash; never uploaded, and they work offline. To carry one to another device, open it and choose <strong>Keep in the page</strong>; that saves a compressed copy into the page itself, visible anywhere you open this link. Fifty kept photos maximum, since the whole page has a size ceiling.</p>
   </div>
 </footer>
@@ -1704,6 +1698,210 @@ function albumSec(t){
   </div>`;
 }
 
+/* ---------------- engraved plates ----------------
+   Each entry opens with a plate: a procedurally engraved scene drawn with
+   cross-hatching, in one ink on the paper ground. Where the page is served
+   from a normal origin (not the artifact sandbox, which blocks outside
+   images), a matching photograph loads over it. */
+function sceneOf(t){
+  const g = t.tags;
+  if(g.includes("desert")) return "desert";
+  if(g.includes("snow")) return "peaks";
+  if(g.includes("wine")) return "vineyard";
+  if(g.includes("beach")) return "coast";
+  if(g.includes("water")) return "harbor";
+  if(g.includes("park") && g.includes("hike")) return "forest";
+  if(g.includes("hike")) return "ridge";
+  if(g.includes("cute") || g.includes("shop") || g.includes("culture")) return "town";
+  return "ridge";
+}
+function seedOf(str){ let h = 2166136261; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+function engrave(cv, kind, seed){
+  const dpr = Math.min(2, devicePixelRatio || 1);
+  const W = cv.clientWidth || 640, H = cv.clientHeight || 200;
+  cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+  const x = cv.getContext("2d"); x.scale(dpr, dpr);
+  const cs = getComputedStyle(document.documentElement);
+  const paper = cs.getPropertyValue("--card").trim() || "#FAF8F3";
+  const ink = cs.getPropertyValue("--ink").trim() || "#242219";
+  let s = seed || 1;
+  const rnd = () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296;
+
+  x.fillStyle = paper; x.fillRect(0,0,W,H);
+  x.strokeStyle = ink; x.lineCap = "butt";
+
+  // Engraving tone comes from ruling density: wide + pale reads distant,
+  // tight + dark reads near, and crossing two directions is darkest of all.
+  const T = [{g:6.0,a:.30,w:.85},{g:4.0,a:.42,w:.9},{g:2.9,a:.55,w:.95},{g:2.2,a:.62,w:1.0}];
+  function rule(build, deg, tone){
+    const t = T[tone];
+    x.save(); x.beginPath(); build(); x.clip();
+    x.globalAlpha = t.a; x.lineWidth = t.w;
+    const d = Math.hypot(W,H);
+    x.translate(W/2, H/2); x.rotate(deg*Math.PI/180);
+    x.beginPath();
+    for(let y=-d; y<d; y+=t.g){ x.moveTo(-d,y); x.lineTo(d,y); }
+    x.stroke(); x.restore();
+  }
+  const cross = (build, tone) => { rule(build, 48, tone); rule(build, -48, tone); };
+  function edge(build, w, a){ x.save(); x.beginPath(); build(); x.globalAlpha=a; x.lineWidth=w; x.stroke(); x.restore(); }
+
+  function sky(hz){                       // a few graduated rules near the horizon only
+    x.save(); x.lineWidth = .8;
+    let y = hz - 4, gap = 3.4, a = .20;
+    while(y > hz*0.34 && a > .015){ x.globalAlpha = a; x.beginPath(); x.moveTo(0,y); x.lineTo(W,y); x.stroke();
+      y -= gap; gap *= 1.28; a *= .82; }
+    x.restore();
+  }
+  function sun(cx, cy, r){
+    x.save(); x.lineWidth = 1.1; x.globalAlpha = .75;
+    x.beginPath(); x.arc(cx,cy,r,0,7); x.stroke();
+    x.globalAlpha = .5; x.lineWidth = .9;
+    for(let i=0;i<32;i++){ const a=i/32*Math.PI*2, l=(i%4?4:9);
+      x.beginPath(); x.moveTo(cx+Math.cos(a)*(r+4), cy+Math.sin(a)*(r+4));
+      x.lineTo(cx+Math.cos(a)*(r+4+l), cy+Math.sin(a)*(r+4+l)); x.stroke(); }
+    x.restore();
+  }
+  const land = (baseY, amp, steps) => () => {
+    x.moveTo(0,H); x.lineTo(0, baseY);
+    let px=0, py=baseY; const dx=W/steps;
+    for(let i=0;i<steps;i++){ const nx=px+dx, ny=baseY+(rnd()-.5)*amp;
+      x.quadraticCurveTo(px+dx/2, py-amp*.7*rnd(), nx, ny); px=nx; py=ny; }
+    x.lineTo(W,H); x.closePath();
+  };
+  const peaks = (baseY, hgt, n) => () => {
+    x.moveTo(0,H); x.lineTo(0, baseY);
+    const dx=W/n;
+    for(let i=0;i<n;i++){ const px=i*dx;
+      x.lineTo(px+dx*.5, baseY-hgt*(.6+rnd()*.6)); x.lineTo(px+dx, baseY-hgt*.14*rnd()); }
+    x.lineTo(W,H); x.closePath();
+  };
+  function conifer(tx, ty, h){
+    const body = () => { x.moveTo(tx-h*.26, ty); x.lineTo(tx, ty-h); x.lineTo(tx+h*.26, ty); x.closePath(); };
+    rule(body, 74, 2); edge(body, .95, .8);
+    x.save(); x.globalAlpha=.75; x.lineWidth=1; x.beginPath();
+    x.moveTo(tx,ty); x.lineTo(tx,ty+h*.18); x.stroke(); x.restore();
+  }
+
+  const hz = Math.round(H*((kind==="coast"||kind==="harbor") ? .48 : .55));
+  sky(hz);
+  sun(W*(kind==="desert" ? .76 : .19), H*.24, kind==="desert" ? 19 : 12);
+
+  if(kind === "coast" || kind === "harbor"){
+    rule(() => x.rect(0,hz,W,H-hz), 0, 1);
+    x.save(); x.globalAlpha=.62; x.lineWidth=1;
+    for(let i=0;i<26;i++){ const wy=hz+5+i*((H-hz)/26), wx=rnd()*W, ln=18+rnd()*34;
+      x.beginPath(); x.moveTo(wx,wy); x.quadraticCurveTo(wx+ln/2, wy-3, wx+ln, wy); x.stroke(); }
+    x.restore();
+    const bluff = () => { x.moveTo(W*.58,H); x.lineTo(W*.6,hz-4);
+      x.quadraticCurveTo(W*.74, hz-46, W*.9, hz-20); x.lineTo(W,hz-10); x.lineTo(W,H); x.closePath(); };
+    cross(bluff, 3); edge(bluff, 1.3, .9);
+    const beachY = H - 26;
+    const beach = () => { x.moveTo(0,H); x.lineTo(0,beachY);
+      x.quadraticCurveTo(W*.3, beachY-7, W*.62, beachY+4); x.lineTo(W*.62,H); x.closePath(); };
+    rule(beach, 0, 0); edge(beach, 1.1, .6);
+    x.save(); x.globalAlpha=.5; x.lineWidth=1; x.lineCap="round";      // stipple the sand
+    for(let i=0;i<70;i++){ const sx=rnd()*W*.62, sy=beachY+4+rnd()*22;
+      x.beginPath(); x.moveTo(sx,sy); x.lineTo(sx+1.2,sy); x.stroke(); }
+    x.restore();
+  } else if(kind === "peaks"){
+    const far = peaks(hz, H*.46, 3), near = peaks(hz+18, H*.32, 4);
+    rule(far, 62, 1); edge(far, 1.1, .72);
+    cross(near, 2); edge(near, 1.3, .9);
+    for(let i=0;i<7;i++) conifer(16+i*(W/7)+rnd()*14, H-3, 22+rnd()*18);
+  } else if(kind === "desert"){
+    const mesa = () => { x.moveTo(0,H); x.lineTo(0,hz-6); x.lineTo(W*.16,hz-38); x.lineTo(W*.4,hz-38);
+      x.lineTo(W*.5,hz-8); x.lineTo(W*.72,hz-24); x.lineTo(W,hz-14); x.lineTo(W,H); x.closePath(); };
+    rule(mesa, 90, 1); rule(mesa, 0, 0); edge(mesa, 1.2, .8);
+    const flat = land(hz+26, 10, 5);
+    rule(flat, 8, 2); edge(flat, 1.1, .7);
+    x.save(); x.lineWidth=2.2; x.lineCap="round"; x.globalAlpha=.85;   // joshua trees
+    [[W*.2,1.25],[W*.85,.9],[W*.55,.6]].forEach(([jx,sc]) => { const b=H-10, h=46*sc;
+      x.beginPath(); x.moveTo(jx,b); x.lineTo(jx,b-h);
+      x.moveTo(jx,b-h*.58); x.lineTo(jx-15*sc,b-h*.8); x.lineTo(jx-18*sc,b-h*1.1);
+      x.moveTo(jx,b-h*.76); x.lineTo(jx+14*sc,b-h*.95); x.lineTo(jx+16*sc,b-h*1.24);
+      x.moveTo(jx-15*sc,b-h*.8); x.lineTo(jx-22*sc,b-h*.9); x.stroke(); });
+    x.restore();
+  } else if(kind === "forest"){
+    const back = land(hz, 16, 4);
+    rule(back, 48, 1); edge(back, 1.05, .65);
+    for(let r=0;r<3;r++){ const base = hz+14+r*((H-hz)/3), sc = .65+r*.45, n = 10-r*3;
+      for(let i=0;i<n;i++) conifer((i+(r%2?.5:0))*(W/n)+rnd()*14, base+14, (20+rnd()*14)*sc); }
+  } else if(kind === "vineyard"){
+    const hill = land(hz-8, 24, 4);
+    rule(hill, 34, 1); edge(hill, 1.1, .68);
+    const field = land(hz+22, 10, 3);
+    rule(field, 0, 0);
+    x.save(); x.globalAlpha=.72; x.lineWidth=1.05;
+    x.beginPath(); x.rect(0,hz+18,W,H-hz-18); x.clip();
+    for(let i=0;i<17;i++){ const t0=i/17; x.beginPath();
+      x.moveTo(-W*.3+t0*W*1.6, H+4); x.lineTo(W*.32+t0*W*.42, hz+20); x.stroke(); }
+    x.restore(); edge(field, 1.1, .72);
+    const oak = () => { x.ellipse(W*.84, hz+4, 17, 13, 0, 0, 7); };
+    cross(oak, 2); edge(oak, 1.1, .85);
+    x.save(); x.globalAlpha=.85; x.lineWidth=2; x.beginPath();
+    x.moveTo(W*.84, hz+16); x.lineTo(W*.84, hz+34); x.stroke(); x.restore();
+  } else if(kind === "town"){
+    const back = land(hz, 14, 4);
+    rule(back, 48, 0); edge(back, 1, .5);
+    let bx = W*.04;
+    while(bx < W*.95){
+      const bw = 30+rnd()*30, bh = 36+rnd()*40, by = H-12-bh, gable = rnd() > .45;
+      const b = () => { x.moveTo(bx,H-12); x.lineTo(bx,by);
+        if(gable){ x.lineTo(bx+bw/2, by-16); x.lineTo(bx+bw, by); } else x.lineTo(bx+bw, by);
+        x.lineTo(bx+bw,H-12); x.closePath(); };
+      rule(b, 90, 1 + (rnd()>.5 ? 1 : 0)); edge(b, 1.25, .88);
+      x.save(); x.globalAlpha=.8; x.lineWidth=1;
+      for(let r=0;r<Math.floor(bh/20);r++) for(let c=0;c<2;c++)
+        x.strokeRect(bx+8+c*(bw-22), by+11+r*19, 8, 11);
+      x.restore();
+      bx += bw + 4 + rnd()*7;
+    }
+    x.save(); x.globalAlpha=.75; x.lineWidth=1.2;
+    x.beginPath(); x.moveTo(0,H-12); x.lineTo(W,H-12); x.stroke(); x.restore();
+    rule(() => x.rect(0,H-12,W,12), 0, 2);
+  } else {                                    // ridge
+    const far = land(hz-12, 30, 3);
+    rule(far, 58, 0); edge(far, 1.05, .6);
+    const mid = land(hz+12, 22, 4);
+    rule(mid, -58, 2); edge(mid, 1.2, .8);
+    const near = land(hz+42, 14, 5);
+    cross(near, 3); edge(near, 1.35, .92);
+    for(let i=0;i<5;i++) conifer(24+i*(W/5)+rnd()*18, H-2, 22+rnd()*16);
+  }
+  x.save(); x.globalAlpha=.45; x.lineWidth=1; x.strokeRect(.5,.5,W-1,H-1); x.restore();
+}
+
+/* A photograph, where the origin allows outside images. Wikipedia's search
+   API resolves the place by name, so there are no hand-typed URLs to rot. */
+const plateCache = {};
+async function loadPlate(t, wrap){
+  const cv = wrap.querySelector("canvas"), img = wrap.querySelector("img");
+  try{ engrave(cv, sceneOf(t), seedOf(t.id)); }catch(e){}
+  if(plateCache[t.id] === null) return;
+  if(plateCache[t.id]){
+    img.src = plateCache[t.id];
+    if(img.complete) wrap.classList.add("has-photo"); else img.onload = () => wrap.classList.add("has-photo");
+    return;
+  }
+  try{
+    const q = (t.maps || t.name).replace(/,\s*(CA|AZ|UT|NV)$/i, "");
+    const url = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*" +
+      "&generator=search&gsrsearch=" + encodeURIComponent(q) + "&gsrlimit=1" +
+      "&prop=pageimages&piprop=thumbnail&pithumbsize=1200";
+    const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 6000);
+    const res = await fetch(url, {signal:ctl.signal, referrerPolicy:"origin-when-cross-origin"});
+    clearTimeout(to);
+    const pages = (await res.json())?.query?.pages;
+    const src = pages && Object.values(pages)[0]?.thumbnail?.source;
+    if(!src){ plateCache[t.id] = null; return; }
+    await new Promise((ok, no) => { img.onload = ok; img.onerror = no; img.src = src; });
+    plateCache[t.id] = src;
+    wrap.classList.add("has-photo");
+  }catch(e){ plateCache[t.id] = null; /* the artifact sandbox blocks this; the engraving is the answer there */ }
+}
+
 /* ---------------- rendering ---------------- */
 function restRow(r, t){
   const badge = r.m === "star"
@@ -1733,6 +1931,10 @@ function card(t){
       </span>
     </button>
     <div class="panel">${open ? `
+      <figure class="plate" data-trip="${esc(t.id)}" style="margin:24px 0 0">
+        <canvas aria-hidden="true"></canvas><img alt="${esc(t.name)}">
+        <figcaption class="credit lbl">Photograph via Wikipedia</figcaption>
+      </figure>
       ${done ? albumSec(t) : ""}
       <div class="sec"><h3>The main event</h3><p class="lead">${esc(t.hero)}</p></div>
       <div class="sec"><h3>Parks, viewpoints and must-sees</h3><ul>${t.see.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
@@ -1786,6 +1988,11 @@ function render(){
   document.getElementById("count").textContent = list.length + (list.length === 1 ? " place" : " places") +
     (list.length < total ? " of " + total : VIEW === "been" ? ", most recent first" : ", nearest first");
   document.getElementById("stampline").textContent = state.done.size + " of " + TRIPS.length + " visited";
+
+  road.querySelectorAll(".plate").forEach(w => {
+    const t = TRIPS.find(x => x.id === w.dataset.trip);
+    if(t) loadPlate(t, w);
+  });
 }
 
 /* ---------------- controls ---------------- */
