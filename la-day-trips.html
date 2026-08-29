@@ -110,8 +110,6 @@ h1 .hl{color:var(--poppy)}
 .trip::before{content:""; position:absolute; left:-38px; top:32px; width:14px; height:14px; border-radius:50%;
   background:var(--sun-fill); border:3px solid var(--ink)}
 @media (max-width:600px){ .trip::before{left:-27px; width:11px; height:11px; border-width:2px; top:30px} }
-.trip.done{opacity:.72}
-.trip.done .t-name{text-decoration:line-through; text-decoration-thickness:2px; text-decoration-color:var(--poppy)}
 
 .t-head{display:flex; gap:12px; align-items:stretch; width:100%; text-align:left; background:none; border:0; padding:10px; font:inherit; color:inherit; cursor:pointer}
 .t-thumb{flex:none; width:88px; height:88px; border-radius:13px; overflow:hidden; border:2px solid var(--line2); background:var(--paper2)}
@@ -180,6 +178,51 @@ footer{border-top:3px dashed var(--line); margin-top:40px; padding:24px 16px 40p
 .tothetop{position:fixed; right:14px; bottom:14px; z-index:50; border:2px solid var(--ink); background:var(--card); color:var(--ink);
   width:42px; height:42px; border-radius:50%; font-size:1rem; cursor:pointer; box-shadow:0 3px 10px rgb(var(--shadow)/.25); display:none}
 .tothetop.show{display:block}
+
+/* ---------- view tabs ---------- */
+.viewtabs{display:flex; gap:4px; background:var(--line2); border:2px solid var(--line); border-radius:999px; padding:3px}
+.viewtabs button{flex:1; border:0; background:none; font:inherit; font-weight:800; font-size:.8rem; color:var(--ink2);
+  padding:6px 10px; border-radius:999px; cursor:pointer; white-space:nowrap}
+.viewtabs button[aria-pressed="true"]{background:var(--card); color:var(--ink); box-shadow:0 1px 3px rgb(var(--shadow)/.2)}
+.zone[data-z="6"] .zone-sign{background:var(--bougain)}
+
+/* ---------- photos ---------- */
+.sec.album{border-color:var(--bougain); background:color-mix(in srgb, var(--bougain) 8%, var(--card))}
+.sec.album h4{color:var(--bougain)}
+.visitrow{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:9px; font-size:.85rem; font-weight:700; color:var(--ink2)}
+.visitrow input[type="date"]{font:inherit; font-weight:800; font-size:.82rem; color:var(--ink); background:var(--card);
+  border:2px solid var(--line); border-radius:9px; padding:4px 8px}
+.photos{display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:7px}
+.photo{position:relative; aspect-ratio:1; border-radius:11px; overflow:hidden; border:2px solid var(--line2); background:var(--paper2); padding:0; cursor:pointer}
+.photo img{width:100%; height:100%; object-fit:cover; display:block}
+.photo .pin{position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; display:grid; place-items:center;
+  font-size:.6rem; background:var(--bougain); color:#fff; border:1.5px solid #fff}
+.addphoto{aspect-ratio:1; border:2px dashed var(--line); border-radius:11px; background:var(--card); color:var(--ink2);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; font:inherit;
+  font-weight:800; font-size:.68rem; text-align:center; line-height:1.15; padding:4px}
+.addphoto:hover{border-color:var(--bougain); color:var(--bougain)}
+.addphoto span{font-size:1.15rem; line-height:1}
+.albnote{font-size:.74rem; color:var(--ink2); margin-top:8px; line-height:1.4}
+.albnote b{color:var(--ink)}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed; inset:0; z-index:90; background:rgb(10 20 26 / .93); display:none; flex-direction:column; padding:12px}
+.lb.on{display:flex}
+.lb-img{flex:1; min-height:0; display:grid; place-items:center}
+.lb-img img{max-width:100%; max-height:100%; object-fit:contain; border-radius:10px}
+.lb-bar{display:flex; gap:7px; align-items:center; flex-wrap:wrap; justify-content:center; padding-top:10px}
+.lb-bar input{flex:1; min-width:150px; max-width:340px; font:inherit; font-size:.85rem; font-weight:700; color:#EAF2EF;
+  background:rgb(255 255 255 / .1); border:2px solid rgb(255 255 255 / .25); border-radius:10px; padding:7px 11px}
+.lb-bar input::placeholder{color:rgb(234 242 239 / .55)}
+.lbtn{font:inherit; font-size:.78rem; font-weight:900; cursor:pointer; border-radius:999px; padding:7px 13px;
+  border:2px solid rgb(255 255 255 / .35); background:rgb(255 255 255 / .1); color:#EAF2EF}
+.lbtn:hover{background:#fff; color:#173042}
+.lbtn.on{background:var(--bougain); border-color:var(--bougain); color:#fff}
+.lbtn.danger:hover{background:#E2564B; border-color:#E2564B; color:#fff}
+.toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:95; background:var(--ink); color:var(--paper);
+  font-weight:800; font-size:.83rem; padding:10px 17px; border-radius:999px; box-shadow:0 4px 16px rgb(var(--shadow)/.35);
+  opacity:0; pointer-events:none; transition:opacity .25s}
+.toast.on{opacity:1}
 </style>
 
 <header class="hero">
@@ -207,6 +250,10 @@ footer{border-top:3px dashed var(--line); margin-top:40px; padding:24px 16px 40p
       </label>
       <button class="iconbtn" id="lucky" type="button">🎲 Surprise</button>
     </div>
+    <div class="viewtabs" id="viewtabs" role="group" aria-label="Switch between places to go and places visited">
+      <button type="button" data-view="todo" aria-pressed="true">🗺 Still to go</button>
+      <button type="button" data-view="been" aria-pressed="false">📸 Been there</button>
+    </div>
     <div class="chips" id="distchips" role="group" aria-label="Filter by drive time"></div>
     <div class="chips" id="vibechips" role="group" aria-label="Filter by vibe"></div>
     <div class="tally">
@@ -226,13 +273,28 @@ footer{border-top:3px dashed var(--line); margin-top:40px; padding:24px 16px 40p
     <p><b>About the drive times.</b> Every number is a realistic door-to-door estimate from The Q Playa in Playa Vista, assuming you leave at a sane hour. Leaving at 5pm on a Friday? Add a lot. Every stop has a <b>Directions</b> button that opens Google Maps with our address already set as the origin, so you always get the live number.</p>
     <p><b>About the menu links.</b> Every restaurant has two buttons. <b>Menu</b> jumps straight to that exact restaurant's menu — one tap, no digging through a homepage, and it lands on the current menu even after the restaurant redesigns its site. <b>Map</b> opens its Google Maps card for hours, photos and the phone number. Restaurants move their menu pages constantly, so this stays correct where a hardcoded link would quietly rot.</p>
     <p><b>About the Michelin notes.</b> Stars and Bib Gourmands are from the California guide and get reshuffled every year, so treat them as "worth checking" rather than gospel — and book the starred ones weeks out.</p>
-    <p><b>Your stamps are private.</b> "Been there" saves to this browser only. Nothing is uploaded anywhere.</p>
+    <p><b>Your stamps and photos are private by default.</b> Marking a stop "been there" moves it out of the main list into the <b>Been there</b> tab, where you can set the date you went and add photos. Photos are shrunk to a sensible size and stored in this browser on this device — never uploaded, and they work offline.</p>
+    <p><b>Getting photos onto your other devices.</b> Tap a photo and hit <b>Keep in the page</b>. That one saves a compressed copy into the page itself, so it shows up wherever you open this link — and to anyone you share the link with. Everything else stays on the device you added it from. There's a ceiling of 60 kept photos, because the whole page has to stay under 16MB.</p>
   </div>
 </footer>
 
 <button class="tothetop" id="top" type="button" aria-label="Back to top">↑</button>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo">
+  <div class="lb-img"><img id="lb-img" alt=""></div>
+  <div class="lb-bar">
+    <input id="lb-cap" type="text" placeholder="Add a caption…" aria-label="Photo caption">
+    <button class="lbtn" id="lb-pin" type="button">☆ Keep in the page</button>
+    <button class="lbtn danger" id="lb-del" type="button">Delete</button>
+    <button class="lbtn" id="lb-close" type="button">Close</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="kept-state" type="application/json">{"photos":[],"visits":{}}</script>
+
 <script>
+const PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
 const ORIGIN = "The Q Playa Vista, 12655 W Jefferson Blvd, Playa Vista, CA 90094";
 const TRIPS = [];
 TRIPS.push(
@@ -1809,26 +1871,27 @@ function restRow(r, t){
 }
 
 function card(t){
-  const done = state.done.has(t.id), open = state.open.has(t.id);
+  const done = state.done.has(t.id), open = state.open.has(t.id), pc = photoCount(t.id);
   const tags = t.tags.slice(0,3).map(v => {
     const f = VIBES.find(x => x[0] === v); return f ? `<span class="tag vibe">${esc(f[1].split(" ").slice(1).join(" "))}</span>` : "";
   }).join("");
   const starred = t.eat.some(r => r.m === "star") ? `<span class="tag star">★ Michelin</span>`
     : t.eat.some(r => r.m === "bib") ? `<span class="tag star">Bib Gourmand</span>`
     : t.mich ? `<span class="tag star">★ nearby</span>` : "";
-  return `<article class="trip${open?" open":""}${done?" done":""}" id="trip-${t.id}">
+  return `<article class="trip${open?" open":""}" id="trip-${t.id}">
     <button class="t-head" type="button" data-t="${t.id}" aria-expanded="${open}">
       <span class="t-thumb">${scene(t.scene, t.tone)}</span>
       <span class="t-body">
         <span class="t-top"><span class="t-name">${esc(t.name)}</span><span class="t-region">${esc(t.region)}</span></span>
         <span class="t-blurb">${esc(t.blurb)}</span>
-        <span class="t-meta"><span class="drive">🚗 ${esc(t.drive)}</span>${tags}${starred}</span>
+        <span class="t-meta"><span class="drive">🚗 ${esc(t.drive)}</span>${pc ? `<span class="tag star">📸 ${pc}</span>` : ""}${tags}${starred}</span>
       </span>
       <span class="t-caret" aria-hidden="true">▾</span>
     </button>
     <div class="t-panel">
       ${open ? `<div class="t-banner">${scene(t.scene, t.tone)}</div>
       <div class="t-inner">
+        ${done ? albumSec(t) : ""}
         <div class="sec hero-sec"><h4>The main event</h4><p class="lead">${esc(t.hero)}</p></div>
         <div class="sec"><h4>Parks, viewpoints &amp; must-sees</h4><ul>${t.see.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
         ${t.shop ? `<div class="sec"><h4>Downtown &amp; shopping</h4><p>${esc(t.shop)}</p></div>` : ""}
@@ -1847,21 +1910,227 @@ function card(t){
 
 function render(){
   const road = document.getElementById("road");
-  const list = TRIPS.filter(matches).sort((a,b) => a.mins - b.mins || a.name.localeCompare(b.name));
-  let html = "", zi = -1;
-  for(const t of list){
-    let z = ZONES.findIndex(x => t.mins <= x.max);
-    if(z !== zi){ zi = z; const Z = ZONES[z];
-      html += `<div class="zone" data-z="${Z.z}"><div class="zone-sign"><span class="z1">${esc(Z.t)}</span><span class="z2">${esc(Z.s)} from home</span></div></div>`; }
-    html += card(t);
+  const been = t => state.done.has(t.id);
+  const list = TRIPS.filter(matches).filter(t => VIEW === "been" ? been(t) : !been(t));
+  let html = "";
+
+  if(VIEW === "been"){
+    list.sort((a, b) => (visits[b.id] || "").localeCompare(visits[a.id] || "") || a.mins - b.mins);
+    let last = null;
+    for(const t of list){
+      const m = monthLabel(visits[t.id]);
+      if(m !== last){ last = m;
+        const n = list.filter(x => monthLabel(visits[x.id]) === m).length;
+        html += `<div class="zone" data-z="6"><div class="zone-sign"><span class="z1">${esc(m)}</span>` +
+                `<span class="z2">${n} stop${n === 1 ? "" : "s"}</span></div></div>`; }
+      html += card(t);
+    }
+  } else {
+    list.sort((a, b) => a.mins - b.mins || a.name.localeCompare(b.name));
+    let zi = -1;
+    for(const t of list){
+      const z = ZONES.findIndex(x => t.mins <= x.max);
+      if(z !== zi){ zi = z; const Z = ZONES[z];
+        html += `<div class="zone" data-z="${Z.z}"><div class="zone-sign"><span class="z1">${esc(Z.t)}</span>` +
+                `<span class="z2">${esc(Z.s)} from home</span></div></div>`; }
+      html += card(t);
+    }
   }
   road.innerHTML = html;
-  document.getElementById("empty").hidden = list.length > 0;
-  document.getElementById("count").textContent = list.length + (list.length === 1 ? " trip" : " trips") +
-    (list.length < TRIPS.length ? " of " + TRIPS.length : " — closest first");
+
+  const empty = document.getElementById("empty");
+  empty.hidden = list.length > 0;
+  if(!list.length) empty.innerHTML = VIEW === "been"
+    ? "<b>No stamped trips yet.</b>Open any stop, hit <em>Mark as been there</em>, and it moves here with room for your photos."
+    : "<b>Nothing matches that.</b>Try clearing a filter — or hit Surprise and let the road decide.";
+
+  const total = TRIPS.filter(t => VIEW === "been" ? been(t) : !been(t)).length;
+  document.getElementById("count").textContent = list.length +
+    (list.length === 1 ? " trip" : " trips") +
+    (list.length < total ? " of " + total : VIEW === "been" ? " visited — newest first" : " to go — closest first");
+
   const n = state.done.size;
   document.getElementById("stamped").textContent = n;
   document.getElementById("barfill").style.width = (TRIPS.length ? n / TRIPS.length * 100 : 0) + "%";
+}
+
+/* ---------------- photo album: on-device store + optional page-kept copies ---------------- */
+const KEPT = (() => { try { const k = JSON.parse(document.getElementById("kept-state").textContent);
+  return {photos: Array.isArray(k.photos) ? k.photos : [], visits: (k.visits && typeof k.visits === "object") ? k.visits : {}};
+} catch(e){ return {photos:[], visits:{}}; } })();
+
+let visits = {};
+try{ visits = JSON.parse(localStorage.getItem("pv-daytrips-visits") || "{}") || {}; }catch(e){}
+visits = Object.assign({}, KEPT.visits, visits);
+const saveVisits = () => { try{ localStorage.setItem("pv-daytrips-visits", JSON.stringify(visits)); }catch(e){} };
+KEPT.photos.forEach(p => state.done.add(p.trip));
+Object.keys(KEPT.visits).forEach(id => state.done.add(id));
+
+let VIEW = "todo";
+const todayISO = () => new Date(Date.now() - new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+function monthLabel(iso){
+  if(!iso) return "No date yet";
+  const d = new Date(iso + "T12:00:00");
+  return isNaN(d) ? "No date yet" : d.toLocaleDateString(undefined, {month:"long", year:"numeric"});
+}
+function prettyDate(iso){
+  if(!iso) return "";
+  const d = new Date(iso + "T12:00:00");
+  return isNaN(d) ? "" : d.toLocaleDateString(undefined, {month:"short", day:"numeric", year:"numeric"});
+}
+
+let _toastT;
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("on");
+  clearTimeout(_toastT); _toastT = setTimeout(() => el.classList.remove("on"), 3200);
+}
+
+/* --- IndexedDB --- */
+let _db;
+function idb(){
+  if(_db) return _db;
+  _db = new Promise((res, rej) => {
+    if(!self.indexedDB) return res(null);
+    const r = indexedDB.open("pv-daytrips", 1);
+    r.onupgradeneeded = () => { const d = r.result;
+      if(!d.objectStoreNames.contains("photos")){ const st = d.createObjectStore("photos", {keyPath:"id"}); st.createIndex("trip", "trip"); } };
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => res(null);
+  }).catch(() => null);
+  return _db;
+}
+function tx(mode, fn, fallback){
+  return idb().then(d => { if(!d) return fallback;
+    return new Promise(res => { try{
+      const t = d.transaction("photos", mode), st = t.objectStore("photos");
+      let out = fallback; const rq = fn(st); if(rq) rq.onsuccess = () => { out = rq.result; };
+      t.oncomplete = () => res(out); t.onerror = () => res(fallback); t.onabort = () => res(fallback);
+    }catch(e){ res(fallback); } });
+  });
+}
+
+/* --- photo cache --- */
+const PHOTOS = {};
+const urlCache = new Map();
+function photoSrc(r){
+  if(r.src) return r.src;
+  if(!urlCache.has(r.id)) urlCache.set(r.id, URL.createObjectURL(r.blob));
+  return urlCache.get(r.id);
+}
+function findPhoto(id){ for(const k in PHOTOS){ const f = PHOTOS[k].find(p => p.id === id); if(f) return f; } return null; }
+async function loadPhotos(){
+  const local = await tx("readonly", st => st.getAll(), []) || [];
+  const byId = new Map();
+  local.forEach(r => byId.set(r.id, Object.assign({}, r, {kept:false})));
+  KEPT.photos.forEach(k => {
+    const ex = byId.get(k.id);
+    if(ex) ex.kept = true;
+    else byId.set(k.id, {id:k.id, trip:k.trip, ts:k.ts, cap:k.cap || "", src:k.src, kept:true, remote:true});
+  });
+  for(const k in PHOTOS) delete PHOTOS[k];
+  [...byId.values()].sort((a,b) => a.ts - b.ts).forEach(r => { (PHOTOS[r.trip] = PHOTOS[r.trip] || []).push(r); });
+}
+const photoCount = id => (PHOTOS[id] || []).length;
+
+/* --- image downscaling --- */
+async function shrink(file, max, q){
+  const bmp = await createImageBitmap(file);
+  const sc = Math.min(1, max / Math.max(bmp.width, bmp.height));
+  const w = Math.max(1, Math.round(bmp.width * sc)), h = Math.max(1, Math.round(bmp.height * sc));
+  const c = document.createElement("canvas"); c.width = w; c.height = h;
+  c.getContext("2d").drawImage(bmp, 0, 0, w, h);
+  if(bmp.close) bmp.close();
+  return new Promise(res => c.toBlob(b => res(b), "image/jpeg", q));
+}
+const toDataURL = b => new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(b); });
+
+async function addPhotos(tripId, files){
+  const imgs = [...files].filter(f => f.type.startsWith("image/"));
+  if(!imgs.length){ toast("Those weren't image files"); return; }
+  if(!await idb()){ toast("This browser is blocking photo storage — open the published link rather than a local copy"); return; }
+  toast(imgs.length === 1 ? "Adding photo…" : "Adding " + imgs.length + " photos…");
+  let n = 0;
+  for(const f of imgs){
+    try{
+      const blob = await shrink(f, 1600, 0.82);
+      if(!blob) continue;
+      const rec = {id:"p" + Date.now().toString(36) + Math.random().toString(36).slice(2,7), trip:tripId, ts:Date.now(), cap:"", blob};
+      await tx("readwrite", st => st.put(rec));
+      n++;
+    }catch(e){}
+  }
+  if(!n){ toast("Couldn't read those photos"); return; }
+  state.done.add(tripId); save();
+  if(!visits[tripId]){ visits[tripId] = todayISO(); saveVisits(); }
+  await loadPhotos(); render();
+  toast(n === 1 ? "Photo added" : n + " photos added");
+}
+
+async function deletePhoto(rec){
+  await tx("readwrite", st => st.delete(rec.id));
+  if(rec.kept){ KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id); await publishKept(); }
+  await loadPhotos(); render(); toast("Photo deleted");
+}
+
+/* --- keeping photos in the page itself (syncs across devices) --- */
+let _art;
+function artifactApi(){
+  if(_art !== undefined) return _art;
+  _art = (window.claude && typeof window.claude.use === "function")
+    ? window.claude.use("artifact").catch(() => null) : Promise.resolve(null);
+  return _art;
+}
+async function publishKept(){
+  const api = await artifactApi();
+  if(!api) return false;
+  const json = JSON.stringify({photos:KEPT.photos, visits}).replace(/</g, "\\u003c");
+  const doc = PRISTINE.replace(/(<script id="kept-state" type="application\/json">)[\s\S]*?(<\/script>)/,
+    (m, a, b) => a + json + b);
+  if(doc.length > 14e6){ toast("The page is full — unkeep a few photos first"); return false; }
+  try{ await api.publish(doc); return true; }
+  catch(e){
+    toast(e && e.code === "conflict" ? "Saved elsewhere first — reload and try again" : "Couldn't save into the page");
+    return false;
+  }
+}
+async function setKept(rec, on){
+  const api = await artifactApi();
+  if(!api){ toast("Keeping photos in the page isn't available in this view"); return; }
+  const backup = KEPT.photos.slice();
+  if(on){
+    if(KEPT.photos.length >= 60){ toast("60 kept photos is the ceiling — unkeep one first"); return; }
+    toast("Saving into the page…");
+    let src = rec.src;
+    if(!src){ const small = await shrink(rec.blob, 1200, 0.7); src = await toDataURL(small); }
+    KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id);
+    KEPT.photos.push({id:rec.id, trip:rec.trip, ts:rec.ts, cap:rec.cap || "", src});
+  } else {
+    KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id);
+  }
+  const ok = await publishKept();
+  if(!ok){ KEPT.photos = backup; return; }
+  rec.kept = on;
+  toast(on ? "Kept in the page — it'll show on your other devices" : "Removed from the page");
+  render();
+}
+
+/* --- album markup --- */
+function albumSec(t){
+  const list = PHOTOS[t.id] || [];
+  const tiles = list.map(r => `<button class="photo" type="button" data-photo="${esc(r.id)}" title="${esc(r.cap || "Photo")}">
+      <img src="${esc(photoSrc(r))}" alt="${esc(r.cap || ("Photo from " + t.name))}" loading="lazy">
+      ${r.kept ? '<span class="pin" title="Kept in the page">★</span>' : ""}</button>`).join("");
+  return `<div class="sec album">
+    <h4>📸 The day we went</h4>
+    <div class="visitrow"><label for="d-${esc(t.id)}">We went on</label>
+      <input id="d-${esc(t.id)}" type="date" value="${esc(visits[t.id] || "")}" data-visit="${esc(t.id)}" max="${todayISO()}">
+      ${list.length ? `<span>· ${list.length} photo${list.length === 1 ? "" : "s"}</span>` : ""}</div>
+    <div class="photos">${tiles}
+      <button class="addphoto" type="button" data-add="${esc(t.id)}"><span>＋</span>Add photos</button>
+    </div>
+    <p class="albnote">Photos stay <b>on this device</b>. Tap one and hit <b>Keep in the page</b> to carry it to your other phone or laptop.</p>
+  </div>`;
 }
 
 /* ---------------- controls ---------------- */
@@ -1870,6 +2139,12 @@ dc.innerHTML = `<button class="chip" type="button" data-d="all" aria-pressed="tr
   ZONES.map((z,i)=>`<button class="chip" type="button" data-d="${i}" aria-pressed="false">${esc(z.s)}</button>`).join("");
 vc.innerHTML = VIBES.map(v=>`<button class="chip" type="button" data-v="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("") +
   `<button class="chip acc" type="button" data-v="__mich" aria-pressed="false">★ Michelin only</button>`;
+
+const vt = document.getElementById("viewtabs");
+vt.addEventListener("click", e => { const b = e.target.closest("[data-view]"); if(!b) return;
+  VIEW = b.dataset.view;
+  [...vt.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+  render(); scrollTo({top:0, behavior:"smooth"}); });
 
 dc.addEventListener("click", e => { const b = e.target.closest("[data-d]"); if(!b) return;
   state.dist = b.dataset.d === "all" ? null : +b.dataset.d;
@@ -1893,7 +2168,85 @@ document.getElementById("road").addEventListener("click", e => {
       if(y < 70 || y > innerHeight - 140) el.scrollIntoView({behavior:"smooth", block:"start"}); }
     return; }
   const d = e.target.closest("[data-done]");
-  if(d){ const id = d.dataset.done; state.done.has(id) ? state.done.delete(id) : state.done.add(id); save(); render(); }
+  if(d){ const id = d.dataset.done;
+    if(state.done.has(id)) state.done.delete(id);
+    else { state.done.add(id); if(!visits[id]){ visits[id] = todayISO(); saveVisits(); } }
+    save(); render();
+    if(state.done.has(id) && VIEW === "todo") toast("Moved to Been there — add photos over there");
+    return; }
+
+  const ph = e.target.closest("[data-photo]");
+  if(ph){ openLightbox(ph.dataset.photo); return; }
+
+  const ad = e.target.closest("[data-add]");
+  if(ad){ pickFiles(ad.dataset.add); return; }
+});
+
+document.getElementById("road").addEventListener("change", e => {
+  const dv = e.target.closest("[data-visit]");
+  if(!dv) return;
+  const id = dv.dataset.visit;
+  if(dv.value) visits[id] = dv.value; else delete visits[id];
+  saveVisits(); render();
+});
+
+/* ---------------- photo picking + lightbox ---------------- */
+let _fileInput;
+function pickFiles(tripId){
+  if(!_fileInput){
+    _fileInput = document.createElement("input");
+    _fileInput.type = "file"; _fileInput.accept = "image/*"; _fileInput.multiple = true;
+    _fileInput.hidden = true; document.body.appendChild(_fileInput);
+    _fileInput.addEventListener("change", () => {
+      const id = _fileInput.dataset.trip;
+      const files = [..._fileInput.files];   // copy before clearing: .files is live
+      _fileInput.value = "";
+      if(files.length) addPhotos(id, files);
+    });
+  }
+  _fileInput.dataset.trip = tripId;
+  _fileInput.click();
+}
+
+const lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img"),
+      lbCap = document.getElementById("lb-cap"), lbPin = document.getElementById("lb-pin");
+let lbRec = null;
+
+async function openLightbox(id){
+  const r = findPhoto(id); if(!r) return;
+  lbRec = r;
+  lbImg.src = photoSrc(r);
+  lbImg.alt = r.cap || "Photo";
+  lbCap.value = r.cap || "";
+  lbPin.textContent = r.kept ? "★ Kept in the page" : "☆ Keep in the page";
+  lbPin.classList.toggle("on", !!r.kept);
+  const api = await artifactApi();
+  lbPin.hidden = !api;
+  lb.classList.add("on");
+  document.body.style.overflow = "hidden";
+}
+async function closeLightbox(){
+  if(lbRec){
+    const cap = lbCap.value.trim();
+    if(cap !== (lbRec.cap || "")){
+      lbRec.cap = cap;
+      if(!lbRec.remote) await tx("readwrite", st => st.put(Object.assign({}, lbRec, {kept:undefined, remote:undefined})));
+      const k = KEPT.photos.find(p => p.id === lbRec.id);
+      if(k){ k.cap = cap; await publishKept(); }
+      render();
+    }
+  }
+  lbRec = null; lb.classList.remove("on"); lbImg.src = ""; document.body.style.overflow = "";
+}
+document.getElementById("lb-close").addEventListener("click", closeLightbox);
+lb.addEventListener("click", e => { if(e.target === lb || e.target.classList.contains("lb-img")) closeLightbox(); });
+addEventListener("keydown", e => { if(e.key === "Escape" && lb.classList.contains("on")) closeLightbox(); });
+lbPin.addEventListener("click", async () => { const r = lbRec; if(!r) return; await closeLightbox(); setKept(r, !r.kept); });
+document.getElementById("lb-del").addEventListener("click", async () => {
+  const r = lbRec; if(!r) return;
+  if(!confirm("Delete this photo? This can't be undone.")) return;
+  lbRec = null; lb.classList.remove("on"); lbImg.src = ""; document.body.style.overflow = "";
+  deletePhoto(r);
 });
 
 document.getElementById("lucky").addEventListener("click", () => {
@@ -1908,4 +2261,5 @@ topBtn.addEventListener("click", () => scrollTo({top:0, behavior:"smooth"}));
 addEventListener("scroll", () => topBtn.classList.toggle("show", scrollY > 900), {passive:true});
 
 render();
+loadPhotos().then(render);
 </script>
