@@ -4,10 +4,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
 <style>
 :root{
-  --paper:#F3F1EA; --paper2:#EAE7DD; --card:#FAF8F3;
+  --paper:#F5F2E9; --paper2:#EBE7DA; --card:#FCFAF4;
   --ink:#242219; --ink2:#6B6659; --ink3:#948E7F;
   --line:#DBD6C8; --line2:#E7E3D8;
   --accent:#55654A; --accent2:#8A6A44;
+  --i-coast:#2A6B73; --i-harbor:#2A6B73; --i-desert:#A85733; --i-peaks:#46587C;
+  --i-forest:#356B48; --i-vineyard:#77465F; --i-town:#96662B; --i-ridge:#5C6B3A;
+  --z1:#2A6B73; --z2:#5C6B3A; --z3:#96662B; --z4:#A85733; --z5:#77465F;
+  --c-seafood:#2A6B73; --c-japanese:#3D5490; --c-chinese:#A33B3B; --c-indian:#A9761B;
+  --c-steak:#8A4733; --c-italian:#3F7048; --c-mexican:#BE6524; --c-french:#6A4A8C;
+  --c-med:#77772B; --c-cal:#5C6B3A; --c-bakery:#96662B; --c-thai:#A9761B; --c-other:#6B6659;
   --sel:#DDE2D5;
   color-scheme:light;
 }
@@ -30,7 +36,8 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 @media (max-width:600px){ .wrap{padding:0 16px} }
 
 /* ---------- masthead ---------- */
-.masthead{border-bottom:1px solid var(--line)}
+.masthead{border-bottom:1px solid var(--line); border-top:4px solid var(--accent)}
+.masthead .lbl{color:var(--accent)}
 .masthead .wrap{padding-top:56px; padding-bottom:38px}
 .masthead h1{font-size:clamp(2rem,5.6vw,2.9rem); line-height:1.12; max-width:16ch; margin:14px 0 0}
 .masthead p{margin:16px 0 0; max-width:56ch; color:var(--ink2); font-size:.98rem}
@@ -39,7 +46,7 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .origin b{font-weight:500; font-size:.88rem}
 
 /* ---------- controls ---------- */
-.controls{position:sticky; top:0; z-index:40; background:var(--paper);
+.controls{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 94%, var(--accent));
   border-bottom:1px solid var(--line); padding:14px 0 12px}
 .controls .wrap{display:flex; flex-direction:column; gap:12px}
 .tabs{display:flex; gap:24px; border-bottom:1px solid var(--line2)}
@@ -68,18 +75,28 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .tally{display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap}
 
 /* ---------- the list ---------- */
-.zone{display:flex; align-items:baseline; gap:14px; padding:38px 0 10px; border-bottom:1px solid var(--line)}
-.zone h2{font-size:1.05rem; flex:1}
+.zone{display:flex; align-items:baseline; gap:14px; padding:38px 0 10px; border-bottom:2px solid var(--zc,var(--line))}
+.zone h2{font-size:1.05rem; flex:1; color:var(--zc,var(--ink))}
+.zone .lbl{color:var(--zc,var(--ink3)); opacity:.8}
+.zone[data-z="0"]{--zc:var(--z1)} .zone[data-z="1"]{--zc:var(--z2)} .zone[data-z="2"]{--zc:var(--z3)}
+.zone[data-z="3"]{--zc:var(--z4)} .zone[data-z="4"]{--zc:var(--z5)}
 .entry{border-bottom:1px solid var(--line2)}
+.entry[data-z="0"]{--zc:var(--z1)} .entry[data-z="1"]{--zc:var(--z2)} .entry[data-z="2"]{--zc:var(--z3)}
+.entry[data-z="3"]{--zc:var(--z4)} .entry[data-z="4"]{--zc:var(--z5)}
+.entry .region{color:var(--zc,var(--ink3)); opacity:.9}
+.entry .mark{color:var(--zc,var(--ink3))}
+.entry.open .sec h3{color:var(--zc,var(--accent)); border-bottom-color:color-mix(in srgb, var(--zc,var(--accent)) 28%, var(--line2))}
+.entry.open .plate{box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--zc,var(--line)) 35%, transparent)}
 .row{display:grid; grid-template-columns:96px 1fr; gap:18px; width:100%; text-align:left;
   background:none; border:0; font:inherit; color:inherit; cursor:pointer; padding:20px 0; align-items:start}
 @media (max-width:600px){ .row{grid-template-columns:74px 1fr; gap:12px; padding:16px 0} }
 .row:hover .name{color:var(--accent)}
-.time{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--ink2);
+.time{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--zc,var(--accent));
   font-variant-numeric:tabular-nums; padding-top:4px; line-height:1.4}
 .main{min-width:0; display:flex; flex-direction:column; gap:5px}
 .hd{display:flex; align-items:baseline; gap:12px; justify-content:space-between}
 .name{font-family:Newsreader,Georgia,serif; font-size:1.28rem; line-height:1.22; font-weight:400}
+.entry.open .name{color:var(--zc,var(--ink))}
 .blurb{color:var(--ink2); font-size:.92rem; line-height:1.5}
 .meta{display:flex; gap:9px; flex-wrap:wrap; align-items:baseline; margin-top:3px}
 .meta .lbl{color:var(--ink3)}
@@ -105,7 +122,7 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .sec{padding-top:22px}
 .sec + .sec{margin-top:0}
 .sec h3{font-family:"IBM Plex Mono",monospace; font-size:.66rem; font-weight:500; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--ink3); padding-bottom:9px; margin-bottom:11px; border-bottom:1px solid var(--line2)}
+  text-transform:uppercase; color:var(--accent); padding-bottom:9px; margin-bottom:11px; border-bottom:1px solid var(--line2)}
 .sec p{margin:0; font-size:.94rem; color:var(--ink2)}
 .sec p strong{color:var(--ink); font-weight:500}
 .sec .lead{font-family:Newsreader,Georgia,serif; font-size:1.12rem; line-height:1.5; color:var(--ink)}
@@ -120,7 +137,17 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .rest-n{font-size:.95rem; font-weight:500; display:flex; gap:9px; align-items:baseline; flex-wrap:wrap}
 .rest-d{font-size:.88rem; color:var(--ink2); margin-top:3px}
 .kind{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--ink3); border:1px solid var(--line); border-radius:2px; padding:1px 5px; white-space:nowrap}
+  color:var(--tc,var(--ink3)); border:1px solid currentColor; border-radius:2px; padding:1px 5px; white-space:nowrap; opacity:.95}
+.kind[data-k="seafood"]{--tc:var(--c-seafood)} .kind[data-k="japanese"]{--tc:var(--c-japanese)}
+.kind[data-k="chinese"]{--tc:var(--c-chinese)} .kind[data-k="indian"]{--tc:var(--c-indian)}
+.kind[data-k="steak"]{--tc:var(--c-steak)} .kind[data-k="italian"]{--tc:var(--c-italian)}
+.kind[data-k="mexican"]{--tc:var(--c-mexican)} .kind[data-k="french"]{--tc:var(--c-french)}
+.kind[data-k="med"]{--tc:var(--c-med)} .kind[data-k="cal"]{--tc:var(--c-cal)}
+.kind[data-k="bakery"]{--tc:var(--c-bakery)} .kind[data-k="thai"]{--tc:var(--c-thai)}
+.landmark{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  color:#FFF; background:var(--accent2); border-radius:2px; padding:1px 6px; white-space:nowrap}
+.flour{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--c-mexican); white-space:nowrap}
 .eatnote{font-size:.88rem; color:var(--ink2); font-style:italic; margin:0 0 6px; padding-bottom:11px;
   border-bottom:1px solid var(--line2)}
 .mich{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
@@ -222,6 +249,8 @@ footer h3{margin-bottom:2px}
     <p><strong>The drive times assume a weekend.</strong> Every number is a door-to-door estimate from The Q Playa on a Saturday or Sunday with normal traffic, not a mileage calculation &mdash; and rounded up, because nothing in this city takes the time the map says. Treat them as planning numbers. Every entry has a <strong>Directions</strong> link that opens Maps with our address already set as the origin, which is where you get the real number for the hour you're actually leaving.</p>
     <p><strong>Menus.</strong> Each restaurant has a <strong>Menu</strong> link that goes straight to that exact restaurant's current menu, and a <strong>Map</strong> link for hours and the phone number. These resolve at the moment you tap them, so they keep working after a restaurant redesigns its site.</p>
     <p><strong>How these picks are chosen.</strong> Seafood leads wherever the geography supports it. No chicken anywhere. Beef only where the beef is the point &mdash; steakhouses and wood grills, not burger counters. Rooms are chosen for being pleasant to sit in; the handful of plain fish-market counters that made the cut are described as exactly that, because the shellfish justifies the picnic table. Where a town genuinely has nothing worth a detour, the note says so and points at the nearest place that does, rather than padding the list.</p>
+    <p><strong>Tortillas.</strong> Mexican picks note <strong>Flour tortillas</strong> where flour is the house standard rather than something you have to ask for &mdash; Sonoran and northern-Mexican kitchens press their own, which is what you want. Most sit-down places will swap corn for flour on request; the street-taco and Oaxacan places genuinely will not, and those are marked or left off.</p>
+    <p><strong>Landmarks.</strong> Places tagged <strong>Landmark</strong> are on the list for fame and history as much as cooking &mdash; the 1899 soda fountain, the 1922 prime rib room, the 1865 stagecoach stop. Some are plainer than the rest of the list on purpose. They earn the seat.</p>
     <p><strong>On Indian food.</strong> Southern California has no Indian restaurant at the level of Copra in San Francisco or Adda in New York. That is a real gap, not an oversight in the research. The two closest here are <strong>Mayura</strong> in Culver City, which is Keralan and genuinely excellent within that lane, and <strong>Bhanu's</strong> in Pasadena for South Indian dosas. Copra itself is listed on the San Francisco entry, since that is the trip where you can actually eat at it.</p>
     <p><strong>Michelin.</strong> Stars and Bib Gourmands come from the California guide and get reshuffled every year, so read them as worth checking rather than as fact. Book the starred rooms weeks ahead.</p>
     <p><strong>The plates.</strong> Each entry opens with an engraved plate, drawn by the page itself in one ink. Where this page is served from a normal web address it also fetches a photograph of the place from Wikipedia and lays it over the engraving, credited. The artifact viewer on claude.ai blocks outside images by policy, so there you get the engravings alone &mdash; same file, both behaviours, nothing broken either way.</p>
@@ -256,7 +285,8 @@ TRIPS.push(
  eatnote:"Playa del Rey has almost nothing for a real dinner. The seafood is five minutes north in the Marina, the sushi fifteen minutes east in Sawtelle.",
  eat:[
   {name:"Playa Provisions", k:"seafood", d:"Brooke Williamson's seafood counter and whiskey bar in one building. The lobster roll, oysters, and a proper cocktail in the back room."},
-  {name:"Cantalini's Salerno Beach Restaurant", k:"italian", d:"Red-sauce Italian since 1954. Warm rather than smart, and the seafood pastas are what to order."}],
+  {name:"Cantalini's Salerno Beach Restaurant", k:"italian", d:"Red-sauce Italian since 1954. Warm rather than smart, and the seafood pastas are what to order."},
+  {name:"Randy's Donuts", k:"bakery", famous:true, d:"The 32-foot doughnut on the roof in Inglewood, up since 1953. A genuine LA landmark that happens to sell breakfast.", city:"Inglewood"}],
  mich:"Nothing starred in Playa del Rey itself — but n/naka, a two-star kaiseki restaurant, is a 10-minute drive up Overland in Palms. Reservations open a month ahead at midnight and vanish in minutes.",
  parking:"Dockweiler has a paid lot (roughly $10-15, cash and card) right off Vista del Mar; street parking on Pacific Ave is free but tight on summer weekends. Ballona Wetlands has a small free lot on Jefferson just west of Lincoln.",
  tip:"The bonfire rings are the whole point. Bring a bundle of firewood from the Culver Blvd hardware store, a folding chair, and get there before 4pm on a Saturday or you're out of luck.",
@@ -301,7 +331,7 @@ TRIPS.push(
  see:["Culver City Stairs (Baldwin Hills Scenic Overlook) — 282 steps straight up, and a 360° view from downtown to the ocean at the top","Museum of Jurassic Technology — a genuinely strange, wonderful little museum that refuses to explain itself","The Wende Museum — Cold War art and artifacts in a converted armory, free admission","Ballona Creek Path — bike from Culver straight to the beach in 25 minutes","Sony Pictures Studio Tour — two hours on a working lot"],
  shop:"The Platform on Washington (design-forward boutiques, Van Leeuwen, Blue Bottle) and the downtown blocks around Main Street. Tuesday Culver City Farmers Market shuts down Main Street 2-7pm.",
  eat:[
-  {name:"n/naka", k:"japanese", m:"star", stars:2, d:"Niki Nakayama's modern kaiseki, in Palms five minutes from downtown Culver. The most ambitious meal within fifteen minutes of home. Reservations open a month ahead at midnight and go in minutes."},
+  {name:"n/naka", famous:true, k:"japanese", m:"star", stars:2, d:"Niki Nakayama's modern kaiseki, in Palms five minutes from downtown Culver. The most ambitious meal within fifteen minutes of home. Reservations open a month ahead at midnight and go in minutes."},
   {name:"Dear John's", k:"steak", d:"A restored 1962 supper club: martinis, oysters, prime rib carved properly. Dark leather, no dinginess."},
   {name:"Mayura", k:"indian", d:"Keralan, and the one Indian kitchen on the Westside worth a detour — dosas, fish moilee, appam."},
   {name:"Margot", k:"med", d:"Rooftop at the Platform with a big view and a Mediterranean menu."}],
@@ -368,7 +398,8 @@ TRIPS.push(
   {name:"Water Grill", k:"seafood", d:"Serious seafood: a raw bar with real depth and whole fish handled simply."},
   {name:"Citrin", k:"cal", m:"star", d:"Mélisse's à la carte sibling in the same building, and considerably easier to book."},
   {name:"Cassia", k:"seafood", d:"Southeast Asian brasserie — the sunbathing prawns and a whole grilled fish. Big handsome room."},
-  {name:"Rustic Canyon", k:"cal", m:"bib", d:"Farmers-market cooking on Wilshire, consistently among the best meals in the city."}],
+  {name:"Rustic Canyon", k:"cal", m:"bib", d:"Farmers-market cooking on Wilshire, consistently among the best meals in the city."},
+  {name:"El Cholo", k:"mexican", famous:true, flour:true, d:"Serving since 1923 and still the benchmark for old-school Californian Mexican. Flour tortillas as standard, green corn tamales in season."}],
  mich:"Mélisse holds two Michelin stars and Citrin holds one — both in the same building on Wilshire, which is a nice trick. Pasjoli in Santa Monica has also held a star. Book the tasting menus a month out.",
  parking:"Downtown structures 1-8 give you the first 90 minutes free, then it's cheap by LA standards — far better than the beach lots. Beach lots on PCH and at the pier run $15-20 in summer.",
  tip:"Skip the pier lot entirely. Park in structure 4 or 5 downtown, walk to the pier, walk the bluffs, and come back up for dinner on Montana or Wilshire.",
@@ -414,7 +445,7 @@ TRIPS.push(
  eat:[
   {name:"Chez Melange", k:"seafood", d:"Riviera Village stalwart with an oyster bar and a serious wine list. Forty years good."},
   {name:"HT Grill", k:"cal", d:"Neighbourhood American bistro in the Village — comfortable, reliable, proper bar."},
-  {name:"Quality Seafood", k:"seafood", d:"Pick your crab or lobster from the tank, they steam it, you eat it at a picnic table over the water. Rough and ready, but nothing here is fresher."}],
+  {name:"Quality Seafood", famous:true, k:"seafood", d:"Pick your crab or lobster from the tank, they steam it, you eat it at a picnic table over the water. Rough and ready, but nothing here is fresher."}],
  mich:null,
  parking:"Pier parking structure is cheap and huge. Riviera Village has free two-hour street parking and a couple of small free lots — much easier than the pier.",
  tip:"Do the pier for lunch (get crab at Quality Seafood), then drive five minutes south to Riviera Village for the afternoon. They're two totally different towns.",
@@ -429,7 +460,9 @@ TRIPS.push(
  eatnote:"Westwood Village is thin for dinner. Sawtelle Japantown is five minutes southwest and is the reason to be over here.",
  eat:[
   {name:"Shamshiri Grill", k:"med", d:"Persian charcoal grill — saffron rice, lamb and beef koobideh done properly."},
-  {name:"Baltaire", k:"steak", d:"Ten minutes west on San Vicente if you want a real dinner after the museums.", city:"Brentwood"}],
+  {name:"Baltaire", k:"steak", d:"Ten minutes west on San Vicente if you want a real dinner after the museums.", city:"Brentwood"},
+  {name:"The Apple Pan", k:"steak", famous:true, d:"A horseshoe counter with no tables, unchanged since 1947. The hickory burger and a slice of banana cream pie. Plain by design, and one of the most famous rooms in the city."},
+  {name:"Sonoritas Prime Tacos", k:"mexican", flour:true, d:"Sonoran-style, which means flour tortillas pressed to order and mesquite-grilled beef. The answer to the corn problem on this side of town."}],
  mich:null,
  parking:"UCLA lots are $15-18 per day (Lot 4 for the Hammer end, Structure 2 for campus). Westwood Village has metered street parking and several cheap public lots off Broxton and Kinross. The Hammer offers discounted parking with admission.",
  tip:"Sculpture garden, then the Hammer, then Attari for lunch, then Diddy Riese. That's a perfect four-hour, almost-free day.",
@@ -474,7 +507,8 @@ TRIPS.push(
  eatnote:"There is nothing worth eating inside the park. Los Feliz and Atwater are both ten minutes down.",
  eat:[
   {name:"Morihiro", k:"japanese", m:"star", d:"Morihiro Onodera's sushi counter in Atwater Village, ten minutes down the hill. Small, exacting, book ahead."},
-  {name:"Little Dom's", k:"italian", d:"Red leather booths and Italian-American comfort at the base of the park."}],
+  {name:"Little Dom's", k:"italian", d:"Red leather booths and Italian-American comfort at the base of the park."},
+  {name:"Tam O'Shanter", k:"steak", famous:true, d:"Open on the same corner since 1922, the oldest restaurant in Los Angeles still in its original spot. Prime rib carved from the cart, dark wood, tartan everywhere.", city:"Atwater Village"}],
  mich:"Nothing in the park, but Los Feliz and Atwater at the base of it have real depth — Morihiro in Atwater Village has held a Michelin star for its sushi.",
  parking:"Observatory parking is $10/hour (capped), and the free street parking on West Observatory Road fills by 10am. Weekends, take the free DASH shuttle from the Greek Theatre lot or the Metro station. Trailhead lots at Fern Dell and Travel Town are free.",
  tip:"Fern Dell is the underrated entrance — a shaded fern-lined creek walk that climbs to the Observatory. Park at the bottom, walk up, and you skip the entire parking war.",
@@ -489,7 +523,7 @@ TRIPS.push(
  eatnote:"San Pedro's seafood is fish-market-and-picnic-table by nature. For a proper room, Terranea on the Palos Verdes bluff is twenty minutes west.",
  eat:[
   {name:"Think Cafe", k:"med", d:"The reliable sit-down downtown — Mediterranean-leaning, good salads and pasta."},
-  {name:"San Pedro Fish Market", k:"seafood", d:"Enormous, loud, order-by-the-tray shellfish on the water. An experience rather than a restaurant."}],
+  {name:"San Pedro Fish Market", famous:true, k:"seafood", d:"Enormous, loud, order-by-the-tray shellfish on the water. An experience rather than a restaurant."}],
  mich:null,
  parking:"Free lots at Point Fermin Park and Angels Gate. Cabrillo Beach lot is around $9. Downtown San Pedro street parking is free and plentiful — this is one of the easiest coastal parking situations in LA.",
  tip:"Check the tide chart and hit the Point Fermin tide pools at low tide, then take the bluff walk down to Cabrillo. Sunset at Point Fermin is genuinely one of the best in the county and there's never a crowd.",
@@ -503,7 +537,7 @@ TRIPS.push(
  shop:"Malibu Country Mart and the Malibu Village — a cluster of high-end boutiques around a lawn where kids play and everyone pretends not to be looking at anyone. Worth an hour.",
  eatnote:"Parts of PCH and Malibu were badly hit by the January 2025 fires — check what has reopened before committing to a plan.",
  eat:[
-  {name:"Nobu Malibu", k:"japanese", d:"A deck hanging over the water and the sushi to match. Book far ahead and go at sunset."},
+  {name:"Nobu Malibu", famous:true, k:"japanese", d:"A deck hanging over the water and the sushi to match. Book far ahead and go at sunset."},
   {name:"Broad Street Oyster Company", k:"seafood", d:"The lobster roll that took over the internet, and it holds up. Counter service, modern and clean."},
   {name:"Malibu Farm Pier Cafe", k:"cal", d:"On the end of the pier with ocean on three sides. Simple, sunny, packed."}],
  mich:null,
@@ -581,10 +615,11 @@ TRIPS.push(
  shop:"99 Ranch Market and the Hong Kong Supermarket are destinations in their own right. San Gabriel Square (the \"Great Mall of China\") has bakeries, tea shops and a food court that beats most restaurants.",
  eat:[
   {name:"Newport Seafood", k:"seafood", d:"San Gabriel. The house special lobster is the dish the whole valley agrees on. Order it and a whole steamed fish.", city:"San Gabriel"},
-  {name:"Din Tai Fung", k:"chinese", d:"Arcadia's original US location. Xiao long bao pleated eighteen times. Put your name in and go shop.", city:"Arcadia"},
+  {name:"Din Tai Fung", famous:true, k:"chinese", d:"Arcadia's original US location. Xiao long bao pleated eighteen times. Put your name in and go shop.", city:"Arcadia"},
   {name:"Sichuan Impression", k:"chinese", m:"bib", d:"Alhambra. Chengdu-style and genuinely numbing — the toothpick lamb and the cold noodles.", city:"Alhambra"},
   {name:"Chengdu Taste", k:"chinese", m:"bib", d:"The room that broke Sichuan cooking into the mainstream here. The boiled fish in chilli oil.", city:"Alhambra"},
-  {name:"Bistro Na's", k:"chinese", d:"Temple City. Qing imperial cuisine in a calm, formal room — the most upscale Chinese cooking in the valley.", city:"Temple City"}],
+  {name:"Bistro Na's", k:"chinese", d:"Temple City. Qing imperial cuisine in a calm, formal room — the most upscale Chinese cooking in the valley.", city:"Temple City"},
+  {name:"Burritos La Palma", k:"mexican", famous:true, flour:true, d:"Zacatecan birria de res wrapped in a thin house-made flour tortilla. Small, famous, and worth the queue.", city:"El Monte"}],
  mich:"The California Michelin Guide's Bib Gourmand list leans heavily on the SGV — Chengdu Taste, Sichuan Impression, Bistro Na's in Temple City and Longo Seafood have all been recognized. Bistro Na's imperial-cuisine tasting is the fancy option out here.",
  parking:"Strip-mall lots everywhere and almost all free — this is the easiest parking of any food trip in LA. San Gabriel Square has a large free structure.",
  tip:"Go with four people minimum and treat it as a crawl: dumplings at one place, noodles at another, shaved ice or a Taiwanese bakery for dessert. Sunday dim sum at Sea Harbour in Rosemead is the other classic play.",
@@ -701,7 +736,8 @@ TRIPS.push(
  eatnote:"Old Towne is antiques first, dinner second. Costa Mesa is twenty minutes south for the Michelin rooms.",
  eat:[
   {name:"Haven Craft Kitchen + Bar", k:"cal", d:"The modern room on the circle — a serious beer list and cooking that goes beyond pub food."},
-  {name:"Felix Continental Cafe", k:"med", d:"Cuban-Spanish with sidewalk tables looking at the fountain. Order the ropa vieja."}],
+  {name:"Felix Continental Cafe", k:"med", d:"Cuban-Spanish with sidewalk tables looking at the fountain. Order the ropa vieja."},
+  {name:"Watson's Soda Fountain & Cafe", k:"cal", famous:true, d:"Operating on the circle since 1899 and the oldest business in Orange County. Counter stools, malts, a patty melt."}],
  mich:null,
  parking:"Free two-hour street parking around the plaza and free public lots one block off. Genuinely easy — arrive by 10am on a Saturday and you'll get a spot on the circle.",
  tip:"Come on a Saturday morning, do the antique malls first while you have energy, eat at Watson's, then walk Chapman's campus. Pair it with Irvine Regional Park if you have kids along.",
@@ -730,8 +766,9 @@ TRIPS.push(
  eat:[
   {name:"The Cannery", k:"seafood", d:"Seafood in a converted 1921 cannery on the water; boats tie up outside."},
   {name:"Nobu Newport Beach", k:"japanese", d:"Lido Marina Village, with a waterfront patio."},
-  {name:"Taco María", k:"mexican", m:"star", d:"Costa Mesa, ten minutes inland. A Mexican tasting menu with a Michelin star and one of the best rooms in the county.", city:"Costa Mesa"},
-  {name:"Bear Flag Fish Company", k:"seafood", d:"Counter-service poke and fish tacos for a quick, good lunch."}],
+  {name:"Taco María", k:"mexican", m:"star", d:"Costa Mesa, ten minutes inland. A Mexican tasting menu with a Michelin star and one of the best rooms in the county. Fair warning: heirloom corn masa is the whole thesis here, so it is not the one for a flour-tortilla night.", city:"Costa Mesa"},
+  {name:"Bear Flag Fish Company", k:"seafood", d:"Counter-service poke and fish tacos for a quick, good lunch."},
+  {name:"The Crab Cooker", k:"seafood", famous:true, d:"A red clapboard institution since 1951, serving crab and skewered fish on paper plates. Famous enough that the queue is part of it."}],
  mich:"Orange County's Michelin cluster is in Costa Mesa, 10 minutes inland: Taco María (one star, Mexican tasting menu), Knife Pleat (one star, French) and Hana re (one star, sushi). Taco María is the one to plan a trip around.",
  parking:"Balboa Island street parking is very limited — park in the Balboa Peninsula lot and take the ferry over as a pedestrian, which is far easier. Crystal Cove lots are $15. Fashion Island parking is free.",
  tip:"Do it backwards: park on the peninsula, walk the Fun Zone, take the ferry across as a walk-on, loop Balboa Island on foot with a frozen banana, ferry back. No parking stress at all.",
@@ -830,7 +867,7 @@ TRIPS.push(
  see:["Mission Inn guided tour — 75 minutes, and the only way to see the upper levels and the catacombs","Festival of Lights, November to January — 5 million lights on the hotel, and it's genuinely spectacular","Riverside Art Museum and the Cheech Marin Center for Chicano Art, which is excellent and new","Mount Rubidoux — a paved 3-mile loop to a cross on a hill with a 360° valley view","California Citrus State Historic Park — orange groves preserved as a park, with tours","Fairmount Park and the downtown Main Street pedestrian mall"],
  shop:"The downtown pedestrian mall on Main Street has antique stores and independent shops, plus a good Saturday farmers market. Riverside Plaza and Tyler Galleria cover mainstream retail.",
  eat:[
-  {name:"Duane's Prime Steaks & Seafood", k:"steak", d:"The Mission Inn's serious room — dry-aged beef and a proper seafood list."},
+  {name:"Duane's Prime Steaks & Seafood", famous:true, k:"steak", d:"The Mission Inn's serious room — dry-aged beef and a proper seafood list."},
   {name:"ProAbition Kitchen", k:"cal", d:"Prohibition-themed downtown room in a historic building, good cocktails."}],
  mich:null,
  parking:"Several downtown city garages with cheap or free evening/weekend rates, right by the Mission Inn. Mount Rubidoux has free street parking at the base.",
@@ -953,7 +990,8 @@ TRIPS.push(
   {name:"The Lark", k:"cal", m:"bib", d:"Funk Zone flagship in an old fish market. Shared plates, great room."},
   {name:"Brophy Bros.", k:"seafood", d:"Chowder and a seafood platter on the harbour deck. Touristy and correct."},
   {name:"Bettina", k:"italian", d:"Neapolitan pizza in Montecito's Upper Village — some of the best in the state.", city:"Montecito"},
-  {name:"Bell's", k:"french", m:"star", d:"Los Alamos, forty-five minutes north. A Michelin-starred bistro in a farm town.", city:"Los Alamos"}],
+  {name:"Bell's", k:"french", m:"star", d:"Los Alamos, forty-five minutes north. A Michelin-starred bistro in a farm town.", city:"Los Alamos"},
+  {name:"Cold Spring Tavern", k:"steak", famous:true, d:"An 1865 stagecoach stop up San Marcos Pass, still serving. Wood fires, game and tri-tip, and no phone signal."}],
  mich:"Bell's in Los Alamos holds a Michelin star, and Santa Barbara itself carries a strong Bib Gourmand list including The Lark and Bibi Ji. If you're doing a wine day, chain Bell's onto Los Olivos.",
  parking:"Downtown Santa Barbara's city lots give you the first 75 minutes free and are cheap after — parking here is far easier than any comparable beach town. Waterfront lots are metered. Free street parking in the residential blocks above State Street.",
  tip:"Do the courthouse tower first thing (free, opens 8am, no crowds), then the Mission, then the Funk Zone for the afternoon. Stay for sunset at Butterfly Beach in Montecito. Carpinteria on the way home or the way up.",
@@ -1011,7 +1049,7 @@ TRIPS.push(
  see:["La Jolla Cove, the Children's Pool seal beach, and the coast walk connecting them","The Sunny Jim Sea Cave — walk down 145 steps through a tunnel to a sea cave, from inside a shop","Kayaking the Seven Sea Caves and the La Jolla Ecological Reserve — the signature activity","Windansea Beach and its 1946 surf shack","Birch Aquarium at Scripps — small, excellent, with a huge ocean view terrace","Mount Soledad and the veterans memorial for a 360° view over all of San Diego","Torrey Pines Gliderport just north"],
  shop:"Girard Avenue and Prospect Street — galleries, jewelry, boutiques, and a Warwick's, the oldest family-owned bookstore in the country. Expensive and lovely.",
  eat:[
-  {name:"The Marine Room", k:"seafood", d:"Waves break against the windows at high tide. Check the tide calendar and book that night."},
+  {name:"The Marine Room", famous:true, k:"seafood", d:"Waves break against the windows at high tide. Check the tide calendar and book that night."},
   {name:"George's at the Cove", k:"cal", d:"Three rooms in one building; California Modern is the serious one, Ocean Terrace has the view."},
   {name:"Soichi Sushi", k:"japanese", m:"star", d:"University Heights. A Michelin-starred omakase counter at a fraction of LA prices.", city:"San Diego"},
   {name:"Puesto", k:"mexican", d:"Excellent modern Mexican — the crispy cheese tacos — right by the Cove."}],
@@ -1124,7 +1162,7 @@ TRIPS.push(
  eat:[
   {name:"Kitchen in the Desert", k:"cal", d:"Joshua Tree. Caribbean-Californian, small, chef-driven, the best cooking in the basin."},
   {name:"La Copine", k:"cal", d:"Flamingo Heights, out in the middle of nothing. A genuinely serious restaurant. No reservations.", city:"Flamingo Heights"},
-  {name:"Pappy & Harriet's", k:"cal", d:"Pioneertown. A barbecue roadhouse on an old western set that became a legendary music venue. Book a table.", city:"Pioneertown"}],
+  {name:"Pappy & Harriet's", famous:true, k:"cal", d:"Pioneertown. A barbecue roadhouse on an old western set that became a legendary music venue. Book a table.", city:"Pioneertown"}],
  mich:null,
  parking:"$30 per vehicle for a 7-day park pass (or use the $80 America the Beautiful annual pass, which pays for itself in three parks). Trailhead lots at Hidden Valley and Barker Dam fill by 10am on spring weekends. There is no gas, food or reliable water inside the park.",
  tip:"There is no cell service in the park — download the map offline before you enter. Go in October-November or February-April; summer regularly exceeds 105°F. Enter via the West Entrance in Joshua Tree town, and stay past dark for the stars. That's the whole reason to come.",
@@ -1140,7 +1178,7 @@ TRIPS.push(
  eatnote:"Julian is a pie town with one real restaurant. Plan accordingly.",
  eat:[
   {name:"Jeremy's on the Hill", k:"cal", d:"California farm-to-table just outside town, and by a distance the best actual meal up here.", city:"Wynola"},
-  {name:"Julian Pie Company", k:"bakery", d:"The apple pie the town runs on. Order a whole one ahead by phone."}],
+  {name:"Julian Pie Company", famous:true, k:"bakery", d:"The apple pie the town runs on. Order a whole one ahead by phone."}],
  mich:null,
  parking:"Free street parking on Main Street and free lots one block off — it fills completely on autumn weekends, when Julian gets genuinely mobbed. Cuyamaca Rancho State Park day use is around $10.",
  tip:"Go on a weekday in October and the town is lovely; go on an October Saturday and you'll sit in traffic on the mountain road. Order pie ahead by phone for pickup. Chain it with Anza-Borrego, an hour east down the mountain.",
@@ -1172,7 +1210,8 @@ TRIPS.push(
  eat:[
   {name:"Ember", k:"cal", d:"Arroyo Grande, ten minutes inland. Everything from a wood-fired oven, no reservations, and the best restaurant on this stretch of coast.", city:"Arroyo Grande"},
   {name:"Ventana Grill", k:"seafood", d:"Clifftop dining with an ocean view and a Latin-influenced menu."},
-  {name:"Old Custom House", k:"cal", d:"Avila Beach, right on the promenade. Big patio, easy lunch.", city:"Avila Beach"}],
+  {name:"Old Custom House", k:"cal", d:"Avila Beach, right on the promenade. Big patio, easy lunch.", city:"Avila Beach"},
+  {name:"Splash Cafe", k:"seafood", famous:true, d:"Clam chowder in a sourdough bread bowl from a walk-up window. The definitive Pismo meal and there is always a queue."}],
  mich:null,
  parking:"Free street parking and free beach lots in Pismo — genuinely easy. Oceano Dunes vehicle entry is around $5 per car. Avila Beach has metered parking on the promenade and free lots slightly inland.",
  tip:"Come between November and February for the butterflies and pair it with Sycamore Mineral Springs — book a private hot tub for after sunset. Ember in Arroyo Grande is worth planning the day around; get there when it opens.",
@@ -1188,7 +1227,8 @@ TRIPS.push(
  eatnote:"San Luis Obispo is twenty minutes inland. For seafood, Morro Bay or Avila Beach on the way.",
  eat:[
   {name:"Novo Restaurant", k:"cal", d:"A creekside deck downtown with a wandering menu. The best patio in town."},
-  {name:"Giuseppe's Cucina Italiana", k:"italian", d:"Southern Italian, decades old, always full."}],
+  {name:"Giuseppe's Cucina Italiana", k:"italian", d:"Southern Italian, decades old, always full."},
+  {name:"Madonna Inn", k:"bakery", famous:true, d:"The pinkest hotel in America, 110 themed rooms and a legendary cake. Go for the pink champagne cake in the gold-and-pink dining room and commit to the bit."}],
  mich:"Six Test Kitchen in Paso Robles (45 minutes north) holds a Michelin star — a 12-seat counter in a converted shipping container. Book far ahead if you're chaining wine country.",
  parking:"Downtown parking structures are cheap and the first hour is often free; street meters are free after 6pm and on Sundays. Thursday market night is busy — park in a structure and walk.",
  tip:"Come on a Thursday. Arrive by 4pm, walk the mission and Bubblegum Alley, hike Bishop Peak or drive out to Montaña de Oro, then hit the market at 6. It's the best evening on the Central Coast.",
@@ -1280,7 +1320,7 @@ TRIPS.push(
  shop:"Downtown Santa Cruz's Pacific Avenue is genuinely great — bookstores, records, vintage. Monterey's Cannery Row is touristy; Carmel is 10 minutes south for the good galleries and boutiques.",
  eat:[
   {name:"Passionfish", k:"seafood", d:"Pacific Grove. Sustainable seafood with wine at near-retail prices — the best-value serious meal on the peninsula.", city:"Pacific Grove"},
-  {name:"Phil's Fish Market", k:"seafood", d:"Moss Landing. Cioppino in a shed on the harbour. Enormous, messy, worth the detour.", city:"Moss Landing"},
+  {name:"Phil's Fish Market", famous:true, k:"seafood", d:"Moss Landing. Cioppino in a shed on the harbour. Enormous, messy, worth the detour.", city:"Moss Landing"},
   {name:"Bantam", k:"cal", d:"Santa Cruz. Wood-fired cooking and the best dinner in town.", city:"Santa Cruz"}],
  mich:"The Monterey Peninsula's stars sit in Carmel and Carmel Valley — Chez Noir and Aubergine in Carmel have both held stars. Santa Cruz is more Bib Gourmand territory.",
  parking:"Monterey has paid garages downtown and on Cannery Row ($2-3/hour). 17-Mile Drive costs around $12 per car, refunded with a restaurant purchase in Pebble Beach. Santa Cruz Boardwalk parking is $15-20 in summer; free street parking a few blocks inland. Point Lobos is around $10 and the lot fills by 10am — reserve online.",
@@ -1296,7 +1336,7 @@ TRIPS.push(
  shop:null,
  eatnote:"Park food is captive-audience food. The Ahwahnee is the exception.",
  eat:[
-  {name:"The Ahwahnee Dining Room", k:"cal", d:"A 34-foot-ceilinged hall in a 1927 granite-and-timber hotel. The great national-park room; book far ahead."},
+  {name:"The Ahwahnee Dining Room", famous:true, k:"cal", d:"A 34-foot-ceilinged hall in a 1927 granite-and-timber hotel. The great national-park room; book far ahead."},
   {name:"Rush Creek Lodge Tavern", k:"cal", d:"Outside the Big Oak Flat entrance, with a good deck and better food than anything inside.", city:"Groveland"}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass. Critically: Yosemite has used a timed-entry reservation system in peak periods in recent years — check the park website before you go, because without one you may be turned away at the gate. Valley day-use lots (Yosemite Village, Curry Village) fill by 9am; the free valley shuttle is the correct way to move around once you're parked.",
@@ -1313,7 +1353,7 @@ TRIPS.push(
   {name:"Chez Noir", k:"french", m:"star", d:"Carmel. A tiny Michelin-starred room from a husband-and-wife team, and the best meal on the peninsula."},
   {name:"Aubergine at L'Auberge Carmel", k:"cal", m:"star", d:"A Michelin-starred tasting menu in a beautiful courtyard hotel."},
   {name:"Sierra Mar at Post Ranch Inn", k:"cal", d:"A glass-walled room on a Big Sur cliff. Reserve far ahead.", city:"Big Sur"},
-  {name:"Nepenthe", k:"cal", d:"A terrace 800 feet above the ocean, serving since 1949. Go for the view and the sunset.", city:"Big Sur"}],
+  {name:"Nepenthe", famous:true, k:"cal", d:"A terrace 800 feet above the ocean, serving since 1949. Go for the view and the sunset.", city:"Big Sur"}],
  mich:"Carmel punches enormously above its weight: Chez Noir and Aubergine have both held Michelin stars, and Sierra Mar at Post Ranch has been recognized. For a village of 3,800 people that's remarkable.",
  parking:"Carmel has free two-hour street parking throughout the village — genuinely free, which nobody expects. Big Sur's viewpoint pullouts are free but small; Julia Pfeiffer Burns and Pfeiffer Big Sur charge around $10-12 day use, and Pfeiffer Beach is $12 cash only with a tiny lot.",
  tip:"Critically: check Highway 1 for closures before you go. Big Sur's road closes regularly for landslides, sometimes for a year at a time, and the route may require approaching from the north. Fill the tank in Carmel — gas in Big Sur is famously expensive and there's no cell service for most of the drive. Stay overnight; this is not a day trip.",
@@ -1327,10 +1367,10 @@ TRIPS.push(
  see:["Golden Gate Bridge — walk or bike across from Crissy Field to Sausalito, then ferry back","Golden Gate Park: the de Young Museum's free observation tower, the Japanese Tea Garden, the Conservatory of Flowers, and the bison paddock","Alcatraz — book the ferry weeks ahead; the audio tour is genuinely superb","Lands End Trail and the Sutro Bath ruins — the best coastal walk inside any American city","The Ferry Building marketplace and the Saturday farmers market","Mission District murals on Balmy Alley and Clarion Alley, plus Dolores Park","Chinatown, the oldest in North America, and the Golden Gate Fortune Cookie Factory","Painted Ladies at Alamo Square and the Filbert Steps up Telegraph Hill"],
  shop:"Hayes Valley for independent design and fashion, Valencia Street in the Mission for books and vintage, Union Square for the flagship stores, and the Ferry Building for food. Skip Fisherman's Wharf entirely.",
  eat:[
-  {name:"Swan Oyster Depot", k:"seafood", d:"A twenty-stool counter open since 1912. Crab, oysters, a beer. Plain as anything and among the best seafood in America — queue by ten."},
+  {name:"Swan Oyster Depot", famous:true, k:"seafood", d:"A twenty-stool counter open since 1912. Crab, oysters, a beer. Plain as anything and among the best seafood in America — queue by ten."},
   {name:"Copra", k:"indian", d:"Srijith Gopinathan's coastal South Indian. This is the standard nothing in Southern California reaches."},
   {name:"Rintaro", k:"japanese", d:"Handmade soba and charcoal skewers in a beautiful cedar room in the Mission."},
-  {name:"House of Prime Rib", k:"steak", d:"One dish since 1949, carved from a silver cart. Book a month ahead."},
+  {name:"House of Prime Rib", famous:true, k:"steak", d:"One dish since 1949, carved from a silver cart. Book a month ahead."},
   {name:"State Bird Provisions", k:"cal", d:"Dim-sum-cart service of Californian small plates. Still one of the most enjoyable rooms in the country."}],
  mich:"San Francisco has more Michelin stars per capita than anywhere in America — Atelier Crenn, Benu, Quince and SingleThread (up in Healdsburg) at three stars, and dozens more below. If you want a three-star meal in California without flying, this is where to plan it.",
  parking:"Do not drive in the city if you can avoid it. Garages run $30-50 a day, street parking is a competitive sport, and break-ins are a genuine problem — never leave anything visible in the car. Park at your hotel and use Muni, BART and your feet.",
@@ -1376,7 +1416,7 @@ TRIPS.push(
  shop:"Hopi House and the Desert View Watchtower have genuine Native American art and jewelry. Tusayan outside the gate is functional. This is not a shopping trip.",
  eatnote:"Everything else inside the park is cafeteria food. Tusayan, ten minutes out, is marginally better.",
  eat:[
-  {name:"El Tovar Dining Room", k:"cal", d:"A 1905 log-and-stone room on the rim. Book weeks ahead; it is the great national-park meal."}],
+  {name:"El Tovar Dining Room", famous:true, k:"cal", d:"A 1905 log-and-stone room on the rim. Book weeks ahead; it is the great national-park meal."}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass. Village lots fill by mid-morning in summer — park once at the visitor center and use the free shuttle system, which is excellent and covers the whole rim. Lodging inside the park books 12 months out; Tusayan is 10 minutes away, Williams an hour.",
  tip:"Sunrise at Mather Point and sunset at Hopi Point are the two non-negotiables, and they're both free once you're in. Go in April-May or September-October. Route it through Sedona (90 minutes south) and make it a proper four-day trip — it's too far for anything less.",
@@ -1426,7 +1466,7 @@ TRIPS.push(
  eatnote:"Come hungry and plan two stops. This is a food trip with a marsh walk attached, not the other way round.",
  eat:[
   {name:"Otafuku", k:"japanese", d:"Handmade soba and udon in a spare, quiet room. Order the cold soba with tempura and the duck broth."},
-  {name:"Musha", k:"japanese", d:"Izakaya small plates and a deep sake list. Loud in a good way, and the room is warm rather than dingy."},
+  {name:"Musha", famous:true, k:"japanese", d:"Izakaya small plates and a deep sake list. Loud in a good way, and the room is warm rather than dingy."},
   {name:"Mitsuwa Marketplace food hall", k:"japanese", d:"Ramen, curry, a fish counter and a bakery under one roof. The low-effort answer when you want six things."},
   {name:"Sushi Ii", k:"japanese", d:"A small, serious omakase counter — book ahead, it seats very few."}],
  mich:"No stars out here, which says more about where Michelin looks than about the cooking. The South Bay's Japanese depth is the draw.",
@@ -1455,7 +1495,8 @@ const VIBES = [
   ["wine","Wine"],["park","Parks"],["desert","Desert"],["snow","Snow"],
   ["cute","Small downtown"],["water","On the water"],["culture","Museums"],["kid","Big fun"]
 ];
-const EATS = [["seafood","Seafood"],["japanese","Japanese"],["chinese","Chinese"],["indian","Indian"]];
+const EATS = [["seafood","Seafood"],["japanese","Japanese"],["chinese","Chinese"],["mexican","Mexican"],
+  ["indian","Indian"],["__flour","Flour tortillas"],["__famous","Landmarks"]];
 
 let state = {q:"", dist:null, vibes:new Set(), eats:new Set(), mich:false, open:new Set(), done:new Set()};
 try{ state.done = new Set(JSON.parse(localStorage.getItem("pv-daytrips-stamps") || "[]")); }catch(e){}
@@ -1467,7 +1508,11 @@ function matches(t){
     if(!(t.mins > prev && t.mins <= ZONES[state.dist].max)) return false;
   }
   if(state.mich && !t.mich && !t.eat.some(r => r.m)) return false;
-  for(const k of state.eats) if(!t.eat.some(r => r.k === k)) return false;
+  for(const k of state.eats){
+    if(k === "__famous"){ if(!t.eat.some(r => r.famous)) return false; }
+    else if(k === "__flour"){ if(!t.eat.some(r => r.flour)) return false; }
+    else if(!t.eat.some(r => r.k === k)) return false;
+  }
   for(const v of state.vibes) if(!t.tags.includes(v)) return false;
   if(state.q){
     const hay = (t.name + " " + t.region + " " + t.blurb + " " + t.hero + " " + t.see.join(" ") + " " +
@@ -1663,7 +1708,7 @@ function engrave(cv, kind, seed){
   const x = cv.getContext("2d"); x.scale(dpr, dpr);
   const cs = getComputedStyle(document.documentElement);
   const paper = cs.getPropertyValue("--card").trim() || "#FAF8F3";
-  const ink = cs.getPropertyValue("--ink").trim() || "#242219";
+  const ink = (cs.getPropertyValue("--i-" + kind).trim()) || cs.getPropertyValue("--ink").trim() || "#242219";
   let s = seed || 1;
   const rnd = () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296;
 
@@ -1849,8 +1894,10 @@ function restRow(r, t){
   const badge = r.m === "star"
       ? `<span class="mich">${(r.stars || 1) === 1 ? "Michelin star" : (r.stars) + " Michelin stars"}</span>`
     : r.m === "bib" ? `<span class="mich">Bib Gourmand</span>` : "";
-  const kind = r.k && KIND[r.k] ? `<span class="kind">${KIND[r.k]}</span>` : "";
-  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${kind}${badge}</div>
+  const kind = r.k && KIND[r.k] ? `<span class="kind" data-k="${esc(r.k)}">${KIND[r.k]}</span>` : "";
+  const fame = r.famous ? `<span class="landmark">Landmark</span>` : "";
+  const flour = r.flour ? `<span class="flour">Flour tortillas</span>` : "";
+  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${kind}${fame}${flour}${badge}</div>
     <div class="rest-d">${esc(r.d)}</div></div><div class="rest-l">
     <a href="${esc(lookup(r,t))}" target="_blank" rel="noopener">Menu</a>
     <a href="${esc(placeUrl(r,t))}" target="_blank" rel="noopener">Map</a></div></div>`;
@@ -1862,13 +1909,14 @@ function card(t){
     .filter(Boolean).join(" &middot; ");
   const mich = t.eat.some(r => r.m === "star") ? "Michelin star"
     : t.eat.some(r => r.m === "bib") ? "Bib Gourmand" : t.mich ? "Michelin nearby" : "";
-  return `<article class="entry${open ? " open" : ""}" id="trip-${t.id}">
+  const z = ZONES.findIndex(x => t.mins <= x.max);
+  return `<article class="entry${open ? " open" : ""}" data-z="${z}" id="trip-${t.id}">
     <button class="row" type="button" data-t="${t.id}" aria-expanded="${open}">
       <span class="time">${esc(t.drive)}</span>
       <span class="main">
         <span class="hd"><span class="name">${esc(t.name)}</span><span class="mark" aria-hidden="true">${open ? "&minus;" : "+"}</span></span>
         <span class="blurb">${esc(t.blurb)}</span>
-        <span class="meta"><span class="lbl">${esc(t.region)}</span><span class="lbl vibes">${vibes}</span>
+        <span class="meta"><span class="lbl region">${esc(t.region)}</span><span class="lbl vibes">${vibes}</span>
           ${mich ? `<span class="lbl mich-flag">${mich}</span>` : ""}
           ${pc ? `<span class="lbl">${pc} photo${pc === 1 ? "" : "s"}</span>` : ""}</span>
       </span>
@@ -1915,7 +1963,7 @@ function render(){
     for(const t of list){
       const z = ZONES.findIndex(x => t.mins <= x.max);
       if(z !== zi){ zi = z;
-        html += `<div class="zone"><h2>${esc(ZONES[z].t)}</h2><span class="lbl">${esc(ZONES[z].s)}</span></div>`; }
+        html += `<div class="zone" data-z="${z}"><h2>${esc(ZONES[z].t)}</h2><span class="lbl">${esc(ZONES[z].s)}</span></div>`; }
       html += card(t);
     }
   }
