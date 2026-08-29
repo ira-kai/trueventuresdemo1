@@ -119,6 +119,10 @@ a:hover{border-bottom-color:var(--accent); color:var(--accent)}
 .rest-b{flex:1; min-width:190px}
 .rest-n{font-size:.95rem; font-weight:500; display:flex; gap:9px; align-items:baseline; flex-wrap:wrap}
 .rest-d{font-size:.88rem; color:var(--ink2); margin-top:3px}
+.kind{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink3); border:1px solid var(--line); border-radius:2px; padding:1px 5px; white-space:nowrap}
+.eatnote{font-size:.88rem; color:var(--ink2); font-style:italic; margin:0 0 6px; padding-bottom:11px;
+  border-bottom:1px solid var(--line2)}
 .mich{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
   color:var(--accent2); border:1px solid var(--accent2); border-radius:2px; padding:1px 5px; white-space:nowrap}
 .rest-l{display:flex; gap:14px; flex:none}
@@ -177,7 +181,7 @@ footer h3{margin-bottom:2px}
   <div class="wrap">
     <span class="lbl">A California field guide</span>
     <h1>Day trips, measured from our driveway</h1>
-    <p>Seventy-five places worth the drive, ordered by how long they actually take to reach on a weekend morning. Open any entry for the parks, the viewpoints, the downtown, the parking and where to eat.</p>
+    <p>Seventy-seven places worth the drive, ordered by how long they actually take to reach on a weekend morning. Open any entry for the parks, the viewpoints, the downtown, the parking and where to eat.</p>
     <div class="origin">
       <span class="lbl">Starting point</span>
       <b>The Q Playa &middot; Playa Vista</b>
@@ -202,8 +206,9 @@ footer h3{margin-bottom:2px}
     <div class="filters" id="filters" hidden>
       <div class="frow" id="distchips" role="group" aria-label="Filter by drive time"></div>
       <div class="frow" id="vibechips" role="group" aria-label="Filter by kind of day"></div>
+      <div class="frow" id="eatchips" role="group" aria-label="Filter by what is on the table"></div>
       <div class="frow"><button class="chip" type="button" id="fclear">Clear all</button>
-        <span class="lbl" id="stampline" style="align-self:center">0 of 75 visited</span></div>
+        <span class="lbl" id="stampline" style="align-self:center">0 of 77 visited</span></div>
     </div>
   </div>
 </div>
@@ -216,6 +221,8 @@ footer h3{margin-bottom:2px}
     <h3>Notes</h3>
     <p><strong>The drive times assume a weekend.</strong> Every number is a door-to-door estimate from The Q Playa on a Saturday or Sunday with normal traffic, not a mileage calculation &mdash; and rounded up, because nothing in this city takes the time the map says. Treat them as planning numbers. Every entry has a <strong>Directions</strong> link that opens Maps with our address already set as the origin, which is where you get the real number for the hour you're actually leaving.</p>
     <p><strong>Menus.</strong> Each restaurant has a <strong>Menu</strong> link that goes straight to that exact restaurant's current menu, and a <strong>Map</strong> link for hours and the phone number. These resolve at the moment you tap them, so they keep working after a restaurant redesigns its site.</p>
+    <p><strong>How these picks are chosen.</strong> Seafood leads wherever the geography supports it. No chicken anywhere. Beef only where the beef is the point &mdash; steakhouses and wood grills, not burger counters. Rooms are chosen for being pleasant to sit in; the handful of plain fish-market counters that made the cut are described as exactly that, because the shellfish justifies the picnic table. Where a town genuinely has nothing worth a detour, the note says so and points at the nearest place that does, rather than padding the list.</p>
+    <p><strong>On Indian food.</strong> Southern California has no Indian restaurant at the level of Copra in San Francisco or Adda in New York. That is a real gap, not an oversight in the research. The two closest here are <strong>Mayura</strong> in Culver City, which is Keralan and genuinely excellent within that lane, and <strong>Bhanu's</strong> in Pasadena for South Indian dosas. Copra itself is listed on the San Francisco entry, since that is the trip where you can actually eat at it.</p>
     <p><strong>Michelin.</strong> Stars and Bib Gourmands come from the California guide and get reshuffled every year, so read them as worth checking rather than as fact. Book the starred rooms weeks ahead.</p>
     <p><strong>The plates.</strong> Each entry opens with an engraved plate, drawn by the page itself in one ink. Where this page is served from a normal web address it also fetches a photograph of the place from Wikipedia and lays it over the engraving, credited. The artifact viewer on claude.ai blocks outside images by policy, so there you get the engravings alone &mdash; same file, both behaviours, nothing broken either way.</p>
     <p><strong>Stamps and photos.</strong> Marking a place visited moves it out of this list into <strong>Been there</strong>, where you can set the date and add photos. Photos are resized and stored in this browser on this device &mdash; never uploaded, and they work offline. To carry one to another device, open it and choose <strong>Keep in the page</strong>; that saves a compressed copy into the page itself, visible anywhere you open this link. Fifty kept photos maximum, since the whole page has a size ceiling.</p>
@@ -246,11 +253,10 @@ TRIPS.push(
  hero:"Dockweiler State Beach — the only LA beach where you can legally build a bonfire, with planes coming in low over the sand. Grab a fire ring in the afternoon, bring wood, stay for sunset.",
  see:["Ballona Wetlands Ecological Reserve — 600 acres of salt marsh with a free boardwalk off Jefferson; herons, egrets and zero crowds","Del Rey Lagoon Park — ducks, a big lawn, playground, and the quietest picnic spot on the Westside","The Jetty at the end of Pacific Ave — walk out for a straight-on view of the Marina channel","Dockweiler fire pits (first come, first served — arrive by 3pm on a weekend)","The bike path south toward El Segundo, flat and empty compared to the Venice stretch"],
  shop:"Not really a shopping stop — but the little strip on Culver Blvd has a great old-school liquor store and a surf shop, and Waterside Marina del Rey is five minutes away for actual errands.",
+ eatnote:"Playa del Rey has almost nothing for a real dinner. The seafood is five minutes north in the Marina, the sushi fifteen minutes east in Sawtelle.",
  eat:[
-  {name:"Cantalini's Salerno Beach Restaurant", d:"Red-sauce Italian institution since 1954, checkered tablecloths, huge portions. The neighborhood's living room.", city:"Playa del Rey"},
-  {name:"The Shack", d:"Divey burger-and-beer joint. Get the Shackburger with the Louisiana hot link on it. Cash-friendly, patio, dogs welcome.", city:"Playa del Rey"},
-  {name:"Playa Provisions", d:"Brooke Williamson's four-concepts-in-one: coffee counter, ice cream shop, seafood deli and a whiskey bar in the back.", city:"Playa del Rey"},
-  {name:"Tacos Por Favor", d:"Cheap, fast, excellent machaca and carne asada. Order at the counter.", city:"Playa del Rey"}],
+  {name:"Playa Provisions", k:"seafood", d:"Brooke Williamson's seafood counter and whiskey bar in one building. The lobster roll, oysters, and a proper cocktail in the back room."},
+  {name:"Cantalini's Salerno Beach Restaurant", k:"italian", d:"Red-sauce Italian since 1954. Warm rather than smart, and the seafood pastas are what to order."}],
  mich:"Nothing starred in Playa del Rey itself — but n/naka, a two-star kaiseki restaurant, is a 10-minute drive up Overland in Palms. Reservations open a month ahead at midnight and vanish in minutes.",
  parking:"Dockweiler has a paid lot (roughly $10-15, cash and card) right off Vista del Mar; street parking on Pacific Ave is free but tight on summer weekends. Ballona Wetlands has a small free lot on Jefferson just west of Lincoln.",
  tip:"The bonfire rings are the whole point. Bring a bundle of firewood from the Culver Blvd hardware store, a folding chair, and get there before 4pm on a Saturday or you're out of luck.",
@@ -263,10 +269,10 @@ TRIPS.push(
  see:["Marina Beach (\"Mother's Beach\") — flat, wave-free water, ideal for a first paddleboard try","Burton Chace Park — grassy point sticking into the main channel; free summer concerts and the best boat-watching in LA","Fisherman's Village — kitschy little faux-New England boardwalk with the lighthouse","Ballona Creek Bike Path — flat, fast ride from the marina inland to Culver City","The Marina Waterfront walk at sunset, Admiralty Way to the jetty"],
  shop:"Waterside Marina del Rey for practical shopping, and the Sunday Marina del Rey Farmers Market (Fiji Way, 9am-2pm) which is small but excellent for flowers and stone fruit.",
  eat:[
-  {name:"Cafe del Rey", d:"The grown-up harbor-view dining room. Go at sunset, sit by the window, order the seafood tower.", city:"Marina del Rey"},
-  {name:"Killer Shrimp", d:"One dish, essentially: a bowl of shrimp in a peppery broth with bread to mop it. On the water, loud, fun.", city:"Marina del Rey"},
-  {name:"Salt", d:"Hotel restaurant at the Marina del Rey Hotel with a great patio — the best-value waterfront brunch here.", city:"Marina del Rey"},
-  {name:"Sugarfish", d:"Nozawa's trust-me sushi. No menu anxiety, consistently great, and there's one right in the marina.", city:"Marina del Rey"}],
+  {name:"Cafe del Rey", k:"cal", d:"The grown-up harbour-view room. Window table at sunset, the seafood tower, a long wine list."},
+  {name:"Sugarfish", k:"japanese", d:"Nozawa's trust-me sushi. No menu to negotiate and reliably good fish."},
+  {name:"Killer Shrimp", k:"seafood", d:"One bowl of peppery shrimp broth with bread to mop it, right on the water."},
+  {name:"Salt", k:"cal", d:"The Marina del Rey Hotel dining room, and the best-value waterfront table here."}],
  mich:null,
  parking:"Structured and surface lots everywhere; most validate with a purchase. Burton Chace Park has a free lot with a 4-hour limit. Street parking along Admiralty is metered and easy midweek.",
  tip:"Pro/Rev Marina del Rey and UCLA Marina Aquatic Center both rent paddleboards by the hour on Mother's Beach. Go on a weekday morning when the water is glass.",
@@ -279,10 +285,10 @@ TRIPS.push(
  see:["Venice Canals Historic District — genuinely magical, ducks and footbridges, four blocks of it, free and almost always quiet","Venice Skate Park at sunset — the concrete bowls right on the sand, best free show in the city","Muscle Beach and the Boardwalk (go once, gawk, move on)","Venice Beach Pier for the view back at the mountains","First Fridays on Abbot Kinney — food trucks and late shop hours"],
  shop:"Abbot Kinney is the destination: General Store, Aviator Nation, Burro, Strange Invisible Perfumes, Alchemy Works. Add the Venice Sunday Farmers Market on Venice Blvd (7am-11am, get there early).",
  eat:[
-  {name:"Gjelina", m:"bib", d:"The restaurant that set the tone for the whole street. Wood-fired vegetables and pizza, dark room, long communal table. Book ahead.", city:"Venice"},
-  {name:"Felix Trattoria", m:"star", d:"House-made pasta from Evan Funke, in a beautiful room on Abbot Kinney. One of the best Italian meals in LA.", city:"Venice"},
-  {name:"Great White", d:"Bondi-style all-day cafe, sunny patio, avocado toast that earns it. Perfect brunch before shopping.", city:"Venice"},
-  {name:"Gjusta", d:"Bakery-deli hybrid on Sunset Ave. Get the smoked fish plate and a loaf to take home. Confusing ordering system, worth it.", city:"Venice"}],
+  {name:"Felix Trattoria", k:"italian", m:"star", d:"Evan Funke's hand-rolled pasta in a beautiful room on Abbot Kinney."},
+  {name:"Dudley Market", k:"seafood", d:"Small, wine-driven, whole local fish cooked simply. The most serious seafood cooking in Venice."},
+  {name:"Gjelina", k:"cal", m:"bib", d:"The room that set the tone for the street. Wood-fired vegetables and very good fish."},
+  {name:"Hama Sushi", k:"japanese", d:"On Windward since 1979. Straightforward, well-cut fish, no theatrics."}],
  mich:"Felix Trattoria has held a Michelin star in the California guide, and Gjelina is a long-running Bib Gourmand favorite. Both need reservations well ahead.",
  parking:"Beach lots off Venice Blvd and Washington ($10-20 depending on season). For Abbot Kinney, park on the residential side streets east of the boulevard — free, two-hour limits, read the signs carefully because Venice ticketing is ruthless.",
  tip:"Do the canals first thing in the morning, coffee in hand, before the boardwalk wakes up. Then walk to Abbot Kinney for lunch. Reverse order and you'll spend the whole day in traffic.",
@@ -295,11 +301,10 @@ TRIPS.push(
  see:["Culver City Stairs (Baldwin Hills Scenic Overlook) — 282 steps straight up, and a 360° view from downtown to the ocean at the top","Museum of Jurassic Technology — a genuinely strange, wonderful little museum that refuses to explain itself","The Wende Museum — Cold War art and artifacts in a converted armory, free admission","Ballona Creek Path — bike from Culver straight to the beach in 25 minutes","Sony Pictures Studio Tour — two hours on a working lot"],
  shop:"The Platform on Washington (design-forward boutiques, Van Leeuwen, Blue Bottle) and the downtown blocks around Main Street. Tuesday Culver City Farmers Market shuts down Main Street 2-7pm.",
  eat:[
-  {name:"Destroyer", d:"Jordan Kahn's daytime-only counter. Tweezer-food breakfast that's actually delicious, not just pretty. Closes mid-afternoon.", city:"Culver City"},
-  {name:"Cavatina at the Sunset Marquis", d:"Not Culver — but for Culver proper, go to Lodge Bread Co. for sourdough and a killer breakfast sandwich.", city:"Culver City"},
-  {name:"Tito's Tacos", d:"Divisive, beloved, unchanged since 1959. Crispy tacos with a mountain of shredded cheese. You either get it or you don't.", city:"Culver City"},
-  {name:"Margot", d:"Rooftop at the Platform with a big view and a Mediterranean menu. The sunset drinks spot.", city:"Culver City"},
-  {name:"Pasta Sisters", d:"Fresh pasta, counter service, absurdly good value. The lasagna is the move.", city:"Culver City"}],
+  {name:"n/naka", k:"japanese", m:"star", stars:2, d:"Niki Nakayama's modern kaiseki, in Palms five minutes from downtown Culver. The most ambitious meal within fifteen minutes of home. Reservations open a month ahead at midnight and go in minutes."},
+  {name:"Dear John's", k:"steak", d:"A restored 1962 supper club: martinis, oysters, prime rib carved properly. Dark leather, no dinginess."},
+  {name:"Mayura", k:"indian", d:"Keralan, and the one Indian kitchen on the Westside worth a detour — dosas, fish moilee, appam."},
+  {name:"Margot", k:"med", d:"Rooftop at the Platform with a big view and a Mediterranean menu."}],
  mich:"n/naka (two Michelin stars) is technically Palms but it's a five-minute drive from downtown Culver — the most ambitious meal within 15 minutes of home. Kato relocated to the Row DTLA, but Culver's Bib Gourmand tier is deep.",
  parking:"Culver City runs several free-for-the-first-two-hours public garages downtown — the Cardiff and Ince garages are the ones to know. The Baldwin Hills Scenic Overlook lot on Jefferson is $6, or park free on the street and walk to the stairs.",
  tip:"Do the Culver City Stairs at 8am, shower, then come back for the Tuesday farmers market and dinner downtown. It's the best cheap day in a 15-minute radius.",
@@ -311,11 +316,10 @@ TRIPS.push(
  hero:"Main Street El Segundo — four blocks of genuinely small-town America, ten minutes from LAX. Old movie theater, hardware store, hardware-store-adjacent bars.",
  see:["El Segundo Beach and the Strand — the quiet southern end of the bike path, with the Chevron pier as a strange, beautiful backdrop","Old Town Music Hall — a 1920s theater with a Mighty Wurlitzer organ that still plays before silent films","The Automobile Driving Museum — you can actually ride in some of the cars on Sundays","Dockweiler dunes and the plane-spotting spot at the end of Imperial Highway","Chevron Bike Path connection down to Manhattan Beach"],
  shop:"Main Street is small but real — a great independent bookshop-adjacent scene, home goods, and the kind of gift stores you actually find something in. Thursday farmers market on Main Street, 3-7pm.",
+ eatnote:"El Segundo's Main Street is charm rather than cooking. For dinner, Manhattan Beach is eight minutes south.",
  eat:[
-  {name:"The Habit / Blue Butterfly Coffee", d:"Blue Butterfly is the neighborhood coffee shop in a converted house with a patio — the correct start to a Main Street morning.", city:"El Segundo"},
-  {name:"Sausal", d:"Rancho-style California cooking, wood grill, big margaritas, good patio.", city:"El Segundo"},
-  {name:"The Standing Room", d:"Legendary burger counter that started in the back of a liquor store. Get the Cowboy.", city:"El Segundo"},
-  {name:"Blue Sky Deli (Tin Roof Bistro sibling)", d:"For a proper sit-down, Tin Roof Bistro in Manhattan Beach is 8 minutes south and worth the hop.", city:"El Segundo"}],
+  {name:"Sausal", k:"cal", d:"Rancho-style cooking over a wood grill; the nicest room on this side of the airport."},
+  {name:"Tin Roof Bistro", k:"cal", d:"Eight minutes south in Manhattan Beach. Good wine list, a patio, and a kitchen that takes fish seriously.", city:"Manhattan Beach"}],
  mich:null,
  parking:"Free two-hour street parking all along Main Street and a free public lot behind the shops on Richmond Street. Genuinely the easiest parking on this whole list.",
  tip:"Pair it with Dockweiler: plane-spot at the end of Imperial, then walk Main Street for dinner. Total drive from home: under 20 minutes each way.",
@@ -327,11 +331,10 @@ TRIPS.push(
  hero:"Baldwin Hills Scenic Overlook — a short, steep climb to a platform where on a clear day you can see the Hollywood Sign, downtown, the ocean and Catalina all at once.",
  see:["The Culver City Stairs — 282 railroad-tie steps, the unofficial Westside stairmaster","Kenneth Hahn State Recreation Area — 400 acres with a fishing lake, Japanese garden, and rolling lawns that feel nothing like LA","The Olympic Forest at Kenneth Hahn, planted for the 1984 Games","Stoneview Nature Center — small, free, and a great picnic overlook","Sunset from the overlook platform, which is when everyone shows up for a reason"],
  shop:null,
+ eatnote:"Nothing up here is worth planning a meal around. Culver City is ten minutes west and has the sushi and the supper club.",
  eat:[
-  {name:"Alta Adams", d:"West Adams soul food from Keith Corbin — cornbread, greens, fried chicken, great room. 10 minutes from the park.", city:"Los Angeles"},
-  {name:"Johnny's West Adams", d:"Reborn 1950s pastrami stand, now with excellent sandwiches and a patio.", city:"Los Angeles"},
-  {name:"Mizlala West Adams", d:"Israeli-Mediterranean small plates, bright and fast, good for post-hike hunger.", city:"Los Angeles"},
-  {name:"Highly Likely", d:"All-day cafe on Jefferson with a great patio and a very good breakfast burrito.", city:"Los Angeles"}],
+  {name:"Mizlala West Adams", k:"med", d:"Israeli-Mediterranean small plates, bright room, good for post-hike hunger."},
+  {name:"Highly Likely", k:"cal", d:"All-day cafe on Jefferson with a proper patio."}],
  mich:null,
  parking:"Scenic Overlook lot on Jefferson is $6 and small — arrive before 9am on weekends. Kenneth Hahn's main entrance on La Cienega charges $6 per car and has plenty of space. Free street parking on Hetzler Road if you want the back way up.",
  tip:"Go up the stairs, across the ridge, and down into Kenneth Hahn for a picnic — it's one continuous park system and almost nobody connects the two.",
@@ -343,12 +346,12 @@ TRIPS.push(
  hero:"The Manhattan Beach Pier and the Strand — a 22-mile beach bike path runs right past it, and the walk down Manhattan Beach Boulevard from downtown to the sand is the single best short walk in the South Bay.",
  see:["Roundhouse Aquarium at the end of the pier — small, free-ish, great with the tide pools talk","The Strand walk south to Hermosa (2 miles, flat, all beach)","Bruce's Beach — small hillside park with a real history worth reading the plaque for","Sand dune workouts at Sand Dune Park (reservation required, and it will humble you)","Sunset from the pier, every single time"],
  shop:"Downtown Manhattan Beach is a genuinely good shopping few blocks — Manhattan Beach Blvd, Highland and Manhattan Ave. Skechers-money boutiques, Lululemon, plus real independents. The Manhattan Village mall is up the hill if you need department stores.",
+ eatnote:"For Japanese, Torrance is fifteen minutes inland and is the real thing.",
  eat:[
-  {name:"MB Post", d:"David LeFevre's neighborhood flagship — bacon cheddar biscuits, brussels sprouts, everything shared. Still the best table in the South Bay.", city:"Manhattan Beach"},
-  {name:"Fishing With Dynamite", d:"Tiny 20-seat oyster bar next door to MB Post. New England clam chowder and the raw bar. Get there at open or wait.", city:"Manhattan Beach"},
-  {name:"The Strand House", d:"Second-floor dining room facing straight down the pier. The sunset reservation to book for a birthday.", city:"Manhattan Beach"},
-  {name:"Uncle Bill's Pancake House", d:"The line down the block is real. Breakfast institution since 1968.", city:"Manhattan Beach"},
-  {name:"Sidecar Doughnuts", d:"Made fresh every hour, rotating monthly flavors, huevos rancheros doughnut is not a joke.", city:"Manhattan Beach"}],
+  {name:"Fishing With Dynamite", k:"seafood", d:"A twenty-seat oyster bar from David LeFevre. The raw bar and the New England chowder. Arrive at open or wait."},
+  {name:"The Arthur J", k:"steak", d:"LeFevre's mid-century steakhouse next door — dry-aged beef, a martini cart, a proper room."},
+  {name:"MB Post", k:"cal", d:"The neighbourhood flagship. Everything shared, still the best all-round table in the South Bay."},
+  {name:"The Strand House", k:"cal", d:"Second-floor dining room facing straight down the pier. The sunset booking."}],
  mich:"No stars in Manhattan Beach, but MB Post and Fishing With Dynamite have both been Michelin-recommended in the California guide.",
  parking:"Metered street parking downtown (bring the ParkMobile app), plus paid structures on Manhattan Beach Blvd and Ocean Drive. Weekend afternoons in summer are genuinely painful — go early or park up the hill on Valley Drive and walk down.",
  tip:"Park once, at the top of the hill, and walk down. The walk back up is the price of admission and it's worth it. Friday nights downtown are busy in a fun way.",
@@ -361,11 +364,11 @@ TRIPS.push(
  see:["Santa Monica Pier and the solar-powered Ferris wheel at Pacific Park","Palisades Park bluffs walk, from Colorado to San Vicente","Annenberg Community Beach House — the old Marion Davies estate with a public pool right on the sand (reserve in summer)","Tongva Park — a small, beautifully designed park with an overlook you'd never find by accident","Santa Monica Stairs on 4th and Adelaide, if you want to suffer with the locals"],
  shop:"Third Street Promenade for the big names, Montana Avenue for the good stuff (boutiques, home goods, a genuinely great few blocks), and Main Street toward Venice for vintage. Wednesday and Saturday Downtown Farmers Market on Arizona is one of the best in the country — chefs shop it.",
  eat:[
-  {name:"Mélisse", m:"star", stars:2, d:"Josiah Citrin's tasting-menu flagship. The special-occasion restaurant on the Westside.", city:"Santa Monica"},
-  {name:"Citrin", m:"star", d:"Mélisse's more relaxed sibling in the same building, à la carte and considerably easier to get into.", city:"Santa Monica"},
-  {name:"Rustic Canyon", m:"bib", d:"Farmers-market-driven California cooking on Wilshire. Consistently one of the best meals in LA.", city:"Santa Monica"},
-  {name:"Milo & Olive", d:"Neighborhood pizza and bakery, no reservations, tiny room, exceptional.", city:"Santa Monica"},
-  {name:"Father's Office", d:"The Office Burger — caramelized onion, gruyère, bacon, no substitutions ever. Bar only, 21+.", city:"Santa Monica"}],
+  {name:"Mélisse", k:"french", m:"star", stars:2, d:"Josiah Citrin's tasting-menu flagship, and the most refined room on the Westside."},
+  {name:"Water Grill", k:"seafood", d:"Serious seafood: a raw bar with real depth and whole fish handled simply."},
+  {name:"Citrin", k:"cal", m:"star", d:"Mélisse's à la carte sibling in the same building, and considerably easier to book."},
+  {name:"Cassia", k:"seafood", d:"Southeast Asian brasserie — the sunbathing prawns and a whole grilled fish. Big handsome room."},
+  {name:"Rustic Canyon", k:"cal", m:"bib", d:"Farmers-market cooking on Wilshire, consistently among the best meals in the city."}],
  mich:"Mélisse holds two Michelin stars and Citrin holds one — both in the same building on Wilshire, which is a nice trick. Pasjoli in Santa Monica has also held a star. Book the tasting menus a month out.",
  parking:"Downtown structures 1-8 give you the first 90 minutes free, then it's cheap by LA standards — far better than the beach lots. Beach lots on PCH and at the pier run $15-20 in summer.",
  tip:"Skip the pier lot entirely. Park in structure 4 or 5 downtown, walk to the pier, walk the bluffs, and come back up for dinner on Montana or Wilshire.",
@@ -377,11 +380,11 @@ TRIPS.push(
  hero:"The Getty Center itself — Richard Meier's hilltop campus, reached by a tram, with a Robert Irwin Central Garden and a view that runs from downtown to the sea. Admission is free. Forever.",
  see:["The Central Garden — a living sculpture with the azalea maze in the pool at the bottom","The Cactus Garden on the South Promontory, the best view point on the whole campus","Van Gogh's Irises, the illuminated manuscripts, and the photography galleries","The tram ride up, which is half the fun","Sunset from the west terrace before they close (check closing times, they vary by season)"],
  shop:"The Getty Store is genuinely one of the best museum shops in the country. Otherwise Brentwood Country Mart is 8 minutes down the hill — a cute, expensive little courtyard of shops with great food stalls.",
+ eatnote:"Sawtelle Japantown is ten minutes downhill and is where you actually want to eat.",
  eat:[
-  {name:"The Restaurant at the Getty Center", d:"Proper sit-down with a view; reserve ahead on weekends. There's also a much cheaper cafe and coffee cart.", city:"Los Angeles"},
-  {name:"Farmshop at Brentwood Country Mart", d:"Market-driven California food in a lovely room. Good for after the museum.", city:"Brentwood"},
-  {name:"Reddi Chick", d:"Brentwood Country Mart's counter-service rotisserie chicken and fries in a paper bag. A local ritual.", city:"Brentwood"},
-  {name:"Baltaire", d:"Big handsome steakhouse on San Vicente if the Getty put you in an expensive mood.", city:"Brentwood"}],
+  {name:"The Restaurant at the Getty Center", k:"cal", d:"Proper sit-down with the view. Reserve ahead on weekends."},
+  {name:"Baltaire", k:"steak", d:"Big handsome San Vicente steakhouse — the quality-beef option out here."},
+  {name:"Farmshop", k:"cal", d:"Market-driven cooking in the Brentwood Country Mart, good after the museum.", city:"Brentwood"}],
  mich:null,
  parking:"$25 per car (drops to $15 after 3pm most days) in the underground structure — the only cost of the visit. Alternatively park free on the street in the neighborhood below and walk up to the tram, but that's a real hike.",
  tip:"Go on a Saturday evening in summer when they stay open late — the light on the travertine at golden hour is the actual reason to go, more than any painting inside.",
@@ -393,11 +396,10 @@ TRIPS.push(
  hero:"Pier Plaza and the Hermosa Beach Pier — a car-free strip of bars and restaurants running straight down to the sand. The most casual beach town in the South Bay.",
  see:["The Strand bike path — Hermosa is the midpoint; rent a cruiser and go north to Manhattan or south to Redondo","Beach volleyball courts, dozens of them, and a real chance of watching pros practice","The Comedy & Magic Club in Hermosa — Jay Leno famously did Sunday nights here for decades","Hermosa Valley Greenbelt — a soft dirt running path that runs the length of town","Sunset on the pier with a beer from Pier Plaza"],
  shop:"Small but fun — Hermosa Ave and Pier Ave have surf shops, vintage, and a few good boutiques. Friday farmers market on Valley Drive.",
+ eatnote:"Hermosa is bars more than kitchens. Manhattan Beach is five minutes north for the seafood and the steak.",
  eat:[
-  {name:"Palmilla Cocina y Tequila", d:"Coastal Mexican with a rooftop half a block from the sand. Good tacos, better margaritas.", city:"Hermosa Beach"},
-  {name:"Abigaile", d:"Brewery-restaurant in the old Black Flag punk house. Great beer, better food than it needs to be.", city:"Hermosa Beach"},
-  {name:"Good Stuff", d:"The classic on the Strand — breakfast burritos and pancakes with your feet basically in the sand.", city:"Hermosa Beach"},
-  {name:"Baja Sharkeez", d:"Not fine dining, but you will end up here at some point and honestly the patio is great.", city:"Hermosa Beach"}],
+  {name:"Palmilla Cocina y Tequila", k:"mexican", d:"Coastal Mexican with a rooftop half a block from the sand. Good fish tacos, better margaritas."},
+  {name:"Abigaile", k:"cal", d:"Brewery-restaurant in the old Black Flag house, with better cooking than it needs to have."}],
  mich:null,
  parking:"Metered lots on 11th Street and 13th Street just off Hermosa Ave, plus street meters. Summer weekends are rough after 11am. The city lot at Pier and Hermosa is the closest.",
  tip:"Hermosa, Manhattan and Redondo are all on the same bike path. Park once in Hermosa, rent bikes at the pier, and do all three in an afternoon.",
@@ -410,10 +412,9 @@ TRIPS.push(
  see:["Redondo Beach Pier — the horseshoe-shaped one, with the fish markets and the arcade downstairs","Seaside Lagoon and King Harbor for kayaking and paddleboarding in flat water","The Esplanade walk along the bluff in South Redondo — clifftop benches, no crowds","Veterans Park and the Redondo Beach Historical Museum","Whale-watching boats out of King Harbor (December through April, gray whale season)"],
  shop:"Riviera Village is the reason to come — 300 businesses in a walkable few blocks: boutiques, a great bookstore, coffee, and no chain-store feel. Thursday farmers market at Veterans Park.",
  eat:[
-  {name:"Quality Seafood", d:"Pick your crab or lobster out of the tank on the pier, they steam it, you eat it on a picnic table with a beer. The whole experience.", city:"Redondo Beach"},
-  {name:"Chez Melange", d:"Riviera Village stalwart, wildly eclectic menu, oyster bar, great wine list. Been excellent for 40 years.", city:"Redondo Beach"},
-  {name:"HT Grill", d:"Neighborhood American bistro in the Village. Reliable, comfortable, good bar.", city:"Redondo Beach"},
-  {name:"Captain Kidd's", d:"Same idea as Quality Seafood — fish market up front, picnic tables out back over the water.", city:"Redondo Beach"}],
+  {name:"Chez Melange", k:"seafood", d:"Riviera Village stalwart with an oyster bar and a serious wine list. Forty years good."},
+  {name:"HT Grill", k:"cal", d:"Neighbourhood American bistro in the Village — comfortable, reliable, proper bar."},
+  {name:"Quality Seafood", k:"seafood", d:"Pick your crab or lobster from the tank, they steam it, you eat it at a picnic table over the water. Rough and ready, but nothing here is fresher."}],
  mich:null,
  parking:"Pier parking structure is cheap and huge. Riviera Village has free two-hour street parking and a couple of small free lots — much easier than the pier.",
  tip:"Do the pier for lunch (get crab at Quality Seafood), then drive five minutes south to Riviera Village for the afternoon. They're two totally different towns.",
@@ -425,11 +426,10 @@ TRIPS.push(
  hero:"The Hammer Museum — free admission, consistently the most interesting contemporary programming in LA, with a courtyard you'll want to sit in for an hour.",
  see:["UCLA's Franklin D. Murphy Sculpture Garden — 70 sculptures on an open lawn, free, always open","Fowler Museum on campus (also free)","Royce Hall and the original brick quad, which is beautiful in a way the rest of campus isn't","The Village Theatre — the great 1931 art deco movie palace, still showing films","Tehrangeles on Westwood Blvd for Persian bakeries and grocery stores"],
  shop:"Westwood Village itself is a bit hollowed out, but Westwood Blvd south of Wilshire is a full Persian commercial district worth browsing. Century City mall is 6 minutes away for real shopping.",
+ eatnote:"Westwood Village is thin for dinner. Sawtelle Japantown is five minutes southwest and is the reason to be over here.",
  eat:[
-  {name:"Attari Sandwich Shop", d:"Tiny Persian counter with a courtyard. Get the beef tongue sandwich and the ash reshteh soup. A genuine LA institution.", city:"Los Angeles"},
-  {name:"Shamshiri Grill", d:"Persian kebabs done properly, huge portions of saffron rice.", city:"Los Angeles"},
-  {name:"Diddy Riese", d:"Ice cream sandwich between two warm cookies for a couple of dollars. The line moves fast.", city:"Los Angeles"},
-  {name:"Saffron & Rose", d:"Persian ice cream — saffron pistachio, rosewater. Unlike anything else.", city:"Los Angeles"}],
+  {name:"Shamshiri Grill", k:"med", d:"Persian charcoal grill — saffron rice, lamb and beef koobideh done properly."},
+  {name:"Baltaire", k:"steak", d:"Ten minutes west on San Vicente if you want a real dinner after the museums.", city:"Brentwood"}],
  mich:null,
  parking:"UCLA lots are $15-18 per day (Lot 4 for the Hammer end, Structure 2 for campus). Westwood Village has metered street parking and several cheap public lots off Broxton and Kinross. The Hammer offers discounted parking with admission.",
  tip:"Sculpture garden, then the Hammer, then Attari for lunch, then Diddy Riese. That's a perfect four-hour, almost-free day.",
@@ -442,10 +442,9 @@ TRIPS.push(
  see:["Point Vicente Interpretive Center and Lighthouse — whale watching from the bluff, December to April","Wayfarers Chapel — Lloyd Wright's glass chapel in a redwood grove (check its status before going; it was dismantled for relocation after land movement)","Abalone Cove and Sacred Cove — the best tide pools in LA County; go at low tide","Terranea's public bluff trail — you can walk the whole coastal path without being a hotel guest","South Coast Botanic Garden — 87 acres built on a former landfill, and gorgeous","Trump National golf course bluff walk for the straight-shot Catalina view"],
  shop:"Malaga Cove Plaza — a tiny 1920s Spanish-style square with a fountain, a few shops and a great bookstore. Not a shopping trip, but a lovely 30 minutes.",
  eat:[
-  {name:"Nelson's at Terranea", d:"Cliff-edge burgers and fish tacos with a whale-watching view. Casual, outdoors, unbeatable setting.", city:"Rancho Palos Verdes"},
-  {name:"mar'sel at Terranea", d:"The resort's fine-dining room, garden-driven, with an ocean view. The special occasion option out here.", city:"Rancho Palos Verdes"},
-  {name:"Admiral Risty", d:"A 1966 time capsule with an ocean view and prime rib. Genuinely charming.", city:"Rancho Palos Verdes"},
-  {name:"Ruby's Diner at Malaga Cove", d:"For a simple lunch before the tide pools, or head to Sausalito Craft Kitchen in Riviera Village 12 minutes away.", city:"Palos Verdes Estates"}],
+  {name:"mar'sel at Terranea", k:"cal", d:"The resort's garden-driven dining room on the cliff edge. The special-occasion table out here."},
+  {name:"Catalina Kitchen", k:"seafood", d:"Terranea's more relaxed room — local fish, an ocean view, no fuss."},
+  {name:"Admiral Risty", k:"seafood", d:"A 1966 time capsule above the water. Prime rib and a proper seafood menu, genuinely charming."}],
  mich:null,
  parking:"Abalone Cove Shoreline Park lot is around $12 and fills early on weekends. Point Vicente Interpretive Center has a free lot. Terranea has paid valet and self-park, but the bluff trail has free street parking on Palos Verdes Drive South if you're willing to walk.",
  tip:"Check the tide chart before you leave the house. Abalone Cove at a minus tide is a completely different, much better place than at high tide. And drive the full loop of Palos Verdes Drive — it's the point.",
@@ -457,11 +456,10 @@ TRIPS.push(
  hero:"Topanga State Park — the largest wildland within the boundaries of a major American city, with the Eagle Rock loop climbing to a sandstone dome and a view all the way to the ocean.",
  see:["Eagle Rock via the Musch Trail from Trippet Ranch — about 6 miles round trip, the classic","Topanga Lookout Trail — short, easy, and an absurd payoff at the graffitied lookout platform","Red Rock Canyon Park — sandstone spires, feels like Utah, 20 minutes off PCH","Will Rogers State Historic Park at the canyon's south end, with the Inspiration Point loop","Theatricum Botanicum — outdoor Shakespeare in an oak grove all summer"],
  shop:"Topanga's little commercial strip is small and completely committed to the bit: crystal shops, vintage, hand-thrown pottery, the Topanga Vintage Market on the fourth Sunday of each month at Pierce College.",
+ eatnote:"The canyon has one great room and not much else. The PCH fish shacks below took heavy fire damage in 2025 — check before counting on them.",
  eat:[
-  {name:"Inn of the Seventh Ray", d:"Creekside tables under fairy lights and sycamores. Wildly romantic, slightly hippie, the reason people come to Topanga.", city:"Topanga"},
-  {name:"Endless Color", d:"The good coffee-and-pastry stop in the canyon. Grab it on the way to the trailhead.", city:"Topanga"},
-  {name:"Rocco's Cucina", d:"Unfussy Italian in the canyon, big portions, locals only.", city:"Topanga"},
-  {name:"Reel Inn", d:"On PCH at the bottom of the canyon — pick your fish off the board, eat at a picnic table. A Malibu institution (check it has reopened after the 2025 fires).", city:"Malibu"}],
+  {name:"Inn of the Seventh Ray", k:"cal", d:"Creekside tables under sycamores and fairy lights. Wildly romantic and the reason people drive up."},
+  {name:"Rocco's Cucina", k:"italian", d:"Unfussy Italian in the canyon, generous, locals-first."}],
  mich:null,
  parking:"Trippet Ranch lot at Topanga State Park is $10 (or free street parking on Entrada Road with a walk). Topanga Lookout has roadside parking on Stunt Road — get there early, it's a handful of spots. Red Rock Canyon Park lot is $7.",
  tip:"Come in from PCH rather than the Valley side — the drive up the canyon from the ocean is half the experience. And carry water; there's no shade on Eagle Rock.",
@@ -473,11 +471,10 @@ TRIPS.push(
  hero:"Griffith Observatory — free, open to the public, with the Zeiss telescope on clear nights and the single best view of the city that exists.",
  see:["Mount Hollywood Trail from the Observatory — 3 miles round trip to the highest point in the park","The Old Zoo — abandoned 1912 animal enclosures you can walk right into, plus Shakespeare in the park","Bronson Caves, aka the Batcave from the 1960s series, a five-minute walk from the road","Griffith Park Merry-Go-Round (1926) and the pony rides","Travel Town railroad museum — free, and great with kids","The Greek Theatre for summer concerts under the trees"],
  shop:null,
+ eatnote:"There is nothing worth eating inside the park. Los Feliz and Atwater are both ten minutes down.",
  eat:[
-  {name:"Trails Cafe", d:"A shack in the park serving avocado sandwiches, coffee and a legendary apple pie under the oaks. The correct post-hike stop.", city:"Los Angeles"},
-  {name:"The Trails / Los Feliz village", d:"Ten minutes down the hill, Little Dom's does a great Italian-American brunch in a red-leather booth.", city:"Los Angeles"},
-  {name:"Yuca's", d:"A shack on Hillhurst that won a James Beard award for its cochinita pibil tacos. Cash only, closes early.", city:"Los Angeles"},
-  {name:"HomeState", d:"Texas breakfast tacos and queso in Los Feliz. Expect a line, it moves.", city:"Los Angeles"}],
+  {name:"Morihiro", k:"japanese", m:"star", d:"Morihiro Onodera's sushi counter in Atwater Village, ten minutes down the hill. Small, exacting, book ahead."},
+  {name:"Little Dom's", k:"italian", d:"Red leather booths and Italian-American comfort at the base of the park."}],
  mich:"Nothing in the park, but Los Feliz and Atwater at the base of it have real depth — Morihiro in Atwater Village has held a Michelin star for its sushi.",
  parking:"Observatory parking is $10/hour (capped), and the free street parking on West Observatory Road fills by 10am. Weekends, take the free DASH shuttle from the Greek Theatre lot or the Metro station. Trailhead lots at Fern Dell and Travel Town are free.",
  tip:"Fern Dell is the underrated entrance — a shaded fern-lined creek walk that climbs to the Observatory. Park at the bottom, walk up, and you skip the entire parking war.",
@@ -489,11 +486,10 @@ TRIPS.push(
  hero:"Point Fermin Park and the Sunken City — a bluff-top park with a Victorian lighthouse, and next to it a landslide-collapsed neighborhood now covered in murals, sitting right on the cliff edge.",
  see:["Point Fermin Lighthouse (1874) and the free bluff-top lawn","Sunken City — technically fenced, endlessly visited; go for the murals and the ocean cliff","Cabrillo Marine Aquarium — free-ish, Frank Gehry building, superb tide pool programs","The Korean Friendship Bell in Angels Gate Park, a 17-ton bronze bell with a Catalina view","Battleship USS Iowa Museum at the port","Wilmington's Banning Museum and the SS Lane Victory if you're a ship person"],
  shop:"Downtown San Pedro's 6th Street has an emerging arts-district feel — galleries, a good bookstore, the First Thursday art walk. Not a shopping destination, but a fun hour.",
+ eatnote:"San Pedro's seafood is fish-market-and-picnic-table by nature. For a proper room, Terranea on the Palos Verdes bluff is twenty minutes west.",
  eat:[
-  {name:"San Pedro Fish Market", d:"Enormous, loud, order-by-the-tray seafood on the water. The shrimp tray is the signature. Chaotic in the best way.", city:"San Pedro"},
-  {name:"Think Cafe", d:"The reliable sit-down downtown — Mediterranean-leaning, good salads and pasta.", city:"San Pedro"},
-  {name:"Busy Bee Market", d:"A corner market making some of the best sandwiches in LA County. Cash, counter, no seats.", city:"San Pedro"},
-  {name:"Niko's Pizzeria", d:"Old-school Greek-Italian, been there forever, exactly what you want after tide pools.", city:"San Pedro"}],
+  {name:"Think Cafe", k:"med", d:"The reliable sit-down downtown — Mediterranean-leaning, good salads and pasta."},
+  {name:"San Pedro Fish Market", k:"seafood", d:"Enormous, loud, order-by-the-tray shellfish on the water. An experience rather than a restaurant."}],
  mich:null,
  parking:"Free lots at Point Fermin Park and Angels Gate. Cabrillo Beach lot is around $9. Downtown San Pedro street parking is free and plentiful — this is one of the easiest coastal parking situations in LA.",
  tip:"Check the tide chart and hit the Point Fermin tide pools at low tide, then take the bluff walk down to Cabrillo. Sunset at Point Fermin is genuinely one of the best in the county and there's never a crowd.",
@@ -505,11 +501,11 @@ TRIPS.push(
  hero:"El Matador State Beach — sea stacks, arches and caves at the base of a steep staircase. The most photographed cove in California for a reason. Go at low tide, late afternoon.",
  see:["Point Dume State Beach — climb the headland for whale-watching and the view down to Zuma","Escondido Falls — a 50-foot waterfall about 2 miles up an easy canyon trail (best in spring)","Malibu Pier and Surfrider Beach, the birthplace of modern surf culture","Getty Villa — a recreated Roman country house full of antiquities; free but requires a timed reservation","Solstice Canyon — an easy, shaded 3-mile loop to a burned-out stone mansion and a waterfall","Leo Carrillo State Park tide pools and sea caves at the far north end"],
  shop:"Malibu Country Mart and the Malibu Village — a cluster of high-end boutiques around a lawn where kids play and everyone pretends not to be looking at anyone. Worth an hour.",
+ eatnote:"Parts of PCH and Malibu were badly hit by the January 2025 fires — check what has reopened before committing to a plan.",
  eat:[
-  {name:"Nobu Malibu", d:"Yes it's a scene. It's also a genuinely spectacular deck hanging over the water. Book far out, go at sunset.", city:"Malibu"},
-  {name:"Malibu Farm Pier Cafe", d:"On the end of the pier, ocean on three sides. Simple, sunny, packed. The cafe is the casual one, the restaurant is the sit-down.", city:"Malibu"},
-  {name:"Broad Street Oyster Company", d:"The lobster roll that took over Instagram, and it lives up to it. Order at the counter.", city:"Malibu"},
-  {name:"Neptune's Net", d:"Bikers, surfers, fried seafood baskets, PCH out front. The northern-Malibu ritual stop.", city:"Malibu"}],
+  {name:"Nobu Malibu", k:"japanese", d:"A deck hanging over the water and the sushi to match. Book far ahead and go at sunset."},
+  {name:"Broad Street Oyster Company", k:"seafood", d:"The lobster roll that took over the internet, and it holds up. Counter service, modern and clean."},
+  {name:"Malibu Farm Pier Cafe", k:"cal", d:"On the end of the pier with ocean on three sides. Simple, sunny, packed."}],
  mich:null,
  parking:"State beach lots (El Matador, Point Dume, Zuma, Leo Carrillo) run $8-15 — El Matador's lot is tiny, maybe 20 spots. PCH shoulder parking is free where legal but read every sign. Getty Villa parking is $25 and requires the timed ticket.",
  tip:"Note that PCH and parts of Malibu were badly hit by the January 2025 fires — check current closures and which restaurants have reopened before you commit to a plan. Go north past Zuma for the emptiest beaches.",
@@ -522,11 +518,10 @@ TRIPS.push(
  see:["Silver Lake Reservoir loop — a 2.2-mile paved walk with the Meadow lawn at the north end","Hollyhock House — Frank Lloyd Wright's first LA building, a UNESCO World Heritage Site, in Barnsdall Park","Barnsdall Art Park's hilltop lawn for the sunset picnic (Friday wine tastings in summer)","Music Box Steps in Silver Lake, from the Laurel and Hardy short","Vista Theatre, restored by Quentin Tarantino, showing 35mm","Echo Park Lake and the swan pedal boats, 10 minutes east"],
  shop:"Skylight Books (one of the best bookstores in the country), Soap Plant/Wacko for weird gifts, and Sunset Junction's boutiques and vintage. Silver Lake Farmers Market on Tuesdays and Saturdays.",
  eat:[
-  {name:"Kismet", d:"Middle Eastern-ish, bright, vegetable-forward, one of the most consistently good rooms in the city.", city:"Los Angeles"},
-  {name:"Little Dom's", d:"Red booths, Italian-American comfort, and a deli next door. The brunch to know.", city:"Los Angeles"},
-  {name:"Alimento", d:"Silver Lake Italian with real depth. The mortadella tortellini in brodo.", city:"Los Angeles"},
-  {name:"Sqirl", d:"The ricotta toast and the sorrel pesto rice that changed LA breakfast. Go early, eat outside.", city:"Los Angeles"},
-  {name:"Guisados", m:"bib", d:"Braised-meat tacos on handmade tortillas. Order the sampler. Cheap and excellent.", city:"Los Angeles"}],
+  {name:"Found Oyster", k:"seafood", d:"A tiny oyster bar on Fountain — the best raw bar on the east side, and a short list of very good wine."},
+  {name:"Kismet", k:"med", d:"Bright, vegetable-forward Middle Eastern, and one of the most consistent rooms in the city."},
+  {name:"Alimento", k:"italian", d:"Silver Lake Italian with real depth. The mortadella tortellini in brodo."},
+  {name:"Morihiro", k:"japanese", m:"star", d:"Atwater Village, five minutes north. A serious sushi counter."}],
  mich:"Kismet, Alimento and Anajak Thai (Sherman Oaks, 20 minutes north) all sit in the Michelin-recognized tier for the region, and Morihiro in Atwater Village has held a star.",
  parking:"Street parking with two-hour limits; the Vermont Avenue side streets are your best bet, and there's a small public lot behind the Vista. Silver Lake is harder — Sunset Junction fills up completely by 7pm on weekends.",
  tip:"Park once near Barnsdall Park (free lot), do the Hollyhock House and the hilltop view, then walk down into Los Feliz village for dinner.",
@@ -539,11 +534,9 @@ TRIPS.push(
  see:["Naples Island — canals, footbridges, Italian-style gondola rides, and the loveliest 30-minute walk in Los Angeles County","Aquarium of the Pacific — one of the best aquariums in the country, especially the lorikeet aviary","Belmont Shore's 2nd Street and the Belmont Pier","Long Beach Museum of Art and the Museum of Latin American Art (MOLAA)","El Dorado Nature Center — 100 acres of trails and lakes hidden off the 605","Bluff Park and the Ocean Boulevard walk for the harbor view"],
  shop:"2nd Street in Belmont Shore is the walkable shopping strip — boutiques, coffee, restaurants, dog-friendly everything. Retro Row on 4th Street is the vintage and mid-century furniture destination.",
  eat:[
-  {name:"Restauration", d:"Farm-to-table on Retro Row, wildly beloved, great patio. Book ahead.", city:"Long Beach"},
-  {name:"The Attic", d:"Brunch in a converted 1920s house. The mac-and-cheese-stuffed grilled cheese is the signature.", city:"Long Beach"},
-  {name:"Roe Seafood", d:"Excellent oysters and crudo, plus a proper seafood dinner menu.", city:"Long Beach"},
-  {name:"Gladstone's Long Beach", d:"Waterfront, big, touristy, but the harbor view at sunset is real.", city:"Long Beach"},
-  {name:"Number Nine", d:"Modern Vietnamese in an alley in the East Village Arts District. A genuine find.", city:"Long Beach"}],
+  {name:"Heritage", k:"cal", m:"star", d:"A small tasting-menu room in Long Beach holding a Michelin star, and far easier to book than its LA equivalents."},
+  {name:"Roe Seafood", k:"seafood", d:"Excellent oysters and crudo, plus a proper seafood dinner menu."},
+  {name:"Restauration", k:"cal", d:"Farm-to-table on Retro Row, beloved locally, good patio."}],
  mich:"Heritage in Long Beach has held a Michelin star for its tasting menu — a small, ambitious room that's much easier to book than the equivalent in LA.",
  parking:"Downtown structures around the Aquarium and Pike run $10-15 with validation. Naples Island has free residential street parking (be considerate). Belmont Shore has metered street parking on 2nd Street and free lots one block off.",
  tip:"Do Naples Island first thing on a Sunday morning — the canals are empty, the light is perfect, and it's completely free. Then 2nd Street for brunch.",
@@ -555,12 +548,10 @@ TRIPS.push(
  hero:"York Boulevard and Figueroa — a long, low-key stretch of vintage stores, record shops, bars and taquerias that has become the best casual food street on the east side.",
  see:["The Lummis Home (El Alisal) — a hand-built 1898 stone house with free tours and a garden","Heritage Square Museum — eight rescued Victorian houses moved to one lot","Debs Park and the Audubon Center — surprisingly wild trails with a downtown view","Eagle Rock itself — the actual rock, with a picnic area beneath it","Highland Park Bowl — a restored 1927 bowling alley that's now a gorgeous bar","Occidental College's campus, which is genuinely beautiful"],
  shop:"York Blvd is the destination: vintage clothing, Owl Bureau, Galco's Soda Pop Stop (500+ sodas, a wonderland), Permanent Records, Mount Analog. Colorado Blvd in Eagle Rock adds more.",
+ eatnote:"Northeast LA is a casual eating neighbourhood by nature; Otoño is the one room here that reads as a night out.",
  eat:[
-  {name:"Amara Kitchen / Kitchen Mouse", d:"Kitchen Mouse does an excellent vegetarian-leaning brunch in a bright room on Figueroa.", city:"Highland Park"},
-  {name:"Joy", d:"Taiwanese small plates on York. Beef roll, dan dan noodles, cheap and outstanding.", city:"Highland Park"},
-  {name:"Cindy's", d:"Restored 1940s diner on Eagle Rock Blvd. Best pancakes in northeast LA.", city:"Eagle Rock"},
-  {name:"Casa Bianca Pizza Pie", d:"Since 1955, cash only, thin crust with fried eggplant. There will be a wait and it's worth it.", city:"Eagle Rock"},
-  {name:"Otoño", d:"Spanish tapas and paella on Figueroa. The proper sit-down dinner here.", city:"Highland Park"}],
+  {name:"Otoño", k:"med", d:"Spanish tapas and paella on Figueroa. The proper sit-down dinner on this side of town."},
+  {name:"Joy", k:"chinese", d:"Taiwanese small plates on York — beef roll, dan dan noodles. Tiny, sharp, very good value."}],
  mich:null,
  parking:"Free street parking almost everywhere, which is the great luxury of this trip. York Blvd fills up on Saturday nights but the side streets are always open.",
  tip:"Second Saturday is the Highland Park art walk, when the shops stay open late. Pair it with Galco's — bring a cardboard flat and build your own mixed soda case.",
@@ -572,12 +563,11 @@ TRIPS.push(
  hero:"The Huntington Library, Art Museum and Botanical Gardens — 130 acres of themed gardens (Japanese, Chinese, Desert, Rose), plus a Gutenberg Bible and Gainsborough's Blue Boy. Budget a full day.",
  see:["The Gamble House — a 1908 Greene & Greene masterpiece and the high point of American Arts and Crafts","Norton Simon Museum — a small, perfect collection (Degas, Rembrandt, Picasso) that never has a line","Old Pasadena's 20 walkable blocks of preserved 1900s buildings","Eaton Canyon Falls — an easy 3-mile hike to a 40-foot waterfall","Descanso Gardens in nearby La Cañada — 150 acres, and the camellia forest in winter is unreal","Colorado Street Bridge and the Arroyo Seco walk beneath it"],
  shop:"Old Pasadena is the best walkable shopping district in LA County — real streets, real stores, and a great movie theater. Add South Lake Avenue and the enormous Rose Bowl Flea Market on the second Sunday of every month (2,500 vendors).",
+ eatnote:"Pasadena's own Chinese and Japanese are ordinary. The San Gabriel Valley starts ten minutes east and is the reason to be out here hungry.",
  eat:[
-  {name:"Union", d:"Northern Italian on a pedestrian alley in Old Town. The best restaurant in Pasadena, hands down.", city:"Pasadena"},
-  {name:"Bone Kettle", d:"Southeast Asian bone broth and shareable plates. Distinctive and very good.", city:"Pasadena"},
-  {name:"Pie 'n Burger", d:"Since 1963. Counter seats, a burger with thousand island, and banana cream pie. Do not skip the pie.", city:"Pasadena"},
-  {name:"The Raymond 1886", d:"Dinner in a 1901 Craftsman cottage with an excellent cocktail bar. Great for a date.", city:"Pasadena"},
-  {name:"Porto's Bakery", d:"Glendale, 10 minutes away. Potato balls and cheese rolls for under $2. Take a number, the line is fast.", city:"Glendale"}],
+  {name:"Union", k:"italian", d:"Northern Italian on a pedestrian alley in Old Town. The best table in Pasadena by a distance."},
+  {name:"The Raymond 1886", k:"cal", d:"Dinner in a 1901 Craftsman cottage with an excellent cocktail bar."},
+  {name:"Bone Kettle", k:"other", d:"Southeast Asian bone broth and shareable plates. Distinctive and genuinely good."}],
  mich:"Pasadena and the San Gabriel Valley carry a deep Bib Gourmand list. Nearby Arcadia and San Gabriel are where Michelin has recognized the region's Chinese restaurants — worth pairing with a Huntington day.",
  parking:"The Huntington's lot is free with admission (tickets are timed, book ahead — it sells out). Old Pasadena has several city garages with the first 90 minutes free. Gamble House has a small free lot. Eaton Canyon's lot is free but full by 9am on weekends.",
  tip:"Get the Huntington's first-entry timed ticket, do the Chinese and Japanese gardens before the crowds, have tea in the Rose Garden Tea Room (reserve separately), then head to Old Pasadena for dinner.",
@@ -590,11 +580,11 @@ TRIPS.push(
  see:["San Gabriel Mission (1771), the fourth of the California missions, rebuilt after a 2020 fire","Hsi Lai Temple in Hacienda Heights — one of the largest Buddhist monasteries in the Western Hemisphere, free to visit, with a vegetarian cafeteria","Vincent Lugo Park's sea-monster playground in San Gabriel","Arcadia's Los Angeles County Arboretum — 127 acres, peacocks everywhere","The 626 Night Market in summer, if the dates line up","Alhambra's Main Street for an easy walkable stretch"],
  shop:"99 Ranch Market and the Hong Kong Supermarket are destinations in their own right. San Gabriel Square (the \"Great Mall of China\") has bakeries, tea shops and a food court that beats most restaurants.",
  eat:[
-  {name:"Din Tai Fung", d:"Arcadia's original US location. Xiao long bao, counted out and pleated 18 times. Put your name in and go shop.", city:"Arcadia"},
-  {name:"Sichuan Impression", m:"bib", d:"Alhambra. Chengdu-style, genuinely numbing. The toothpick lamb and the cold noodles.", city:"Alhambra"},
-  {name:"Chengdu Taste", m:"bib", d:"The restaurant that broke Sichuan food into the mainstream here. Order the boiled fish in chili oil.", city:"Alhambra"},
-  {name:"Newport Seafood", d:"San Gabriel. The house special lobster is the dish the whole valley agrees on.", city:"San Gabriel"},
-  {name:"Huge Tree Pastry", d:"Taiwanese breakfast — sticky rice rolls, savory soy milk, egg crepes. Cheap, early, essential.", city:"Monterey Park"}],
+  {name:"Newport Seafood", k:"seafood", d:"San Gabriel. The house special lobster is the dish the whole valley agrees on. Order it and a whole steamed fish.", city:"San Gabriel"},
+  {name:"Din Tai Fung", k:"chinese", d:"Arcadia's original US location. Xiao long bao pleated eighteen times. Put your name in and go shop.", city:"Arcadia"},
+  {name:"Sichuan Impression", k:"chinese", m:"bib", d:"Alhambra. Chengdu-style and genuinely numbing — the toothpick lamb and the cold noodles.", city:"Alhambra"},
+  {name:"Chengdu Taste", k:"chinese", m:"bib", d:"The room that broke Sichuan cooking into the mainstream here. The boiled fish in chilli oil.", city:"Alhambra"},
+  {name:"Bistro Na's", k:"chinese", d:"Temple City. Qing imperial cuisine in a calm, formal room — the most upscale Chinese cooking in the valley.", city:"Temple City"}],
  mich:"The California Michelin Guide's Bib Gourmand list leans heavily on the SGV — Chengdu Taste, Sichuan Impression, Bistro Na's in Temple City and Longo Seafood have all been recognized. Bistro Na's imperial-cuisine tasting is the fancy option out here.",
  parking:"Strip-mall lots everywhere and almost all free — this is the easiest parking of any food trip in LA. San Gabriel Square has a large free structure.",
  tip:"Go with four people minimum and treat it as a crawl: dumplings at one place, noodles at another, shaved ice or a Taiwanese bakery for dessert. Sunday dim sum at Sea Harbour in Rosemead is the other classic play.",
@@ -607,10 +597,8 @@ TRIPS.push(
  see:["The M*A*S*H site — rusted jeeps and an ambulance, with interpretive signs, on an easy fire-road walk","Rock Pool — a deep green swimming hole under volcanic cliffs, a mile from the parking lot","Century Lake and the Reagan Ranch section","Paramount Ranch in nearby Agoura — the Western town set (rebuilt after the Woolsey fire)","Sandstone Peak, the highest point in the Santa Monica Mountains, about 25 minutes further west","The Old Place in Cornell, a tiny 1800s roadhouse restaurant"],
  shop:"The Commons at Calabasas — a pretty, fountain-centered outdoor shopping village with a great Saturday farmers market. More pleasant than it has any right to be.",
  eat:[
-  {name:"The Old Place", d:"A 19th-century stagecoach stop turned restaurant in Cornell. Steak, clams, a wood stove, no cell service. Book ahead, it seats about 30.", city:"Agoura Hills"},
-  {name:"Saddle Peak Lodge", d:"A hunting-lodge dining room in the canyon — game meats, taxidermy, fireplaces. The special-occasion mountain dinner.", city:"Calabasas"},
-  {name:"Marmalade Cafe", d:"The Commons. Reliable California cafe food and a nice patio for post-hike.", city:"Calabasas"},
-  {name:"Sagebrush Cantina", d:"Old Town Calabasas, enormous patio, margaritas, been there since 1975.", city:"Calabasas"}],
+  {name:"Saddle Peak Lodge", k:"steak", d:"A hunting-lodge dining room in the canyon — game, dry-aged beef, fireplaces. The occasion dinner out here."},
+  {name:"The Old Place", k:"cal", d:"A 19th-century stagecoach stop in Cornell. Steak, steamed clams, a wood stove, thirty seats. Book ahead."}],
  mich:null,
  parking:"Malibu Creek State Park day-use lot is $12 and fills by 10am on weekends; there's free roadside parking on Las Virgenes but it's a longer walk. Paramount Ranch parking is free.",
  tip:"Swim at the Rock Pool in late spring when there's actually water, and go on a weekday. The M*A*S*H hike is flat and stroller-friendly — one of the easiest big payoffs in the region.",
@@ -622,11 +610,10 @@ TRIPS.push(
  hero:"Descanso Gardens — 150 acres in the Verdugo foothills, built around a 20-acre camellia forest under a canopy of California oaks. It's peak-season all year: camellias in winter, 30,000 tulips in spring, roses in summer.",
  see:["The Camellia Forest — the largest collection in North America, best January through March","The Japanese Garden with its teahouse and koi pond","The Rose Garden and the Ancient Forest of cycads","Enchanted Forest of Light, a walk-through light installation, November through January (ticketed separately, sells out)","The Enchanted Railroad, a small train kids lose their minds over","Nearby: the Angeles Crest Highway starts right here — drive 20 minutes up for a huge view"],
  shop:"Not really a shopping trip, but the gift shop is excellent and downtown Montrose (5 minutes away) is a genuinely charming few blocks with a Sunday farmers market.",
+ eatnote:"La Cañada and Montrose are breakfast towns. For a real dinner, Pasadena is fifteen minutes south.",
  eat:[
-  {name:"Maple at Descanso", d:"On-site cafe with a patio in the oaks. Good salads and sandwiches; the Camellia Lounge does tea.", city:"La Cañada Flintridge"},
-  {name:"Dish", d:"La Cañada's neighborhood American restaurant. Big portions, good breakfast, easy after the gardens.", city:"La Cañada Flintridge"},
-  {name:"Ocean Prime? Try Star Cafe", d:"Montrose's Star Cafe does a proper old-fashioned diner breakfast five minutes from the gardens.", city:"Montrose"},
-  {name:"Black Cow Cafe", d:"Montrose brunch institution with a patio on the main street.", city:"Montrose"}],
+  {name:"Maple at Descanso", k:"cal", d:"On-site cafe with a patio under the oaks; the Camellia Lounge does tea."},
+  {name:"Dish", k:"cal", d:"La Cañada's neighbourhood American room, easy after the gardens."}],
  mich:null,
  parking:"Free parking lot at Descanso, included with admission (around $15 adults, and free the third Tuesday of each month). Montrose has free street parking and a free public lot.",
  tip:"Members get in an hour early, but the real move is arriving right at opening on a weekday in February when the camellias are peaking and you'll have the forest to yourself.",
@@ -638,11 +625,10 @@ TRIPS.push(
  hero:"Zuma Beach — a mile and a half of wide, clean, lifeguarded sand, and the best swimming beach in Los Angeles County. Point Dume rises right at the south end.",
  see:["Point Dume Natural Preserve — a short climb up the headland with a boardwalk, a whale-watching platform, and a stairway down to Pirate's Cove","Westward Beach, the quieter cove tucked under the bluff","Sea lions and seals hauled out on the rocks below Point Dume, visible from the trail","Gray whale migration from the headland, December through April","Paradise Cove Beach Cafe's pier and its famous (expensive) beach chairs"],
  shop:null,
+ eatnote:"This stretch is picnic country. For a real dinner, the Malibu entry below has Nobu and the oyster bar.",
  eat:[
-  {name:"Paradise Cove Beach Cafe", d:"Tables in the sand at a private cove. Very touristy, very expensive parking, genuinely a great time.", city:"Malibu"},
-  {name:"Malibu Seafood", d:"A fish-market shack on PCH with picnic tables across from the ocean. Fish and chips, no frills, bring your own wine.", city:"Malibu"},
-  {name:"Vintage Grocers at Trancas", d:"The good grocery store for building a beach picnic — hot bar, cheeses, wine.", city:"Malibu"},
-  {name:"Lily's Malibu", d:"Solid Mexican in the Trancas Country Market, five minutes from Zuma.", city:"Malibu"}],
+  {name:"Malibu Seafood", k:"seafood", d:"A fish-market counter on PCH with picnic tables facing the water. Plain, but the fish comes off the boat."},
+  {name:"Vintage Grocers", k:"cal", d:"The Trancas grocery for building a proper beach picnic — hot bar, cheese, wine."}],
  mich:null,
  parking:"Zuma's county lot is $8-15 depending on season and it's enormous. Westward Beach lot is the same system. Point Dume's small preserve lot fills instantly — park at Westward and walk up. PCH shoulder parking is free where posted.",
  tip:"Park at Westward Beach (the far end lot), walk the Point Dume headland trail at sunset, and come down the Pirate's Cove stairs. It's the best free hour on the LA coast.",
@@ -655,10 +641,9 @@ TRIPS.push(
  see:["Main Street, all three blocks of it, ending at the sand","Seal Beach National Wildlife Refuge — inside a naval weapons station, open only on scheduled monthly tours, and superb for birds","The Red Car Museum, a restored 1925 Pacific Electric car","Bolsa Chica Ecological Reserve, 10 minutes south — 1,300 acres of wetlands with a flat loop trail and enormous bird numbers","Sunset Beach's water tower house, a genuine oddity"],
  shop:"Main Street's independent shops — a bookstore, surf shops, gift stores, an old-fashioned barber. It's small, and that's the appeal. No chains to speak of.",
  eat:[
-  {name:"Nick's on Main", d:"The good sit-down on Main Street. California-American, solid cocktails, always busy.", city:"Seal Beach"},
-  {name:"Walt's Wharf", d:"Oak-grilled seafood, a Seal Beach institution for 50 years, no reservations at dinner.", city:"Seal Beach"},
-  {name:"Hangout Cafe", d:"Breakfast in a converted house with a patio. The town's morning ritual.", city:"Seal Beach"},
-  {name:"Mahé", d:"Sushi and steak with a hidden speakeasy-ish back room. Fun for a night out.", city:"Seal Beach"}],
+  {name:"Walt's Wharf", k:"seafood", d:"Oak-grilled fish and a proper wine list. A Seal Beach institution for fifty years, and the reason to come."},
+  {name:"Mahé", k:"japanese", d:"Sushi and steak with a hidden back room. The fun night out in town."},
+  {name:"Nick's on Main", k:"cal", d:"The good sit-down on Main Street — solid across the menu, proper cocktails."}],
  mich:null,
  parking:"Metered street parking on Main Street and a beach lot at the pier ($5-10 for the day, cheap by LA standards). Free residential parking two blocks inland.",
  tip:"Pair Seal Beach with Bolsa Chica: birds and a flat wetland walk in the morning, Main Street and the pier for lunch and sunset. Very low-effort, very high-charm day.",
@@ -671,10 +656,8 @@ TRIPS.push(
  see:["Huntington Beach Pier and the International Surfing Museum","Bolsa Chica Ecological Reserve — 1,300 acres of restored wetland with a flat loop and outstanding birding","Huntington Central Park — 350 acres, bigger than Central Park's ratio suggests, with a great disc golf course and Shipley Nature Center","The beach bike path, 8+ miles, the longest uninterrupted stretch in Southern California","Fire rings at Bolsa Chica State Beach — first come, first served, and the sunset payoff is real","Huntington Dog Beach, which is exactly what it sounds like and is glorious"],
  shop:"Pacific City is an open-air mall right on the sand with a great rooftop, and Main Street has the surf shops and casual boutiques. Downtown is more bar-forward than boutique-forward.",
  eat:[
-  {name:"Duke's Huntington Beach", d:"Hawaiian-leaning, right at the base of the pier, and the sunset view is the whole product.", city:"Huntington Beach"},
-  {name:"Sancho's Tacos", d:"Small, beloved, right on Main Street. Get the Sancho taco.", city:"Huntington Beach"},
-  {name:"Bluegold at Pacific City", d:"Modern seafood with an ocean-facing patio and firepits.", city:"Huntington Beach"},
-  {name:"Sugar Shack Cafe", d:"On Main since 1967, breakfast from 6am, surfers straight out of the water. Cash-friendly and always packed.", city:"Huntington Beach"}],
+  {name:"Bluegold", k:"seafood", d:"Modern seafood at Pacific City with an ocean-facing patio and firepits."},
+  {name:"Duke's Huntington Beach", k:"cal", d:"Hawaiian-leaning, at the base of the pier, and the sunset view is the product."}],
  mich:null,
  parking:"Beach lots run $15-20 for the day, or $5 at Bolsa Chica State Beach's north lot. Main Street has metered parking and a public structure. Fire ring spots require arriving early — think 2pm on a summer Saturday.",
  tip:"Bolsa Chica State Beach fire rings are cheaper, less crowded and just as good as the city ones. Bring firewood from home, a blanket, and stay until it's fully dark.",
@@ -686,11 +669,9 @@ TRIPS.push(
  hero:"Vasquez Rocks Natural Area — 50-degree tilted sandstone slabs that have stood in for every alien planet in television history. Free, and you can climb right up them.",
  see:["The main rock formation and the short Geology Trail loop","The Pacific Crest Trail runs right through the park — walk a mile of it for the novelty","Placerita Canyon Natural Area — oak woodland, a nature center, and the Oak of the Golden Dream where California gold was first found","Six Flags Magic Mountain if you want roller coasters","Old Town Newhall's walkable main street and the Santa Clarita Walk of Western Stars","William S. Hart Park — a free silent-film-star ranch with a bison herd"],
  shop:"Old Town Newhall has a few antique stores and a good Thursday evening farmers market. Otherwise this is a nature-and-nostalgia trip, not a shopping one.",
+ eatnote:"There is genuinely nowhere good to eat out here. Eat in Pasadena or Claremont on the way, or pack lunch.",
  eat:[
-  {name:"Egg Plantation", d:"Agua Dulce, five minutes from Vasquez Rocks. 60-plus omelets in a country house. The right post-hike breakfast.", city:"Agua Dulce"},
-  {name:"Newhall Refinery", d:"Old Town Newhall gastropub with a serious beer list and a good burger.", city:"Santa Clarita"},
-  {name:"Salt Creek Grille", d:"Mesquite grill and a big patio — the sit-down dinner option in Valencia.", city:"Valencia"},
-  {name:"Reyes Winery", d:"Agua Dulce has a small wine scene; Reyes has a tasting room and picnic tables in the hills.", city:"Agua Dulce"}],
+  {name:"Reyes Winery", k:"cal", d:"Agua Dulce tasting room with picnic tables in the hills."}],
  mich:null,
  parking:"Vasquez Rocks is free with a free parking lot — it fills by 10am on weekends and they close the gate when it's full. Placerita Canyon and Hart Park are also free.",
  tip:"Go early, wear real shoes (the rock is slick and steeper than it looks), and be out by noon in summer — there's zero shade and it hits 100°F. Combine with breakfast at Egg Plantation on the way.",
@@ -702,11 +683,10 @@ TRIPS.push(
  hero:"The Angeles Crest Highway (SR-2) — 66 miles of pure mountain road climbing from La Cañada to 7,900 feet, with pullouts every few miles and almost no traffic on a weekday.",
  see:["Mount Wilson Observatory — the 100-inch Hooker Telescope where Hubble proved other galaxies exist; free grounds, weekend tours","Switzer Falls — a 4-mile round trip through a shaded canyon to a waterfall","Chilao and Charlton Flat picnic areas, in real pine forest at 5,000 feet","Inspiration Point and Dawson Saddle for the huge desert-side views","Mount Baden-Powell — 8 miles round trip to 9,400 feet, one of the great SoCal summits","Snow play at Mount Waterman or Cloudburst Summit in winter"],
  shop:null,
+ eatnote:"There is nothing on the mountain after the observatory cafe closes. Plan to eat in Pasadena coming down.",
  eat:[
-  {name:"Cosmic Cafe at Mount Wilson", d:"A tiny cafe at the observatory serving sandwiches and coffee at 5,700 feet. Weekends and seasonal only.", city:"Mount Wilson"},
-  {name:"Newcomb's Ranch", d:"The only roadhouse on the entire Angeles Crest, a legendary biker and skier stop — check whether it's currently open, its status has changed.", city:"Angeles National Forest"},
-  {name:"Dish", d:"La Cañada, at the base of the highway. Fuel up before you go up, or eat here on the way down.", city:"La Cañada Flintridge"},
-  {name:"Bhanu's Indian Grocery & Cuisine", d:"Pasadena, 15 minutes from the base. Superb South Indian dosas in a grocery store, if you're coming down hungry.", city:"Pasadena"}],
+  {name:"Cosmic Cafe", k:"cal", d:"A small cafe at the observatory, 5,700 feet up. Weekends and seasonal only."},
+  {name:"Bhanu's Indian Grocery & Cuisine", k:"indian", d:"Pasadena, at the base of the mountain. Superb South Indian dosas inside a grocery store.", city:"Pasadena"}],
  mich:null,
  parking:"You need an Adventure Pass ($5/day) for most Angeles National Forest trailheads — buy it online or at the La Cañada REI/sporting goods stores before you go up. Mount Wilson's lot requires the same. There is no cell service for most of the highway.",
  tip:"Check road status before you leave — the Angeles Crest closes for snow and fire regularly, sometimes for months. And fill the tank in La Cañada; there is no gas on the mountain.",
@@ -718,11 +698,10 @@ TRIPS.push(
  hero:"The Orange Plaza — a genuine 1886 traffic circle with a fountain, surrounded by the largest concentration of antique stores in California. It's the closest thing to a Midwestern town square in Southern California.",
  see:["The Plaza and its four quadrants of preserved Victorian and early-1900s storefronts","Chapman University's Memorial Hall and campus, right off the plaza","Hilbert Museum of California Art at Chapman — free, and a genuinely lovely collection of California scene painting","Irvine Regional Park, 10 minutes away — 477 acres, paddle boats, a small zoo and a train","The Block/Outlets at Orange for the opposite kind of shopping","Santiago Oaks Regional Park for a quick oak-canyon hike"],
  shop:"This is the point of the trip. Dozens of antique malls and vintage stores ring the plaza — Country Roads Antiques, Orange Circle Antique Mall, and a dozen smaller ones. Budget three hours and a car with a big trunk.",
+ eatnote:"Old Towne is antiques first, dinner second. Costa Mesa is twenty minutes south for the Michelin rooms.",
  eat:[
-  {name:"Watson's Soda Fountain & Cafe", d:"Operating since 1899. Counter stools, malts, a patty melt. The plaza's anchor.", city:"Orange"},
-  {name:"Felix Continental Cafe", d:"Cuban-Spanish on the circle with sidewalk tables looking at the fountain. Order the ropa vieja.", city:"Orange"},
-  {name:"Haven Craft Kitchen + Bar", d:"The modern option — good beer list, elevated pub food, in a historic brick building.", city:"Orange"},
-  {name:"Bruxie", d:"Fried chicken on a waffle, handheld. Started here, and it's still best here.", city:"Orange"}],
+  {name:"Haven Craft Kitchen + Bar", k:"cal", d:"The modern room on the circle — a serious beer list and cooking that goes beyond pub food."},
+  {name:"Felix Continental Cafe", k:"med", d:"Cuban-Spanish with sidewalk tables looking at the fountain. Order the ropa vieja."}],
  mich:null,
  parking:"Free two-hour street parking around the plaza and free public lots one block off. Genuinely easy — arrive by 10am on a Saturday and you'll get a spot on the circle.",
  tip:"Come on a Saturday morning, do the antique malls first while you have energy, eat at Watson's, then walk Chapman's campus. Pair it with Irvine Regional Park if you have kids along.",
@@ -735,11 +714,8 @@ TRIPS.push(
  see:["California Botanic Garden — 86 acres devoted entirely to California native plants, spectacular in spring wildflower season","The Claremont Colleges campuses, which are lovely to walk through","Claremont Hills Wilderness Park — a 5-mile loop with a big view over the valley (reserve parking online on weekends)","Mount Baldy Village and the ski lift, 30 minutes up the road","Folk Music Center, the Harveys' museum-and-shop that gave the world Ben Harper","The Village's Friday evening farmers market and art walk"],
  shop:"The Village is the whole thing — Rio de Ojas, the Claremont Forum bookshop in the old packing house, vintage stores, and a very good independent bookstore. It's compact and completely walkable.",
  eat:[
-  {name:"Union on Yale", d:"The Village's proper dinner spot — seasonal California cooking, good wine list, patio.", city:"Claremont"},
-  {name:"Casa Moreno / Tutti Mangia", d:"Tutti Mangia does Italian in a handsome room a block from the plaza.", city:"Claremont"},
-  {name:"Some Crust Bakery", d:"A Village institution since 1985. Get a morning bun and a coffee and sit outside.", city:"Claremont"},
-  {name:"Packing House Wines", d:"Wine bar in the converted citrus warehouse with a good cheese board.", city:"Claremont"},
-  {name:"Walter's Restaurant", d:"Been on Yale Ave since 1957, Afghan-California-everything menu, huge patio.", city:"Claremont"}],
+  {name:"Union on Yale", k:"cal", d:"Seasonal California cooking, a good wine list and a patio. The Village's proper dinner."},
+  {name:"Tutti Mangia", k:"italian", d:"Italian in a handsome room a block off the plaza."}],
  mich:null,
  parking:"Free two-hour street parking and two free public structures in the Village (Village West and the College/First lot). Claremont Wilderness Park requires a $5 parking reservation on weekends — book it online in advance.",
  tip:"Do the Wilderness Park loop at 7am, shower, then the Village for brunch and the botanic garden in the afternoon. In April the California Botanic Garden's wildflower display is worth the drive on its own.",
@@ -752,11 +728,10 @@ TRIPS.push(
  see:["The Balboa Island Ferry — three cars at a time, running since 1919, and the best $2 you'll spend","Balboa Fun Zone and the 1936 Ferris wheel","The Wedge at the harbor mouth — a legendary bodysurfing break; go to watch, not to swim","Crystal Cove State Park, 15 minutes south — 3 miles of undeveloped coast and restored 1930s beach cottages","Back Bay (Upper Newport Bay) — a 10-mile loop trail around a genuine estuary","Corona del Mar State Beach and Lookout Point for the sunset"],
  shop:"Marine Avenue on Balboa Island (small, cute, walkable), Lido Marina Village for design-forward boutiques on the water, and Fashion Island for a full open-air mall with a koi pond.",
  eat:[
-  {name:"Bear Flag Fish Company", d:"Counter-service seafood, poke bowls and fish tacos. The Newport lunch.", city:"Newport Beach"},
-  {name:"The Cannery", d:"Seafood in a converted 1921 cannery on the water. Boats pull right up.", city:"Newport Beach"},
-  {name:"Sugar 'n Spice", d:"Balboa Island. The original frozen banana since 1945. It's not optional.", city:"Newport Beach"},
-  {name:"The Beachcomber at Crystal Cove", d:"Breakfast on the sand in a 1930s cottage. Reserve weeks ahead or take a walk-up number at the Bootlegger bar.", city:"Newport Coast"},
-  {name:"Wildflour / Nobu Newport", d:"Lido Marina Village's Nobu has a waterfront patio if you want the fancy version.", city:"Newport Beach"}],
+  {name:"The Cannery", k:"seafood", d:"Seafood in a converted 1921 cannery on the water; boats tie up outside."},
+  {name:"Nobu Newport Beach", k:"japanese", d:"Lido Marina Village, with a waterfront patio."},
+  {name:"Taco María", k:"mexican", m:"star", d:"Costa Mesa, ten minutes inland. A Mexican tasting menu with a Michelin star and one of the best rooms in the county.", city:"Costa Mesa"},
+  {name:"Bear Flag Fish Company", k:"seafood", d:"Counter-service poke and fish tacos for a quick, good lunch."}],
  mich:"Orange County's Michelin cluster is in Costa Mesa, 10 minutes inland: Taco María (one star, Mexican tasting menu), Knife Pleat (one star, French) and Hana re (one star, sushi). Taco María is the one to plan a trip around.",
  parking:"Balboa Island street parking is very limited — park in the Balboa Peninsula lot and take the ferry over as a pedestrian, which is far easier. Crystal Cove lots are $15. Fashion Island parking is free.",
  tip:"Do it backwards: park on the peninsula, walk the Fun Zone, take the ferry across as a walk-on, loop Balboa Island on foot with a frozen banana, ferry back. No parking stress at all.",
@@ -768,11 +743,10 @@ TRIPS.push(
  hero:"Mission San Juan Capistrano — founded 1776, the \"Jewel of the Missions,\" with the ruins of the Great Stone Church, a serene central courtyard and the oldest building still in use in California.",
  see:["The Mission grounds, gardens and bell wall — allow two hours with the audio guide","Los Rios Historic District — the oldest residential neighborhood in California, three blocks of adobes and cottages under pepper trees","The Swallows' return in March (the birds are less reliable than the festival, but the town goes all in)","Ocean Institute in nearby Dana Point, with tall ships in the harbor","Ronald W. Caspers Wilderness Park for oak-canyon hiking","The 1894 Santa Fe depot, still an active Amtrak stop — you can literally take the train here"],
  shop:"The Los Rios district and the blocks around the Mission have antique shops, a great garden store, and the River Street Marketplace — a newer, well-done cluster of independent shops and food.",
+ eatnote:"Dana Point is ten minutes west when you want seafood and a harbour view.",
  eat:[
-  {name:"The Ramos House Cafe", d:"Breakfast on the porch of an 1881 board-and-batten house in Los Rios. Weekend brunch here is the reason many people come.", city:"San Juan Capistrano"},
-  {name:"Ellie's Table", d:"Bakery and cafe near the Mission — good pastries and a sunny patio.", city:"San Juan Capistrano"},
-  {name:"Trevor's at the Tracks", d:"Modern American right by the depot, with a great patio and a solid cocktail list.", city:"San Juan Capistrano"},
-  {name:"Cedar Creek Inn", d:"Old-school garden patio dining across from the Mission. Reliable, pretty, a bit dated in a nice way.", city:"San Juan Capistrano"}],
+  {name:"Trevor's at the Tracks", k:"cal", d:"Modern American by the depot, good patio, proper cocktail list."},
+  {name:"The Ramos House Cafe", k:"cal", d:"Breakfast on the porch of an 1881 house in Los Rios. The reason many people come."}],
  mich:null,
  parking:"Free lots around the Mission and along Verdugo Street, plus free street parking in Los Rios. This is a very easy town to park in — one of the best on the list.",
  tip:"Take the Amtrak Pacific Surfliner instead of driving. The station is literally at the Mission, the ride hugs the coast, and you can drink on the train. Pair it with Dana Point 10 minutes south.",
@@ -785,11 +759,9 @@ TRIPS.push(
  see:["Heisler Park — a bluff-top garden walk with gazebos, tide pools and the best sunset benches in Orange County","Crystal Cove State Park at the north end — 3.5 miles of undeveloped coast and restored 1930s beach cottages","Treasure Island Park at the Montage — public bluff access with a spectacular cove below","Thousand Steps Beach (it's 218, but it feels like a thousand coming back up)","Laguna Coast Wilderness Park for inland canyon hiking with an ocean view","The Pageant of the Masters and Festival of Arts in July and August — living recreations of famous paintings, genuinely unlike anything else","Sawdust Art Festival in summer, a real working craft village"],
  shop:"Forest Avenue and the Pacific Coast Highway blocks downtown — dozens of galleries, real boutiques, and jewelry. The gallery scene is the best in Orange County, and First Thursdays Art Walk is free with a shuttle.",
  eat:[
-  {name:"The Deck on Laguna Beach", d:"Feet-in-the-sand dining on the beach itself. Get there for sunset, order the fish tacos.", city:"Laguna Beach"},
-  {name:"Driftwood Kitchen", d:"Ocean-view dining room right above Main Beach. The nicer dinner in town.", city:"Laguna Beach"},
-  {name:"Nick's Laguna Beach", d:"Downtown, dependable, great for a group. Booths and a good bar.", city:"Laguna Beach"},
-  {name:"The Stand Natural Foods", d:"Vegan counter that's been there since 1975, on a patio. Cheap and excellent.", city:"Laguna Beach"},
-  {name:"Studio at the Montage", d:"The special-occasion restaurant, in a craftsman-style building hanging over the ocean.", city:"Laguna Beach"}],
+  {name:"Studio at the Montage", k:"cal", d:"A craftsman-style room hanging over the ocean. The occasion dinner in Orange County."},
+  {name:"Driftwood Kitchen", k:"seafood", d:"Ocean-view dining above Main Beach; local fish, done well."},
+  {name:"Nick's Laguna Beach", k:"cal", d:"Downtown, dependable, booths and a good bar."}],
  mich:"Studio at the Montage has been Michelin-recognized, and Orange County's stars are 20 minutes north in Costa Mesa — Taco María, Knife Pleat and Hana re.",
  parking:"This is Laguna's one real problem. Metered street parking downtown fills by 10am in summer; use the free trolley from the Act V lot on Laguna Canyon Road, which runs all summer and on weekends year-round. Crystal Cove lots are $15.",
  tip:"Park at Act V and ride the free trolley in. Then walk Heisler Park north to Crescent Bay for the coves, and be at Main Beach for sunset. In July, buy Pageant of the Masters tickets months ahead.",
@@ -802,10 +774,8 @@ TRIPS.push(
  see:["Whale watching with Captain Dave's Dolphin & Whale Safari — a catamaran with underwater viewing pods, and the operator locals actually recommend","Dana Point Headlands Conservation Area — a bluff-top interpretive trail with an enormous ocean view","Salt Creek Beach — wide sand, a great surf break, and a bluff park above it","Doheny State Beach for easy swimming, camping and tide pools","Ocean Institute at the harbor, with the tall ship Pilgrim's replica","Strands Beach and the funicular down from the bluff"],
  shop:"The harbor's Dana Wharf area has been undergoing a major rebuild — check what's open. Lantern District downtown has a growing set of independent shops and restaurants.",
  eat:[
-  {name:"Wind & Sea", d:"Harborside patio, been there forever, and the boats are right there. Classic.", city:"Dana Point"},
-  {name:"Hendrix", d:"The Lantern District's best dinner — modern American, good wine list, handsome room.", city:"Dana Point"},
-  {name:"Coastal Kitchen", d:"Seafood-forward with a sunny patio, walkable from the harbor.", city:"Dana Point"},
-  {name:"Turk's", d:"A genuine harbor dive bar since 1963. Cash, cheap beer, characters.", city:"Dana Point"}],
+  {name:"Wind & Sea", k:"seafood", d:"Harbourside patio with the boats right there. A Dana Point fixture."},
+  {name:"Hendrix", k:"cal", d:"The Lantern District's best dinner — modern American, handsome room, real wine list."}],
  mich:null,
  parking:"Harbor parking is free (a rarity), though construction has shifted lots around. Salt Creek Beach lot is around $1/hour. Doheny State Beach day use is roughly $15.",
  tip:"Book the whale watch for the morning when the water is calmest, then do the Headlands trail at sunset. Gray whale season is December through April; blue whales show up in summer.",
@@ -818,10 +788,8 @@ TRIPS.push(
  see:["Island Packers day trips to Santa Cruz Island — sea caves, kayaking, island foxes, and a two-hour boat ride with dolphins","Anacapa Island's Inspiration Point and the lighthouse (a 157-step climb from the landing)","Channel Islands Harbor and the Sunday farmers market","Silver Strand Beach and Hollywood Beach — wide, empty, and genuinely lovely","Channel Islands Maritime Museum","Point Mugu State Park on the way home — Sycamore Canyon and the La Jolla Valley wildflowers"],
  shop:"Not a shopping trip. The Collection at RiverPark is a big outdoor mall if you need it, and the harbor has a small marketplace.",
  eat:[
-  {name:"Herzog Wine Cellars / Tierra Sur", d:"Tierra Sur is a serious kosher restaurant with a wood-fired grill inside a winery. One of the most surprising meals in Southern California.", city:"Oxnard"},
-  {name:"The Shores Restaurant", d:"Harborfront at Channel Islands, good for a post-boat meal with a view.", city:"Oxnard"},
-  {name:"Toppers Pizza", d:"Local chain that Ventura County is genuinely loyal to.", city:"Oxnard"},
-  {name:"La Dolce Vita", d:"Downtown Oxnard Italian in the historic district — better than it needs to be.", city:"Oxnard"}],
+  {name:"Tierra Sur at Herzog Wine Cellars", k:"cal", d:"A serious kosher kitchen with a wood-fired grill inside a winery. One of the most surprising meals in Southern California."},
+  {name:"The Shores Restaurant", k:"seafood", d:"Harbourfront at Channel Islands, and the right place to land after a boat day."}],
  mich:null,
  parking:"Island Packers' Oxnard and Ventura harbor lots have free or cheap all-day parking for passengers. Silver Strand and Hollywood Beach have free street parking. Point Mugu State Park day use is around $12.",
  tip:"Book the Santa Cruz Island trip weeks ahead, take the earliest boat, bring layers and motion-sickness pills. Scorpion Anchorage has the sea caves; Prisoners Harbor has the better hiking. There is no food or water on the island — pack everything.",
@@ -833,11 +801,9 @@ TRIPS.push(
  hero:"Mount Baldy (Mount San Antonio) — the highest peak in Los Angeles County at 10,064 feet, with a ski lift that runs year-round and a summit hike that is genuinely serious.",
  see:["The Baldy Notch scenic chairlift — runs in summer too, and gets you to 7,800 feet without walking","San Antonio Falls — an easy 1.5-mile round trip on a fire road to a 80-foot waterfall","The Devil's Backbone trail to the summit (about 11 miles round trip, exposed, not for casual hikers)","Mt. Baldy Ski Lifts for winter skiing and snowboarding, plus tubing at the Notch","Icehouse Canyon — a beautiful shaded creek trail through cabins to the saddle","Mt. Baldy Village and the Buddhist monastery Leonard Cohen lived at"],
  shop:null,
+ eatnote:"The mountain has lodge food and not much more. Claremont Village is twenty-five minutes below and worth saving your appetite for.",
  eat:[
-  {name:"Top of the Notch", d:"Restaurant at 7,800 feet at the top of the chairlift. Burgers, beer, a deck, and a view over the whole Inland Empire.", city:"Mount Baldy"},
-  {name:"The Buckhorn Lodge", d:"Mt. Baldy Village's historic restaurant and bar — a proper mountain lodge dinner.", city:"Mount Baldy"},
-  {name:"Mt Baldy Lodge", d:"Village institution with a big fireplace and a steak-and-burgers menu.", city:"Mount Baldy"},
-  {name:"Union on Yale", d:"If you'd rather eat well on the way down, Claremont Village is 25 minutes below the mountain.", city:"Claremont"}],
+  {name:"Top of the Notch", k:"cal", d:"At 7,800 feet at the top of the chairlift. A deck, a beer, and the whole Inland Empire below."}],
  mich:null,
  parking:"Adventure Pass required ($5/day) at Manker Flats and most trailheads — buy before you drive up. Ski lift parking is paid in winter and chains are frequently required. The road is narrow and winding.",
  tip:"The chairlift plus a beer at Top of the Notch is a genuinely great low-effort day — you get an alpine view without the 4,000 feet of climbing. Do not attempt the summit in winter without an ice axe and crampons; people die on Baldy every year.",
@@ -850,10 +816,8 @@ TRIPS.push(
  see:["San Clemente Pier (1928) and the small beach town around it","Casa Romantica Cultural Center — the 1927 home of the city's founder, with gardens on a bluff over the ocean","T-Street and Trestles — Trestles is one of the most famous surf breaks in the world, reached by a walk down from San Onofre","San Onofre State Beach and the bluff campgrounds","Calafia Beach Park at the trail's south end","Los Molinos and downtown's Spanish Colonial architecture"],
  shop:"Avenida Del Mar is a genuinely nice walkable shopping street sloping down to the ocean — surf shops, boutiques, coffee, and no chains. Outlets at San Clemente for the other kind.",
  eat:[
-  {name:"Nick's San Clemente", d:"Downtown on Del Mar, great patio, solid across the whole menu.", city:"San Clemente"},
-  {name:"South of Nick's / Fisherman's Restaurant", d:"Fisherman's is on the pier itself — get a table on the deck at sunset.", city:"San Clemente"},
-  {name:"The Riders Club Cafe", d:"A tiny burger counter that people drive from LA for. Get the Riders Club burger.", city:"San Clemente"},
-  {name:"Ellie's Table", d:"Good coffee and pastries on Del Mar to start the day.", city:"San Clemente"}],
+  {name:"Fisherman's Restaurant", k:"seafood", d:"On the pier itself — take a table on the deck at sunset."},
+  {name:"Nick's San Clemente", k:"cal", d:"Downtown on Del Mar, solid across the whole menu, good patio."}],
  mich:null,
  parking:"Metered parking downtown and at the pier (roughly $1.50/hour), plus the North Beach lot. San Onofre State Beach day use is around $15. Street parking a few blocks inland is free.",
  tip:"Park at North Beach, walk the whole beach trail south to Calafia and back — about 5 miles round trip, entirely flat, with the ocean on one side and trains going past. Then dinner on Del Mar.",
@@ -866,10 +830,8 @@ TRIPS.push(
  see:["Mission Inn guided tour — 75 minutes, and the only way to see the upper levels and the catacombs","Festival of Lights, November to January — 5 million lights on the hotel, and it's genuinely spectacular","Riverside Art Museum and the Cheech Marin Center for Chicano Art, which is excellent and new","Mount Rubidoux — a paved 3-mile loop to a cross on a hill with a 360° valley view","California Citrus State Historic Park — orange groves preserved as a park, with tours","Fairmount Park and the downtown Main Street pedestrian mall"],
  shop:"The downtown pedestrian mall on Main Street has antique stores and independent shops, plus a good Saturday farmers market. Riverside Plaza and Tyler Galleria cover mainstream retail.",
  eat:[
-  {name:"Mission Inn Restaurant / Duane's Prime Steaks", d:"Duane's is the hotel's serious steakhouse; the Mission Inn Restaurant does a lovely courtyard brunch.", city:"Riverside"},
-  {name:"ProAbition Kitchen", d:"Prohibition-themed downtown restaurant and bar in a historic building. Fun room, good cocktails.", city:"Riverside"},
-  {name:"Simple Simon's", d:"Downtown bakery-cafe with excellent sandwiches on house bread. The lunch everyone recommends.", city:"Riverside"},
-  {name:"Anchos Southwest Grill", d:"Local favorite for Southwestern food and a big tequila list.", city:"Riverside"}],
+  {name:"Duane's Prime Steaks & Seafood", k:"steak", d:"The Mission Inn's serious room — dry-aged beef and a proper seafood list."},
+  {name:"ProAbition Kitchen", k:"cal", d:"Prohibition-themed downtown room in a historic building, good cocktails."}],
  mich:null,
  parking:"Several downtown city garages with cheap or free evening/weekend rates, right by the Mission Inn. Mount Rubidoux has free street parking at the base.",
  tip:"Go in December for the Festival of Lights switch-on — it's free to walk through, they do fireworks, and the whole downtown turns out. Book the hotel tour in advance either way.",
@@ -882,11 +844,8 @@ TRIPS.push(
  see:["Mission San Buenaventura (1782) and the small museum","Ventura Pier — 1,600 feet, the longest wooden pier in California","Grant Park and the Serra Cross — a five-minute drive to a hilltop with the whole coastline and the Channel Islands laid out","Emma Wood State Beach and the Ventura River Trail bike path","Channel Islands National Park visitor center at Ventura Harbor — this is the main departure point for the islands","Ventura Botanical Gardens, a steep hillside garden right above downtown"],
  shop:"Main Street is one of the best thrift and vintage streets in Southern California — a dozen serious secondhand stores in a few blocks, plus independent bookstores and record shops. Saturday farmers market downtown.",
  eat:[
-  {name:"Rori's Artisanal Creamery / Lure Fish House", d:"Lure does excellent mesquite-grilled local fish on Main Street. Ventura's best sit-down.", city:"Ventura"},
-  {name:"Beach House Tacos", d:"At the base of the pier. Fish tacos with your feet nearly in the sand.", city:"Ventura"},
-  {name:"Harvest Cafe", d:"Downtown breakfast and lunch, farm-driven, very Ventura.", city:"Ventura"},
-  {name:"Tony's Pizzeria", d:"Since 1956, thin crust, a Main Street institution.", city:"Ventura"},
-  {name:"Topa Topa Brewing", d:"The county's flagship brewery with a downtown taproom.", city:"Ventura"}],
+  {name:"Lure Fish House", k:"seafood", d:"Mesquite-grilled local fish on Main Street. Ventura's best table and unfussy about it."},
+  {name:"Harvest Cafe", k:"cal", d:"Downtown, farm-driven, good for lunch before Ojai."}],
  mich:null,
  parking:"Free two-hour street parking downtown plus free public lots on Santa Clara and California Streets. Beach parking at the promenade is cheap. Ventura is easy — this is not a parking-stress town.",
  tip:"Ventura is the correct base for a Channel Islands boat trip, and it pairs perfectly with Ojai — 25 minutes inland. Do the islands or the beach in the morning, Ojai in the afternoon, dinner back on Main Street.",
@@ -899,11 +858,9 @@ TRIPS.push(
  hero:"Antelope Valley California Poppy Reserve — 1,780 acres of rolling hills that, in a good March or April, turn solid orange with California poppies. Seven miles of easy trails run through it.",
  see:["The Antelope Loop Trail and Tehachapi Vista Point — the classic 2-mile walk through the densest fields","Ripley Desert Woodland State Park, 10 minutes west, for Joshua trees","Saddleback Butte State Park east of Lancaster for a real desert summit hike","The Musical Road on Avenue G in Lancaster — rumble strips that play the William Tell Overture when you drive over them","Blackbird Airpark and the Joe Davies Heritage Airpark in Palmdale — SR-71 Blackbirds you can walk right up to, free","Devil's Punchbowl Natural Area on the way home — tilted sandstone slabs at the San Andreas Fault"],
  shop:null,
+ eatnote:"The Antelope Valley is a landscape trip, not a food one. Eat before you drive up or on the way home.",
  eat:[
-  {name:"Crazy Otto's Diner", d:"Lancaster. Enormous portions, the omelets are absurd, and it's the local institution.", city:"Lancaster"},
-  {name:"Kinetic Brewing Company", d:"Lancaster's BLVD district — good beer and elevated pub food in a walkable downtown block.", city:"Lancaster"},
-  {name:"Lucky Luke Brewing", d:"Palmdale, big taproom, food trucks, easy stop on the way back.", city:"Palmdale"},
-  {name:"Egg Plantation", d:"Agua Dulce, right on the drive home. 60-plus omelets in a country house.", city:"Agua Dulce"}],
+  {name:"Kinetic Brewing Company", k:"cal", d:"Lancaster's BLVD district — good beer and better-than-expected cooking in a walkable block."}],
  mich:null,
  parking:"$10 per vehicle at the reserve during bloom season. It is genuinely mobbed on peak weekends — cars back up on Lancaster Road for a mile. Devil's Punchbowl and the airparks are free.",
  tip:"Check the reserve's live bloom status before you drive — some years there is essentially no bloom at all. Go on a weekday, arrive by 9am, and go when it's sunny: poppies close up in wind and clouds. Peak is usually mid-March to mid-April.",
@@ -916,10 +873,8 @@ TRIPS.push(
  see:["Kimberly Crest House & Gardens — tours on weekends, gardens open more often","Redlands Bowl — free summer concerts since 1924, the longest-running free music festival in the US","Prospect Park and the Carriage House, with orange groves and a big view","San Bernardino County Museum and the A.K. Smiley Public Library, a stunning 1898 building","Lincoln Memorial Shrine, the only Lincoln museum west of the Mississippi","Downtown State Street's preserved storefronts and the Fox Theater"],
  shop:"State Street downtown — antiques, a great independent bookstore, and the Redlands Market Night on Thursday evenings which closes the street. Genuinely charming and almost never crowded.",
  eat:[
-  {name:"Caprice Cafe", d:"Downtown Redlands' best dinner — California-Mediterranean with a patio on State Street.", city:"Redlands"},
-  {name:"Eureka!", d:"The chain started here. Burgers and whiskey on a good downtown corner.", city:"Redlands"},
-  {name:"Augie's Coffee", d:"Excellent roaster with a downtown shop. Redlands' coffee is better than it has any right to be.", city:"Redlands"},
-  {name:"Farm Artisan Foods", d:"Farm-to-table in a converted house. The nicer meal in town.", city:"Redlands"}],
+  {name:"Caprice Cafe", k:"cal", d:"California-Mediterranean with a patio on State Street. Downtown Redlands' best."},
+  {name:"Farm Artisan Foods", k:"cal", d:"Farm-to-table in a converted house — the nicer meal in town."}],
  mich:null,
  parking:"Free street parking and free public lots downtown. Kimberly Crest has a free lot. This is one of the easiest towns on the entire list.",
  tip:"Pair Redlands with Big Bear or Joshua Tree — it's right on the way up the mountain or out to the desert, and it's a much better lunch stop than anything on the interstate.",
@@ -932,11 +887,9 @@ TRIPS.push(
  hero:"Mountain High Resort — the closest ski area to Los Angeles, with three separate mountains, night skiing, and a dedicated snow-play tubing park that doesn't require any skill at all.",
  see:["Mountain High's North, East and West resorts — East has the best beginner terrain, North is the tubing and snow play park","Wrightwood village — a genuine small mountain town with a few blocks of shops and restaurants","The Pacific Crest Trail passes right through town — walk a section from the Highway 2 crossing","Big Pines and Jackson Lake for summer picnics and easy hiking","Mt. Baden-Powell trailhead at Vincent Gap for a serious summit day","Devil's Punchbowl Natural Area, 30 minutes down the north side"],
  shop:"Wrightwood's Park Drive has a handful of shops, a good general store, and a great little bakery. It's small-mountain-town shopping, which is to say: charming, brief.",
+ eatnote:"Mountain-town cooking, and that is all it claims to be.",
  eat:[
-  {name:"Grizzly Cafe", d:"Wrightwood's main sit-down. Big breakfasts, a fireplace, exactly what you want after snow.", city:"Wrightwood"},
-  {name:"Evergreen Cafe & Racoon Saloon", d:"Village institution — the saloon side is where everyone ends up after skiing.", city:"Wrightwood"},
-  {name:"Mile High Pizza Co.", d:"Pizza and beer in the village. Simple and good.", city:"Wrightwood"},
-  {name:"Cinnamon's Bakery", d:"Cinnamon rolls the size of your head. Get there early, they sell out.", city:"Wrightwood"}],
+  {name:"Grizzly Cafe", k:"cal", d:"The village's main room. Big breakfasts, a fireplace, exactly right after snow."}],
  mich:null,
  parking:"Mountain High charges for parking on peak days (reserve online to guarantee a spot) and the free lots fill by 8am on a powder Saturday. Wrightwood village has free street parking. Chains are frequently required on Highway 2 — carry them or take the 138 approach.",
  tip:"Buy lift and tubing tickets online in advance; walk-up prices are much higher and tubing sessions sell out. For a non-ski winter day, just drive up for snow play at Jackson Lake and lunch in the village — free and lovely.",
@@ -948,11 +901,10 @@ TRIPS.push(
  hero:"Carpinteria State Beach — a mile of gently shelving sand with a natural offshore reef that kills the surf, officially nicknamed \"the world's safest beach.\" Camping right on the sand.",
  see:["The Carpinteria Seal Sanctuary — a bluff-top viewpoint over a harbor seal rookery; pupping season is December to May","Carpinteria Bluffs Nature Preserve — a flat mile-long walk with the Channel Islands straight ahead","The tar pits at the west end of the beach, natural asphalt seeps the Chumash used for waterproofing canoes","Tide pools at the reef at low tide","Rincon Point, one of the best point breaks in California, five minutes south","Downtown Linden Avenue, four blocks ending at the sand"],
  shop:"Linden Avenue — a handful of genuinely nice independent shops, an old-fashioned candy store, a good bookstore, and Island Brewing right by the train tracks. Small, complete, unpretentious.",
+ eatnote:"Santa Barbara is fifteen minutes north and has the seafood and the sushi.",
  eat:[
-  {name:"The Palms", d:"A 1912 building where you grill your own steak over an open fire pit. Utterly unique and very fun.", city:"Carpinteria"},
-  {name:"Padaro Beach Grill", d:"Order at the window, eat on a lawn under palm trees with an ocean view and a sandbox for kids. Perfect.", city:"Carpinteria"},
-  {name:"Corktree Cellars", d:"Wine bar and bistro on Linden with a good small-plates menu.", city:"Carpinteria"},
-  {name:"Island Brewing Company", d:"Taproom right by the tracks — trains go past six feet away. Bring your own food.", city:"Carpinteria"}],
+  {name:"The Palms", k:"steak", d:"A 1912 building where you grill your own steak over an open fire pit. Odd, communal and genuinely fun."},
+  {name:"Corktree Cellars", k:"cal", d:"Wine bar and bistro on Linden with a good small-plates menu."}],
  mich:null,
  parking:"Free street parking all over downtown and along the bluffs, plus a state beach day-use lot (around $10). The Bluffs Preserve lot on Carpinteria Ave is free.",
  tip:"This is the best low-effort beach day north of Malibu, and it pairs perfectly with Santa Barbara 15 minutes further. Do Carpinteria in the morning while it's quiet, Santa Barbara for the afternoon and dinner.",
@@ -966,11 +918,10 @@ TRIPS.push(
  see:["The Flower Fields (March-May) — buy tickets online, go on a weekday morning","Carlsbad Village and the seawall walk along Carlsbad Boulevard","Batiquitos Lagoon — a flat 3-mile trail through a restored coastal wetland","Oceanside Pier — the longest wooden pier on the West Coast, and the town around it has genuinely improved","Legoland California if you have kids along","California Surf Museum in Oceanside, which is better than you'd expect"],
  shop:"Carlsbad Village is walkable and full of independent shops and restaurants. Carlsbad Premium Outlets is right by the Flower Fields for serious outlet shopping. Oceanside's Coast Highway is coming up fast.",
  eat:[
-  {name:"Campfire", d:"Carlsbad Village. Everything cooked over live fire in a beautiful indoor-outdoor space. The best restaurant in North County.", city:"Carlsbad"},
-  {name:"Jeune et Jolie", m:"star", d:"French, in Carlsbad Village, with a tasting menu and a gorgeous room.", city:"Carlsbad"},
-  {name:"Wrench & Rodent Seabasstropub", d:"Oceanside. Bizarre name, seriously inventive sushi and seafood.", city:"Oceanside"},
-  {name:"Valle at the Mission Pacific Hotel", m:"star", d:"Oceanside. Baja-inspired tasting menu on a rooftop over the pier.", city:"Oceanside"},
-  {name:"Beach Break Cafe", d:"Oceanside's breakfast institution. Get the coffee cake.", city:"Oceanside"}],
+  {name:"Jeune et Jolie", k:"french", m:"star", d:"Carlsbad Village, a tasting menu and a gorgeous room."},
+  {name:"Valle", k:"cal", m:"star", d:"Oceanside. A Baja-inspired tasting menu on a rooftop above the pier.", city:"Oceanside"},
+  {name:"Campfire", k:"cal", d:"Everything over live fire in a beautiful indoor-outdoor space. The best room in North County."},
+  {name:"Wrench & Rodent Seabasstropub", k:"japanese", d:"Oceanside. A ridiculous name attached to seriously inventive sushi and seafood.", city:"Oceanside"}],
  mich:"North County San Diego has become a genuine dining destination: Jeune et Jolie in Carlsbad and Valle in Oceanside have both held Michelin stars, and Addison in Del Mar (three stars) is 20 minutes south.",
  parking:"Free three-hour street parking in Carlsbad Village and along the seawall. Flower Fields has a large paid lot. Oceanside Pier has metered lots that are cheap outside summer.",
  tip:"Do the Flower Fields at opening in early April, then Carlsbad Village for lunch and the seawall. If you're going to eat at Jeune et Jolie or Valle, book weeks out.",
@@ -983,11 +934,9 @@ TRIPS.push(
  see:["Meditation Mount — a garden and viewpoint at the top of the valley, built for exactly this","Ojai Valley Trail — a flat 9-mile paved path along the old rail line; rent bikes downtown","Bart's Books — the largest outdoor bookstore in the world, in an open-air courtyard, with an honor-system shelf on the street","The Arcade downtown, a 1917 Spanish Colonial shopping colonnade","Ojai Olive Oil and the citrus and lavender farms in the valley","Rose Valley Falls, a 300-foot waterfall about 30 minutes up into the Los Padres"],
  shop:"Downtown Ojai is compact and excellent: the Arcade's boutiques, Bart's Books, Ojai Clothing, In the Field, and a great Sunday farmers market. Everything is walkable in fifteen minutes.",
  eat:[
-  {name:"The Nest / Nocciola", d:"Nocciola does Northern Italian in a converted house — Ojai's most serious dinner.", city:"Ojai"},
-  {name:"Rory's Place", d:"Wood-fired, Mediterranean-leaning, and the buzziest opening in the valley in years.", city:"Ojai"},
-  {name:"Farmer and the Cook", d:"Organic vegetarian cafe and market in Meiners Oaks. Very Ojai, in the best way.", city:"Ojai"},
-  {name:"Ojai Rôtie", d:"Rotisserie chicken and lamb over frites. Small, casual, exceptional.", city:"Ojai"},
-  {name:"Olivella at the Ojai Valley Inn", d:"The resort's Italian dining room if you want to do it properly.", city:"Ojai"}],
+  {name:"Nocciola", k:"italian", d:"Northern Italian in a converted house. Ojai's most serious dinner."},
+  {name:"Rory's Place", k:"cal", d:"Wood-fired, Mediterranean-leaning, and the buzziest opening in the valley in years."},
+  {name:"Olivella at the Ojai Valley Inn", k:"italian", d:"The resort's dining room if you want to do it properly."}],
  mich:"Ojai doesn't carry stars, but Rory's Place and Nocciola both sit in the Michelin-recognized conversation for the region — and Bell's in Los Alamos (one star) is about 90 minutes north if you're chaining wine country.",
  parking:"Free public lots behind the Arcade and free street parking downtown, with time limits. Meditation Mount has a small free lot that fills at sunset — get there 45 minutes early.",
  tip:"Ojai and Ventura are 25 minutes apart and make one perfect day: beach and Main Street in the morning, drive inland, Bart's Books and downtown in the afternoon, Meditation Mount for the Pink Moment, dinner in Ojai.",
@@ -1001,11 +950,10 @@ TRIPS.push(
  see:["Old Mission Santa Barbara (1786), the \"Queen of the Missions,\" with a rose garden across the street","Santa Barbara County Courthouse — climb the free clock tower for the best 360° view in town; the Mural Room ceiling is extraordinary","Stearns Wharf and the waterfront bike path","Santa Barbara Botanic Garden — 78 acres of California natives in Mission Canyon","The Funk Zone — a few blocks of converted warehouses now full of tasting rooms, the Urban Wine Trail","Lotusland in Montecito — an extraordinary private estate garden, by reservation only, book months ahead","Butterfly Beach in Montecito for the sunset"],
  shop:"State Street's lower blocks (partly pedestrianized), plus El Paseo and La Arcada's tiled passages. Montecito's Coast Village Road is the upscale version. Saturday farmers market on Santa Barbara Street.",
  eat:[
-  {name:"The Lark", m:"bib", d:"Funk Zone flagship in an old fish market. Shared plates, great room, book ahead.", city:"Santa Barbara"},
-  {name:"La Super-Rica Taqueria", m:"bib", d:"Julia Child's favorite taqueria. A shack on Milpas with a line. Get the tacos de rajas.", city:"Santa Barbara"},
-  {name:"Bettina", d:"Neapolitan pizza in Montecito's Upper Village. Some of the best pizza in California.", city:"Montecito"},
-  {name:"Brophy Bros.", d:"Clam chowder and a seafood platter on the harbor deck. Touristy, correct.", city:"Santa Barbara"},
-  {name:"Bell's", m:"star", d:"Los Alamos, 45 minutes north — a Michelin-starred French bistro in a tiny farm town. Worth the detour.", city:"Los Alamos"}],
+  {name:"The Lark", k:"cal", m:"bib", d:"Funk Zone flagship in an old fish market. Shared plates, great room."},
+  {name:"Brophy Bros.", k:"seafood", d:"Chowder and a seafood platter on the harbour deck. Touristy and correct."},
+  {name:"Bettina", k:"italian", d:"Neapolitan pizza in Montecito's Upper Village — some of the best in the state.", city:"Montecito"},
+  {name:"Bell's", k:"french", m:"star", d:"Los Alamos, forty-five minutes north. A Michelin-starred bistro in a farm town.", city:"Los Alamos"}],
  mich:"Bell's in Los Alamos holds a Michelin star, and Santa Barbara itself carries a strong Bib Gourmand list including The Lark and Bibi Ji. If you're doing a wine day, chain Bell's onto Los Olivos.",
  parking:"Downtown Santa Barbara's city lots give you the first 75 minutes free and are cheap after — parking here is far easier than any comparable beach town. Waterfront lots are metered. Free street parking in the residential blocks above State Street.",
  tip:"Do the courthouse tower first thing (free, opens 8am, no crowds), then the Mission, then the Funk Zone for the afternoon. Stay for sunset at Butterfly Beach in Montecito. Carpinteria on the way home or the way up.",
@@ -1019,11 +967,9 @@ TRIPS.push(
  see:["Old Town Temecula — six walkable blocks of wooden boardwalks and Western storefronts, better than it sounds","Hot air balloon rides over the vineyards at dawn — this is the signature Temecula experience","Wilson Creek Winery (the almond champagne is a cult item), Ponte, Leoness and Doffo for a good four-stop day","Vail Lake and the Santa Rosa Plateau Ecological Reserve for hiking and vernal pools","Pechanga Resort if you want a casino evening","Temecula Valley Museum and the Saturday Old Town farmers market"],
  shop:"Old Town Temecula's Front Street — antique malls, a great olive oil shop, boutiques and candy stores along the boardwalk. It's genuinely fun to browse.",
  eat:[
-  {name:"The Restaurant at Ponte Winery", d:"Vineyard-view patio under grapevines. The classic wine-country lunch here.", city:"Temecula"},
-  {name:"Meritage at Callaway", d:"Hilltop dining room with a big valley view and a Mediterranean menu.", city:"Temecula"},
-  {name:"E.A.T. Marketplace", d:"Old Town breakfast and lunch, farm-driven, excellent.", city:"Temecula"},
-  {name:"Public House", d:"Old Town gastropub with a serious beer list.", city:"Temecula"},
-  {name:"Bottega Italia", d:"Handmade pasta in Old Town — the best proper dinner in town.", city:"Temecula"}],
+  {name:"The Restaurant at Ponte Winery", k:"cal", d:"A vineyard-view patio under the grapevines. The wine-country lunch here."},
+  {name:"Bottega Italia", k:"italian", d:"Handmade pasta in Old Town — the best proper dinner in the valley."},
+  {name:"Meritage at Callaway", k:"med", d:"Hilltop room with a big valley view."}],
  mich:null,
  parking:"Free parking at every winery and free public lots and structures in Old Town. Parking is a non-issue here — the constraint is having a designated driver. Several companies run winery shuttle tours from Old Town.",
  tip:"Book a balloon flight for sunrise (they launch around 6am and it's genuinely spectacular), have breakfast in Old Town, then do three wineries in the afternoon with a driver. Don't try to do more than four tastings.",
@@ -1036,10 +982,8 @@ TRIPS.push(
  see:["The Arrowhead Queen lake tour — 50 minutes around a lake that's otherwise private-access only","Heaps Peak Arboretum — an easy, beautiful mile through cedar and dogwood","Lake Gregory in Crestline for actual public swimming, with a water slide in summer","SkyPark at Santa's Village — a re-imagined 1955 theme park, now with mountain biking, zip lines and Christmas year-round","The Rim of the World Highway (SR-18) drive itself, with pullouts over the whole basin","Deep Creek and the Pacific Crest Trail sections nearby"],
  shop:"Lake Arrowhead Village has a mix of outlet stores and mountain-town boutiques on a lakefront boardwalk. Blue Jay Village nearby is smaller and more local.",
  eat:[
-  {name:"BIN 189 at Lake Arrowhead Resort", d:"The lakeside sit-down with a patio right over the water.", city:"Lake Arrowhead"},
-  {name:"Belgian Waffle Works", d:"On the village boardwalk with lake views. Waffles, obviously. A tradition.", city:"Lake Arrowhead"},
-  {name:"Stone Creek Bistro", d:"Blue Jay. Small, chef-driven, the best actual dinner on the mountain.", city:"Blue Jay"},
-  {name:"Papagayos", d:"Mexican in the village, big margaritas, good patio.", city:"Lake Arrowhead"}],
+  {name:"Stone Creek Bistro", k:"cal", d:"Blue Jay. Small, chef-owned, and the best actual dinner on the mountain."},
+  {name:"BIN 189", k:"cal", d:"Lakeside at the resort, with a patio over the water."}],
  mich:null,
  parking:"Free parking structures at Lake Arrowhead Village. Chains may be required on SR-18 and SR-330 in winter — check Caltrans before leaving. The drive up is steep and winding; take it slow.",
  tip:"Arrowhead is the quieter, prettier mountain; Big Bear is the one with actual activities. If you want a lake you can swim in and boat on, go to Big Bear. If you want pines, a boardwalk and a nap, come here.",
@@ -1052,10 +996,9 @@ TRIPS.push(
  see:["Torrey Pines Reserve — do the Beach Trail down and walk back along the sand at low tide","Del Mar Beach and Powerhouse Park on the bluff above it","Del Mar Racetrack — the summer meet (July-September) and the Del Mar Fair in June","Torrey Pines Gliderport — hang gliders launching off the cliff, free to watch, genuinely mesmerizing","The Flower Hill and Del Mar Village walkable blocks","Los Peñasquitos Canyon Preserve inland for a waterfall hike"],
  shop:"Del Mar Village along Camino del Mar — a small, expensive, very pretty stretch of boutiques and galleries. Flower Hill Promenade has a good bookstore and market.",
  eat:[
-  {name:"Addison", m:"star", stars:3, d:"Three Michelin stars — the only three-star restaurant in Southern California. A long, extraordinary, expensive tasting menu. Book months ahead.", city:"Del Mar"},
-  {name:"Jake's Del Mar", d:"On the sand at Powerhouse Park. The view is the point; the fish is good.", city:"Del Mar"},
-  {name:"Pacifica Del Mar", d:"Ocean-view seafood in Del Mar Plaza with a great sunset happy hour.", city:"Del Mar"},
-  {name:"Board & Brew", d:"The local sandwich institution. The Tri-Tip. Cheap and correct after a hike.", city:"Del Mar"}],
+  {name:"Addison", k:"french", m:"star", stars:3, d:"Three Michelin stars, the only ones in Southern California. A long, extraordinary, expensive tasting menu — book months out."},
+  {name:"Jake's Del Mar", k:"seafood", d:"On the sand at Powerhouse Park. The view is the point and the fish is good."},
+  {name:"Pacifica Del Mar", k:"seafood", d:"Ocean-view seafood in Del Mar Plaza with a strong sunset hour."}],
  mich:"Addison at the Fairmont Grand Del Mar holds three Michelin stars — the highest rating in Southern California and one of a handful in the country. It is a several-hundred-dollar, four-hour commitment and it books out months in advance.",
  parking:"Torrey Pines has a paid lot at the bottom (around $15-25 depending on season) that fills by 9am; free street parking on North Torrey Pines Road means a longer walk. Del Mar has metered street parking and a beach lot.",
  tip:"Do Torrey Pines at sunrise when the lot is empty and the light on the sandstone is unreal, then Del Mar Village for brunch. If you're booking Addison, plan the whole trip around it and stay overnight.",
@@ -1068,11 +1011,10 @@ TRIPS.push(
  see:["La Jolla Cove, the Children's Pool seal beach, and the coast walk connecting them","The Sunny Jim Sea Cave — walk down 145 steps through a tunnel to a sea cave, from inside a shop","Kayaking the Seven Sea Caves and the La Jolla Ecological Reserve — the signature activity","Windansea Beach and its 1946 surf shack","Birch Aquarium at Scripps — small, excellent, with a huge ocean view terrace","Mount Soledad and the veterans memorial for a 360° view over all of San Diego","Torrey Pines Gliderport just north"],
  shop:"Girard Avenue and Prospect Street — galleries, jewelry, boutiques, and a Warwick's, the oldest family-owned bookstore in the country. Expensive and lovely.",
  eat:[
-  {name:"George's at the Cove", d:"Three restaurants in one building; Ocean Terrace on the roof has the best view in La Jolla and California Modern is the serious one.", city:"La Jolla"},
-  {name:"Puesto", d:"Excellent modern Mexican — the crispy cheese tacos. There's one right by the Cove.", city:"La Jolla"},
-  {name:"The Marine Room", d:"Waves literally break against the windows at high tide. Check the tide calendar and book that night.", city:"La Jolla"},
-  {name:"Cottage La Jolla", d:"Breakfast in a converted bungalow with a patio. The La Jolla morning.", city:"La Jolla"},
-  {name:"Soichi Sushi", m:"star", d:"In nearby University Heights — a one-star omakase counter that's much easier to book than most.", city:"San Diego"}],
+  {name:"The Marine Room", k:"seafood", d:"Waves break against the windows at high tide. Check the tide calendar and book that night."},
+  {name:"George's at the Cove", k:"cal", d:"Three rooms in one building; California Modern is the serious one, Ocean Terrace has the view."},
+  {name:"Soichi Sushi", k:"japanese", m:"star", d:"University Heights. A Michelin-starred omakase counter at a fraction of LA prices.", city:"San Diego"},
+  {name:"Puesto", k:"mexican", d:"Excellent modern Mexican — the crispy cheese tacos — right by the Cove."}],
  mich:"San Diego's stars sit just outside La Jolla: Addison in Del Mar (three stars), Soichi and Sushi Tadokoro (one star each) in the city, and Jeune et Jolie up in Carlsbad. La Jolla itself is more about view than stars.",
  parking:"Free two-hour street parking around the Cove, which fills completely by 10am on weekends; paid lots on Prospect. Free all-day parking is available further up the hill on Torrey Pines Road with a walk down.",
  tip:"Book a morning kayak tour of the sea caves — the water is calmest before 11am and you'll paddle through leopard sharks in summer. Then the Cove, lunch on Prospect, and Mount Soledad at sunset.",
@@ -1084,12 +1026,11 @@ TRIPS.push(
  hero:"The Palm Springs Aerial Tramway — the world's largest rotating tram car climbs 8,500 feet in ten minutes from desert floor to pine forest. It can be 100°F at the bottom and 50°F with snow at the top on the same day.",
  see:["Aerial Tramway to Mount San Jacinto State Park — 50 miles of alpine trails at the top","Indian Canyons — Palm, Andreas and Murray Canyons, real palm oases on Agua Caliente tribal land, with a creek and waterfalls","Mid-century modern architecture tour — the Kaufmann House, Frey House II, the Tramway gas station; Modernism Week is in February","Moorten Botanical Garden and its Cactarium, a tiny wonderful family-run garden","Joshua Tree National Park's west entrance, 45 minutes away","Salvation Mountain and Salton Sea if you want the truly strange version of the desert","Sunnylands in Rancho Mirage — the Annenberg estate, with free gardens"],
  shop:"Palm Canyon Drive downtown for the uptown design district (mid-century furniture, vintage, galleries) and the Thursday night VillageFest street fair. El Paseo in Palm Desert is the high-end shopping street.",
+ eatnote:"The desert is a long way from any ocean and the seafood shows it. Eat steak here.",
  eat:[
-  {name:"Workshop Kitchen + Bar", d:"A James Beard-winning room in a converted 1926 building. The most designed restaurant in the desert.", city:"Palm Springs"},
-  {name:"Cheeky's", d:"The brunch with the line. Bacon flight, seasonal menu that changes weekly. Go at 8am.", city:"Palm Springs"},
-  {name:"Mr. Lyons", d:"A proper mid-century steakhouse with a great bar. Very Palm Springs.", city:"Palm Springs"},
-  {name:"Tac/Quila", d:"Modern Mexican on Palm Canyon with a big patio.", city:"Palm Springs"},
-  {name:"King's Highway at the Ace Hotel", d:"A converted Denny's turned diner. Order poolside if you can.", city:"Palm Springs"}],
+  {name:"Workshop Kitchen + Bar", k:"cal", d:"A James Beard-winning room in a 1926 building. The most designed restaurant in the desert."},
+  {name:"Mr. Lyons", k:"steak", d:"A proper mid-century steakhouse with a great bar. Very Palm Springs."},
+  {name:"Tac/Quila", k:"mexican", d:"Modern Mexican on Palm Canyon with a big patio."}],
  mich:null,
  parking:"Free street parking downtown with time limits, plus free public lots off Palm Canyon and Indian Canyon. The Tramway has a large paid lot ($15) — arrive before 9am on weekends or you'll wait hours for a tram car.",
  tip:"Do the tram first thing in the morning (buy timed tickets online), bring a jacket, hike an hour at the top, then come down for a late lunch and the design district. In summer, come only if you have a pool — it hits 115°F.",
@@ -1102,12 +1043,10 @@ TRIPS.push(
  hero:"Big Bear Lake itself — seven miles of alpine lake at 6,750 feet that you can actually swim in, boat on and fish, ringed by pine forest and two ski mountains.",
  see:["Snow Summit and Bear Mountain — skiing and snowboarding in winter, lift-served mountain biking and a scenic sky chair in summer","Castle Rock Trail — a steep 1.2-mile climb to granite boulders with the whole lake below","Big Bear Alpine Zoo, a rehabilitation center for animals that can't be released — genuinely moving","Boat rentals and pontoons at Pine Knot Marina; the Big Bear Queen paddlewheel tour","The Alpine Pedal Path, a flat 3-mile paved lakeside trail","Bald eagle counts in winter — they nest here","Holcomb Valley and the old gold-rush mining sites"],
  shop:"The Village on Pine Knot Avenue — a walkable few blocks of mountain-town shops, candy stores, outfitters and restaurants. It's touristy and charming and does the job.",
+ eatnote:"Mountain-lake food. Nobody comes to Big Bear to eat, and the town knows it.",
  eat:[
-  {name:"Peppercorn Grille", d:"The Village's reliable sit-down — Italian-American, big portions, a patio for people watching.", city:"Big Bear Lake"},
-  {name:"Himalayan Restaurant", d:"Nepalese and Indian in the Village. A genuine surprise and the best food in town.", city:"Big Bear Lake"},
-  {name:"Grizzly Manor Cafe", d:"A tiny, rude, wonderful breakfast shack. Portions are enormous, the wait is long, it's worth it.", city:"Big Bear Lake"},
-  {name:"Saucy Mama's Pizzeria", d:"Village pizza, good beer, exactly right after a day on the mountain.", city:"Big Bear Lake"},
-  {name:"Big Bear Lake Brewing Co.", d:"Taproom in the Village with a solid pub menu.", city:"Big Bear Lake"}],
+  {name:"Himalayan Restaurant", k:"indian", d:"Nepalese and Indian in the Village, and by some distance the best cooking in town."},
+  {name:"Peppercorn Grille", k:"italian", d:"The Village's reliable sit-down, with a patio for people-watching."}],
  mich:null,
  parking:"Free lots and street parking in the Village. Ski resorts charge for parking on peak days (reserve online). Chains are regularly required on SR-18 and SR-330 in winter — carry them, and check Caltrans QuickMap before you leave.",
  tip:"Summer is genuinely the better season: the lake is warm, the crowds are lower than ski weekends, and the sky chair at Snow Summit gets you a huge view for very little effort. Leave by 2pm on a Sunday or you'll sit in mountain traffic.",
@@ -1120,10 +1059,8 @@ TRIPS.push(
  see:["Suicide Rock and Tahquitz Peak — two classic granite summit hikes with enormous views (permits required for some, free from the ranger station)","Devil's Slide Trail to Saddle Junction, connecting to the Pacific Crest Trail","Humber Park and the Ernie Maxwell Scenic Trail, an easy 2.6-mile forest walk","Idyllwild Nature Center and the Chumash and Cahuilla exhibits","Lake Fulmor and Lake Hemet nearby","The Idyllwild Arts Academy summer concert program"],
  shop:"The village's few blocks are all independent — art galleries, a great bookstore, candle and pottery shops, an outfitter. Small, walkable, no chains anywhere.",
  eat:[
-  {name:"Gastrognome", d:"The village's long-standing proper dinner — a fireplace, a good wine list, mountain-lodge feel.", city:"Idyllwild"},
-  {name:"Ferro", d:"Wood-fired pizza and Italian on a deck in the pines. The best meal in town.", city:"Idyllwild"},
-  {name:"Idyllwild Brewpub", d:"House beer and pub food with a big patio, right in the village.", city:"Idyllwild"},
-  {name:"Higher Grounds Coffee", d:"The village coffee shop, and the correct first stop of the morning.", city:"Idyllwild"}],
+  {name:"Ferro", k:"italian", d:"Wood-fired pizza and Italian on a deck in the pines. The best meal in the village."},
+  {name:"Gastrognome", k:"cal", d:"A fireplace, a decent wine list and proper mountain-lodge cooking."}],
  mich:null,
  parking:"Free street parking and free village lots. Trailheads at Humber Park require an Adventure Pass ($5) — buy it at the ranger station in the village, which is also where you get the free day-use wilderness permits for Devil's Slide.",
  tip:"Get your wilderness permit at the ranger station first thing (they're free but limited daily), then hike Devil's Slide to Saddle Junction. Come up via the Palms-to-Pines Highway (SR-74) from the desert side — it's one of the great California drives.",
@@ -1135,11 +1072,9 @@ TRIPS.push(
  hero:"Red Rock Canyon State Park — banded white and red sandstone cliffs and eroded desert badlands on Highway 14, used as an alien planet in a hundred films. Almost nobody stops.",
  see:["Red Cliffs Natural Preserve and the Hagen Canyon Nature Trail — a short, easy loop through the most dramatic formations","White House Cliffs at sunset, when the bands go orange","Ricardo Campground and the visitor center","Nightsky — this is genuinely dark, and the Milky Way is visible with the naked eye","Fossil Falls, an hour north — a dry basalt waterfall polished by an ancient river, and utterly strange","Jawbone Canyon and the desert OHV country nearby"],
  shop:null,
+ eatnote:"There is no food here worth planning around. Fill up in Lancaster on the way out or Mojave on the way back.",
  eat:[
-  {name:"Indian Wells Brewing Company", d:"In Inyokern, 30 minutes north — a genuine desert oddity with dozens of house sodas and beers. Worth the stop.", city:"Inyokern"},
-  {name:"Mojave Bakery / Steve's Restaurant", d:"Mojave, 20 minutes south, has basic roadside diners. This is not a food trip.", city:"Mojave"},
-  {name:"Voyager Restaurant", d:"At the Mojave Air & Space Port — eat while watching experimental aircraft. Genuinely fun.", city:"Mojave"},
-  {name:"Crazy Otto's Diner", d:"Lancaster, on the drive home. Enormous portions and the best real meal on this route.", city:"Lancaster"}],
+  {name:"Indian Wells Brewing Company", k:"cal", d:"Inyokern, thirty minutes north. A genuine desert oddity with dozens of house sodas and beers.", city:"Inyokern"}],
  mich:null,
  parking:"$6 day use at the visitor center lot; roadside pullouts along Highway 14 are free. There is no water and very limited services — fill up in Mojave.",
  tip:"This is a stop, not a destination — chain it with Fossil Falls and make it a strange-desert day, or use it as the scenic route to the eastern Sierra. Go in spring or fall; summer is brutally hot and there is no shade.",
@@ -1153,11 +1088,10 @@ TRIPS.push(
  see:["Los Olivos' Grand Avenue tasting rooms — walk between a dozen without moving the car","Solvang's Danish village: the windmills, Solvang Bakery, the Elverhøj Museum, the Hans Christian Andersen Museum","Ballard and Santa Ynez, two tiny villages five minutes away with excellent restaurants","Sunstone, Roblar, Beckmen and Foxen wineries in the Santa Ynez Valley","Old Mission Santa Inés in Solvang (1804)","Ostrich Land USA on the highway between the towns, which is exactly as ridiculous as it sounds","Nojoqui Falls County Park — an easy walk to an 80-foot waterfall"],
  shop:"Solvang's Copenhagen Drive is the shopping stretch — Danish bakeries, clog shops, Christmas stores, and a very good toy store. Los Olivos has a handful of galleries and home shops between the tasting rooms.",
  eat:[
-  {name:"Bell's", m:"star", d:"Los Alamos, 15 minutes away. One Michelin star for a small French bistro in a farm town. The best meal in the valley by a distance.", city:"Los Alamos"},
-  {name:"Bear and Star", d:"Los Olivos. Ranch-to-table cooking from the family's own cattle ranch. Excellent.", city:"Los Olivos"},
-  {name:"Los Olivos Wine Merchant & Cafe", d:"The Sideways restaurant. Still very good, with a great patio and wine list.", city:"Los Olivos"},
-  {name:"Mad & Vin at the Landsby", d:"Solvang's best actual dinner — Nordic-California, in a design hotel.", city:"Solvang"},
-  {name:"Solvang Bakery / Olsen's Danish Village Bakery", d:"For aebleskiver and Danish pastries. Do the tourist thing properly.", city:"Solvang"}],
+  {name:"Bell's", k:"french", m:"star", d:"Los Alamos, fifteen minutes away. One Michelin star in a farm town, and the best meal in the valley by a distance.", city:"Los Alamos"},
+  {name:"Bear and Star", k:"steak", d:"Los Olivos. Ranch-to-table beef from the family's own cattle. Excellent, and the reason to eat here.", city:"Los Olivos"},
+  {name:"Mad & Vin at the Landsby", k:"cal", d:"Solvang's best actual dinner — Nordic-California in a design hotel."},
+  {name:"Los Olivos Wine Merchant & Cafe", k:"cal", d:"The Sideways room. Still very good, with a great patio and list.", city:"Los Olivos"}],
  mich:"Bell's in Los Alamos holds a Michelin star, and the Santa Ynez Valley carries several Bib Gourmands. Book Bell's several weeks out — it's a tiny room.",
  parking:"Free parking everywhere: free lots and street parking throughout Solvang, and free street parking in Los Olivos. Hire a driver or book a wine tour if you're tasting seriously.",
  tip:"You're right that Solvang alone is thin. The correct day is: Los Olivos tasting rooms in the late morning, lunch in Los Olivos or Los Alamos, an hour of Solvang for the bakeries and the windmills in the afternoon, then dinner at Bell's. Or chain the whole thing onto Santa Barbara, 45 minutes south.",
@@ -1171,12 +1105,10 @@ TRIPS.push(
  see:["Balboa Park's El Prado, the Botanical Building and Lily Pond, the Japanese Friendship Garden, and the Spreckels Organ Pavilion's free Sunday concerts","San Diego Zoo — still one of the best in the world","Coronado and the Hotel del Coronado, reached by the bridge or the ferry","Cabrillo National Monument on Point Loma — tide pools, the old lighthouse, and a view over the whole bay","Old Town San Diego State Historic Park","Sunset Cliffs Natural Park in Ocean Beach, which is exactly what it says","USS Midway Museum on the waterfront","Little Italy's Saturday Mercato, one of the best farmers markets in California"],
  shop:"Little Italy for design shops and the Mercato; the Gaslamp Quarter for nightlife more than retail; Liberty Station's converted naval base for boutiques and the Liberty Public Market food hall; and Seaport Village on the water.",
  eat:[
-  {name:"Addison", m:"star", stars:3, d:"Three Michelin stars, in Del Mar just north. The most decorated restaurant in Southern California.", city:"Del Mar"},
-  {name:"Las Cuatro Milpas", m:"bib", d:"Barrio Logan. A tiny counter with a line down the block for rolled tacos and chorizo. Cash, closes early, essential.", city:"San Diego"},
-  {name:"Born & Raised", d:"Little Italy steakhouse with a rooftop. Tableside Caesar, gold-leaf theatrics, extremely fun.", city:"San Diego"},
-  {name:"Lucha Libre Taco Shop", d:"The gold booth, the surf-and-turf burrito. A San Diego rite of passage.", city:"San Diego"},
-  {name:"Soichi Sushi", m:"star", d:"University Heights. A Michelin-starred omakase counter at a fraction of LA prices.", city:"San Diego"},
-  {name:"Liberty Public Market", d:"Thirty vendors in a converted naval building — the easy group answer.", city:"San Diego"}],
+  {name:"Addison", k:"french", m:"star", stars:3, d:"Three Michelin stars, in Del Mar just north. The most decorated restaurant in Southern California.", city:"Del Mar"},
+  {name:"Ironside Fish & Oyster", k:"seafood", d:"Little Italy. A raw bar with real range in a beautiful room."},
+  {name:"Soichi Sushi", k:"japanese", m:"star", d:"University Heights. A Michelin-starred omakase counter, and far easier to book than its LA equivalents."},
+  {name:"Born & Raised", k:"steak", d:"Little Italy steakhouse with a rooftop, tableside Caesar and dry-aged beef."}],
  mich:"San Diego County holds Addison (three stars, Del Mar), Soichi and Sushi Tadokoro (one star each), Jeune et Jolie in Carlsbad and Valle in Oceanside. It's a genuinely strong guide city now.",
  parking:"Balboa Park has extensive free parking (the lots by the Organ Pavilion and Inspiration Point, with a free tram). Downtown and Little Italy are paid garages. Coronado has metered street parking. Free parking in a major city park is a rarity — use it.",
  tip:"Balboa Park's free-parking-plus-free-tram setup means you can spend a whole day there for the cost of museum tickets. The Explorer Pass covers multiple museums. Go on a Sunday for the 2pm free organ concert.",
@@ -1188,12 +1120,11 @@ TRIPS.push(
  hero:"Joshua Tree National Park — 800,000 acres where the Mojave and Colorado deserts meet, full of monzogranite boulder piles and the Seussian trees themselves. One of the best dark-sky parks in the country.",
  see:["Hidden Valley — an easy 1-mile loop inside a boulder-ringed basin, the best short walk in the park","Keys View at sunset — the whole Coachella Valley, the San Andreas Fault, and on clear days Signal Mountain in Mexico","Cholla Cactus Garden at sunrise or sunset, when the spines glow","Barker Dam loop and the petroglyphs","Skull Rock and Jumbo Rocks, right off the road","Arch Rock and the Cottonwood Spring palm oasis","Stargazing anywhere after dark — bring a blanket and lie on a rock","Noah Purifoy Outdoor Desert Art Museum, free, just outside the park","Pioneertown and Pappy & Harriet's, 30 minutes northwest"],
  shop:"The town of Joshua Tree and Yucca Valley have a genuinely fun cluster of vintage, rock shops, western wear and desert-modern home stores along Highway 62. The Station and Coyote Corner are the classics.",
+ eatnote:"The desert has no seafood and no sushi. It does have two or three kitchens well above what the setting suggests.",
  eat:[
-  {name:"Pappy & Harriet's", d:"Pioneertown. A barbecue roadhouse on an old western movie set that became a legendary music venue. Book a table or you won't get one.", city:"Pioneertown"},
-  {name:"Kitchen in the Desert", d:"Joshua Tree. Caribbean-Californian, small, chef-driven, the best cooking in the basin.", city:"Joshua Tree"},
-  {name:"La Copine", d:"Flamingo Heights, out in the middle of nowhere. A genuinely serious restaurant in the desert. No reservations, get there at open.", city:"Flamingo Heights"},
-  {name:"Crossroads Cafe", d:"The Joshua Tree breakfast institution. Huge portions, hikers and climbers, a line by 9am.", city:"Joshua Tree"},
-  {name:"Natural Sisters Cafe", d:"Good coffee and healthy fuel before you go into the park.", city:"Joshua Tree"}],
+  {name:"Kitchen in the Desert", k:"cal", d:"Joshua Tree. Caribbean-Californian, small, chef-driven, the best cooking in the basin."},
+  {name:"La Copine", k:"cal", d:"Flamingo Heights, out in the middle of nothing. A genuinely serious restaurant. No reservations.", city:"Flamingo Heights"},
+  {name:"Pappy & Harriet's", k:"cal", d:"Pioneertown. A barbecue roadhouse on an old western set that became a legendary music venue. Book a table.", city:"Pioneertown"}],
  mich:null,
  parking:"$30 per vehicle for a 7-day park pass (or use the $80 America the Beautiful annual pass, which pays for itself in three parks). Trailhead lots at Hidden Valley and Barker Dam fill by 10am on spring weekends. There is no gas, food or reliable water inside the park.",
  tip:"There is no cell service in the park — download the map offline before you enter. Go in October-November or February-April; summer regularly exceeds 105°F. Enter via the West Entrance in Joshua Tree town, and stay past dark for the stars. That's the whole reason to come.",
@@ -1206,12 +1137,10 @@ TRIPS.push(
  hero:"Main Street Julian — a preserved 1870s gold-mining town at 4,200 feet in the Cuyamaca Mountains, where every single business sells apple pie and they are all, annoyingly, good.",
  see:["Eagle Mining Company — a real gold mine tour underground, run by enthusiasts","Cuyamaca Rancho State Park — 26,000 acres of oak and pine with the Stonewall Peak hike (5 miles, big view)","Volcan Mountain Preserve — a 5-mile climb to a summit with a view to the Salton Sea and the ocean on the same day","Apple picking at the orchards in September and October","Julian Pioneer Museum and the old cemetery on the hill","Lake Cuyamaca for fishing and a quiet picnic","Snow in winter — Julian genuinely gets it, and San Diego drives up to see it"],
  shop:"Main Street's boardwalk — an old-fashioned candy store, a cider mill, antiques, a hard-cider tasting room and a lot of apple-themed everything. It's four blocks and it's the whole town.",
+ eatnote:"Julian is a pie town with one real restaurant. Plan accordingly.",
  eat:[
-  {name:"Julian Pie Company", d:"The most famous pie in town. Apple, boysenberry apple, or Dutch apple with crumble. Get a whole one to take home.", city:"Julian"},
-  {name:"Mom's Pie House", d:"The other side of the great Julian pie debate. Try both, decide for yourself, that's the trip.", city:"Julian"},
-  {name:"Jeremy's on the Hill", d:"California-farm-to-table just outside town, and by some distance the best actual meal in the area.", city:"Wynola"},
-  {name:"Julian Beer Company", d:"Brewery in a 1907 garage with wood-fired pizza and a big deck.", city:"Julian"},
-  {name:"Wynola Pizza & Bistro", d:"Live music, a patio, and good pizza five minutes down the hill.", city:"Wynola"}],
+  {name:"Jeremy's on the Hill", k:"cal", d:"California farm-to-table just outside town, and by a distance the best actual meal up here.", city:"Wynola"},
+  {name:"Julian Pie Company", k:"bakery", d:"The apple pie the town runs on. Order a whole one ahead by phone."}],
  mich:null,
  parking:"Free street parking on Main Street and free lots one block off — it fills completely on autumn weekends, when Julian gets genuinely mobbed. Cuyamaca Rancho State Park day use is around $10.",
  tip:"Go on a weekday in October and the town is lovely; go on an October Saturday and you'll sit in traffic on the mountain road. Order pie ahead by phone for pickup. Chain it with Anza-Borrego, an hour east down the mountain.",
@@ -1224,11 +1153,10 @@ TRIPS.push(
  hero:"Anza-Borrego Desert State Park — 600,000 acres, the largest state park in California, with slot canyons, palm oases, and in a good year a wildflower superbloom that draws the entire state.",
  see:["Ricardo Breceda's sky-art sculptures in Galleta Meadows — 130 enormous metal dinosaurs, camels, a 350-foot serpent, scattered free across the desert around Borrego Springs","Borrego Palm Canyon Trail — a 3-mile round trip to a genuine palm oasis with a waterfall","The Slot — a narrow, easy slot canyon you can walk right through","Font's Point at sunset — a viewpoint over the Borrego Badlands that is one of the great views in California (high-clearance vehicle recommended for the sand road)","Wildflower superbloom, February to April in a wet year — check the park's wildflower hotline","Borrego Springs is an International Dark Sky Community — the stargazing is exceptional","Salton Sea and Salvation Mountain, an hour east, for the truly surreal"],
  shop:"Borrego Springs has a small mall and a couple of galleries. This is not a shopping trip; it's a landscape trip.",
+ eatnote:"Borrego Springs has four restaurants and no pretensions. Come for the badlands, not the table.",
  eat:[
-  {name:"Carlee's Place", d:"The town's institution — a diner-bar-restaurant that has fed everyone in Borrego Springs for decades.", city:"Borrego Springs"},
-  {name:"Kesling's Kitchen", d:"In a restored mid-century building. The nicest room in town.", city:"Borrego Springs"},
-  {name:"Red Ocotillo", d:"All-day American at the Palms Hotel. Reliable and good.", city:"Borrego Springs"},
-  {name:"Jilberto's Taco Shop", d:"Cheap, fast, open late, and exactly what you want after a day in the desert.", city:"Borrego Springs"}],
+  {name:"Kesling's Kitchen", k:"cal", d:"In a restored mid-century building. The nicest room in Borrego Springs."},
+  {name:"Carlee's Place", k:"cal", d:"The town institution — a diner-bar-restaurant that has fed everyone here for decades."}],
  mich:null,
  parking:"Free — most of Anza-Borrego has no entrance fee at all, which is remarkable for a park this size. Borrego Palm Canyon's day-use lot is around $10. There is essentially no cell service; download maps first.",
  tip:"Do the metal sculptures at golden hour (they're free, scattered on open land, and you just drive between them), then Font's Point for sunset. In superbloom years, check the wildflower report before committing — it varies enormously year to year. Summer here reaches 115°F; go November through April.",
@@ -1242,11 +1170,9 @@ TRIPS.push(
  see:["Monarch Butterfly Grove (November-February) with free docent talks","Oceano Dunes — one of the only places in California you can legally drive a vehicle on the beach","Pismo Pier and the promenade","Avila Beach — a smaller, sunnier, more sheltered town 15 minutes north with a lovely little downtown","Sycamore Mineral Springs in Avila — private hot tubs on a hillside in the oaks, open to the public by the hour","Point San Luis Lighthouse, reached by a trail or a trolley","Bob Jones Trail, a flat paved path from San Luis Obispo down to Avila Beach"],
  shop:"Pismo's downtown blocks by the pier are small and beachy. Avila Beach's promenade is nicer. The real shopping is 20 minutes inland in San Luis Obispo.",
  eat:[
-  {name:"Splash Cafe", d:"Clam chowder in a sourdough bread bowl, from a walk-up window. The definitive Pismo meal, and there's always a line.", city:"Pismo Beach"},
-  {name:"Ventana Grill", d:"Clifftop dining with an ocean view and a Latin-influenced menu. The nice dinner here.", city:"Pismo Beach"},
-  {name:"Ember", d:"Arroyo Grande, 10 minutes inland. Everything cooked in a wood-fired oven, no reservations, worth the wait. The best restaurant on this stretch of coast.", city:"Arroyo Grande"},
-  {name:"Old Custom House", d:"Avila Beach, right on the promenade. Big patio, easy lunch.", city:"Avila Beach"},
-  {name:"Cracked Crab", d:"Pismo. They dump a bucket of seafood on your butcher-paper table. Messy and fun.", city:"Pismo Beach"}],
+  {name:"Ember", k:"cal", d:"Arroyo Grande, ten minutes inland. Everything from a wood-fired oven, no reservations, and the best restaurant on this stretch of coast.", city:"Arroyo Grande"},
+  {name:"Ventana Grill", k:"seafood", d:"Clifftop dining with an ocean view and a Latin-influenced menu."},
+  {name:"Old Custom House", k:"cal", d:"Avila Beach, right on the promenade. Big patio, easy lunch.", city:"Avila Beach"}],
  mich:null,
  parking:"Free street parking and free beach lots in Pismo — genuinely easy. Oceano Dunes vehicle entry is around $5 per car. Avila Beach has metered parking on the promenade and free lots slightly inland.",
  tip:"Come between November and February for the butterflies and pair it with Sycamore Mineral Springs — book a private hot tub for after sunset. Ember in Arroyo Grande is worth planning the day around; get there when it opens.",
@@ -1259,12 +1185,10 @@ TRIPS.push(
  hero:"Downtown San Luis Obispo — a genuinely great small city center built along a creek, anchored by the 1772 mission, with the Thursday night Farmers Market that closes five blocks of Higuera Street and is one of the best street markets in the country.",
  see:["Thursday Night Farmers Market (6-9pm) — barbecue pits on the street, live music, produce. Plan the trip around it","Mission San Luis Obispo de Tolosa and Mission Plaza on the creek","Bubblegum Alley — a narrow alley covered wall to wall in chewed gum. Repulsive, iconic","Bishop Peak — a 3.5-mile hike up a volcanic plug with the whole valley below","Madonna Inn — the pinkest hotel in America, with 110 themed rooms and a legendary men's-room waterfall. Go for cake","Edna Valley wineries, 15 minutes south, for Chardonnay and Pinot","Montaña de Oro State Park, 25 minutes west — Bluff Trail is one of the best coastal walks in California"],
  shop:"Higuera and Marsh Streets downtown — a real, walkable, independent-heavy shopping district with a great bookstore, outdoor gear, and boutiques. Not a mall town, which is the point.",
+ eatnote:"San Luis Obispo is twenty minutes inland. For seafood, Morro Bay or Avila Beach on the way.",
  eat:[
-  {name:"Firestone Grill", d:"The tri-tip sandwich on a grilled roll. A SLO institution, and the line moves fast.", city:"San Luis Obispo"},
-  {name:"Novo Restaurant", d:"Creekside deck downtown with a globally scattered menu. The best patio in town.", city:"San Luis Obispo"},
-  {name:"Giuseppe's Cucina Italiana", d:"Southern Italian, been there decades, always full.", city:"San Luis Obispo"},
-  {name:"Madonna Inn Copper Cafe", d:"Go for the pink champagne cake. Sit in the gold-and-pink dining room. Commit to the bit.", city:"San Luis Obispo"},
-  {name:"Sidecar / High Street Deli", d:"High Street Deli's sandwiches are a Cal Poly institution — cheap, huge, excellent.", city:"San Luis Obispo"}],
+  {name:"Novo Restaurant", k:"cal", d:"A creekside deck downtown with a wandering menu. The best patio in town."},
+  {name:"Giuseppe's Cucina Italiana", k:"italian", d:"Southern Italian, decades old, always full."}],
  mich:"Six Test Kitchen in Paso Robles (45 minutes north) holds a Michelin star — a 12-seat counter in a converted shipping container. Book far ahead if you're chaining wine country.",
  parking:"Downtown parking structures are cheap and the first hour is often free; street meters are free after 6pm and on Sundays. Thursday market night is busy — park in a structure and walk.",
  tip:"Come on a Thursday. Arrive by 4pm, walk the mission and Bubblegum Alley, hike Bishop Peak or drive out to Montaña de Oro, then hit the market at 6. It's the best evening on the Central Coast.",
@@ -1278,11 +1202,9 @@ TRIPS.push(
  see:["Downtown City Park and the square, surrounded by tasting rooms and restaurants — you can taste a dozen wines without driving","Tablas Creek, Halter Ranch, Daou and Tin City — Tin City is a cluster of small producers, brewers and distillers in industrial units, and it's the most fun afternoon in Paso","River Oaks Hot Springs — natural mineral hot tubs by the hour","Sensorio's Field of Light — Bruce Munro's installation of 58,800 fiber-optic stems across a hillside, after dark. Ticketed, and genuinely beautiful","Estrella Warbird Museum for restored aircraft","Cambria and Hearst Castle, 45 minutes west, for a coast-and-wine day"],
  shop:"The downtown square's blocks have real boutiques, a great olive oil shop, kitchen stores and a bookstore. General Store Paso Robles is the good one.",
  eat:[
-  {name:"Six Test Kitchen", m:"star", d:"A 12-seat tasting-menu counter in Tin City holding a Michelin star. The most ambitious restaurant on the Central Coast. Book a month out.", city:"Paso Robles"},
-  {name:"Les Petites Canailles", d:"French bistro just off the square — excellent, and much easier to book.", city:"Paso Robles"},
-  {name:"Fish Gaucho", d:"Modern Mexican and a huge mezcal list, right on the square.", city:"Paso Robles"},
-  {name:"The Hatch Rotisserie & Bar", d:"Rotisserie chicken and bourbon. Casual and great.", city:"Paso Robles"},
-  {name:"Etto Pastificio", d:"Fresh pasta in Tin City. Simple, exceptional.", city:"Paso Robles"}],
+  {name:"Six Test Kitchen", k:"cal", m:"star", d:"A twelve-seat tasting counter in Tin City holding a Michelin star. The most ambitious cooking on the Central Coast. Book a month out."},
+  {name:"Les Petites Canailles", k:"french", d:"A French bistro just off the square — excellent, and much easier to book."},
+  {name:"Etto Pastificio", k:"italian", d:"Fresh pasta in Tin City. Simple and exceptional."}],
  mich:"Six Test Kitchen holds one Michelin star. It's a tiny counter and books out well in advance — if you want it, plan the whole trip around the reservation.",
  parking:"Free street parking and free lots around the downtown square, and free parking at every winery and in Tin City. Get a designated driver or book a shuttle; the wineries are spread over 20 miles of country road.",
  tip:"Do Tin City in the afternoon — you can walk between eight producers, eat at Etto, and never move the car. Then Sensorio after dark. Book Six Test Kitchen weeks ahead if you want it.",
@@ -1296,11 +1218,9 @@ TRIPS.push(
  see:["Morro Rock and the Embarcadero; kayak the estuary and you'll almost certainly see sea otters","Montaña de Oro State Park — the Bluff Trail is a flat, spectacular 4-mile coastal walk with almost nobody on it","Hearst Castle in San Simeon — William Randolph Hearst's 165-room hilltop estate with the Neptune Pool. Tours only, book ahead","Piedras Blancas Elephant Seal Rookery — thousands of elephant seals on the beach, free, viewable from a boardwalk, year-round with peaks in January and April","Moonstone Beach boardwalk in Cambria — a mile of bluff-top walkway","Nitt Witt Ridge in Cambria, a house built entirely of junk over 50 years","Fiscalini Ranch Preserve in Cambria for the Bluff Trail"],
  shop:"Cambria's East and West Villages — antiques, art galleries, and a lot of very good browsing. Morro Bay's Embarcadero is more taffy-and-t-shirts, but the Main Street blocks uphill have real shops.",
  eat:[
-  {name:"Giovanni's Fish Market", d:"Morro Bay. Fish market up front, fried seafood out back, picnic tables on the water. The correct Morro Bay lunch.", city:"Morro Bay"},
-  {name:"Windows on the Water", d:"Morro Bay's nicer dinner, with a harbor view and a good oyster selection.", city:"Morro Bay"},
-  {name:"Linn's Restaurant", d:"Cambria. Olallieberry pie, which is the local obsession. Get a whole one.", city:"Cambria"},
-  {name:"Robin's Restaurant", d:"Cambria. A garden patio and a wildly eclectic menu that's been beloved for 40 years.", city:"Cambria"},
-  {name:"Sebastian's General Store", d:"San Simeon, near Hearst Castle. A tri-tip sandwich and a Hearst Ranch wine tasting in a historic store.", city:"San Simeon"}],
+  {name:"Windows on the Water", k:"seafood", d:"Morro Bay's nicer dinner, with a harbour view and a good oyster selection."},
+  {name:"Giovanni's Fish Market", k:"seafood", d:"Fish market up front, fried seafood and picnic tables out back on the water. Plain but very fresh."},
+  {name:"Robin's Restaurant", k:"cal", d:"Cambria. A garden patio and a wildly eclectic menu, beloved for forty years.", city:"Cambria"}],
  mich:null,
  parking:"Free street parking on Morro Bay's Embarcadero and at Morro Rock. Hearst Castle parking is free but the tour tickets must be booked in advance. Piedras Blancas has a free lot. Montaña de Oro is free.",
  tip:"Do Hearst Castle's Grand Rooms tour in the morning (book weeks ahead), the elephant seals at Piedras Blancas right after — it's five minutes north and free — then Cambria for the afternoon and Morro Bay for sunset behind the rock.",
@@ -1313,11 +1233,10 @@ TRIPS.push(
  hero:"General Sherman — the largest tree on Earth by volume, 275 feet tall and 36 feet across at the base. Standing at the bottom of it does something to your sense of scale that photos cannot.",
  see:["General Sherman Tree and the Congress Trail — an easy 2-mile paved loop through the densest grove of giants","Moro Rock — 400 steps carved into a granite dome, with a view over the whole Great Western Divide","Crescent Meadow, which John Muir called the gem of the Sierra","Tunnel Log, the fallen sequoia you drive through","Crystal Cave — a marble cavern, tour tickets only, book in advance","Kings Canyon Scenic Byway to Cedar Grove — one of the deepest canyons in North America","General Grant Tree, the nation's Christmas tree"],
  shop:null,
+ eatnote:"National-park dining. Fine, never more than that — stock a cooler in Visalia on the way up.",
  eat:[
-  {name:"Peaks Restaurant at Wuksachi Lodge", d:"The only proper sit-down inside Sequoia. Book ahead; it's the sole dinner option for miles.", city:"Sequoia National Park"},
-  {name:"Grant Grove Restaurant", d:"Kings Canyon's dining room at Grant Grove Village. Simple, fine, convenient.", city:"Kings Canyon National Park"},
-  {name:"The Gateway Restaurant & Lodge", d:"Three Rivers, just outside the south entrance. A deck over the river, and the best meal in the area.", city:"Three Rivers"},
-  {name:"Ol' Buckaroo", d:"Three Rivers. Small, genuinely good, locals-first.", city:"Three Rivers"}],
+  {name:"Peaks Restaurant at Wuksachi Lodge", k:"cal", d:"The only proper sit-down inside the park. Book ahead; it is the sole option for miles."},
+  {name:"The Gateway Restaurant & Lodge", k:"cal", d:"Three Rivers, outside the south entrance. A deck over the river and the best food in the area.", city:"Three Rivers"}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass covering both parks (the $80 America the Beautiful pass is better value if you're doing several parks). General Sherman's main lot fills by 10am in summer — a free shuttle runs from Giant Forest Museum. Chains are required on the Generals Highway in winter.",
  tip:"The road into Sequoia from Three Rivers is a genuine mountain road — narrow, steep, 130 curves. Allow more time than the map says. Go in late spring or fall; summer means shuttles and full lots, and winter closes half the roads. There's no cell service in the park.",
@@ -1329,11 +1248,9 @@ TRIPS.push(
  hero:"Badwater Basin — a salt flat 282 feet below sea level, the lowest point in North America, with hexagonal salt polygons stretching to the horizon and a sign on the cliff behind marking sea level 282 feet above your head.",
  see:["Badwater Basin salt flats, best at sunrise before the heat","Zabriskie Point at sunrise — golden badlands, and one of the great views in the American West","Artist's Palette — mineral-stained hills in green, pink and purple, on a one-way scenic loop","Mesquite Flat Sand Dunes, best at sunrise or sunset","Dante's View, 5,475 feet straight up above Badwater","Ubehebe Crater and, with a high-clearance vehicle, the Racetrack Playa with its moving rocks","Darkest skies in the country — Death Valley is a Gold Tier Dark Sky Park","Rare superblooms after wet winters, and the Amargosa Opera House in Death Valley Junction"],
  shop:null,
+ eatnote:"There are four places to eat in an area the size of Connecticut. Bring far more food and water than you think you need.",
  eat:[
-  {name:"The Inn at Death Valley Dining Room", d:"A genuinely elegant dining room in a 1927 oasis resort. Book ahead — options here are extremely limited.", city:"Death Valley"},
-  {name:"The Last Kind Words Saloon", d:"At the Ranch at Death Valley. Western-themed, casual, reliable.", city:"Death Valley"},
-  {name:"Stovepipe Wells Toll Road Restaurant", d:"The other end of the valley. Basic, but it exists, which matters here.", city:"Stovepipe Wells"},
-  {name:"Panamint Springs Resort", d:"West entrance. Burgers and a huge beer list in the middle of nowhere.", city:"Panamint Springs"}],
+  {name:"The Inn at Death Valley Dining Room", k:"cal", d:"A genuinely elegant room in a 1927 oasis resort. Book ahead; options here are extremely limited."}],
  mich:null,
  parking:"$30 per vehicle for a 7-day pass, paid at self-serve kiosks. Parking at viewpoints is free and plentiful. Gas inside the park is very expensive — fill up in Ridgecrest or Baker. Carry far more water than you think you need.",
  tip:"Go November through March, full stop. Summer temperatures exceed 120°F and it is genuinely dangerous. There's no cell service anywhere in the park. Do Zabriskie Point at sunrise, Badwater before 9am, Artist's Palette in the afternoon light, Dante's View at sunset. Stay overnight for the stars — it's the whole point.",
@@ -1346,11 +1263,9 @@ TRIPS.push(
  see:["Mammoth Mountain and the summit gondola (runs in summer too, and the view over the Minarets is enormous)","Devils Postpile National Monument — a wall of hexagonal basalt columns, plus Rainbow Falls, reached by a mandatory shuttle in summer","Mono Lake, 40 minutes north — an ancient alkaline lake full of tufa towers, and one of the strangest landscapes in America","Bodie State Historic Park — a genuine gold-rush ghost town preserved in \"arrested decay,\" 170 buildings still standing","Convict Lake — a glacial lake ringed by 12,000-foot peaks with an easy 3-mile shoreline loop","Hot Creek Geological Site and the natural hot springs scattered across the Long Valley Caldera","June Lake Loop, a 16-mile scenic drive that rivals anything in the Sierra","Yosemite's Tioga Pass entrance is 40 minutes away when the road is open (roughly June-October)"],
  shop:"The Village at Mammoth and Old Mammoth Road have outfitters, ski shops and a few good boutiques. It's a mountain town — you come for the mountain.",
  eat:[
-  {name:"The Mogul", d:"You grill your own steak over an open fire pit. A Mammoth institution since 1970 and genuinely great fun.", city:"Mammoth Lakes"},
-  {name:"Restaurant Skadi", d:"The serious dinner in town — small, chef-owned, Scandinavian-influenced.", city:"Mammoth Lakes"},
-  {name:"Stellar Brew", d:"The breakfast and coffee stop. Get a breakfast burrito before the mountain.", city:"Mammoth Lakes"},
-  {name:"Mammoth Brewing Company", d:"Big taproom, good beer, solid food, and everyone ends up here after skiing.", city:"Mammoth Lakes"},
-  {name:"Whoa Nellie Deli", d:"Inside a gas station at the Tioga Pass junction in Lee Vining. Fish tacos and lobster taquitos that food writers have written about for 20 years. Seasonal.", city:"Lee Vining"}],
+  {name:"Restaurant Skadi", k:"cal", d:"The serious dinner in town — small, chef-owned, Scandinavian-influenced."},
+  {name:"The Mogul", k:"steak", d:"You grill your own steak over an open fire pit. A Mammoth institution since 1970 and genuinely fun."},
+  {name:"Whoa Nellie Deli", k:"seafood", d:"Inside a petrol station at the Tioga Pass junction in Lee Vining. Fish tacos that food writers have travelled for. Seasonal.", city:"Lee Vining"}],
  mich:null,
  parking:"Free parking throughout the village and at most trailheads. Devils Postpile requires a shuttle ticket in summer (around $15) from the Adventure Center. Highway 395 is open year-round, but check conditions — this drive crosses high desert and gets snow.",
  tip:"The drive up 395 is one of the great American road trips in its own right — Red Rock Canyon, Fossil Falls, the Alabama Hills at Lone Pine (where every Western was filmed, with Mount Whitney behind them). Stop at the Alabama Hills; it's the best two hours of the drive.",
@@ -1364,11 +1279,9 @@ TRIPS.push(
  see:["Monterey Bay Aquarium — book timed tickets in advance, and go at opening","17-Mile Drive through Pebble Beach — the Lone Cypress, Bird Rock, and a coastline that justifies the toll","Point Lobos State Natural Reserve — sea otters, harbor seals, cypress groves; arguably the most beautiful meeting of land and sea anywhere","Cannery Row and the Monterey Recreation Trail, a flat bike path along the whole bay","Santa Cruz Beach Boardwalk — the 1924 Giant Dipper wooden coaster and a free beach","Natural Bridges State Beach and its monarch grove (October-February)","Elkhorn Slough kayaking in Moss Landing — the highest density of sea otters on the California coast","Santa Cruz's Mystery Spot, which is nonsense and very fun"],
  shop:"Downtown Santa Cruz's Pacific Avenue is genuinely great — bookstores, records, vintage. Monterey's Cannery Row is touristy; Carmel is 10 minutes south for the good galleries and boutiques.",
  eat:[
-  {name:"Passionfish", d:"Pacific Grove. Sustainable seafood with wine at near-retail prices. The best value serious meal on the peninsula.", city:"Pacific Grove"},
-  {name:"Phil's Fish Market", d:"Moss Landing. Cioppino in a shed on the harbor. Messy, enormous, worth the detour.", city:"Moss Landing"},
-  {name:"Zachary's", d:"Santa Cruz breakfast institution — sourdough pancakes and Mike's Mess. Expect a wait.", city:"Santa Cruz"},
-  {name:"Bantam", d:"Santa Cruz. Wood-fired pizza and California cooking. The best dinner in town.", city:"Santa Cruz"},
-  {name:"Old Fisherman's Grotto", d:"Monterey's wharf classic — clam chowder and a harbor view.", city:"Monterey"}],
+  {name:"Passionfish", k:"seafood", d:"Pacific Grove. Sustainable seafood with wine at near-retail prices — the best-value serious meal on the peninsula.", city:"Pacific Grove"},
+  {name:"Phil's Fish Market", k:"seafood", d:"Moss Landing. Cioppino in a shed on the harbour. Enormous, messy, worth the detour.", city:"Moss Landing"},
+  {name:"Bantam", k:"cal", d:"Santa Cruz. Wood-fired cooking and the best dinner in town.", city:"Santa Cruz"}],
  mich:"The Monterey Peninsula's stars sit in Carmel and Carmel Valley — Chez Noir and Aubergine in Carmel have both held stars. Santa Cruz is more Bib Gourmand territory.",
  parking:"Monterey has paid garages downtown and on Cannery Row ($2-3/hour). 17-Mile Drive costs around $12 per car, refunded with a restaurant purchase in Pebble Beach. Santa Cruz Boardwalk parking is $15-20 in summer; free street parking a few blocks inland. Point Lobos is around $10 and the lot fills by 10am — reserve online.",
  tip:"Do the aquarium at opening, Point Lobos in the afternoon light, and stay in Monterey or Carmel. Santa Cruz is 45 minutes further north and works better as a stop on the way home. Reserve Point Lobos parking online — they turn cars away.",
@@ -1381,11 +1294,10 @@ TRIPS.push(
  hero:"Yosemite Valley — seven square miles of meadow floor with 3,000-foot granite walls on both sides, El Capitan, Half Dome and Yosemite Falls all visible from one road. There is nothing else like it.",
  see:["Tunnel View — the classic first look at the valley, and it genuinely does stop people in their tracks","Yosemite Falls — 2,425 feet, the tallest in North America; roaring in May, often dry by August","Glacier Point — a road-accessible viewpoint 3,200 feet above the valley floor, looking straight at Half Dome (open roughly May-October)","Mist Trail to Vernal and Nevada Falls — steep, wet, and the best day hike in the park","Mariposa Grove of giant sequoias near the south entrance","Tuolumne Meadows and Tioga Road, high country at 8,600 feet (open roughly June-October)","Horsetail Fall's \"firefall\" in mid-late February, when sunset lights it orange","Valley Loop bike path — rent bikes and cover the whole floor flat"],
  shop:null,
+ eatnote:"Park food is captive-audience food. The Ahwahnee is the exception.",
  eat:[
-  {name:"The Ahwahnee Dining Room", d:"A 34-foot-ceilinged dining hall in a 1927 granite-and-timber hotel. Book far ahead; it's the great national park dining room.", city:"Yosemite National Park"},
-  {name:"Mountain Room Restaurant", d:"At Yosemite Valley Lodge, with a window view of Yosemite Falls. Much easier to get into.", city:"Yosemite National Park"},
-  {name:"Degnan's Kitchen", d:"Valley village. Sandwiches, pizza, and the practical lunch option.", city:"Yosemite National Park"},
-  {name:"Rush Creek Lodge Tavern", d:"Just outside the Big Oak Flat entrance. A good deck and better food than anything inside the park.", city:"Groveland"}],
+  {name:"The Ahwahnee Dining Room", k:"cal", d:"A 34-foot-ceilinged hall in a 1927 granite-and-timber hotel. The great national-park room; book far ahead."},
+  {name:"Rush Creek Lodge Tavern", k:"cal", d:"Outside the Big Oak Flat entrance, with a good deck and better food than anything inside.", city:"Groveland"}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass. Critically: Yosemite has used a timed-entry reservation system in peak periods in recent years — check the park website before you go, because without one you may be turned away at the gate. Valley day-use lots (Yosemite Village, Curry Village) fill by 9am; the free valley shuttle is the correct way to move around once you're parked.",
  tip:"Go in late April or May: the waterfalls are at peak, the crowds haven't arrived, and Tioga Road opening is a bonus. Book lodging inside the park a year ahead, or stay in Groveland or Mariposa. Download offline maps — there's no service in the valley.",
@@ -1398,12 +1310,10 @@ TRIPS.push(
  see:["Bixby Creek Bridge — the most photographed bridge in California, with pullouts on both sides","McWay Falls at Julia Pfeiffer Burns State Park — an 80-foot waterfall dropping onto a beach you can't reach, seen from a short cliff trail","Pfeiffer Beach and its purple sand and keyhole rock (the turnoff is unmarked; it's Sycamore Canyon Road)","Point Lobos State Natural Reserve just south of Carmel — the finest coastal reserve in the state","Carmel Mission Basilica (1771), Junípero Serra's headquarters and burial place","Carmel Beach — white sand, cypress trees, dogs off leash, and a genuinely great sunset","Carmel's storybook cottages and the hidden courtyards and passageways off Ocean Avenue","Andrew Molera and Pfeiffer Big Sur State Parks for redwood and ridge hiking"],
  shop:"Carmel's Ocean Avenue and the secret passageways off it — dozens of galleries, jewelers, and boutiques in a village with no street addresses and no streetlights. It's expensive, it's twee, and it's genuinely delightful for an afternoon.",
  eat:[
-  {name:"Chez Noir", m:"star", d:"Carmel. A tiny Michelin-starred room from a husband-and-wife team. The best meal on the peninsula. Book a month out.", city:"Carmel-by-the-Sea"},
-  {name:"Aubergine at L'Auberge Carmel", m:"star", d:"Michelin-starred tasting menu in a beautiful courtyard hotel. The other special-occasion table.", city:"Carmel-by-the-Sea"},
-  {name:"Nepenthe", d:"Big Sur. A terrace 800 feet above the ocean that has been serving the Ambrosia Burger since 1949. Go for the view, stay for the sunset.", city:"Big Sur"},
-  {name:"Big Sur Bakery", d:"A house behind a gas station doing wood-fired pizza and exceptional pastries. Get there early.", city:"Big Sur"},
-  {name:"La Bicyclette", d:"Carmel. Rustic European, wood-fired, and a good, un-fussy dinner in the village.", city:"Carmel-by-the-Sea"},
-  {name:"Sierra Mar at Post Ranch Inn", d:"Glass-walled dining room on a Big Sur cliff. Reserve far ahead; it's the view meal of a lifetime.", city:"Big Sur"}],
+  {name:"Chez Noir", k:"french", m:"star", d:"Carmel. A tiny Michelin-starred room from a husband-and-wife team, and the best meal on the peninsula."},
+  {name:"Aubergine at L'Auberge Carmel", k:"cal", m:"star", d:"A Michelin-starred tasting menu in a beautiful courtyard hotel."},
+  {name:"Sierra Mar at Post Ranch Inn", k:"cal", d:"A glass-walled room on a Big Sur cliff. Reserve far ahead.", city:"Big Sur"},
+  {name:"Nepenthe", k:"cal", d:"A terrace 800 feet above the ocean, serving since 1949. Go for the view and the sunset.", city:"Big Sur"}],
  mich:"Carmel punches enormously above its weight: Chez Noir and Aubergine have both held Michelin stars, and Sierra Mar at Post Ranch has been recognized. For a village of 3,800 people that's remarkable.",
  parking:"Carmel has free two-hour street parking throughout the village — genuinely free, which nobody expects. Big Sur's viewpoint pullouts are free but small; Julia Pfeiffer Burns and Pfeiffer Big Sur charge around $10-12 day use, and Pfeiffer Beach is $12 cash only with a tiny lot.",
  tip:"Critically: check Highway 1 for closures before you go. Big Sur's road closes regularly for landslides, sometimes for a year at a time, and the route may require approaching from the north. Fill the tank in Carmel — gas in Big Sur is famously expensive and there's no cell service for most of the drive. Stay overnight; this is not a day trip.",
@@ -1417,12 +1327,11 @@ TRIPS.push(
  see:["Golden Gate Bridge — walk or bike across from Crissy Field to Sausalito, then ferry back","Golden Gate Park: the de Young Museum's free observation tower, the Japanese Tea Garden, the Conservatory of Flowers, and the bison paddock","Alcatraz — book the ferry weeks ahead; the audio tour is genuinely superb","Lands End Trail and the Sutro Bath ruins — the best coastal walk inside any American city","The Ferry Building marketplace and the Saturday farmers market","Mission District murals on Balmy Alley and Clarion Alley, plus Dolores Park","Chinatown, the oldest in North America, and the Golden Gate Fortune Cookie Factory","Painted Ladies at Alamo Square and the Filbert Steps up Telegraph Hill"],
  shop:"Hayes Valley for independent design and fashion, Valencia Street in the Mission for books and vintage, Union Square for the flagship stores, and the Ferry Building for food. Skip Fisherman's Wharf entirely.",
  eat:[
-  {name:"Zuni Cafe", d:"The roast chicken for two with bread salad, ordered an hour ahead. A San Francisco institution and still worth it.", city:"San Francisco"},
-  {name:"Swan Oyster Depot", d:"A 20-stool counter open since 1912. Get in line by 10am. Crab, oysters, a beer. Cash preferred.", city:"San Francisco"},
-  {name:"La Taqueria", d:"Mission. The James Beard-winning burrito, made without rice. Order it dorado.", city:"San Francisco"},
-  {name:"Tartine Bakery / Tartine Manufactory", d:"The bakery that changed American bread. Get the morning bun and a country loaf.", city:"San Francisco"},
-  {name:"State Bird Provisions", d:"Dim-sum-cart service of Californian small plates. Still one of the most fun rooms in America.", city:"San Francisco"},
-  {name:"House of Prime Rib", d:"One dish, since 1949, carved from a silver cart. Book a month ahead. Non-negotiable.", city:"San Francisco"}],
+  {name:"Swan Oyster Depot", k:"seafood", d:"A twenty-stool counter open since 1912. Crab, oysters, a beer. Plain as anything and among the best seafood in America — queue by ten."},
+  {name:"Copra", k:"indian", d:"Srijith Gopinathan's coastal South Indian. This is the standard nothing in Southern California reaches."},
+  {name:"Rintaro", k:"japanese", d:"Handmade soba and charcoal skewers in a beautiful cedar room in the Mission."},
+  {name:"House of Prime Rib", k:"steak", d:"One dish since 1949, carved from a silver cart. Book a month ahead."},
+  {name:"State Bird Provisions", k:"cal", d:"Dim-sum-cart service of Californian small plates. Still one of the most enjoyable rooms in the country."}],
  mich:"San Francisco has more Michelin stars per capita than anywhere in America — Atelier Crenn, Benu, Quince and SingleThread (up in Healdsburg) at three stars, and dozens more below. If you want a three-star meal in California without flying, this is where to plan it.",
  parking:"Do not drive in the city if you can avoid it. Garages run $30-50 a day, street parking is a competitive sport, and break-ins are a genuine problem — never leave anything visible in the car. Park at your hotel and use Muni, BART and your feet.",
  tip:"Two routes: the I-5 (6 hours, dull, fast) or Highway 1 through Big Sur (12+ hours, spectacular, needs two days). Do the 5 on the way up and the coast on the way back. Bring a real jacket — San Francisco in July is colder than LA in January.",
@@ -1436,10 +1345,8 @@ TRIPS.push(
  see:["The Narrows — hike upstream through the Virgin River between 1,000-foot walls just 20 feet apart. Rent neoprene boots and a walking stick in Springdale","Angels Landing — 1,500 feet of switchbacks and a chain-assisted spine with drop-offs on both sides. Permit required by lottery","Observation Point via East Mesa Trail — higher than Angels Landing and far less crowded","Emerald Pools and the Riverside Walk, both easy and paved","The Zion-Mount Carmel Highway and its 1930 tunnel, with switchbacks and Checkerboard Mesa","Canyon Overlook Trail — a one-mile round trip to one of the best views in the park","Kolob Canyons, the park's quiet northern section right off I-15","Bryce Canyon is 90 minutes further if you're already out here"],
  shop:"Springdale, the town at the park gate, has outfitters, galleries and gift shops along a single street. It's tidy and pleasant and exists entirely for the park.",
  eat:[
-  {name:"King's Landing Bistro", d:"Springdale. The best actual restaurant at the park gate — seasonal American with a patio under the cliffs.", city:"Springdale"},
-  {name:"Oscar's Cafe", d:"Springdale. Enormous portions, Mexican-American, and the correct post-Narrows meal.", city:"Springdale"},
-  {name:"Deep Creek Coffee Company", d:"Springdale. Opens at 6am for people heading into the canyon. Excellent breakfast burritos.", city:"Springdale"},
-  {name:"Red Rock Grill at Zion Lodge", d:"The only sit-down inside the park, with a lawn under the cliffs. Book ahead.", city:"Zion National Park"}],
+  {name:"King's Landing Bistro", k:"cal", d:"Springdale. Seasonal American with a patio under the cliffs — the best room at the park gate.", city:"Springdale"},
+  {name:"Oscar's Cafe", k:"mexican", d:"Springdale. Enormous portions and the correct meal after the Narrows.", city:"Springdale"}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass. Zion Canyon's scenic drive is closed to private cars most of the year — you park in Springdale or at the visitor center and take the free shuttle, and the visitor center lot fills by 8am. Angels Landing requires a permit won by online lottery; apply months ahead or use the day-before lottery.",
  tip:"Stay in Springdale so you can walk to the shuttle. Do the Narrows in the morning (check the flash flood forecast — this is not optional), Canyon Overlook at sunset. Spring and fall are ideal; summer is 100°F and packed. It's a long drive, so make it three days and add Bryce.",
@@ -1452,11 +1359,9 @@ TRIPS.push(
  see:["Cathedral Rock Trail — a short, steep, scrambly climb to a saddle with the definitive Sedona view","Devil's Bridge — the largest natural sandstone arch in the area, and the photo everyone comes for","Chapel of the Holy Cross — a 1956 modernist chapel built directly into the red rock, free to enter","Red Rock Scenic Byway (SR-179) and Airport Mesa for sunset","Slide Rock State Park in Oak Creek Canyon — a natural rock waterslide in a creek","Oak Creek Canyon drive up to Flagstaff, one of the most beautiful roads in the Southwest","Palatki and Honanki Heritage Sites — cliff dwellings and rock art","Jerome, an hour away — a vertical ghost town on a mountainside, now full of galleries and wine bars"],
  shop:"Tlaquepaque Arts & Shopping Village — a beautifully built Mexican-village-style complex of galleries and boutiques under sycamores. Uptown Sedona is more crystal-and-t-shirt, and fun in its own way.",
  eat:[
-  {name:"Elote Cafe", d:"The best restaurant in Sedona for 15 years running. Regional Mexican, no reservations, get there when they open or wait two hours.", city:"Sedona"},
-  {name:"Mariposa Latin Inspired Grill", d:"A Lisa Dahl restaurant with the single best patio view in town. Book for sunset.", city:"Sedona"},
-  {name:"Hudson", d:"Reliable American with a red rock view and a good bar.", city:"Sedona"},
-  {name:"Indian Gardens Cafe & Market", d:"Up Oak Creek Canyon. Sandwiches and coffee on a shaded creekside deck. Lovely.", city:"Sedona"},
-  {name:"Cress on Oak Creek at L'Auberge", d:"Tables at the water's edge under the sycamores. The romantic dinner.", city:"Sedona"}],
+  {name:"Elote Cafe", k:"mexican", d:"The best restaurant in Sedona for fifteen years running. Regional Mexican, no reservations, arrive at open."},
+  {name:"Cress on Oak Creek", k:"cal", d:"Tables at the water's edge under the sycamores at L'Auberge. The romantic dinner."},
+  {name:"Mariposa Latin Inspired Grill", k:"cal", d:"The single best patio view in town. Book it for sunset."}],
  mich:null,
  parking:"A Red Rock Pass ($5/day) is required at most trailheads and viewpoints in the national forest — buy at the visitor center or a vending machine. Devil's Bridge and Cathedral Rock lots fill by 7am; the free Sedona Shuttle runs to the busiest trailheads on weekends and is the correct answer.",
  tip:"It's a long drive, so make it three days. Go in spring or fall — summer is hot and Sedona is genuinely overrun on holiday weekends. Take Oak Creek Canyon up to Flagstaff and chain the Grand Canyon on the same trip; it's 90 minutes further.",
@@ -1469,11 +1374,9 @@ TRIPS.push(
  hero:"The South Rim — 277 miles of canyon, a mile deep, up to 18 miles across, and the moment you first walk up to the railing is genuinely unlike any other view in the world.",
  see:["Mather Point and Yavapai Point for the first look, and the Yavapai Geology Museum's window wall","The Rim Trail — 13 miles of mostly paved, mostly flat path with a free shuttle you can hop on and off","Bright Angel Trail — go down as far as the 1.5-mile resthouse and turn around. Going down is optional; coming up is not","Desert View Drive to the Desert View Watchtower, Mary Colter's 1932 stone tower","Hermit Road at sunset (shuttle-only most of the year) — Hopi Point and Mohave Point","Grand Canyon Village's historic district: El Tovar, Hopi House, Lookout Studio","Stargazing — the park is a certified Dark Sky Park and the Milky Way over the canyon is extraordinary","The Grand Canyon Railway from Williams, if you'd rather not drive the last leg"],
  shop:"Hopi House and the Desert View Watchtower have genuine Native American art and jewelry. Tusayan outside the gate is functional. This is not a shopping trip.",
+ eatnote:"Everything else inside the park is cafeteria food. Tusayan, ten minutes out, is marginally better.",
  eat:[
-  {name:"El Tovar Dining Room", d:"A 1905 log-and-stone hotel dining room on the rim. Book weeks ahead; it's the great national park meal.", city:"Grand Canyon Village"},
-  {name:"Arizona Room", d:"Rim-view restaurant at Bright Angel Lodge, more casual and easier to get into. Seasonal.", city:"Grand Canyon Village"},
-  {name:"Yavapai Tavern / Market Plaza Deli", d:"The practical options inside the park for a sandwich and a beer.", city:"Grand Canyon Village"},
-  {name:"Plaza Bonita", d:"Tusayan, just outside the gate. Solid Mexican and a welcome change from park food.", city:"Tusayan"}],
+  {name:"El Tovar Dining Room", k:"cal", d:"A 1905 log-and-stone room on the rim. Book weeks ahead; it is the great national-park meal."}],
  mich:null,
  parking:"$35 per vehicle for a 7-day pass. Village lots fill by mid-morning in summer — park once at the visitor center and use the free shuttle system, which is excellent and covers the whole rim. Lodging inside the park books 12 months out; Tusayan is 10 minutes away, Williams an hour.",
  tip:"Sunrise at Mather Point and sunset at Hopi Point are the two non-negotiables, and they're both free once you're in. Go in April-May or September-October. Route it through Sedona (90 minutes south) and make it a proper four-day trip — it's too far for anything less.",
@@ -1487,15 +1390,49 @@ TRIPS.push(
  see:["Emerald Bay State Park and Vikingsholm — the most photographed spot on the lake, with Fannette Island in the middle","Sand Harbor on the Nevada side — turquoise water over granite boulders, and the best swimming beach on the lake","Palisades Tahoe and Northstar for skiing; Heavenly for the gondola view over the whole basin","The Flume Trail, a mountain bike ride 1,600 feet above the east shore","Eagle Falls and the Rubicon Trail along the west shore","Donner Memorial State Park and its genuinely grim, excellent museum","Kayaking or a boat cruise out to Emerald Bay","Truckee's historic downtown — a lovely, walkable railroad town with real restaurants"],
  shop:"Truckee's Commercial Row is the best shopping around the lake — independent boutiques and outfitters in 1860s buildings. Heavenly Village in South Lake is functional resort retail.",
  eat:[
-  {name:"Moody's Bistro", d:"Truckee. Live jazz, a great bar, and the most reliable good dinner in the region.", city:"Truckee"},
-  {name:"Sunnyside Restaurant", d:"Tahoe City. A deck over the water and the famous hula pie. The classic summer lunch.", city:"Tahoe City"},
-  {name:"Jake's on the Lake", d:"Tahoe City. Lakefront, dependable, good for a group.", city:"Tahoe City"},
-  {name:"Fire Sign Cafe", d:"West shore. The breakfast institution — expect a wait, it's worth it.", city:"Tahoe City"},
-  {name:"Edgewood Tahoe", d:"South shore. Lakefront fine dining with a view straight up the lake.", city:"Stateline"}],
+  {name:"Moody's Bistro", k:"cal", d:"Truckee. Live jazz, a great bar, and the most reliable good dinner in the region.", city:"Truckee"},
+  {name:"Edgewood Tahoe", k:"cal", d:"South shore. Lakefront dining with a view straight up the lake.", city:"Stateline"},
+  {name:"Sunnyside Restaurant", k:"seafood", d:"Tahoe City. A deck over the water and a proper fish menu.", city:"Tahoe City"}],
  mich:null,
  parking:"Emerald Bay and Sand Harbor lots fill by 9am in summer and they close the gates — Sand Harbor now takes parking reservations, so book online. Most trailheads are free or a few dollars. In winter, chains are frequently required on I-80 and US-50, and both close in storms.",
  tip:"This is a two-day drive each way realistically, so give it four or five days. Summer is arguably better than winter — the water is swimmable in August, the crowds are more spread out, and you avoid the chain controls. Check I-80 conditions obsessively in winter.",
  maps:"Emerald Bay State Park, South Lake Tahoe, CA"}
+);
+
+TRIPS.push(
+{id:"sawtelle", name:"Sawtelle Japantown", region:"West LA", mins:15, drive:"15 min",
+ blurb:"the densest Japanese eating in the city, fifteen minutes away",
+ tags:["food","shop","cute","culture"],
+ hero:"Sawtelle Boulevard between Olympic and Santa Monica — six blocks that hold more good Japanese kitchens than anywhere else in Los Angeles, plus the bookstores, nurseries and markets that grew up around them.",
+ see:["Giant Robot and GR2 gallery — the shop and art space that made this stretch a destination","The old Japanese nurseries along Sawtelle, a remnant of the pre-war farming community","Nuart Theatre for repertory and midnight screenings","Stoner Recreation Area for a walk between courses","Nijiya and Marukai markets, worth an hour on their own","The Japanese Institute of Sawtelle and the neighbourhood's history plaques"],
+ shop:"Giant Robot for art books and toys, Nijiya Market for prepared food and fish to take home, and a cluster of Japanese stationery and skincare shops along the boulevard.",
+ eatnote:"This is the reason to come. Everything below is within a five-minute walk of everything else.",
+ eat:[
+  {name:"Kiriko Sushi", k:"japanese", d:"A long-running sushi bar doing house-smoked salmon and cured pieces. Sit at the counter and take the omakase."},
+  {name:"Nanbankan", k:"japanese", d:"Charcoal robata in a small warm room — beef skewers, seafood off the grill, cold beer."},
+  {name:"Tsujita LA Artisan Noodle", k:"japanese", d:"Tonkotsu ramen and tsukemen. The broth is the whole argument; go at an odd hour."},
+  {name:"Sushi Note Omakase", k:"japanese", d:"A counter built around wine-and-sushi pairing rather than sake. Small, calm, expensive."}],
+ mich:"Sawtelle trades in neighbourhood excellence rather than stars — the starred sushi counters are downtown. What it has is depth: four or five genuinely good Japanese rooms on one street.",
+ parking:"Metered street parking on Sawtelle plus free two-hour parking on the residential side streets east of the boulevard. There is a small public lot behind the Olympic end. Easiest on a weeknight.",
+ tip:"Go on a weeknight. Weekend queues at the ramen shops run past an hour and none of them take reservations. Finish at Nijiya and take home fish for the next night.",
+ maps:"Sawtelle Japantown, Los Angeles, CA"},
+
+{id:"torrance", name:"Torrance", region:"South Bay", mins:35, drive:"35 min",
+ blurb:"the actual Japanese food district of Southern California",
+ tags:["food","shop","culture","park"],
+ hero:"Torrance's Japanese quarter — the largest concentration of Japanese restaurants, markets and bakeries in Southern California, anchored by Mitsuwa and Tokyo Central and fed by decades of Japanese corporate presence in the South Bay.",
+ see:["Mitsuwa Marketplace — market, bakery, bookshop and a food hall that beats most restaurants","Tokyo Central and Marukai for the deeper grocery run","Madrona Marsh Preserve — 43 acres of rare vernal marsh in the middle of the suburbs, free","Torrance Art Museum, small and genuinely good","Wilson Park farmers market on Tuesday and Saturday, one of the biggest in the county","Del Amo Fashion Center if you need an actual mall"],
+ shop:"Mitsuwa, Tokyo Central and Marukai are the point — Japanese groceries, ceramics, knives, stationery and a bakery counter. Del Amo covers everything else.",
+ eatnote:"Come hungry and plan two stops. This is a food trip with a marsh walk attached, not the other way round.",
+ eat:[
+  {name:"Otafuku", k:"japanese", d:"Handmade soba and udon in a spare, quiet room. Order the cold soba with tempura and the duck broth."},
+  {name:"Musha", k:"japanese", d:"Izakaya small plates and a deep sake list. Loud in a good way, and the room is warm rather than dingy."},
+  {name:"Mitsuwa Marketplace food hall", k:"japanese", d:"Ramen, curry, a fish counter and a bakery under one roof. The low-effort answer when you want six things."},
+  {name:"Sushi Ii", k:"japanese", d:"A small, serious omakase counter — book ahead, it seats very few."}],
+ mich:"No stars out here, which says more about where Michelin looks than about the cooking. The South Bay's Japanese depth is the draw.",
+ parking:"Free surface lots at every market and strip mall, and free street parking throughout. The easiest parking on this entire list.",
+ tip:"Saturday morning at Mitsuwa, then Madrona Marsh to walk it off, then an early dinner at Otafuku before the South Bay traffic sets in.",
+ maps:"Mitsuwa Marketplace, Torrance, CA"}
 );
 
 
@@ -1518,8 +1455,9 @@ const VIBES = [
   ["wine","Wine"],["park","Parks"],["desert","Desert"],["snow","Snow"],
   ["cute","Small downtown"],["water","On the water"],["culture","Museums"],["kid","Big fun"]
 ];
+const EATS = [["seafood","Seafood"],["japanese","Japanese"],["chinese","Chinese"],["indian","Indian"]];
 
-let state = {q:"", dist:null, vibes:new Set(), mich:false, open:new Set(), done:new Set()};
+let state = {q:"", dist:null, vibes:new Set(), eats:new Set(), mich:false, open:new Set(), done:new Set()};
 try{ state.done = new Set(JSON.parse(localStorage.getItem("pv-daytrips-stamps") || "[]")); }catch(e){}
 const save = () => { try{ localStorage.setItem("pv-daytrips-stamps", JSON.stringify([...state.done])); }catch(e){} };
 
@@ -1529,6 +1467,7 @@ function matches(t){
     if(!(t.mins > prev && t.mins <= ZONES[state.dist].max)) return false;
   }
   if(state.mich && !t.mich && !t.eat.some(r => r.m)) return false;
+  for(const k of state.eats) if(!t.eat.some(r => r.k === k)) return false;
   for(const v of state.vibes) if(!t.tags.includes(v)) return false;
   if(state.q){
     const hay = (t.name + " " + t.region + " " + t.blurb + " " + t.hero + " " + t.see.join(" ") + " " +
@@ -1903,11 +1842,15 @@ async function loadPlate(t, wrap){
 }
 
 /* ---------------- rendering ---------------- */
+const KIND = {seafood:"Seafood", japanese:"Japanese", chinese:"Chinese", indian:"Indian",
+  steak:"Steak", italian:"Italian", mexican:"Mexican", cal:"California", thai:"Thai",
+  french:"French", med:"Mediterranean", bakery:"Bakery"};
 function restRow(r, t){
   const badge = r.m === "star"
       ? `<span class="mich">${(r.stars || 1) === 1 ? "Michelin star" : (r.stars) + " Michelin stars"}</span>`
     : r.m === "bib" ? `<span class="mich">Bib Gourmand</span>` : "";
-  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${badge}</div>
+  const kind = r.k && KIND[r.k] ? `<span class="kind">${KIND[r.k]}</span>` : "";
+  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${kind}${badge}</div>
     <div class="rest-d">${esc(r.d)}</div></div><div class="rest-l">
     <a href="${esc(lookup(r,t))}" target="_blank" rel="noopener">Menu</a>
     <a href="${esc(placeUrl(r,t))}" target="_blank" rel="noopener">Map</a></div></div>`;
@@ -1939,7 +1882,7 @@ function card(t){
       <div class="sec"><h3>The main event</h3><p class="lead">${esc(t.hero)}</p></div>
       <div class="sec"><h3>Parks, viewpoints and must-sees</h3><ul>${t.see.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
       ${t.shop ? `<div class="sec"><h3>Downtown and shopping</h3><p>${esc(t.shop)}</p></div>` : ""}
-      <div class="sec"><h3>Where to eat</h3>${t.eat.map(r => restRow(r,t)).join("")}</div>
+      <div class="sec"><h3>Where to eat</h3>${t.eatnote ? `<p class="eatnote">${esc(t.eatnote)}</p>` : ""}${t.eat.map(r => restRow(r,t)).join("")}</div>
       ${t.mich ? `<div class="sec"><h3>Michelin in the area</h3><p>${esc(t.mich)}</p></div>` : ""}
       <div class="sec"><h3>Parking</h3><p>${esc(t.parking)}</p></div>
       <div class="sec"><h3>Worth knowing</h3><p>${esc(t.tip)}</p>${t.pair ? `<p class="pair">${esc(t.pair)}</p>` : ""}</div>
@@ -2000,11 +1943,17 @@ const dc = document.getElementById("distchips"), vc = document.getElementById("v
       tabs = document.getElementById("tabs");
 dc.innerHTML = `<button class="chip" type="button" data-d="all" aria-pressed="true">Any distance</button>` +
   ZONES.map((z,i) => `<button class="chip" type="button" data-d="${i}" aria-pressed="false">${esc(z.s)}</button>`).join("");
-vc.innerHTML = VIBES.map(v => `<button class="chip" type="button" data-v="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("") +
-  `<button class="chip" type="button" data-v="__mich" aria-pressed="false">Michelin only</button>`;
+vc.innerHTML = VIBES.map(v => `<button class="chip" type="button" data-v="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("");
+const ec = document.getElementById("eatchips");
+ec.innerHTML = EATS.map(v => `<button class="chip" type="button" data-e="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("") +
+  `<button class="chip" type="button" data-e="__mich" aria-pressed="false">Michelin only</button>`;
+ec.addEventListener("click", e => { const b = e.target.closest("[data-e]"); if(!b) return;
+  const k = b.dataset.e, on = b.getAttribute("aria-pressed") === "true";
+  if(k === "__mich") state.mich = !on; else on ? state.eats.delete(k) : state.eats.add(k);
+  b.setAttribute("aria-pressed", String(!on)); syncFilterLabel(); render(); });
 
 const ftoggle = document.getElementById("ftoggle"), fpanel = document.getElementById("filters");
-function activeFilters(){ return (state.dist !== null ? 1 : 0) + state.vibes.size + (state.mich ? 1 : 0); }
+function activeFilters(){ return (state.dist !== null ? 1 : 0) + state.vibes.size + state.eats.size + (state.mich ? 1 : 0); }
 function syncFilterLabel(){
   const n = activeFilters();
   ftoggle.textContent = n ? "Filters (" + n + ")" : "Filters";
@@ -2015,9 +1964,10 @@ ftoggle.addEventListener("click", () => {
   fpanel.hidden = open;
 });
 document.getElementById("fclear").addEventListener("click", () => {
-  state.dist = null; state.vibes.clear(); state.mich = false;
+  state.dist = null; state.vibes.clear(); state.eats.clear(); state.mich = false;
   [...dc.children].forEach(c => c.setAttribute("aria-pressed", String(c.dataset.d === "all")));
   [...vc.children].forEach(c => c.setAttribute("aria-pressed", "false"));
+  [...ec.children].forEach(c => c.setAttribute("aria-pressed", "false"));
   syncFilterLabel(); render();
 });
 
@@ -2033,7 +1983,7 @@ dc.addEventListener("click", e => { const b = e.target.closest("[data-d]"); if(!
 
 vc.addEventListener("click", e => { const b = e.target.closest("[data-v]"); if(!b) return;
   const v = b.dataset.v, on = b.getAttribute("aria-pressed") === "true";
-  if(v === "__mich") state.mich = !on; else on ? state.vibes.delete(v) : state.vibes.add(v);
+  on ? state.vibes.delete(v) : state.vibes.add(v);
   b.setAttribute("aria-pressed", String(!on)); syncFilterLabel(); render(); });
 
 let qt;
