@@ -1,291 +1,239 @@
 <title>Playa Vista Day Trips</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Nunito:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
 <style>
-/* ---------- tokens ---------- */
 :root{
-  --paper:#EFF5F1; --paper2:#E2EDE8; --card:#FFFFFF; --card2:#F7FBF9;
-  --ink:#173042; --ink2:#4A6572; --line:#C9DCD5; --line2:#E1EDE8;
-  --poppy:#DD4E17; --lagoon:#0F7F93; --bougain:#C93A72; --sun:#E09600; --moss:#3F7C50;
-  --sun-fill:#F7B32B;
-  --shadow:23 48 66; --shadow-a:.10;
-  --chip:#FFFFFF; --chip-on:var(--ink);
+  --paper:#F3F1EA; --paper2:#EAE7DD; --card:#FAF8F3;
+  --ink:#242219; --ink2:#6B6659; --ink3:#948E7F;
+  --line:#DBD6C8; --line2:#E7E3D8;
+  --accent:#55654A; --accent2:#8A6A44;
+  --sel:#DDE2D5;
   color-scheme:light dark;
 }
-:root:not([data-theme="light"]){}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#0E1D27; --paper2:#142833; --card:#19303C; --card2:#1E3946;
-    --ink:#E9F2EF; --ink2:#9AB4BF; --line:#2B4855; --line2:#223E4A;
-    --poppy:#FF8256; --lagoon:#48C2D4; --bougain:#F47AA6; --sun:#FFC65C; --moss:#79BC89;
-    --sun-fill:#FFC65C;
-    --shadow:0 0 0; --shadow-a:.45;
-    --chip:#19303C; --chip-on:var(--paper);
+    --paper:#191814; --paper2:#211F1A; --card:#201E19;
+    --ink:#EDEAE0; --ink2:#A29C8D; --ink3:#7B7566;
+    --line:#332F28; --line2:#2A2721;
+    --accent:#9DB08C; --accent2:#C29C6C;
+    --sel:#2C332A;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0E1D27; --paper2:#142833; --card:#19303C; --card2:#1E3946;
-  --ink:#E9F2EF; --ink2:#9AB4BF; --line:#2B4855; --line2:#223E4A;
-  --poppy:#FF8256; --lagoon:#48C2D4; --bougain:#F47AA6; --sun:#FFC65C; --moss:#79BC89;
-  --sun-fill:#FFC65C;
-  --shadow:0 0 0; --shadow-a:.45;
-  --chip:#19303C; --chip-on:var(--paper);
+  --paper:#191814; --paper2:#211F1A; --card:#201E19;
+  --ink:#EDEAE0; --ink2:#A29C8D; --ink3:#7B7566;
+  --line:#332F28; --line2:#2A2721;
+  --accent:#9DB08C; --accent2:#C29C6C;
+  --sel:#2C332A;
 }
 
 *{box-sizing:border-box}
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:Nunito,"Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.55;
-  -webkit-text-size-adjust:100%;
-}
-h1,h2,h3,h4{font-family:Fraunces,Georgia,"Times New Roman",serif; font-variation-settings:"SOFT" 80,"WONK" 1; text-wrap:balance; margin:0}
-a{color:var(--lagoon)}
-:focus-visible{outline:3px solid var(--poppy); outline-offset:2px; border-radius:6px}
+[hidden]{display:none!important}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:16px; line-height:1.6;
+  -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Newsreader,Georgia,serif; font-weight:400; margin:0; text-wrap:balance; letter-spacing:-.005em}
+::selection{background:var(--sel)}
+a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line)}
+a:hover{border-bottom-color:var(--accent); color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 
-.wrap{max-width:820px; margin:0 auto; padding:0 16px 90px}
+.lbl{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink3)}
+.wrap{max-width:740px; margin:0 auto; padding:0 24px}
+@media (max-width:600px){ .wrap{padding:0 16px} }
 
-/* ---------- hero ---------- */
-.hero{position:relative; overflow:hidden; background:var(--paper2); border-bottom:3px dashed var(--line)}
-.hero-in{max-width:820px; margin:0 auto; padding:38px 16px 30px; position:relative; z-index:2}
-.eyebrow{font-family:Caveat,"Comic Sans MS",cursive; font-size:1.45rem; color:var(--bougain); transform:rotate(-1.6deg); display:inline-block; margin-bottom:2px}
-h1{font-size:clamp(2.1rem,7.5vw,3.5rem); line-height:1.02; font-weight:900; font-variation-settings:"SOFT" 100,"WONK" 1; letter-spacing:-.015em}
-h1 .hl{color:var(--poppy)}
-.sub{max-width:56ch; margin:14px 0 0; color:var(--ink2); font-size:1.02rem}
-.from{display:inline-flex; align-items:center; gap:8px; margin-top:16px; background:var(--card); border:2px solid var(--ink); border-radius:999px; padding:7px 15px 7px 11px; font-weight:800; font-size:.86rem;
-  box-shadow:3px 3px 0 var(--sun-fill)}
-.from svg{flex:none}
-.hero-doodle{position:absolute; inset:auto 0 -10px 0; z-index:1; opacity:.55; pointer-events:none}
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--line)}
+.masthead .wrap{padding-top:56px; padding-bottom:38px}
+.masthead h1{font-size:clamp(2rem,5.6vw,2.9rem); line-height:1.12; max-width:16ch; margin:14px 0 0}
+.masthead p{margin:16px 0 0; max-width:56ch; color:var(--ink2); font-size:.98rem}
+.origin{margin-top:26px; padding-top:14px; border-top:1px solid var(--line2);
+  display:flex; gap:9px; align-items:baseline; flex-wrap:wrap}
+.origin b{font-weight:500; font-size:.88rem}
 
 /* ---------- controls ---------- */
-.controls{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter:blur(9px);
-  border-bottom:2px solid var(--line); padding:10px 0 9px; margin-bottom:6px}
-.controls-in{max-width:820px; margin:0 auto; padding:0 16px; display:flex; flex-direction:column; gap:8px}
-.searchrow{display:flex; gap:8px; align-items:center}
-.search{flex:1; min-width:0; display:flex; align-items:center; gap:8px; background:var(--card); border:2px solid var(--line); border-radius:14px; padding:8px 12px}
-.search:focus-within{border-color:var(--lagoon)}
-.search input{flex:1; min-width:0; border:0; background:none; font:inherit; font-weight:700; color:var(--ink); outline:none}
-.search input::placeholder{color:var(--ink2); font-weight:600}
-.iconbtn{flex:none; border:2px solid var(--ink); background:var(--card); color:var(--ink); border-radius:14px; padding:9px 12px; font:inherit; font-weight:800; font-size:.82rem; cursor:pointer; white-space:nowrap}
-.iconbtn:hover{background:var(--sun-fill); color:#173042}
-.chips{display:flex; gap:6px; overflow-x:auto; padding-bottom:2px; scrollbar-width:thin; -webkit-overflow-scrolling:touch}
-.chips::-webkit-scrollbar{height:5px}
-.chips::-webkit-scrollbar-thumb{background:var(--line); border-radius:9px}
-@media (min-width:720px){ .chips{flex-wrap:wrap; overflow:visible} }
-.chip{flex:none; border:2px solid var(--line); background:var(--chip); color:var(--ink2); border-radius:999px; padding:5px 12px; font:inherit; font-weight:800; font-size:.78rem; cursor:pointer; white-space:nowrap}
-.chip:hover{border-color:var(--ink2); color:var(--ink)}
+.controls{position:sticky; top:0; z-index:40; background:var(--paper);
+  border-bottom:1px solid var(--line); padding:14px 0 12px}
+.controls .wrap{display:flex; flex-direction:column; gap:12px}
+.tabs{display:flex; gap:24px; border-bottom:1px solid var(--line2)}
+.tabs button{border:0; background:none; font:inherit; font-size:.92rem; color:var(--ink3);
+  padding:0 0 9px; margin-bottom:-1px; cursor:pointer; border-bottom:2px solid transparent}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.srch{display:flex; align-items:center; gap:9px; border-bottom:1px solid var(--line); padding-bottom:7px}
+.srch:focus-within{border-bottom-color:var(--accent)}
+.srch input{flex:1; min-width:0; border:0; background:none; font:inherit; font-size:.95rem; color:var(--ink); outline:none}
+.srch input::placeholder{color:var(--ink3)}
+.srch button{border:0; background:none; font:inherit; cursor:pointer; padding:0; color:var(--ink3); font-size:.8rem}
+.srch button:hover{color:var(--accent)}
+.filters{display:flex; flex-direction:column; gap:7px; padding-top:2px}
+.fbtn{background:none; border:0; cursor:pointer; padding:0; font-family:"IBM Plex Mono",monospace;
+  border-bottom:1px solid var(--line)}
+.fbtn:hover{color:var(--ink)}
+.fbtn[aria-expanded="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+.frow{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding-bottom:1px}
+.frow::-webkit-scrollbar{display:none}
+@media (min-width:700px){ .frow{flex-wrap:wrap; overflow:visible} }
+.chip{flex:none; border:1px solid var(--line); background:none; color:var(--ink2); border-radius:2px;
+  padding:4px 10px; font:inherit; font-size:.79rem; cursor:pointer; white-space:nowrap}
+.chip:hover{border-color:var(--ink3); color:var(--ink)}
 .chip[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--paper)}
-.chip.acc[aria-pressed="true"]{background:var(--bougain); border-color:var(--bougain); color:#fff}
-.tally{font-size:.78rem; font-weight:800; color:var(--ink2); display:flex; justify-content:space-between; gap:6px 12px; align-items:center; flex-wrap:wrap}
-.tally b{color:var(--poppy)}
-.bar{height:7px; width:clamp(70px,22vw,170px); flex:none; background:var(--line2); border-radius:9px; overflow:hidden; border:1px solid var(--line)}
-.bar i{display:block; height:100%; background:var(--sun-fill); width:0%; transition:width .35s ease}
+.tally{display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap}
 
-/* ---------- road ---------- */
-.road{position:relative; padding-left:52px}
-.road::before{content:""; position:absolute; left:20px; top:6px; bottom:40px; width:6px; border-radius:6px;
-  background:repeating-linear-gradient(to bottom, var(--line) 0 16px, transparent 16px 30px)}
-@media (max-width:600px){ .road{padding-left:34px} .road::before{left:9px; width:5px} }
+/* ---------- the list ---------- */
+.zone{display:flex; align-items:baseline; gap:14px; padding:38px 0 10px; border-bottom:1px solid var(--line)}
+.zone h2{font-size:1.05rem; flex:1}
+.entry{border-bottom:1px solid var(--line2)}
+.row{display:grid; grid-template-columns:96px 1fr; gap:18px; width:100%; text-align:left;
+  background:none; border:0; font:inherit; color:inherit; cursor:pointer; padding:20px 0; align-items:start}
+@media (max-width:600px){ .row{grid-template-columns:74px 1fr; gap:12px; padding:16px 0} }
+.row:hover .name{color:var(--accent)}
+.time{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--ink2);
+  font-variant-numeric:tabular-nums; padding-top:4px; line-height:1.4}
+.main{min-width:0; display:flex; flex-direction:column; gap:5px}
+.hd{display:flex; align-items:baseline; gap:12px; justify-content:space-between}
+.name{font-family:Newsreader,Georgia,serif; font-size:1.28rem; line-height:1.22; font-weight:400}
+.blurb{color:var(--ink2); font-size:.92rem; line-height:1.5}
+.meta{display:flex; gap:9px; flex-wrap:wrap; align-items:baseline; margin-top:3px}
+.meta .lbl{color:var(--ink3)}
+.meta .lbl + .lbl::before{content:"/"; margin-right:9px; color:var(--line)}
+@media (max-width:600px){ .meta .vibes{display:none} }
+.mich-flag{color:var(--accent2)}
+.mark{color:var(--ink3); font-family:"IBM Plex Mono",monospace; font-size:.85rem; flex:none; padding-top:5px}
+.entry.open .mark{color:var(--accent)}
 
-.zone{position:relative; margin:34px 0 16px}
-.zone-sign{display:inline-flex; flex-direction:column; background:var(--moss); color:#fff; border:3px solid var(--ink); border-radius:12px;
-  padding:9px 18px; box-shadow:4px 4px 0 rgb(var(--shadow)/.28)}
-.zone-sign .z1{font-family:Fraunces,Georgia,serif; font-weight:800; font-size:1.15rem; line-height:1.1; font-variation-settings:"SOFT" 90,"WONK" 1}
-.zone-sign .z2{font-size:.72rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; opacity:.85}
-.zone[data-z="1"] .zone-sign{background:var(--lagoon)}
-.zone[data-z="2"] .zone-sign{background:var(--moss)}
-.zone[data-z="3"] .zone-sign{background:var(--sun); color:#22140A}
-.zone[data-z="4"] .zone-sign{background:var(--poppy)}
-.zone[data-z="5"] .zone-sign{background:var(--bougain)}
-.zone::before{content:""; position:absolute; left:-42px; top:24px; width:22px; height:22px; border-radius:50%;
-  background:var(--paper); border:4px solid var(--ink)}
-@media (max-width:600px){ .zone::before{left:-30px; width:18px; height:18px; border-width:3px; top:22px} }
+/* ---------- expanded ---------- */
+.panel{display:none; padding:0 0 34px}
+.entry.open .panel{display:block}
+@media (min-width:601px){ .panel{padding-left:114px} }
+.sec{padding-top:22px}
+.sec + .sec{margin-top:0}
+.sec h3{font-family:"IBM Plex Mono",monospace; font-size:.66rem; font-weight:500; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink3); padding-bottom:9px; margin-bottom:11px; border-bottom:1px solid var(--line2)}
+.sec p{margin:0; font-size:.94rem; color:var(--ink2)}
+.sec p strong{color:var(--ink); font-weight:500}
+.sec .lead{font-family:Newsreader,Georgia,serif; font-size:1.12rem; line-height:1.5; color:var(--ink)}
+.sec ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px}
+.sec ul li{font-size:.93rem; color:var(--ink2); padding-left:17px; position:relative}
+.sec ul li::before{content:""; position:absolute; left:0; top:.62em; width:6px; height:1px; background:var(--ink3)}
+.pair{color:var(--accent); font-size:.9rem; margin-top:11px}
 
-/* ---------- trip card ---------- */
-.trip{position:relative; background:var(--card); border:2px solid var(--line); border-radius:18px; margin:10px 0;
-  box-shadow:0 2px 0 var(--line2); overflow:hidden}
-.trip:hover{border-color:var(--ink2)}
-.trip.open{border-color:var(--ink); box-shadow:4px 5px 0 rgb(var(--shadow)/.16)}
-.trip::before{content:""; position:absolute; left:-38px; top:32px; width:14px; height:14px; border-radius:50%;
-  background:var(--sun-fill); border:3px solid var(--ink)}
-@media (max-width:600px){ .trip::before{left:-27px; width:11px; height:11px; border-width:2px; top:30px} }
+.rest{padding:13px 0; border-bottom:1px solid var(--line2); display:flex; gap:16px; align-items:baseline; flex-wrap:wrap}
+.rest:last-child{border-bottom:0; padding-bottom:0}
+.rest-b{flex:1; min-width:190px}
+.rest-n{font-size:.95rem; font-weight:500; display:flex; gap:9px; align-items:baseline; flex-wrap:wrap}
+.rest-d{font-size:.88rem; color:var(--ink2); margin-top:3px}
+.mich{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--accent2); border:1px solid var(--accent2); border-radius:2px; padding:1px 5px; white-space:nowrap}
+.rest-l{display:flex; gap:14px; flex:none}
+.rest-l a{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink2); border-bottom:1px solid var(--line)}
+.rest-l a:hover{color:var(--accent); border-bottom-color:var(--accent)}
 
-.t-head{display:flex; gap:12px; align-items:stretch; width:100%; text-align:left; background:none; border:0; padding:10px; font:inherit; color:inherit; cursor:pointer}
-.t-thumb{flex:none; width:88px; height:88px; border-radius:13px; overflow:hidden; border:2px solid var(--line2); background:var(--paper2)}
-.t-thumb svg{display:block; width:100%; height:100%}
-@media (max-width:600px){ .t-thumb{width:72px; height:72px} }
-.t-body{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px; justify-content:center}
-.t-top{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
-.t-name{font-family:Fraunces,Georgia,serif; font-size:1.2rem; font-weight:800; font-variation-settings:"SOFT" 90,"WONK" 1; line-height:1.15}
-.t-region{font-size:.72rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--ink2)}
-.t-blurb{font-family:Caveat,cursive; font-size:1.12rem; color:var(--bougain); line-height:1.25}
-.t-meta{display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:3px}
-.drive{display:inline-flex; align-items:center; gap:5px; background:var(--ink); color:var(--paper); border-radius:999px;
-  padding:3px 9px; font-size:.74rem; font-weight:900; font-variant-numeric:tabular-nums; white-space:nowrap}
-.t-meta .tag.vibe{display:inline-block}
-@media (max-width:600px){ .t-meta .tag.vibe ~ .tag.vibe{display:none} }
-.tag{font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--ink2);
-  border:1.5px solid var(--line); border-radius:999px; padding:2px 8px; background:var(--card2)}
-.tag.star{color:#fff; background:var(--bougain); border-color:var(--bougain)}
-.t-caret{flex:none; align-self:center; width:26px; height:26px; border-radius:50%; border:2px solid var(--line); display:grid; place-items:center; color:var(--ink2); font-size:.7rem; transition:transform .2s}
-.trip.open .t-caret{transform:rotate(180deg); background:var(--ink); color:var(--paper); border-color:var(--ink)}
-
-.t-panel{display:none; border-top:2px dashed var(--line); padding:0 0 14px}
-.trip.open .t-panel{display:block}
-.t-banner{height:150px; border-bottom:2px solid var(--line2)}
-.t-banner svg{display:block; width:100%; height:100%}
-.t-inner{padding:14px 14px 0; display:flex; flex-direction:column; gap:14px}
-
-.sec{border:2px solid var(--line2); border-radius:14px; padding:11px 13px; background:var(--card2)}
-.sec.hero-sec{border-color:var(--sun-fill); background:color-mix(in srgb, var(--sun-fill) 12%, var(--card))}
-.sec h4{font-size:.71rem; font-weight:900; letter-spacing:.11em; text-transform:uppercase; color:var(--ink2);
-  font-family:Nunito,sans-serif; margin-bottom:5px; display:flex; align-items:center; gap:6px}
-.sec.hero-sec h4{color:var(--poppy)}
-.sec p{margin:0; font-size:.94rem}
-.sec ul{margin:0; padding-left:1.05em; display:flex; flex-direction:column; gap:5px; font-size:.93rem}
-.sec ul li::marker{color:var(--lagoon)}
-.sec .lead{font-family:Fraunces,Georgia,serif; font-weight:700; font-size:1.05rem; font-variation-settings:"SOFT" 80,"WONK" 1}
-
-.eat{display:flex; flex-direction:column; gap:8px}
-.rest{display:flex; gap:10px; align-items:flex-start; padding:9px 10px; background:var(--card); border:2px solid var(--line2); border-radius:12px; flex-wrap:wrap}
-.rest-b{flex:1; min-width:180px}
-.rest-n{font-weight:900; font-size:.95rem; display:flex; align-items:center; gap:6px; flex-wrap:wrap}
-.rest-d{font-size:.85rem; color:var(--ink2); margin-top:1px}
-.mich{font-size:.63rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase; border-radius:5px; padding:2px 6px; white-space:nowrap}
-.mich.star{background:var(--bougain); color:#fff}
-.mich.bib{background:var(--moss); color:#fff}
-.rest-l{display:flex; gap:6px; align-items:center}
-.mbtn{display:inline-flex; align-items:center; gap:4px; text-decoration:none; font-size:.76rem; font-weight:900;
-  border:2px solid var(--ink); border-radius:999px; padding:4px 11px; background:var(--sun-fill); color:#1B2B14; white-space:nowrap}
-.mbtn:hover{background:var(--ink); color:var(--paper)}
-.mbtn.ghost{background:var(--card); color:var(--ink); border-color:var(--line)}
-.mbtn.ghost:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
-
-.t-foot{display:flex; gap:8px; flex-wrap:wrap; padding:0 14px; margin-top:2px}
-.foot-b{display:inline-flex; align-items:center; gap:6px; font:inherit; font-size:.8rem; font-weight:900; cursor:pointer;
-  border:2px solid var(--ink); border-radius:999px; padding:6px 13px; background:var(--card); color:var(--ink); text-decoration:none}
-.foot-b:hover{background:var(--ink); color:var(--paper)}
-.foot-b.on{background:var(--moss); border-color:var(--moss); color:#fff}
-
-.pair{font-family:Caveat,cursive; font-size:1.15rem; color:var(--lagoon)}
-.empty{text-align:center; padding:50px 20px; color:var(--ink2)}
-.empty b{display:block; font-family:Fraunces,serif; font-size:1.4rem; color:var(--ink); margin-bottom:6px}
-
-footer{border-top:3px dashed var(--line); margin-top:40px; padding:24px 16px 40px; background:var(--paper2)}
-.foot-in{max-width:820px; margin:0 auto; font-size:.83rem; color:var(--ink2); display:flex; flex-direction:column; gap:9px}
-.foot-in b{color:var(--ink)}
-.tothetop{position:fixed; right:14px; bottom:14px; z-index:50; border:2px solid var(--ink); background:var(--card); color:var(--ink);
-  width:42px; height:42px; border-radius:50%; font-size:1rem; cursor:pointer; box-shadow:0 3px 10px rgb(var(--shadow)/.25); display:none}
-.tothetop.show{display:block}
-
-/* ---------- view tabs ---------- */
-.viewtabs{display:flex; gap:4px; background:var(--line2); border:2px solid var(--line); border-radius:999px; padding:3px}
-.viewtabs button{flex:1; border:0; background:none; font:inherit; font-weight:800; font-size:.8rem; color:var(--ink2);
-  padding:6px 10px; border-radius:999px; cursor:pointer; white-space:nowrap}
-.viewtabs button[aria-pressed="true"]{background:var(--card); color:var(--ink); box-shadow:0 1px 3px rgb(var(--shadow)/.2)}
-.zone[data-z="6"] .zone-sign{background:var(--bougain)}
+.acts{display:flex; gap:10px; flex-wrap:wrap; padding-top:24px}
+.btn{font:inherit; font-size:.82rem; cursor:pointer; background:none; color:var(--ink);
+  border:1px solid var(--line); border-radius:2px; padding:7px 14px; text-decoration:none; display:inline-block}
+.btn:hover{border-color:var(--accent); color:var(--accent)}
+.btn.on{border-color:var(--accent); color:var(--accent)}
 
 /* ---------- photos ---------- */
-.sec.album{border-color:var(--bougain); background:color-mix(in srgb, var(--bougain) 8%, var(--card))}
-.sec.album h4{color:var(--bougain)}
-.visitrow{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:9px; font-size:.85rem; font-weight:700; color:var(--ink2)}
-.visitrow input[type="date"]{font:inherit; font-weight:800; font-size:.82rem; color:var(--ink); background:var(--card);
-  border:2px solid var(--line); border-radius:9px; padding:4px 8px}
-.photos{display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:7px}
-.photo{position:relative; aspect-ratio:1; border-radius:11px; overflow:hidden; border:2px solid var(--line2); background:var(--paper2); padding:0; cursor:pointer}
+.visitrow{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:13px; font-size:.88rem; color:var(--ink2)}
+.visitrow input[type="date"]{font:inherit; font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--ink);
+  background:none; border:0; border-bottom:1px solid var(--line); padding:2px 0}
+.photos{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:8px}
+.photo{position:relative; aspect-ratio:1; overflow:hidden; border:0; background:var(--paper2); padding:0; cursor:pointer; border-radius:2px}
 .photo img{width:100%; height:100%; object-fit:cover; display:block}
-.photo .pin{position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; display:grid; place-items:center;
-  font-size:.6rem; background:var(--bougain); color:#fff; border:1.5px solid #fff}
-.addphoto{aspect-ratio:1; border:2px dashed var(--line); border-radius:11px; background:var(--card); color:var(--ink2);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer; font:inherit;
-  font-weight:800; font-size:.68rem; text-align:center; line-height:1.15; padding:4px}
-.addphoto:hover{border-color:var(--bougain); color:var(--bougain)}
-.addphoto span{font-size:1.15rem; line-height:1}
-.albnote{font-size:.74rem; color:var(--ink2); margin-top:8px; line-height:1.4}
-.albnote b{color:var(--ink)}
+.photo .kept{position:absolute; inset:auto 0 0 0; background:rgb(0 0 0 / .55); color:#fff;
+  font-family:"IBM Plex Mono",monospace; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; padding:2px 0; text-align:center}
+.addphoto{aspect-ratio:1; border:1px dashed var(--line); border-radius:2px; background:none; color:var(--ink3);
+  cursor:pointer; font:inherit; font-size:.75rem; display:grid; place-items:center; padding:6px; text-align:center}
+.addphoto:hover{border-color:var(--accent); color:var(--accent)}
+.albnote{font-size:.83rem; color:var(--ink3); margin-top:12px; line-height:1.55}
 
-/* ---------- lightbox ---------- */
-.lb{position:fixed; inset:0; z-index:90; background:rgb(10 20 26 / .93); display:none; flex-direction:column; padding:12px}
+.lb{position:fixed; inset:0; z-index:90; background:#14130F; display:none; flex-direction:column; padding:16px}
 .lb.on{display:flex}
 .lb-img{flex:1; min-height:0; display:grid; place-items:center}
-.lb-img img{max-width:100%; max-height:100%; object-fit:contain; border-radius:10px}
-.lb-bar{display:flex; gap:7px; align-items:center; flex-wrap:wrap; justify-content:center; padding-top:10px}
-.lb-bar input{flex:1; min-width:150px; max-width:340px; font:inherit; font-size:.85rem; font-weight:700; color:#EAF2EF;
-  background:rgb(255 255 255 / .1); border:2px solid rgb(255 255 255 / .25); border-radius:10px; padding:7px 11px}
-.lb-bar input::placeholder{color:rgb(234 242 239 / .55)}
-.lbtn{font:inherit; font-size:.78rem; font-weight:900; cursor:pointer; border-radius:999px; padding:7px 13px;
-  border:2px solid rgb(255 255 255 / .35); background:rgb(255 255 255 / .1); color:#EAF2EF}
-.lbtn:hover{background:#fff; color:#173042}
-.lbtn.on{background:var(--bougain); border-color:var(--bougain); color:#fff}
-.lbtn.danger:hover{background:#E2564B; border-color:#E2564B; color:#fff}
-.toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:95; background:var(--ink); color:var(--paper);
-  font-weight:800; font-size:.83rem; padding:10px 17px; border-radius:999px; box-shadow:0 4px 16px rgb(var(--shadow)/.35);
-  opacity:0; pointer-events:none; transition:opacity .25s}
+.lb-img img{max-width:100%; max-height:100%; object-fit:contain}
+.lb-bar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; padding-top:14px}
+.lb-bar input{flex:1; min-width:160px; max-width:340px; font:inherit; font-size:.88rem; color:#EDEAE0;
+  background:none; border:0; border-bottom:1px solid rgb(237 234 224 / .3); padding:6px 0}
+.lb-bar input::placeholder{color:rgb(237 234 224 / .45)}
+.lbtn{font:inherit; font-size:.8rem; cursor:pointer; background:none; color:#EDEAE0;
+  border:1px solid rgb(237 234 224 / .3); border-radius:2px; padding:6px 13px}
+.lbtn:hover{border-color:#EDEAE0}
+.lbtn.on{border-color:#9DB08C; color:#9DB08C}
+
+.toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:95;
+  background:var(--ink); color:var(--paper); font-size:.85rem; padding:10px 18px; border-radius:2px;
+  opacity:0; pointer-events:none; transition:opacity .2s; max-width:88vw; text-align:center}
 .toast.on{opacity:1}
+
+.empty{padding:64px 0; color:var(--ink2); font-size:.95rem; max-width:44ch}
+.empty b{display:block; font-family:Newsreader,Georgia,serif; font-size:1.3rem; font-weight:400; color:var(--ink); margin-bottom:8px}
+footer{border-top:1px solid var(--line); margin-top:64px; background:var(--paper2)}
+footer .wrap{padding-top:38px; padding-bottom:64px; display:flex; flex-direction:column; gap:18px}
+footer p{margin:0; font-size:.87rem; color:var(--ink2); max-width:64ch}
+footer p strong{color:var(--ink); font-weight:500}
+footer h3{margin-bottom:2px}
 </style>
 
-<header class="hero">
-  <div class="hero-in">
-    <span class="eyebrow">pack the cooler, we're going ~somewhere~</span>
-    <h1>Every good day trip <span class="hl">from our driveway</span></h1>
-    <p class="sub">A California field guide built from one exact starting point, sorted closest to farthest. Tap any stop to unfold the parks, the viewpoints, the cute downtown, where to park, and where to eat — with menus linked straight through.</p>
-    <div class="from">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
-      Starting at The Q Playa · Playa Vista
+<header class="masthead">
+  <div class="wrap">
+    <span class="lbl">A California field guide</span>
+    <h1>Day trips, measured from our driveway</h1>
+    <p>Seventy-five places worth the drive, ordered by how long they actually take to reach on a weekend morning. Open any entry for the parks, the viewpoints, the downtown, the parking and where to eat.</p>
+    <div class="origin">
+      <span class="lbl">Starting point</span>
+      <b>The Q Playa &middot; Playa Vista</b>
     </div>
   </div>
-  <svg class="hero-doodle" viewBox="0 0 820 60" preserveAspectRatio="none" height="46" aria-hidden="true">
-    <path d="M0 46 Q 80 26 165 40 T 340 38 T 520 44 T 700 34 T 820 42 L820 60 L0 60Z" fill="var(--moss)" opacity=".28"/>
-    <path d="M0 54 Q 120 40 250 52 T 500 50 T 820 54 L820 60 L0 60Z" fill="var(--lagoon)" opacity=".22"/>
-  </svg>
 </header>
 
 <div class="controls">
-  <div class="controls-in">
-    <div class="searchrow">
-      <label class="search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink2)" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
-        <input id="q" type="search" placeholder="Search a town, a taco, a trailhead…" autocomplete="off" aria-label="Search day trips">
-      </label>
-      <button class="iconbtn" id="lucky" type="button">🎲 Surprise</button>
+  <div class="wrap">
+    <div class="tabs" id="tabs" role="group" aria-label="Switch between places to go and places visited">
+      <button type="button" data-view="todo" aria-pressed="true">Still to go</button>
+      <button type="button" data-view="been" aria-pressed="false">Been there</button>
     </div>
-    <div class="viewtabs" id="viewtabs" role="group" aria-label="Switch between places to go and places visited">
-      <button type="button" data-view="todo" aria-pressed="true">🗺 Still to go</button>
-      <button type="button" data-view="been" aria-pressed="false">📸 Been there</button>
-    </div>
-    <div class="chips" id="distchips" role="group" aria-label="Filter by drive time"></div>
-    <div class="chips" id="vibechips" role="group" aria-label="Filter by vibe"></div>
+    <label class="srch">
+      <input id="q" type="search" placeholder="Search a town, a dish, a trailhead" autocomplete="off" aria-label="Search day trips">
+      <button type="button" id="lucky">Pick one for me</button>
+    </label>
     <div class="tally">
-      <span id="count">—</span>
-      <span style="display:flex;align-items:center;gap:8px"><b id="stamped">0</b> stamped <span class="bar"><i id="barfill"></i></span></span>
+      <span class="lbl" id="count">&mdash;</span>
+      <button class="lbl fbtn" type="button" id="ftoggle" aria-expanded="false" aria-controls="filters">Filters</button>
+    </div>
+    <div class="filters" id="filters" hidden>
+      <div class="frow" id="distchips" role="group" aria-label="Filter by drive time"></div>
+      <div class="frow" id="vibechips" role="group" aria-label="Filter by kind of day"></div>
+      <div class="frow"><button class="chip" type="button" id="fclear">Clear all</button>
+        <span class="lbl" id="stampline" style="align-self:center">0 of 75 visited</span></div>
     </div>
   </div>
 </div>
 
-<main class="wrap">
-  <div class="road" id="road"></div>
-  <div class="empty" id="empty" hidden><b>Nothing matches that.</b>Try clearing a filter — or hit Surprise and let the road decide.</div>
-</main>
+<main class="wrap" id="road"></main>
+<div class="wrap"><div class="empty" id="empty" hidden></div></div>
 
 <footer>
-  <div class="foot-in">
-    <p><b>About the drive times.</b> Every number is a realistic door-to-door estimate from The Q Playa in Playa Vista, assuming you leave at a sane hour. Leaving at 5pm on a Friday? Add a lot. Every stop has a <b>Directions</b> button that opens Google Maps with our address already set as the origin, so you always get the live number.</p>
-    <p><b>About the menu links.</b> Every restaurant has two buttons. <b>Menu</b> jumps straight to that exact restaurant's menu — one tap, no digging through a homepage, and it lands on the current menu even after the restaurant redesigns its site. <b>Map</b> opens its Google Maps card for hours, photos and the phone number. Restaurants move their menu pages constantly, so this stays correct where a hardcoded link would quietly rot.</p>
-    <p><b>About the Michelin notes.</b> Stars and Bib Gourmands are from the California guide and get reshuffled every year, so treat them as "worth checking" rather than gospel — and book the starred ones weeks out.</p>
-    <p><b>Your stamps and photos are private by default.</b> Marking a stop "been there" moves it out of the main list into the <b>Been there</b> tab, where you can set the date you went and add photos. Photos are shrunk to a sensible size and stored in this browser on this device — never uploaded, and they work offline.</p>
-    <p><b>Getting photos onto your other devices.</b> Tap a photo and hit <b>Keep in the page</b>. That one saves a compressed copy into the page itself, so it shows up wherever you open this link — and to anyone you share the link with. Everything else stays on the device you added it from. There's a ceiling of 60 kept photos, because the whole page has to stay under 16MB.</p>
+  <div class="wrap">
+    <h3>Notes</h3>
+    <p><strong>The drive times assume a weekend.</strong> Every number is a door-to-door estimate from The Q Playa on a Saturday or Sunday with normal traffic, not a mileage calculation &mdash; and rounded up, because nothing in this city takes the time the map says. Treat them as planning numbers. Every entry has a <strong>Directions</strong> link that opens Maps with our address already set as the origin, which is where you get the real number for the hour you're actually leaving.</p>
+    <p><strong>Menus.</strong> Each restaurant has a <strong>Menu</strong> link that goes straight to that exact restaurant's current menu, and a <strong>Map</strong> link for hours and the phone number. These resolve at the moment you tap them, so they keep working after a restaurant redesigns its site.</p>
+    <p><strong>Michelin.</strong> Stars and Bib Gourmands come from the California guide and get reshuffled every year, so read them as worth checking rather than as fact. Book the starred rooms weeks ahead.</p>
+    <p><strong>Stamps and photos.</strong> Marking a place visited moves it out of this list into <strong>Been there</strong>, where you can set the date and add photos. Photos are resized and stored in this browser on this device &mdash; never uploaded, and they work offline. To carry one to another device, open it and choose <strong>Keep in the page</strong>; that saves a compressed copy into the page itself, visible anywhere you open this link. Fifty kept photos maximum, since the whole page has a size ceiling.</p>
   </div>
 </footer>
-
-<button class="tothetop" id="top" type="button" aria-label="Back to top">↑</button>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo">
   <div class="lb-img"><img id="lb-img" alt=""></div>
   <div class="lb-bar">
-    <input id="lb-cap" type="text" placeholder="Add a caption…" aria-label="Photo caption">
-    <button class="lbtn" id="lb-pin" type="button">☆ Keep in the page</button>
-    <button class="lbtn danger" id="lb-del" type="button">Delete</button>
+    <input id="lb-cap" type="text" placeholder="Add a caption" aria-label="Photo caption">
+    <button class="lbtn" id="lb-pin" type="button">Keep in the page</button>
+    <button class="lbtn" id="lb-del" type="button">Delete</button>
     <button class="lbtn" id="lb-close" type="button">Close</button>
   </div>
 </div>
@@ -298,7 +246,7 @@ const PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
 const ORIGIN = "The Q Playa Vista, 12655 W Jefferson Blvd, Playa Vista, CA 90094";
 const TRIPS = [];
 TRIPS.push(
-{id:"playadelrey", name:"Playa del Rey & Ballona", region:"Westside", mins:7, drive:"7 min", scene:"beach", tone:"dusk",
+{id:"playadelrey", name:"Playa del Rey & Ballona", region:"Westside", mins:10, drive:"10 min",
  blurb:"our own backyard, and we still forget it exists",
  tags:["beach","hike","park","food","water"],
  hero:"Dockweiler State Beach — the only LA beach where you can legally build a bonfire, with planes coming in low over the sand. Grab a fire ring in the afternoon, bring wood, stay for sunset.",
@@ -314,7 +262,7 @@ TRIPS.push(
  tip:"The bonfire rings are the whole point. Bring a bundle of firewood from the Culver Blvd hardware store, a folding chair, and get there before 4pm on a Saturday or you're out of luck.",
  maps:"Dockweiler State Beach, Playa del Rey, CA"},
 
-{id:"marinadelrey", name:"Marina del Rey", region:"Westside", mins:9, drive:"9 min", scene:"harbor", tone:"day",
+{id:"marinadelrey", name:"Marina del Rey", region:"Westside", mins:15, drive:"15 min",
  blurb:"boats, brunch, and a paddle at golden hour",
  tags:["water","food","shop","park"],
  hero:"The largest man-made small-craft harbor in the country — 5,000 boats. Rent a kayak, paddleboard or an electric Duffy boat and putter around the basins for two hours.",
@@ -330,7 +278,7 @@ TRIPS.push(
  tip:"Pro/Rev Marina del Rey and UCLA Marina Aquatic Center both rent paddleboards by the hour on Mother's Beach. Go on a weekday morning when the water is glass.",
  maps:"Burton W Chace Park, Marina del Rey, CA"},
 
-{id:"venice", name:"Venice & Abbot Kinney", region:"Westside", mins:12, drive:"12 min", scene:"beach", tone:"dawn",
+{id:"venice", name:"Venice & Abbot Kinney", region:"Westside", mins:20, drive:"20 min",
  blurb:"chaos on the boardwalk, canals two blocks away",
  tags:["beach","shop","food","cute","culture"],
  hero:"Abbot Kinney Boulevard — a mile of independent shops, tiny galleries and very good restaurants, ending at the beach. Do it on foot, start at the north end.",
@@ -346,7 +294,7 @@ TRIPS.push(
  tip:"Do the canals first thing in the morning, coffee in hand, before the boardwalk wakes up. Then walk to Abbot Kinney for lunch. Reverse order and you'll spend the whole day in traffic.",
  maps:"Venice Canals, Venice, CA"},
 
-{id:"culvercity", name:"Culver City", region:"Westside", mins:12, drive:"12 min", scene:"town", tone:"day",
+{id:"culvercity", name:"Culver City", region:"Westside", mins:20, drive:"20 min",
  blurb:"studio backlot town that became a food town",
  tags:["food","shop","cute","culture","park"],
  hero:"Downtown Culver City — a compact, walkable few blocks around the Culver Hotel and the Kirk Douglas Theatre, with more good restaurants per square foot than anywhere else nearby.",
@@ -363,7 +311,7 @@ TRIPS.push(
  tip:"Do the Culver City Stairs at 8am, shower, then come back for the Tuesday farmers market and dinner downtown. It's the best cheap day in a 15-minute radius.",
  maps:"Downtown Culver City, Culver City, CA"},
 
-{id:"elsegundo", name:"El Segundo", region:"South Bay", mins:15, drive:"15 min", scene:"town", tone:"fog",
+{id:"elsegundo", name:"El Segundo", region:"South Bay", mins:20, drive:"20 min",
  blurb:"a small town hiding behind a refinery",
  tags:["cute","food","beach","shop"],
  hero:"Main Street El Segundo — four blocks of genuinely small-town America, ten minutes from LAX. Old movie theater, hardware store, hardware-store-adjacent bars.",
@@ -379,7 +327,7 @@ TRIPS.push(
  tip:"Pair it with Dockweiler: plane-spot at the end of Imperial, then walk Main Street for dinner. Total drive from home: under 20 minutes each way.",
  maps:"Main Street, El Segundo, CA"},
 
-{id:"baldwinhills", name:"Kenneth Hahn & the Overlook", region:"Mid-City", mins:18, drive:"18 min", scene:"garden", tone:"day",
+{id:"baldwinhills", name:"Kenneth Hahn & the Overlook", region:"Mid-City", mins:25, drive:"25 min",
  blurb:"the whole basin, from downtown to Catalina",
  tags:["hike","park","cute"],
  hero:"Baldwin Hills Scenic Overlook — a short, steep climb to a platform where on a clear day you can see the Hollywood Sign, downtown, the ocean and Catalina all at once.",
@@ -395,7 +343,7 @@ TRIPS.push(
  tip:"Go up the stairs, across the ridge, and down into Kenneth Hahn for a picnic — it's one continuous park system and almost nobody connects the two.",
  maps:"Baldwin Hills Scenic Overlook, Los Angeles, CA"},
 
-{id:"manhattanbeach", name:"Manhattan Beach", region:"South Bay", mins:18, drive:"18 min", scene:"beach", tone:"day",
+{id:"manhattanbeach", name:"Manhattan Beach", region:"South Bay", mins:30, drive:"30 min",
  blurb:"the pretty one, and it knows it",
  tags:["beach","shop","food","cute","water"],
  hero:"The Manhattan Beach Pier and the Strand — a 22-mile beach bike path runs right past it, and the walk down Manhattan Beach Boulevard from downtown to the sand is the single best short walk in the South Bay.",
@@ -412,7 +360,7 @@ TRIPS.push(
  tip:"Park once, at the top of the hill, and walk down. The walk back up is the price of admission and it's worth it. Friday nights downtown are busy in a fun way.",
  maps:"Manhattan Beach Pier, Manhattan Beach, CA"},
 
-{id:"santamonica", name:"Santa Monica", region:"Westside", mins:20, drive:"20 min", scene:"beach", tone:"dusk",
+{id:"santamonica", name:"Santa Monica", region:"Westside", mins:30, drive:"30 min",
  blurb:"tourist trap on top, very good city underneath",
  tags:["beach","shop","food","culture","water","kid"],
  hero:"Palisades Park — a mile and a half of bluff-top lawn and palm trees over the ocean, with the pier below it. Best at sunset, always.",
@@ -429,7 +377,7 @@ TRIPS.push(
  tip:"Skip the pier lot entirely. Park in structure 4 or 5 downtown, walk to the pier, walk the bluffs, and come back up for dinner on Montana or Wilshire.",
  maps:"Palisades Park, Santa Monica, CA"},
 
-{id:"getty", name:"The Getty Center", region:"Brentwood", mins:22, drive:"22 min", scene:"garden", tone:"day",
+{id:"getty", name:"The Getty Center", region:"Brentwood", mins:30, drive:"30 min",
  blurb:"a white travertine spaceship with a free view",
  tags:["culture","park","hike"],
  hero:"The Getty Center itself — Richard Meier's hilltop campus, reached by a tram, with a Robert Irwin Central Garden and a view that runs from downtown to the sea. Admission is free. Forever.",
@@ -445,7 +393,7 @@ TRIPS.push(
  tip:"Go on a Saturday evening in summer when they stay open late — the light on the travertine at golden hour is the actual reason to go, more than any painting inside.",
  maps:"Getty Center, Los Angeles, CA"},
 
-{id:"hermosa", name:"Hermosa Beach", region:"South Bay", mins:22, drive:"22 min", scene:"beach", tone:"day",
+{id:"hermosa", name:"Hermosa Beach", region:"South Bay", mins:35, drive:"35 min",
  blurb:"volleyball, dive bars, no shoes required",
  tags:["beach","food","water","shop"],
  hero:"Pier Plaza and the Hermosa Beach Pier — a car-free strip of bars and restaurants running straight down to the sand. The most casual beach town in the South Bay.",
@@ -461,7 +409,7 @@ TRIPS.push(
  tip:"Hermosa, Manhattan and Redondo are all on the same bike path. Park once in Hermosa, rent bikes at the pier, and do all three in an afternoon.",
  maps:"Hermosa Beach Pier, Hermosa Beach, CA"},
 
-{id:"redondo", name:"Redondo Beach & Riviera Village", region:"South Bay", mins:25, drive:"25 min", scene:"harbor", tone:"dawn",
+{id:"redondo", name:"Redondo Beach & Riviera Village", region:"South Bay", mins:40, drive:"40 min",
  blurb:"the pier is chaos, the village is charming",
  tags:["beach","food","shop","cute","water"],
  hero:"Riviera Village — the genuinely cute, tree-lined shopping district in South Redondo that most people driving to the pier never find. Two blocks from a quiet stretch of beach.",
@@ -477,7 +425,7 @@ TRIPS.push(
  tip:"Do the pier for lunch (get crab at Quality Seafood), then drive five minutes south to Riviera Village for the afternoon. They're two totally different towns.",
  maps:"Riviera Village, Redondo Beach, CA"},
 
-{id:"westwood", name:"Westwood & UCLA", region:"Westside", mins:22, drive:"22 min", scene:"city", tone:"day",
+{id:"westwood", name:"Westwood & UCLA", region:"Westside", mins:30, drive:"30 min",
  blurb:"college town energy, world-class art, cheap Persian food",
  tags:["culture","food","shop","park"],
  hero:"The Hammer Museum — free admission, consistently the most interesting contemporary programming in LA, with a courtyard you'll want to sit in for an hour.",
@@ -493,24 +441,7 @@ TRIPS.push(
  tip:"Sculpture garden, then the Hammer, then Attari for lunch, then Diddy Riese. That's a perfect four-hour, almost-free day.",
  maps:"Hammer Museum, Los Angeles, CA"},
 
-{id:"beverlyhills", name:"Beverly Hills & Century City", region:"Westside", mins:28, drive:"28 min", scene:"city", tone:"dusk",
- blurb:"go look at things you're not buying, then eat well",
- tags:["shop","food","culture","cute"],
- hero:"Rodeo Drive and the Beverly Gardens Park stretch along Santa Monica Blvd — window-shop the three blocks, then walk the gardens with the cactus garden and the Beverly Hills sign.",
- see:["Greystone Mansion and Gardens — a 1928 Tudor estate with free public gardens and a view over the whole basin","Beverly Gardens Park — 1.9 miles of linear park, lily pond, and the famous sign","Paley Center for Media — dig through a television archive for free","Annenberg Space? Try instead the Wallis Annenberg Center for the Performing Arts for evening shows","Franklin Canyon Park just up Coldwater — a hidden lake and duck pond that feels an hour from anywhere"],
- shop:"Rodeo Drive for the spectacle, but the actually-shoppable streets are Beverly Drive and Canon (real stores, real prices) and Westfield Century City, which is a legitimately great open-air mall with a huge Eataly and an Alamo Drafthouse.",
- eat:[
-  {name:"Funke", d:"Evan Funke's grand Beverly Hills pasta palace. A big, gorgeous, expensive night out.", city:"Beverly Hills"},
-  {name:"Nate 'n Al's", d:"The 1945 deli. Matzo ball soup and a pastrami on rye, surrounded by people who have been coming for 50 years.", city:"Beverly Hills"},
-  {name:"Il Pastaio", d:"Risotto and pasta on a sunny corner patio. The classic Beverly Hills lunch.", city:"Beverly Hills"},
-  {name:"The Polo Lounge at the Beverly Hills Hotel", d:"McCarthy salad on the patio under the pink umbrellas. Pure LA theater.", city:"Beverly Hills"},
-  {name:"Eataly LA", d:"Century City. Three floors of Italian market, a rooftop restaurant, and a very good pasta counter.", city:"Century City"}],
- mich:"Beverly Hills carries several Michelin-recognized rooms; Somni in West Hollywood (a few minutes north) has held two stars, and Hayato and Providence are the other two-star tables in the wider area. Providence in Hollywood is the one to book for a milestone.",
- parking:"Beverly Hills city lots give you the first two hours free, which almost nobody knows — the lots on Beverly Drive and Brighton Way are the useful ones. Century City mall parking is free for the first three hours with validation.",
- tip:"Park free in a Beverly Hills city lot, do Rodeo and the gardens on foot, then drive up to Greystone Mansion for the view. Greystone parking is free and the gardens close at 5-6pm.",
- maps:"Rodeo Drive, Beverly Hills, CA"},
-
-{id:"palosverdes", name:"Palos Verdes Peninsula", region:"South Bay", mins:32, drive:"32 min", scene:"cliff", tone:"dusk",
+{id:"palosverdes", name:"Palos Verdes Peninsula", region:"South Bay", mins:45, drive:"45 min",
  blurb:"Big Sur cosplay, thirty minutes from home",
  tags:["hike","park","cute","water","culture"],
  hero:"The Palos Verdes coastline — sea cliffs, tide pools and switchback trails down to hidden coves, with the best ocean drive in Los Angeles County running the whole way around.",
@@ -524,44 +455,9 @@ TRIPS.push(
  mich:null,
  parking:"Abalone Cove Shoreline Park lot is around $12 and fills early on weekends. Point Vicente Interpretive Center has a free lot. Terranea has paid valet and self-park, but the bluff trail has free street parking on Palos Verdes Drive South if you're willing to walk.",
  tip:"Check the tide chart before you leave the house. Abalone Cove at a minus tide is a completely different, much better place than at high tide. And drive the full loop of Palos Verdes Drive — it's the point.",
- maps:"Point Vicente Interpretive Center, Rancho Palos Verdes, CA"}
-);
-TRIPS.push(
-{id:"dtla", name:"Downtown LA & the Arts District", region:"Central LA", mins:32, drive:"32 min", scene:"city", tone:"dusk",
- blurb:"the city we live next to and never visit",
- tags:["culture","food","shop","cute"],
- hero:"The Broad — free contemporary art in a honeycomb building, with Yayoi Kusama's Infinity Mirrored Room. Reserve a free timed ticket online the moment they release, or stand in the standby line.",
- see:["Walt Disney Concert Hall — walk the free public rooftop garden, not just the exterior","Grand Central Market — 1917 food hall, 30 stalls, the best single room in downtown","The Bradbury Building lobby — 1893 wrought iron and light, from Blade Runner","Angels Flight, the world's shortest railway, $1 each way","Arts District murals, Hauser & Wirth's free gallery complex, and the Sixth Street Viaduct at night","Union Station's 1939 waiting room and the Traxx bar"],
- shop:"The Arts District (Row DTLA, Poketo, Apolis) and the Fashion District if you want chaos and a bargain. Santee Alley is an experience. The Last Bookstore is non-negotiable.",
- eat:[
-  {name:"Bestia", d:"Still the hardest table in the Arts District a decade on. House-cured salumi, wood-fired everything.", city:"Los Angeles"},
-  {name:"Grand Central Market", d:"Eggslut, Sarita's Pupuseria, Villa Moreliana carnitas, Tacos Tumbras. Bring cash and an appetite.", city:"Los Angeles"},
-  {name:"Philippe the Original", d:"The 1908 birthplace of the French dip. Sawdust on the floor, 10-cent coffee history, still cheap.", city:"Los Angeles"},
-  {name:"Camphor", m:"star", d:"French technique through an Indian lens in the Arts District. One of the best newer rooms in the city.", city:"Los Angeles"},
-  {name:"Langer's Delicatessen", d:"Westlake, five minutes away. The #19 pastrami sandwich is arguably the best sandwich in America.", city:"Los Angeles"}],
- mich:"Downtown is the densest Michelin block in Southern California: Hayato (two stars, in Row DTLA), Kato (one star, Row DTLA), Sushi Kaneyoshi (one star), Shibumi (one star) and Camphor (one star). Hayato seats about seven people — book the moment reservations drop.",
- parking:"Everything downtown is a paid structure. The Broad's garage is around $18, Grand Central Market validates 90 minutes for $3 at the Hill Street garage, and Arts District street parking is free but scarce. Honestly the Metro E Line from Culver City is faster and cheaper on a weekend.",
- tip:"Do it as an evening: Grand Central Market at 5, the Bradbury and Angels Flight, then Disney Hall's garden at dusk when the steel goes gold.",
- maps:"The Broad, Los Angeles, CA"},
+ maps:"Point Vicente Interpretive Center, Rancho Palos Verdes, CA"},
 
-{id:"hollywood", name:"Hollywood & the Sign", region:"Central LA", mins:33, drive:"33 min", scene:"city", tone:"day",
- blurb:"do it once properly, then never again",
- tags:["culture","hike","food","kid"],
- hero:"The Hollywood Sign — the honest way to see it is the hike from Griffith Park's Brush Canyon or Innsdale trailhead, not the sidewalk on Hollywood Blvd.",
- see:["Griffith Observatory — free entry, the best building in LA, and the definitive sign view from the lawn","Hollywood Forever Cemetery — Rudolph Valentino, peacocks, and summer movie screenings on the lawn","The TCL Chinese Theatre handprints and the El Capitan next door","Hollywood Bowl in summer — bring a picnic, it's the whole point","Runyon Canyon for the loop everyone does and the view that earns it","The Egyptian Theatre, restored, for repertory screenings"],
- shop:"Amoeba Music is the real destination — the largest independent record store in the world. Otherwise Hollywood Blvd shopping is a tourist trap; drive 10 minutes to Larchmont Village for actual charm.",
- eat:[
-  {name:"Providence", m:"star", stars:2, d:"Michael Cimarusti's seafood tasting menu. The most refined meal in Los Angeles.", city:"Los Angeles"},
-  {name:"Musso & Frank Grill", d:"Open since 1919. Sit at the bar, order a martini and the flannel cakes. Nothing else in LA feels like this.", city:"Los Angeles"},
-  {name:"Osteria Mozza", m:"star", d:"Nancy Silverton's mozzarella bar. Sit at the counter and let them feed you burrata.", city:"Los Angeles"},
-  {name:"Pink's Hot Dogs", d:"Since 1939, still a line at 1am. The chili dog is the order.", city:"Los Angeles"},
-  {name:"Jitlada", d:"Southern Thai on Sunset that will genuinely hurt you. Order the crying tiger and respect the heat scale.", city:"Los Angeles"}],
- mich:"Providence holds two Michelin stars; Osteria Mozza and Kali both hold one. Providence books about a month out for the full tasting menu.",
- parking:"Hollywood & Highland garage is the reliable option (validated rates with purchases). Griffith Observatory parking is $10/hour on the lot with free street parking further down — or take the DASH Observatory shuttle from the Greek Theatre lot on weekends.",
- tip:"Reverse the usual order: observatory at sunset, city lights at dusk, then dinner at Musso's at 9pm. You skip every crowd.",
- maps:"Griffith Observatory, Los Angeles, CA"},
-
-{id:"topanga", name:"Topanga Canyon", region:"Santa Monica Mountains", mins:35, drive:"35 min", scene:"forest", tone:"fog",
+{id:"topanga", name:"Topanga Canyon", region:"Santa Monica Mountains", mins:45, drive:"45 min",
  blurb:"1971 never ended up here and that's the point",
  tags:["hike","park","cute","food"],
  hero:"Topanga State Park — the largest wildland within the boundaries of a major American city, with the Eagle Rock loop climbing to a sandstone dome and a view all the way to the ocean.",
@@ -577,7 +473,7 @@ TRIPS.push(
  tip:"Come in from PCH rather than the Valley side — the drive up the canyon from the ocean is half the experience. And carry water; there's no shade on Eagle Rock.",
  maps:"Trippet Ranch, Topanga State Park, CA"},
 
-{id:"griffith", name:"Griffith Park", region:"Central LA", mins:35, drive:"35 min", scene:"garden", tone:"dawn",
+{id:"griffith", name:"Griffith Park", region:"Central LA", mins:50, drive:"50 min",
  blurb:"4,300 acres, and we've seen about six of them",
  tags:["hike","park","kid","culture","cute"],
  hero:"Griffith Observatory — free, open to the public, with the Zeiss telescope on clear nights and the single best view of the city that exists.",
@@ -593,7 +489,7 @@ TRIPS.push(
  tip:"Fern Dell is the underrated entrance — a shaded fern-lined creek walk that climbs to the Observatory. Park at the bottom, walk up, and you skip the entire parking war.",
  maps:"Griffith Observatory, Los Angeles, CA"},
 
-{id:"sanpedro", name:"San Pedro & Point Fermin", region:"Harbor", mins:35, drive:"35 min", scene:"cliff", tone:"fog",
+{id:"sanpedro", name:"San Pedro & Point Fermin", region:"Harbor", mins:45, drive:"45 min",
  blurb:"working port, tide pools, and the best sunset cliff nobody uses",
  tags:["park","hike","culture","food","water"],
  hero:"Point Fermin Park and the Sunken City — a bluff-top park with a Victorian lighthouse, and next to it a landslide-collapsed neighborhood now covered in murals, sitting right on the cliff edge.",
@@ -609,7 +505,7 @@ TRIPS.push(
  tip:"Check the tide chart and hit the Point Fermin tide pools at low tide, then take the bluff walk down to Cabrillo. Sunset at Point Fermin is genuinely one of the best in the county and there's never a crowd.",
  maps:"Point Fermin Park, San Pedro, CA"},
 
-{id:"malibu", name:"Malibu & PCH", region:"Coast", mins:38, drive:"38 min", scene:"cliff", tone:"day",
+{id:"malibu", name:"Malibu & PCH", region:"Coast", mins:55, drive:"55 min",
  blurb:"the drive is the destination",
  tags:["beach","hike","park","food","shop","water"],
  hero:"El Matador State Beach — sea stacks, arches and caves at the base of a steep staircase. The most photographed cove in California for a reason. Go at low tide, late afternoon.",
@@ -625,7 +521,7 @@ TRIPS.push(
  tip:"Note that PCH and parts of Malibu were badly hit by the January 2025 fires — check current closures and which restaurants have reopened before you commit to a plan. Go north past Zuma for the emptiest beaches.",
  maps:"El Matador State Beach, Malibu, CA"},
 
-{id:"losfeliz", name:"Los Feliz & Silver Lake", region:"East Side", mins:38, drive:"38 min", scene:"town", tone:"dusk",
+{id:"losfeliz", name:"Los Feliz & Silver Lake", region:"East Side", mins:50, drive:"50 min",
  blurb:"where LA goes to walk around and eat",
  tags:["food","shop","cute","culture","hike"],
  hero:"Vermont and Hillhurst in Los Feliz, and Sunset Junction in Silver Lake — two of the very few LA neighborhoods that genuinely reward wandering on foot.",
@@ -642,7 +538,7 @@ TRIPS.push(
  tip:"Park once near Barnsdall Park (free lot), do the Hollyhock House and the hilltop view, then walk down into Los Feliz village for dinner.",
  maps:"Barnsdall Art Park, Los Angeles, CA"},
 
-{id:"longbeach", name:"Long Beach", region:"Harbor", mins:38, drive:"38 min", scene:"harbor", tone:"day",
+{id:"longbeach", name:"Long Beach", region:"Harbor", mins:50, drive:"50 min",
  blurb:"a real city with a canal district and a haunted ocean liner",
  tags:["water","culture","food","shop","kid","cute"],
  hero:"The Queen Mary — a 1936 ocean liner permanently docked, that you can tour, eat on, and stay overnight in. Art deco top to bottom, and reportedly extremely haunted.",
@@ -659,7 +555,7 @@ TRIPS.push(
  tip:"Do Naples Island first thing on a Sunday morning — the canals are empty, the light is perfect, and it's completely free. Then 2nd Street for brunch.",
  maps:"Naples Island, Long Beach, CA"},
 
-{id:"highlandpark", name:"Highland Park & Eagle Rock", region:"Northeast LA", mins:38, drive:"38 min", scene:"town", tone:"dusk",
+{id:"highlandpark", name:"Highland Park & Eagle Rock", region:"Northeast LA", mins:50, drive:"50 min",
  blurb:"York Blvd on a Saturday is the whole pitch",
  tags:["food","shop","cute","culture"],
  hero:"York Boulevard and Figueroa — a long, low-key stretch of vintage stores, record shops, bars and taquerias that has become the best casual food street on the east side.",
@@ -676,7 +572,7 @@ TRIPS.push(
  tip:"Second Saturday is the Highland Park art walk, when the shops stay open late. Pair it with Galco's — bring a cardboard flat and build your own mixed soda case.",
  maps:"York Blvd, Highland Park, Los Angeles, CA"},
 
-{id:"pasadena", name:"Pasadena & the Huntington", region:"San Gabriel Valley", mins:40, drive:"40 min", scene:"garden", tone:"day",
+{id:"pasadena", name:"Pasadena & the Huntington", region:"San Gabriel Valley", mins:55, drive:"55 min",
  blurb:"gardens, Craftsman houses, and the best Old Town in LA County",
  tags:["culture","shop","cute","park","food","hike"],
  hero:"The Huntington Library, Art Museum and Botanical Gardens — 130 acres of themed gardens (Japanese, Chinese, Desert, Rose), plus a Gutenberg Bible and Gainsborough's Blue Boy. Budget a full day.",
@@ -693,24 +589,7 @@ TRIPS.push(
  tip:"Get the Huntington's first-entry timed ticket, do the Chinese and Japanese gardens before the crowds, have tea in the Rose Garden Tea Room (reserve separately), then head to Old Pasadena for dinner.",
  maps:"The Huntington, San Marino, CA"},
 
-{id:"glendale", name:"Glendale & Burbank", region:"San Fernando Valley", mins:38, drive:"38 min", scene:"town", tone:"day",
- blurb:"studio tours, a cemetery museum, and Porto's",
- tags:["culture","shop","food","kid"],
- hero:"Warner Bros. Studio Tour — the best of the LA studio tours by a wide margin. A real working lot, the Central Perk set, the Batmobiles, and a backlot you'll recognize from everything.",
- see:["Forest Lawn Glendale — free museum with a stained-glass Last Supper and Renaissance reproductions, plus half of old Hollywood buried on the hill","Brand Library and Art Center, a 1904 Moorish mansion turned free art and music library","Universal Studios Hollywood if you want the theme-park version (and the Wizarding World is genuinely great)","Descanso Gardens, 10 minutes north in La Cañada","Griffith Park's north side and Travel Town, just over the hill","Downtown Burbank's Magnolia Park for vintage and costume shops"],
- shop:"The Americana at Brand and the Glendale Galleria are back-to-back and cover every mainstream need. Magnolia Park in Burbank is the interesting one — vintage clothing, records, and Halloween stores that operate year-round.",
- eat:[
-  {name:"Porto's Bakery", d:"The Glendale flagship. Potato balls, cheese rolls, guava strudel. Get a dozen to freeze.", city:"Glendale"},
-  {name:"Raffi's Place", d:"Armenian kebabs in a garden patio. Glendale's signature meal, and the reason to come hungry.", city:"Glendale"},
-  {name:"Carousel Restaurant", d:"Lebanese-Armenian mezze. Order the spread and don't stop.", city:"Glendale"},
-  {name:"Bea Bea's", d:"The Burbank brunch spot with the line out front. Enormous pancakes.", city:"Burbank"},
-  {name:"Olive & Thyme", d:"Toluca Lake cafe with a great market attached. Where the studio crowd eats lunch.", city:"Burbank"}],
- mich:null,
- parking:"Free garage parking at the Americana and the Galleria (three hours validated). Warner Bros. tour parking is included with the ticket. Magnolia Park has free street parking.",
- tip:"Book the Warner Bros. tour for the morning, eat in Magnolia Park, and hit Porto's on the way home — order online for pickup and skip the line entirely.",
- maps:"Warner Bros. Studio Tour Hollywood, Burbank, CA"},
-
-{id:"sgv", name:"San Gabriel Valley Food Crawl", region:"San Gabriel Valley", mins:42, drive:"42 min", scene:"town", tone:"dusk",
+{id:"sgv", name:"San Gabriel Valley Food Crawl", region:"San Gabriel Valley", mins:55, drive:"55 min",
  blurb:"the best Chinese food outside of China, allegedly, and probably",
  tags:["food","shop","culture"],
  hero:"Valley Boulevard from Alhambra through San Gabriel to Rowland Heights — the densest concentration of regional Chinese cooking anywhere in the Western Hemisphere. This is a food trip, full stop.",
@@ -727,7 +606,7 @@ TRIPS.push(
  tip:"Go with four people minimum and treat it as a crawl: dumplings at one place, noodles at another, shaved ice or a Taiwanese bakery for dessert. Sunday dim sum at Sea Harbour in Rosemead is the other classic play.",
  maps:"Valley Blvd, San Gabriel, CA"},
 
-{id:"malibucreek", name:"Malibu Creek & Calabasas", region:"Santa Monica Mountains", mins:42, drive:"42 min", scene:"mountain", tone:"day",
+{id:"malibucreek", name:"Malibu Creek & Calabasas", region:"Santa Monica Mountains", mins:55, drive:"55 min",
  blurb:"the M*A*S*H set is still sitting there rusting",
  tags:["hike","park","cute","food"],
  hero:"Malibu Creek State Park — 8,000 acres of oak savanna and volcanic rock, with the Rock Pool, a swimmable gorge, and the actual abandoned M*A*S*H filming site at the end of a flat 5-mile round trip.",
@@ -743,7 +622,7 @@ TRIPS.push(
  tip:"Swim at the Rock Pool in late spring when there's actually water, and go on a weekday. The M*A*S*H hike is flat and stroller-friendly — one of the easiest big payoffs in the region.",
  maps:"Malibu Creek State Park, Calabasas, CA"},
 
-{id:"descanso", name:"Descanso Gardens & La Cañada", region:"Foothills", mins:42, drive:"42 min", scene:"garden", tone:"dawn",
+{id:"descanso", name:"Descanso Gardens & La Cañada", region:"Foothills", mins:55, drive:"55 min",
  blurb:"a camellia forest, a rose garden, and a tiny train",
  tags:["park","cute","culture","kid"],
  hero:"Descanso Gardens — 150 acres in the Verdugo foothills, built around a 20-acre camellia forest under a canopy of California oaks. It's peak-season all year: camellias in winter, 30,000 tulips in spring, roses in summer.",
@@ -759,7 +638,7 @@ TRIPS.push(
  tip:"Members get in an hour early, but the real move is arriving right at opening on a weekday in February when the camellias are peaking and you'll have the forest to yourself.",
  maps:"Descanso Gardens, La Canada Flintridge, CA"},
 
-{id:"pointdume", name:"Zuma & Point Dume", region:"Coast", mins:48, drive:"48 min", scene:"beach", tone:"day",
+{id:"pointdume", name:"Zuma & Point Dume", region:"Coast", mins:65, drive:"1 hr 5 min",
  blurb:"the wide clean sand LA pretends not to have",
  tags:["beach","hike","park","water"],
  hero:"Zuma Beach — a mile and a half of wide, clean, lifeguarded sand, and the best swimming beach in Los Angeles County. Point Dume rises right at the south end.",
@@ -775,7 +654,7 @@ TRIPS.push(
  tip:"Park at Westward Beach (the far end lot), walk the Point Dume headland trail at sunset, and come down the Pirate's Cove stairs. It's the best free hour on the LA coast.",
  maps:"Point Dume State Beach, Malibu, CA"},
 
-{id:"sealbeach", name:"Seal Beach", region:"Orange County", mins:45, drive:"45 min", scene:"beach", tone:"dawn",
+{id:"sealbeach", name:"Seal Beach", region:"Orange County", mins:60, drive:"1 hr",
  blurb:"Main Street ends at a wooden pier and that's it, that's the town",
  tags:["beach","cute","food","shop","park"],
  hero:"Seal Beach Pier — the second-longest wooden pier in California, at the end of a three-block Main Street that has resisted every attempt to modernize it.",
@@ -791,23 +670,7 @@ TRIPS.push(
  tip:"Pair Seal Beach with Bolsa Chica: birds and a flat wetland walk in the morning, Main Street and the pier for lunch and sunset. Very low-effort, very high-charm day.",
  maps:"Seal Beach Pier, Seal Beach, CA"},
 
-{id:"anaheim", name:"Anaheim & Disneyland", region:"Orange County", mins:50, drive:"50 min", scene:"castle", tone:"dusk",
- blurb:"yes, obviously, but also the packing district",
- tags:["kid","food","shop","culture"],
- hero:"Disneyland Resort — two parks, and the original one is still the better one. Buy the timed-entry ticket ahead; nothing about this works as a spontaneous drop-in.",
- see:["Disneyland Park and Disney California Adventure","Downtown Disney District — free to enter, good for an evening without a park ticket","Anaheim Packing House — a restored 1919 citrus packing plant, now a two-story food hall with live music","Center Street Promenade in downtown Anaheim","Muzeo Museum and the Anaheim Colony historic district","Angel Stadium and Honda Center if the schedule works out"],
- shop:"Downtown Disney for Disney everything; the Anaheim Packing District for independent shops and food; and the Outlets at Orange are 10 minutes away if you want serious outlet shopping.",
- eat:[
-  {name:"Anaheim Packing House", d:"30-plus vendors in a gorgeous building — Georgia's Southern, the Kroft's poutine, Wheat & Sons. The best non-park meal in Anaheim.", city:"Anaheim"},
-  {name:"Blue Bayou", d:"Inside the park, in the Pirates of the Caribbean ride. Book the moment reservations open; it's the most atmospheric restaurant in California.", city:"Anaheim"},
-  {name:"Carthay Circle", d:"California Adventure's fine-dining room, and it comes with a good World of Color viewing package.", city:"Anaheim"},
-  {name:"Pizza Press / Umami Burger Downtown Disney", d:"For a solid, quick, non-park dinner without leaving the resort area.", city:"Anaheim"}],
- mich:null,
- parking:"Disneyland's Mickey & Friends structure is around $35 per day. Downtown Disney offers limited validated parking with a purchase. The Packing House has free parking. Consider staying at a Harbor Blvd hotel and walking instead.",
- tip:"If you're not doing the parks, the Packing House plus Center Street on a Friday night is a genuinely great, cheap Orange County evening — and the drive back at 9pm is easy.",
- maps:"Anaheim Packing House, Anaheim, CA"},
-
-{id:"huntingtonbeach", name:"Huntington Beach", region:"Orange County", mins:50, drive:"50 min", scene:"beach", tone:"day",
+{id:"huntingtonbeach", name:"Huntington Beach", region:"Orange County", mins:70, drive:"1 hr 10 min",
  blurb:"surf city, fire rings, and a very long pier",
  tags:["beach","water","food","shop","park","kid"],
  hero:"Huntington City Beach and the pier — 8.5 miles of continuous sand, 1,000 fire rings, and a surf break that hosts the US Open of Surfing every summer.",
@@ -823,7 +686,7 @@ TRIPS.push(
  tip:"Bolsa Chica State Beach fire rings are cheaper, less crowded and just as good as the city ones. Bring firewood from home, a blanket, and stay until it's fully dark.",
  maps:"Huntington Beach Pier, Huntington Beach, CA"},
 
-{id:"vasquez", name:"Vasquez Rocks & Santa Clarita", region:"North County", mins:50, drive:"50 min", scene:"desert", tone:"day",
+{id:"vasquez", name:"Vasquez Rocks & Santa Clarita", region:"North County", mins:65, drive:"1 hr 5 min",
  blurb:"the tilted rocks from every sci-fi show ever",
  tags:["hike","park","desert","kid"],
  hero:"Vasquez Rocks Natural Area — 50-degree tilted sandstone slabs that have stood in for every alien planet in television history. Free, and you can climb right up them.",
@@ -839,7 +702,7 @@ TRIPS.push(
  tip:"Go early, wear real shoes (the rock is slick and steeper than it looks), and be out by noon in summer — there's zero shade and it hits 100°F. Combine with breakfast at Egg Plantation on the way.",
  maps:"Vasquez Rocks Natural Area Park, Agua Dulce, CA"},
 
-{id:"mtwilson", name:"Angeles Crest & Mount Wilson", region:"San Gabriel Mountains", mins:55, drive:"55 min", scene:"mountain", tone:"fog",
+{id:"mtwilson", name:"Angeles Crest & Mount Wilson", region:"San Gabriel Mountains", mins:75, drive:"1 hr 15 min",
  blurb:"an alpine highway that starts at a Trader Joe's",
  tags:["hike","park","snow","culture"],
  hero:"The Angeles Crest Highway (SR-2) — 66 miles of pure mountain road climbing from La Cañada to 7,900 feet, with pullouts every few miles and almost no traffic on a weekday.",
@@ -855,7 +718,7 @@ TRIPS.push(
  tip:"Check road status before you leave — the Angeles Crest closes for snow and fire regularly, sometimes for months. And fill the tank in La Cañada; there is no gas on the mountain.",
  maps:"Mount Wilson Observatory, Mount Wilson, CA"},
 
-{id:"orange", name:"Old Towne Orange", region:"Orange County", mins:55, drive:"55 min", scene:"town", tone:"day",
+{id:"orange", name:"Old Towne Orange", region:"Orange County", mins:70, drive:"1 hr 10 min",
  blurb:"an actual town square, with antiques all around it",
  tags:["shop","cute","food","culture"],
  hero:"The Orange Plaza — a genuine 1886 traffic circle with a fountain, surrounded by the largest concentration of antique stores in California. It's the closest thing to a Midwestern town square in Southern California.",
@@ -871,7 +734,7 @@ TRIPS.push(
  tip:"Come on a Saturday morning, do the antique malls first while you have energy, eat at Watson's, then walk Chapman's campus. Pair it with Irvine Regional Park if you have kids along.",
  maps:"Orange Plaza, Orange, CA"},
 
-{id:"claremont", name:"Claremont Village", region:"Inland Empire", mins:55, drive:"55 min", scene:"town", tone:"dawn",
+{id:"claremont", name:"Claremont Village", region:"Inland Empire", mins:70, drive:"1 hr 10 min",
  blurb:"a college town with 24,000 trees and a great bookstore",
  tags:["cute","shop","food","hike","culture"],
  hero:"Claremont Village — the walkable heart of a seven-college town, with brick sidewalks, independent shops, and the Packing House food hall in a converted 1922 citrus warehouse.",
@@ -888,7 +751,7 @@ TRIPS.push(
  tip:"Do the Wilderness Park loop at 7am, shower, then the Village for brunch and the botanic garden in the afternoon. In April the California Botanic Garden's wildflower display is worth the drive on its own.",
  maps:"Claremont Village, Claremont, CA"},
 
-{id:"newport", name:"Newport Beach & Balboa Island", region:"Orange County", mins:58, drive:"58 min", scene:"harbor", tone:"dusk",
+{id:"newport", name:"Newport Beach & Balboa Island", region:"Orange County", mins:75, drive:"1 hr 15 min",
  blurb:"ferry, frozen banana, done",
  tags:["beach","water","shop","food","cute","kid"],
  hero:"Balboa Island — a tiny island in Newport Harbor reached by a three-car ferry, with a boardwalk loop, cottages an arm's-width apart, and the original frozen banana.",
@@ -903,10 +766,9 @@ TRIPS.push(
  mich:"Orange County's Michelin cluster is in Costa Mesa, 10 minutes inland: Taco María (one star, Mexican tasting menu), Knife Pleat (one star, French) and Hana re (one star, sushi). Taco María is the one to plan a trip around.",
  parking:"Balboa Island street parking is very limited — park in the Balboa Peninsula lot and take the ferry over as a pedestrian, which is far easier. Crystal Cove lots are $15. Fashion Island parking is free.",
  tip:"Do it backwards: park on the peninsula, walk the Fun Zone, take the ferry across as a walk-on, loop Balboa Island on foot with a frozen banana, ferry back. No parking stress at all.",
- maps:"Balboa Island, Newport Beach, CA"}
-);
-TRIPS.push(
-{id:"sjc", name:"San Juan Capistrano", region:"Orange County", mins:65, drive:"1 hr 5 min", scene:"town", tone:"dawn",
+ maps:"Balboa Island, Newport Beach, CA"},
+
+{id:"sjc", name:"San Juan Capistrano", region:"Orange County", mins:85, drive:"1 hr 25 min",
  blurb:"a 1776 mission, swallows, and Los Rios Street",
  tags:["culture","cute","food","shop"],
  hero:"Mission San Juan Capistrano — founded 1776, the \"Jewel of the Missions,\" with the ruins of the Great Stone Church, a serene central courtyard and the oldest building still in use in California.",
@@ -922,7 +784,7 @@ TRIPS.push(
  tip:"Take the Amtrak Pacific Surfliner instead of driving. The station is literally at the Mission, the ride hugs the coast, and you can drink on the train. Pair it with Dana Point 10 minutes south.",
  maps:"Mission San Juan Capistrano, San Juan Capistrano, CA"},
 
-{id:"laguna", name:"Laguna Beach", region:"Orange County", mins:68, drive:"1 hr 8 min", scene:"cliff", tone:"day",
+{id:"laguna", name:"Laguna Beach", region:"Orange County", mins:90, drive:"1 hr 30 min",
  blurb:"seven miles of coves and an art colony that never left",
  tags:["beach","shop","culture","food","hike","water"],
  hero:"The coves — Laguna has more than 30 pocket beaches strung along seven miles of protected coastline, most reached by a stairway from a bluff-top park. Thousand Steps, Victoria, Crescent Bay, Table Rock.",
@@ -939,7 +801,7 @@ TRIPS.push(
  tip:"Park at Act V and ride the free trolley in. Then walk Heisler Park north to Crescent Bay for the coves, and be at Main Beach for sunset. In July, buy Pageant of the Masters tickets months ahead.",
  maps:"Heisler Park, Laguna Beach, CA"},
 
-{id:"danapoint", name:"Dana Point", region:"Orange County", mins:70, drive:"1 hr 10 min", scene:"harbor", tone:"day",
+{id:"danapoint", name:"Dana Point", region:"Orange County", mins:90, drive:"1 hr 30 min",
  blurb:"whales, tide pools, and a harbor that just got rebuilt",
  tags:["water","beach","hike","food","kid"],
  hero:"Dana Point Harbor and the whale-watching fleet — this is the self-declared Dolphin and Whale Watching Capital of the World, and the year-round dolphin numbers genuinely back it up.",
@@ -955,7 +817,7 @@ TRIPS.push(
  tip:"Book the whale watch for the morning when the water is calmest, then do the Headlands trail at sunset. Gray whale season is December through April; blue whales show up in summer.",
  maps:"Dana Point Harbor, Dana Point, CA"},
 
-{id:"oxnard", name:"Oxnard & Channel Islands Harbor", region:"Ventura County", mins:72, drive:"1 hr 12 min", scene:"harbor", tone:"fog",
+{id:"oxnard", name:"Oxnard & Channel Islands Harbor", region:"Ventura County", mins:80, drive:"1 hr 20 min",
  blurb:"the launch point for California's Galapagos",
  tags:["water","beach","park","food","kid"],
  hero:"Channel Islands National Park — boats leave from Ventura and Oxnard for Santa Cruz and Anacapa Islands. It's the least-visited national park in California and the closest thing to untouched coastline left in the state.",
@@ -971,7 +833,7 @@ TRIPS.push(
  tip:"Book the Santa Cruz Island trip weeks ahead, take the earliest boat, bring layers and motion-sickness pills. Scorpion Anchorage has the sea caves; Prisoners Harbor has the better hiking. There is no food or water on the island — pack everything.",
  maps:"Island Packers, Oxnard, CA"},
 
-{id:"mtbaldy", name:"Mount Baldy", region:"San Gabriel Mountains", mins:75, drive:"1 hr 15 min", scene:"snow", tone:"fog",
+{id:"mtbaldy", name:"Mount Baldy", region:"San Gabriel Mountains", mins:90, drive:"1 hr 30 min",
  blurb:"10,064 feet, and you can see it from our street",
  tags:["hike","snow","park"],
  hero:"Mount Baldy (Mount San Antonio) — the highest peak in Los Angeles County at 10,064 feet, with a ski lift that runs year-round and a summit hike that is genuinely serious.",
@@ -987,7 +849,7 @@ TRIPS.push(
  tip:"The chairlift plus a beer at Top of the Notch is a genuinely great low-effort day — you get an alpine view without the 4,000 feet of climbing. Do not attempt the summit in winter without an ice axe and crampons; people die on Baldy every year.",
  maps:"Mt Baldy Ski Lifts, Mount Baldy, CA"},
 
-{id:"sanclemente", name:"San Clemente", region:"Orange County", mins:78, drive:"1 hr 18 min", scene:"beach", tone:"dusk",
+{id:"sanclemente", name:"San Clemente", region:"Orange County", mins:95, drive:"1 hr 35 min",
  blurb:"Spanish village by the sea, and a beach trail with a train on it",
  tags:["beach","cute","food","shop","hike"],
  hero:"The San Clemente Beach Trail — 2.3 miles of paved path running right along the sand between the pier and Calafia, with the Amtrak line running alongside it. One of the best coastal walks in the state.",
@@ -1003,7 +865,7 @@ TRIPS.push(
  tip:"Park at North Beach, walk the whole beach trail south to Calafia and back — about 5 miles round trip, entirely flat, with the ocean on one side and trains going past. Then dinner on Del Mar.",
  maps:"San Clemente Pier, San Clemente, CA"},
 
-{id:"riverside", name:"Riverside & the Mission Inn", region:"Inland Empire", mins:78, drive:"1 hr 18 min", scene:"town", tone:"dusk",
+{id:"riverside", name:"Riverside & the Mission Inn", region:"Inland Empire", mins:95, drive:"1 hr 35 min",
  blurb:"the strangest, most wonderful hotel in California",
  tags:["culture","cute","food","shop","park"],
  hero:"The Mission Inn — a full city block of Spanish Revival fantasy architecture built over 30 years, with flying buttresses, a five-story rotunda, catacombs, and a chapel with a Tiffany window. Take the guided tour.",
@@ -1019,7 +881,7 @@ TRIPS.push(
  tip:"Go in December for the Festival of Lights switch-on — it's free to walk through, they do fireworks, and the whole downtown turns out. Book the hotel tour in advance either way.",
  maps:"The Mission Inn Hotel & Spa, Riverside, CA"},
 
-{id:"ventura", name:"Ventura", region:"Ventura County", mins:80, drive:"1 hr 20 min", scene:"beach", tone:"dawn",
+{id:"ventura", name:"Ventura", region:"Ventura County", mins:90, drive:"1 hr 30 min",
  blurb:"Santa Barbara's unpretentious little sibling",
  tags:["beach","cute","shop","food","culture","water"],
  hero:"Main Street Ventura — a long, genuinely fun downtown of thrift stores, record shops, breweries and taquerias, running from the 1782 mission down toward the beach.",
@@ -1037,7 +899,7 @@ TRIPS.push(
  pair:"Best paired with Ojai — they're 25 minutes apart and make one excellent day.",
  maps:"Main Street, Ventura, CA"},
 
-{id:"poppies", name:"Antelope Valley Poppy Reserve", region:"High Desert", mins:82, drive:"1 hr 22 min", scene:"garden", tone:"day",
+{id:"poppies", name:"Antelope Valley Poppy Reserve", region:"High Desert", mins:95, drive:"1 hr 35 min",
  blurb:"eight weeks a year the desert turns orange",
  tags:["park","hike","desert"],
  hero:"Antelope Valley California Poppy Reserve — 1,780 acres of rolling hills that, in a good March or April, turn solid orange with California poppies. Seven miles of easy trails run through it.",
@@ -1053,7 +915,7 @@ TRIPS.push(
  tip:"Check the reserve's live bloom status before you drive — some years there is essentially no bloom at all. Go on a weekday, arrive by 9am, and go when it's sunny: poppies close up in wind and clouds. Peak is usually mid-March to mid-April.",
  maps:"Antelope Valley California Poppy Reserve, Lancaster, CA"},
 
-{id:"redlands", name:"Redlands", region:"Inland Empire", mins:85, drive:"1 hr 25 min", scene:"garden", tone:"dawn",
+{id:"redlands", name:"Redlands", region:"Inland Empire", mins:105, drive:"1 hr 45 min",
  blurb:"Victorian mansions and orange groves nobody told you about",
  tags:["cute","culture","shop","food","park"],
  hero:"The Kimberly Crest House and Gardens — an 1897 French chateau on a hillside with Italian terraced gardens, and the anchor of a downtown full of Victorian architecture from the citrus boom.",
@@ -1070,7 +932,7 @@ TRIPS.push(
  pair:"Right on the way to Big Bear and Joshua Tree — make it the lunch stop.",
  maps:"Kimberly Crest House and Gardens, Redlands, CA"},
 
-{id:"wrightwood", name:"Wrightwood & Mountain High", region:"San Gabriel Mountains", mins:92, drive:"1 hr 32 min", scene:"snow", tone:"fog",
+{id:"wrightwood", name:"Wrightwood & Mountain High", region:"San Gabriel Mountains", mins:105, drive:"1 hr 45 min",
  blurb:"the closest real snow day",
  tags:["snow","hike","cute","park"],
  hero:"Mountain High Resort — the closest ski area to Los Angeles, with three separate mountains, night skiing, and a dedicated snow-play tubing park that doesn't require any skill at all.",
@@ -1086,7 +948,7 @@ TRIPS.push(
  tip:"Buy lift and tubing tickets online in advance; walk-up prices are much higher and tubing sessions sell out. For a non-ski winter day, just drive up for snow play at Jackson Lake and lunch in the village — free and lovely.",
  maps:"Mountain High Resort, Wrightwood, CA"},
 
-{id:"carpinteria", name:"Carpinteria", region:"Santa Barbara County", mins:95, drive:"1 hr 35 min", scene:"beach", tone:"day",
+{id:"carpinteria", name:"Carpinteria", region:"Santa Barbara County", mins:105, drive:"1 hr 45 min",
  blurb:"the world's safest beach, and they mean it",
  tags:["beach","cute","food","water","park"],
  hero:"Carpinteria State Beach — a mile of gently shelving sand with a natural offshore reef that kills the surf, officially nicknamed \"the world's safest beach.\" Camping right on the sand.",
@@ -1103,7 +965,7 @@ TRIPS.push(
  pair:"Fifteen minutes from Santa Barbara — do both in one day.",
  maps:"Carpinteria State Beach, Carpinteria, CA"},
 
-{id:"carlsbad", name:"Carlsbad & Oceanside", region:"North San Diego", mins:98, drive:"1 hr 38 min", scene:"garden", tone:"day",
+{id:"carlsbad", name:"Carlsbad & Oceanside", region:"North San Diego", mins:115, drive:"1 hr 55 min",
  blurb:"a flower field, a lagoon, and a very good pier",
  tags:["beach","cute","shop","food","kid","park"],
  hero:"The Flower Fields at Carlsbad Ranch — 50 acres of ranunculus in solid stripes of color, open March through mid-May only. It's as absurd and photogenic as it sounds.",
@@ -1120,7 +982,7 @@ TRIPS.push(
  tip:"Do the Flower Fields at opening in early April, then Carlsbad Village for lunch and the seawall. If you're going to eat at Jeune et Jolie or Valle, book weeks out.",
  maps:"The Flower Fields at Carlsbad Ranch, Carlsbad, CA"},
 
-{id:"ojai", name:"Ojai", region:"Ventura County", mins:100, drive:"1 hr 40 min", scene:"vineyard", tone:"dusk",
+{id:"ojai", name:"Ojai", region:"Ventura County", mins:105, drive:"1 hr 45 min",
  blurb:"the pink moment, and one very good bookstore",
  tags:["cute","shop","food","hike","wine","culture"],
  hero:"The Pink Moment — the ten minutes at sunset when the Topa Topa bluffs turn a genuine rose pink. Watch it from Meditation Mount, which is free and open to the public until sunset.",
@@ -1138,7 +1000,7 @@ TRIPS.push(
  pair:"Pairs perfectly with Ventura — beach in the morning, Ojai for the Pink Moment.",
  maps:"Downtown Ojai, Ojai, CA"},
 
-{id:"santabarbara", name:"Santa Barbara", region:"Central Coast", mins:105, drive:"1 hr 45 min", scene:"town", tone:"day",
+{id:"santabarbara", name:"Santa Barbara", region:"Central Coast", mins:120, drive:"2 hr",
  blurb:"the American Riviera, and it earns the nickname",
  tags:["beach","wine","shop","food","culture","cute","water"],
  hero:"State Street and the Santa Barbara Mission — a whole city built to one Spanish Colonial Revival code after the 1925 earthquake, with red tile roofs running from the mountains to the pier.",
@@ -1156,7 +1018,7 @@ TRIPS.push(
  pair:"Chain it with Carpinteria (15 min) or Solvang and Los Olivos (45 min inland).",
  maps:"Santa Barbara County Courthouse, Santa Barbara, CA"},
 
-{id:"temecula", name:"Temecula Valley", region:"Riverside County", mins:105, drive:"1 hr 45 min", scene:"vineyard", tone:"dusk",
+{id:"temecula", name:"Temecula Valley", region:"Riverside County", mins:120, drive:"2 hr",
  blurb:"the wine country you can actually get to before lunch",
  tags:["wine","cute","food","shop"],
  hero:"Temecula Valley Wine Country — around 50 wineries on rolling hills 25 minutes east of the interstate, most with tasting rooms, restaurants and enormous patios. It is not Napa, and it doesn't need to be.",
@@ -1173,7 +1035,7 @@ TRIPS.push(
  tip:"Book a balloon flight for sunrise (they launch around 6am and it's genuinely spectacular), have breakfast in Old Town, then do three wineries in the afternoon with a driver. Don't try to do more than four tastings.",
  maps:"Temecula Valley Wine Country, Temecula, CA"},
 
-{id:"arrowhead", name:"Lake Arrowhead", region:"San Bernardino Mountains", mins:110, drive:"1 hr 50 min", scene:"lake", tone:"fog",
+{id:"arrowhead", name:"Lake Arrowhead", region:"San Bernardino Mountains", mins:130, drive:"2 hr 10 min",
  blurb:"pine trees and a lake you mostly look at",
  tags:["snow","hike","cute","water","park"],
  hero:"Lake Arrowhead Village — an alpine village at 5,100 feet on a private lake, with a boardwalk, shops and the Arrowhead Queen paddlewheel boat tour, which is the only way most people get on the water.",
@@ -1189,7 +1051,7 @@ TRIPS.push(
  tip:"Arrowhead is the quieter, prettier mountain; Big Bear is the one with actual activities. If you want a lake you can swim in and boat on, go to Big Bear. If you want pines, a boardwalk and a nap, come here.",
  maps:"Lake Arrowhead Village, Lake Arrowhead, CA"},
 
-{id:"delmar", name:"Del Mar & Torrey Pines", region:"San Diego County", mins:112, drive:"1 hr 52 min", scene:"cliff", tone:"day",
+{id:"delmar", name:"Del Mar & Torrey Pines", region:"San Diego County", mins:135, drive:"2 hr 15 min",
  blurb:"where the turf meets the surf, and a three-star restaurant",
  tags:["beach","hike","park","food","shop","culture"],
  hero:"Torrey Pines State Natural Reserve — 2,000 acres of sandstone bluffs and the rarest pine tree in North America, with trails dropping from the clifftop straight down to the beach.",
@@ -1205,7 +1067,7 @@ TRIPS.push(
  tip:"Do Torrey Pines at sunrise when the lot is empty and the light on the sandstone is unreal, then Del Mar Village for brunch. If you're booking Addison, plan the whole trip around it and stay overnight.",
  maps:"Torrey Pines State Natural Reserve, La Jolla, CA"},
 
-{id:"lajolla", name:"La Jolla", region:"San Diego County", mins:118, drive:"1 hr 58 min", scene:"cliff", tone:"day",
+{id:"lajolla", name:"La Jolla", region:"San Diego County", mins:135, drive:"2 hr 15 min",
  blurb:"sea lions, sea caves, and the best coastline in San Diego",
  tags:["beach","water","hike","shop","food","culture","kid"],
  hero:"La Jolla Cove and the Children's Pool — sea lions and harbor seals hauled out on the rocks, feet away from a bluff-top walkway. Snorkeling in the Cove is some of the best shore diving in California.",
@@ -1222,7 +1084,7 @@ TRIPS.push(
  tip:"Book a morning kayak tour of the sea caves — the water is calmest before 11am and you'll paddle through leopard sharks in summer. Then the Cove, lunch on Prospect, and Mount Soledad at sunset.",
  maps:"La Jolla Cove, La Jolla, CA"},
 
-{id:"palmsprings", name:"Palm Springs", region:"Coachella Valley", mins:120, drive:"2 hr", scene:"oasis", tone:"dusk",
+{id:"palmsprings", name:"Palm Springs", region:"Coachella Valley", mins:150, drive:"2 hr 30 min",
  blurb:"mid-century modern, a tram to the alpine zone, and a lot of pools",
  tags:["desert","shop","food","cute","hike","culture"],
  hero:"The Palm Springs Aerial Tramway — the world's largest rotating tram car climbs 8,500 feet in ten minutes from desert floor to pine forest. It can be 100°F at the bottom and 50°F with snow at the top on the same day.",
@@ -1238,10 +1100,9 @@ TRIPS.push(
  parking:"Free street parking downtown with time limits, plus free public lots off Palm Canyon and Indian Canyon. The Tramway has a large paid lot ($15) — arrive before 9am on weekends or you'll wait hours for a tram car.",
  tip:"Do the tram first thing in the morning (buy timed tickets online), bring a jacket, hike an hour at the top, then come down for a late lunch and the design district. In summer, come only if you have a pool — it hits 115°F.",
  pair:"Palm Springs plus Joshua Tree is the classic two-day desert weekend.",
- maps:"Palm Springs Aerial Tramway, Palm Springs, CA"}
-);
-TRIPS.push(
-{id:"bigbear", name:"Big Bear Lake", region:"San Bernardino Mountains", mins:135, drive:"2 hr 15 min", scene:"lake", tone:"day",
+ maps:"Palm Springs Aerial Tramway, Palm Springs, CA"},
+
+{id:"bigbear", name:"Big Bear Lake", region:"San Bernardino Mountains", mins:165, drive:"2 hr 45 min",
  blurb:"a real lake with a real winter, two hours away",
  tags:["snow","water","hike","cute","park","kid"],
  hero:"Big Bear Lake itself — seven miles of alpine lake at 6,750 feet that you can actually swim in, boat on and fish, ringed by pine forest and two ski mountains.",
@@ -1258,7 +1119,7 @@ TRIPS.push(
  tip:"Summer is genuinely the better season: the lake is warm, the crowds are lower than ski weekends, and the sky chair at Snow Summit gets you a huge view for very little effort. Leave by 2pm on a Sunday or you'll sit in mountain traffic.",
  maps:"Big Bear Lake Village, Big Bear Lake, CA"},
 
-{id:"idyllwild", name:"Idyllwild", region:"San Jacinto Mountains", mins:135, drive:"2 hr 15 min", scene:"forest", tone:"fog",
+{id:"idyllwild", name:"Idyllwild", region:"San Jacinto Mountains", mins:165, drive:"2 hr 45 min",
  blurb:"a pine village with a golden retriever for a mayor",
  tags:["hike","cute","park","food","snow"],
  hero:"Idyllwild village at 5,400 feet — cedar and pine forest, granite domes overhead, an arts colony, and no chain stores at all. The mayor is, genuinely and officially, a dog.",
@@ -1274,7 +1135,7 @@ TRIPS.push(
  tip:"Get your wilderness permit at the ranger station first thing (they're free but limited daily), then hike Devil's Slide to Saddle Junction. Come up via the Palms-to-Pines Highway (SR-74) from the desert side — it's one of the great California drives.",
  maps:"Idyllwild, CA"},
 
-{id:"redrock", name:"Red Rock Canyon State Park", region:"Mojave Desert", mins:135, drive:"2 hr 15 min", scene:"canyon", tone:"dusk",
+{id:"redrock", name:"Red Rock Canyon State Park", region:"Mojave Desert", mins:150, drive:"2 hr 30 min",
  blurb:"a movie-set desert nobody drives to on purpose",
  tags:["desert","hike","park"],
  hero:"Red Rock Canyon State Park — banded white and red sandstone cliffs and eroded desert badlands on Highway 14, used as an alien planet in a hundred films. Almost nobody stops.",
@@ -1291,7 +1152,7 @@ TRIPS.push(
  pair:"Chain it with Fossil Falls, or use it as a stop on the drive to Mammoth.",
  maps:"Red Rock Canyon State Park, Cantil, CA"},
 
-{id:"solvang", name:"Solvang, Los Olivos & Santa Ynez", region:"Santa Barbara County", mins:140, drive:"2 hr 20 min", scene:"vineyard", tone:"day",
+{id:"solvang", name:"Solvang, Los Olivos & Santa Ynez", region:"Santa Barbara County", mins:165, drive:"2 hr 45 min",
  blurb:"do NOT do Solvang alone — pair it with the wine towns",
  tags:["wine","cute","shop","food","culture"],
  hero:"Los Olivos — a genuinely lovely two-street village with more than 30 tasting rooms you can walk between, right in the middle of Santa Barbara wine country. This, not Solvang, is the reason to come.",
@@ -1309,7 +1170,7 @@ TRIPS.push(
  pair:"Pair Solvang with Los Olivos and Los Alamos — or add Santa Barbara, 45 minutes south, for a full weekend.",
  maps:"Los Olivos, CA"},
 
-{id:"sandiego", name:"San Diego", region:"San Diego County", mins:140, drive:"2 hr 20 min", scene:"city", tone:"day",
+{id:"sandiego", name:"San Diego", region:"San Diego County", mins:165, drive:"2 hr 45 min",
  blurb:"Balboa Park alone justifies the drive",
  tags:["culture","food","beach","shop","kid","park","water"],
  hero:"Balboa Park — 1,200 acres with 17 museums, the San Diego Zoo, a botanical building, and the 1915 Spanish Colonial architecture of El Prado. The single best urban park in the state.",
@@ -1327,7 +1188,7 @@ TRIPS.push(
  tip:"Balboa Park's free-parking-plus-free-tram setup means you can spend a whole day there for the cost of museum tickets. The Explorer Pass covers multiple museums. Go on a Sunday for the 2pm free organ concert.",
  maps:"Balboa Park, San Diego, CA"},
 
-{id:"joshuatree", name:"Joshua Tree National Park", region:"High Desert", mins:150, drive:"2 hr 30 min", scene:"desert", tone:"dusk",
+{id:"joshuatree", name:"Joshua Tree National Park", region:"High Desert", mins:180, drive:"3 hr",
  blurb:"the one that actually feels like another planet",
  tags:["desert","hike","park","cute","culture"],
  hero:"Joshua Tree National Park — 800,000 acres where the Mojave and Colorado deserts meet, full of monzogranite boulder piles and the Seussian trees themselves. One of the best dark-sky parks in the country.",
@@ -1345,7 +1206,7 @@ TRIPS.push(
  pair:"Chain it with Palm Springs (45 min) for a proper desert weekend.",
  maps:"Joshua Tree National Park West Entrance, Joshua Tree, CA"},
 
-{id:"julian", name:"Julian", region:"San Diego County", mins:165, drive:"2 hr 45 min", scene:"forest", tone:"dawn",
+{id:"julian", name:"Julian", region:"San Diego County", mins:195, drive:"3 hr 15 min",
  blurb:"a gold rush town that now runs entirely on apple pie",
  tags:["cute","food","hike","park","snow"],
  hero:"Main Street Julian — a preserved 1870s gold-mining town at 4,200 feet in the Cuyamaca Mountains, where every single business sells apple pie and they are all, annoyingly, good.",
@@ -1363,7 +1224,7 @@ TRIPS.push(
  pair:"An hour from Anza-Borrego — pine forest in the morning, desert wildflowers in the afternoon.",
  maps:"Main Street, Julian, CA"},
 
-{id:"anzaborrego", name:"Anza-Borrego Desert State Park", region:"San Diego County", mins:185, drive:"3 hr 5 min", scene:"desert", tone:"dawn",
+{id:"anzaborrego", name:"Anza-Borrego Desert State Park", region:"San Diego County", mins:210, drive:"3 hr 30 min",
  blurb:"the biggest state park in California, and the metal dinosaurs",
  tags:["desert","hike","park","culture"],
  hero:"Anza-Borrego Desert State Park — 600,000 acres, the largest state park in California, with slot canyons, palm oases, and in a good year a wildflower superbloom that draws the entire state.",
@@ -1380,7 +1241,7 @@ TRIPS.push(
  pair:"An hour from Julian — combine the pine mountains and the desert floor in one day.",
  maps:"Borrego Springs, CA"},
 
-{id:"pismo", name:"Pismo Beach & Avila", region:"Central Coast", mins:185, drive:"3 hr 5 min", scene:"beach", tone:"dusk",
+{id:"pismo", name:"Pismo Beach & Avila", region:"Central Coast", mins:210, drive:"3 hr 30 min",
  blurb:"monarch butterflies, clam chowder, and driving on the sand",
  tags:["beach","water","cute","food","park","kid"],
  hero:"The Monarch Butterfly Grove — from late October through February, tens of thousands of monarchs cluster in a eucalyptus grove right off Highway 1. It's free, and it's genuinely astonishing.",
@@ -1398,7 +1259,7 @@ TRIPS.push(
  pair:"Twenty minutes from San Luis Obispo — combine them, or make Pismo the stop on the way to Big Sur.",
  maps:"Pismo State Beach Monarch Butterfly Grove, Pismo Beach, CA"},
 
-{id:"slo", name:"San Luis Obispo", region:"Central Coast", mins:200, drive:"3 hr 20 min", scene:"town", tone:"day",
+{id:"slo", name:"San Luis Obispo", region:"Central Coast", mins:225, drive:"3 hr 45 min",
  blurb:"a college town with a mission, a creek, and a wall of chewing gum",
  tags:["cute","food","wine","shop","hike","culture"],
  hero:"Downtown San Luis Obispo — a genuinely great small city center built along a creek, anchored by the 1772 mission, with the Thursday night Farmers Market that closes five blocks of Higuera Street and is one of the best street markets in the country.",
@@ -1416,7 +1277,7 @@ TRIPS.push(
  pair:"Chain with Pismo (20 min), Paso Robles (45 min), or Morro Bay (20 min).",
  maps:"Downtown San Luis Obispo, CA"},
 
-{id:"paso", name:"Paso Robles", region:"Central Coast", mins:210, drive:"3 hr 30 min", scene:"vineyard", tone:"dusk",
+{id:"paso", name:"Paso Robles", region:"Central Coast", mins:240, drive:"4 hr",
  blurb:"big reds, hot springs, and a town square",
  tags:["wine","food","cute","shop"],
  hero:"Paso Robles wine country — more than 200 wineries across 40,000 acres, best known for Rhône varietals and big Zinfandels. The Westside's Adelaida district has the dramatic hill roads and the small producers.",
@@ -1434,7 +1295,7 @@ TRIPS.push(
  pair:"Forty-five minutes from Cambria and Hearst Castle — wine one day, coast the next.",
  maps:"Downtown City Park, Paso Robles, CA"},
 
-{id:"morrobay", name:"Morro Bay, Cambria & Hearst Castle", region:"Central Coast", mins:215, drive:"3 hr 35 min", scene:"cliff", tone:"fog",
+{id:"morrobay", name:"Morro Bay, Cambria & Hearst Castle", region:"Central Coast", mins:240, drive:"4 hr",
  blurb:"a giant rock, a herd of elephant seals, and a castle",
  tags:["beach","water","park","cute","culture","food","hike"],
  hero:"Morro Rock — a 576-foot volcanic plug sitting at the harbor mouth, with an estuary full of otters and a working fishing town wrapped around it. One of the most distinctive places on the California coast.",
@@ -1452,7 +1313,7 @@ TRIPS.push(
  pair:"Paso Robles is 45 minutes inland; Big Sur starts an hour north.",
  maps:"Morro Rock, Morro Bay, CA"},
 
-{id:"sequoia", name:"Sequoia & Kings Canyon", region:"Sierra Nevada", mins:225, drive:"3 hr 45 min", scene:"redwood", tone:"fog",
+{id:"sequoia", name:"Sequoia & Kings Canyon", region:"Sierra Nevada", mins:255, drive:"4 hr 15 min",
  blurb:"the largest living things on earth, and they're four hours away",
  tags:["park","hike","snow","desert"],
  hero:"General Sherman — the largest tree on Earth by volume, 275 feet tall and 36 feet across at the base. Standing at the bottom of it does something to your sense of scale that photos cannot.",
@@ -1468,7 +1329,7 @@ TRIPS.push(
  tip:"The road into Sequoia from Three Rivers is a genuine mountain road — narrow, steep, 130 curves. Allow more time than the map says. Go in late spring or fall; summer means shuttles and full lots, and winter closes half the roads. There's no cell service in the park.",
  maps:"General Sherman Tree, Sequoia National Park, CA"},
 
-{id:"deathvalley", name:"Death Valley National Park", region:"Mojave Desert", mins:240, drive:"4 hr", scene:"desert", tone:"dawn",
+{id:"deathvalley", name:"Death Valley National Park", region:"Mojave Desert", mins:270, drive:"4 hr 30 min",
  blurb:"the lowest, hottest, driest place in North America",
  tags:["desert","park","hike","culture"],
  hero:"Badwater Basin — a salt flat 282 feet below sea level, the lowest point in North America, with hexagonal salt polygons stretching to the horizon and a sign on the cliff behind marking sea level 282 feet above your head.",
@@ -1484,25 +1345,7 @@ TRIPS.push(
  tip:"Go November through March, full stop. Summer temperatures exceed 120°F and it is genuinely dangerous. There's no cell service anywhere in the park. Do Zabriskie Point at sunrise, Badwater before 9am, Artist's Palette in the afternoon light, Dante's View at sunset. Stay overnight for the stars — it's the whole point.",
  maps:"Badwater Basin, Death Valley National Park, CA"},
 
-{id:"vegas", name:"Las Vegas", region:"Nevada", mins:240, drive:"4 hr", scene:"city", tone:"dusk",
- blurb:"honestly, the drive is easier than the flight",
- tags:["food","shop","culture","kid","desert"],
- hero:"The Strip — but the actual argument for driving four hours is the food. Las Vegas has become one of the best restaurant cities in America, and you can eat at chef flagships that don't exist in LA.",
- see:["Red Rock Canyon National Conservation Area — a 13-mile scenic loop 20 minutes from the Strip, and the best reason to come that isn't a casino","Valley of Fire State Park, an hour northeast — red Aztec sandstone, petroglyphs, and better than most national parks","The Neon Museum's boneyard of old Vegas signs, best on the night tour","Fremont Street and the Arts District downtown, which is where the good bars and independent restaurants are","Hoover Dam and the Mike O'Callaghan-Pat Tillman Bridge, 45 minutes away","The Sphere, if there's a show worth seeing","Atomic Museum for the genuinely strange Nevada history"],
- shop:"The Forum Shops at Caesars, the Grand Canal Shoppes, and Las Vegas North Premium Outlets — this is a serious shopping city if that's your thing. The Arts District downtown has vintage and independents.",
- eat:[
-  {name:"Joël Robuchon at MGM Grand", d:"Three Michelin stars in the Vegas guide's heyday and still one of the great tasting menus in America.", city:"Las Vegas"},
-  {name:"Bazaar Meat by José Andrés", d:"At the Sahara. Whole suckling pig, cotton-candy foie gras. The most fun expensive meal in town.", city:"Las Vegas"},
-  {name:"Lotus of Siam", d:"Northern Thai in a strip mall that food writers have made pilgrimages to for 25 years. Get the nam prik ong and the khao soi.", city:"Las Vegas"},
-  {name:"Esther's Kitchen", d:"Arts District. House pasta and bread, and the best non-Strip restaurant in the city.", city:"Las Vegas"},
-  {name:"Raku", d:"Chinatown. A late-night Japanese charcoal grill where every Vegas chef eats after service.", city:"Las Vegas"}],
- mich:"Michelin stopped publishing a Las Vegas guide years ago, so current stars don't exist here — but the chef flagships (Robuchon, Savoy, Bazaar Meat, é by José Andrés) are still operating at that level. Treat it as a food city with no scoreboard.",
- parking:"Most Strip resorts now charge $15-25 per day for self-parking; Wynn, Encore and a few others still comp it. Downtown and the Arts District have free lots. Red Rock Canyon requires a $20 timed-entry reservation October through May — book it online.",
- tip:"Drive out Friday morning to beat the traffic (the I-15 back on Sunday afternoon is genuinely awful — leave before noon or after 8pm). Do Red Rock at sunrise, sleep in a hotel off the Strip, and spend the money on dinner instead of a show.",
- maps:"Las Vegas Strip, Las Vegas, NV"}
-);
-TRIPS.push(
-{id:"mammoth", name:"Mammoth Lakes & the Eastern Sierra", region:"Sierra Nevada", mins:330, drive:"5 hr 30 min", scene:"snow", tone:"day",
+{id:"mammoth", name:"Mammoth Lakes & the Eastern Sierra", region:"Sierra Nevada", mins:360, drive:"6 hr",
  blurb:"the best snow in California and an alien lake",
  tags:["snow","hike","park","water","cute","food"],
  hero:"Mammoth Mountain — 3,500 acres, an 11,053-foot summit, and the longest ski season in California, often running into June. In summer the same mountain becomes a lift-served bike park.",
@@ -1520,7 +1363,7 @@ TRIPS.push(
  pair:"Chain the Alabama Hills and Lone Pine on the way up, Mono Lake and Bodie on the way back.",
  maps:"Mammoth Lakes, CA"},
 
-{id:"montereysc", name:"Monterey & Santa Cruz", region:"Central Coast", mins:335, drive:"5 hr 35 min", scene:"harbor", tone:"fog",
+{id:"montereysc", name:"Monterey & Santa Cruz", region:"Central Coast", mins:375, drive:"6 hr 15 min",
  blurb:"the best aquarium in the world and a wooden roller coaster",
  tags:["water","beach","culture","food","kid","park","cute"],
  hero:"Monterey Bay Aquarium — built in an old sardine cannery on Cannery Row, with a three-story kelp forest tank and an open-ocean exhibit. It's not just the best aquarium in America, it changed what aquariums are for.",
@@ -1538,7 +1381,7 @@ TRIPS.push(
  pair:"Carmel-by-the-Sea and Big Sur are 10 minutes and 40 minutes south — this is really one big trip.",
  maps:"Monterey Bay Aquarium, Monterey, CA"},
 
-{id:"yosemite", name:"Yosemite National Park", region:"Sierra Nevada", mins:345, drive:"5 hr 45 min", scene:"granite", tone:"day",
+{id:"yosemite", name:"Yosemite National Park", region:"Sierra Nevada", mins:375, drive:"6 hr 15 min",
  blurb:"the one everyone means when they say national park",
  tags:["park","hike","snow","water"],
  hero:"Yosemite Valley — seven square miles of meadow floor with 3,000-foot granite walls on both sides, El Capitan, Half Dome and Yosemite Falls all visible from one road. There is nothing else like it.",
@@ -1554,7 +1397,7 @@ TRIPS.push(
  tip:"Go in late April or May: the waterfalls are at peak, the crowds haven't arrived, and Tioga Road opening is a bonus. Book lodging inside the park a year ahead, or stay in Groveland or Mariposa. Download offline maps — there's no service in the valley.",
  maps:"Yosemite Valley Visitor Center, Yosemite National Park, CA"},
 
-{id:"carmel", name:"Carmel-by-the-Sea & Big Sur", region:"Central Coast", mins:350, drive:"5 hr 50 min", scene:"cliff", tone:"fog",
+{id:"carmel", name:"Carmel-by-the-Sea & Big Sur", region:"Central Coast", mins:390, drive:"6 hr 30 min",
  blurb:"a fairytale village, then ninety miles of the best coast on earth",
  tags:["beach","cute","shop","food","hike","park","culture"],
  hero:"Big Sur — 90 miles of Highway 1 where the Santa Lucia Mountains fall straight into the Pacific, with Bixby Bridge, McWay Falls and redwood canyons. Carmel-by-the-Sea sits at the north end as the softest possible landing.",
@@ -1573,7 +1416,7 @@ TRIPS.push(
  pair:"Monterey and Point Lobos are 10 minutes north — do all of it over three days.",
  maps:"Carmel-by-the-Sea, CA"},
 
-{id:"sanfrancisco", name:"San Francisco", region:"Bay Area", mins:370, drive:"6 hr 10 min", scene:"bridge", tone:"fog",
+{id:"sanfrancisco", name:"San Francisco", region:"Bay Area", mins:405, drive:"6 hr 45 min",
  blurb:"six hours up the 5, or take the coast and make it two days",
  tags:["culture","food","shop","water","cute","park"],
  hero:"Golden Gate Park and the bridge — 1,017 acres of park running to the ocean, and a bridge you can walk across. Do both on the same day and you've understood the city.",
@@ -1592,7 +1435,7 @@ TRIPS.push(
  pair:"Take Highway 1 one direction and chain Big Sur, Carmel and Monterey into the trip.",
  maps:"Golden Gate Bridge, San Francisco, CA"},
 
-{id:"zion", name:"Zion National Park", region:"Utah", mins:400, drive:"6 hr 40 min", scene:"canyon", tone:"dawn",
+{id:"zion", name:"Zion National Park", region:"Utah", mins:420, drive:"7 hr",
  blurb:"a 2,000-foot sandstone canyon you walk up a river to see",
  tags:["park","hike","desert"],
  hero:"Zion Canyon — a half-mile-deep gorge of Navajo sandstone that you enter from the bottom and look up out of, which is the opposite of the Grand Canyon and somehow more overwhelming.",
@@ -1608,7 +1451,7 @@ TRIPS.push(
  tip:"Stay in Springdale so you can walk to the shuttle. Do the Narrows in the morning (check the flash flood forecast — this is not optional), Canyon Overlook at sunset. Spring and fall are ideal; summer is 100°F and packed. It's a long drive, so make it three days and add Bryce.",
  maps:"Zion National Park Visitor Center, Springdale, UT"},
 
-{id:"sedona", name:"Sedona", region:"Arizona", mins:450, drive:"7 hr 30 min", scene:"canyon", tone:"dusk",
+{id:"sedona", name:"Sedona", region:"Arizona", mins:465, drive:"7 hr 45 min",
  blurb:"red rocks, vortexes, and a chapel built into a cliff",
  tags:["desert","hike","cute","shop","park","food"],
  hero:"The red rock formations — Cathedral Rock, Bell Rock, Devil's Bridge and Courthouse Butte, all rising straight out of a town you can drive through in ten minutes. The color at sunset is not exaggerated.",
@@ -1626,7 +1469,7 @@ TRIPS.push(
  pair:"Ninety minutes from the Grand Canyon's South Rim — do them together.",
  maps:"Sedona, AZ"},
 
-{id:"grandcanyon", name:"Grand Canyon South Rim", region:"Arizona", mins:465, drive:"7 hr 45 min", scene:"canyon", tone:"dawn",
+{id:"grandcanyon", name:"Grand Canyon South Rim", region:"Arizona", mins:480, drive:"8 hr",
  blurb:"you already know. go anyway.",
  tags:["park","hike","desert","culture"],
  hero:"The South Rim — 277 miles of canyon, a mile deep, up to 18 miles across, and the moment you first walk up to the railing is genuinely unlike any other view in the world.",
@@ -1643,7 +1486,7 @@ TRIPS.push(
  pair:"Chain it with Sedona, 90 minutes south, or Zion, five hours northwest.",
  maps:"Grand Canyon Village, Grand Canyon National Park, AZ"},
 
-{id:"tahoe", name:"Lake Tahoe", region:"Sierra Nevada", mins:470, drive:"7 hr 50 min", scene:"lake", tone:"day",
+{id:"tahoe", name:"Lake Tahoe", region:"Sierra Nevada", mins:495, drive:"8 hr 15 min",
  blurb:"the bluest water in America, and a dozen ski mountains",
  tags:["snow","water","hike","park","beach","food"],
  hero:"Lake Tahoe itself — 1,645 feet deep, 22 miles long, and so clear you can see 70 feet down. Ringed by a dozen ski resorts in winter and some of the best alpine beaches in the country in summer.",
@@ -1662,302 +1505,49 @@ TRIPS.push(
 );
 
 
-/* ---------------- illustrated scenes ---------------- */
-let _uid = 0;
-const TONES = {
-  day:  ["#BFE7F2","#EAF7EC","#F7B32B"],
-  dawn: ["#FBD9C8","#FDEEDC","#F79256"],
-  dusk: ["#F7B7C8","#FCE3D6","#E85D75"],
-  fog:  ["#D9E4E7","#EFF3F2","#F0E6D2"]
-};
-function scene(kind, tone){
-  const id = "g" + (++_uid), t = TONES[tone] || TONES.day, sky = t[0], hz = t[1], sun = t[2];
-  const P = [];
-  P.push(`<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky}"/><stop offset="1" stop-color="${hz}"/></linearGradient></defs>`);
-  P.push(`<rect width="400" height="200" fill="url(#${id})"/>`);
-  const S = (cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${sun}" opacity=".92"/>`;
-  const pine = (x,y,h,c)=>`<path d="M${x} ${y} l${h*.42} ${-h} l${h*.42} ${h}z" fill="${c}"/>`;
-  const palm = (x,y,h,c)=>{
-    let s = `<path d="M${x} ${y} q${h*.13} ${-h*.55} ${h*.05} ${-h}" stroke="${c}" stroke-width="${h*.075}" fill="none" stroke-linecap="round"/>`;
-    for(let i=0;i<5;i++){ const a=-165+i*38, r=h*.42, ex=x+h*.05+Math.cos(a*Math.PI/180)*r, ey=y-h+Math.sin(a*Math.PI/180)*r*.62;
-      s += `<path d="M${x+h*.05} ${y-h} Q${(x+ex)/2} ${(y-h+ey)/2 - h*.16} ${ex} ${ey}" stroke="${c}" stroke-width="${h*.055}" fill="none" stroke-linecap="round"/>`; }
-    return s;
-  };
-  switch(kind){
-    case "beach":
-      P.push(S(312,50,30), `<rect y="112" width="400" height="88" fill="#1E90A8"/>`,
-        `<path d="M0 150 q40 -12 80 0 t80 0 t80 0 t80 0 t80 0 v50 H0z" fill="#3FB3C4" opacity=".8"/>`,
-        `<path d="M0 168 q50 -11 100 0 t100 0 t100 0 t100 0 v32 H0z" fill="#F2E3C7"/>`,
-        palm(58,168,86,"#2C6E52"), palm(96,172,58,"#38855F"));
-      break;
-    case "cliff":
-      P.push(S(66,48,24), `<rect y="118" width="400" height="82" fill="#1B7F98"/>`,
-        `<path d="M0 168 q60 -10 120 0 t120 0 t160 0 v32 H0z" fill="#2FA0AF" opacity=".75"/>`,
-        `<path d="M212 200 L232 96 q26 -22 52 4 l10 24 q30 -8 48 22 l0 54z" fill="#4A7C4F"/>`,
-        `<path d="M212 200 L232 96 q26 -22 52 4 l4 100z" fill="#3B6640"/>`,
-        `<path d="M0 200 L0 130 q40 -22 78 2 l14 68z" fill="#5C8C5A"/>`);
-      break;
-    case "mountain":
-      P.push(S(322,44,25),
-        `<path d="M-10 200 L92 66 L188 200z" fill="#5E7E8C"/><path d="M92 66 L118 100 L92 92 L66 104z" fill="#F4F8F8"/>`,
-        `<path d="M110 200 L216 42 L330 200z" fill="#41606F"/><path d="M216 42 L248 86 L216 76 L184 90z" fill="#FBFEFE"/>`,
-        `<path d="M266 200 L352 96 L430 200z" fill="#6B8B96"/>`,
-        `<rect y="176" width="400" height="24" fill="#3F6B45"/>`,
-        pine(24,182,42,"#2E5C39"), pine(60,186,32,"#386B42"), pine(316,184,36,"#2E5C39"), pine(352,188,28,"#386B42"));
-      break;
-    case "desert":
-      P.push(S(300,58,38), `<path d="M0 148 L70 112 L150 148z" fill="#C98B62" opacity=".85"/>`,
-        `<path d="M160 150 L220 108 L246 108 L300 150z" fill="#B87551"/>`,
-        `<rect y="146" width="400" height="54" fill="#E0B183"/>`,
-        `<g stroke="#4C6B41" stroke-width="9" stroke-linecap="round" fill="none"><path d="M92 178 v-56"/><path d="M92 146 l-22 -14 v-16"/><path d="M92 134 l24 -12 v-20"/></g>`,
-        `<g stroke="#4C6B41" stroke-width="6" stroke-linecap="round" fill="none"><path d="M296 182 v-36"/><path d="M296 162 l-15 -10 v-11"/><path d="M296 154 l16 -9 v-13"/></g>`,
-        `<ellipse cx="196" cy="188" rx="22" ry="6" fill="#C79769"/>`);
-      break;
-    case "forest":
-      P.push(`<rect y="126" width="400" height="74" fill="#EAF0E6" opacity=".55"/>`);
-      for(let i=0;i<9;i++) P.push(pine(i*46-14, 158, 54+((i*13)%26), "#4E7F55"));
-      for(let i=0;i<8;i++) P.push(pine(i*54+8, 200, 86+((i*19)%34), "#2C5735"));
-      P.push(`<rect y="120" width="400" height="16" fill="#FFFFFF" opacity=".35"/>`);
-      break;
-    case "redwood":
-      P.push(`<rect y="0" width="400" height="200" fill="#EAF2E4" opacity=".4"/>`);
-      for(let i=0;i<7;i++){ const x=i*58+18, w=13+((i*7)%9);
-        P.push(`<rect x="${x}" y="${-10+((i*23)%30)}" width="${w}" height="220" rx="4" fill="${i%2?"#4A3227":"#5C4033"}"/>`,
-               `<path d="M${x-16} ${20+((i*17)%40)} q${w/2+16} -26 ${w+32} 0 q-${w/2+16} 18 -${w+32} 0z" fill="#2F5A38" opacity=".9"/>`); }
-      P.push(`<rect y="182" width="400" height="18" fill="#3E5E3A"/>`);
-      break;
-    case "city":
-      P.push(S(60,46,22));
-      const bh=[74,110,58,142,92,126,66,104,150,80,118,62];
-      bh.forEach((h,i)=>{ const x=i*34+6; P.push(`<rect x="${x}" y="${200-h}" width="28" height="${h}" rx="3" fill="${i%2?"#3C5A6B":"#4E7086"}"/>`);
-        for(let r=0;r<Math.floor(h/22);r++) for(let c=0;c<3;c++) P.push(`<rect x="${x+5+c*8}" y="${206-h+r*20}" width="4.5" height="7" fill="${sun}" opacity="${.35+((i+r+c)%3)*.22}"/>`); });
-      break;
-    case "town":
-      P.push(S(340,46,24), `<rect y="160" width="400" height="40" fill="#D9CBB4"/>`);
-      [["#E8927C",100],["#7FB0A5",124],["#F2C57C",92],["#9AA8D8",134],["#E2A0C0",106],["#8FC08C",118]].forEach((b,i)=>{
-        const x=i*66+4, h=b[1];
-        P.push(`<rect x="${x}" y="${168-h}" width="60" height="${h}" rx="3" fill="${b[0]}"/>`,
-          `<path d="M${x-5} ${168-h} L${x+30} ${150-h} L${x+65} ${168-h}z" fill="#8E5A46"/>`,
-          `<rect x="${x+11}" y="${182-h}" width="17" height="21" rx="2" fill="#FDF6E8" opacity=".9"/>`,
-          `<rect x="${x+34}" y="${182-h}" width="17" height="21" rx="2" fill="#FDF6E8" opacity=".9"/>`,
-          `<rect x="${x+8}" y="${160}" width="44" height="9" fill="#FFF" opacity=".55"/>`); });
-      break;
-    case "harbor":
-      P.push(S(70,44,22), `<rect y="120" width="400" height="80" fill="#2A8FA8"/>`,
-        `<path d="M0 156 q46 -10 92 0 t92 0 t92 0 t124 0 v44 H0z" fill="#46AEC0" opacity=".7"/>`);
-      [[70,140,46],[180,132,60],[292,144,40]].forEach(b=>{
-        P.push(`<path d="M${b[0]-b[2]/2} ${b[1]} h${b[2]} l-9 16 h-${b[2]-18} z" fill="#F5F1E6"/>`,
-          `<path d="M${b[0]} ${b[1]} v-${b[2]*1.15}" stroke="#33505E" stroke-width="3"/>`,
-          `<path d="M${b[0]+2} ${b[1]-4} v-${b[2]*1.02} l${b[2]*.62} ${b[2]*.86}z" fill="#E86A4E"/>`,
-          `<path d="M${b[0]-3} ${b[1]-4} v-${b[2]*.72} l-${b[2]*.44} ${b[2]*.62}z" fill="#FFFFFF" opacity=".92"/>`); });
-      break;
-    case "vineyard":
-      P.push(S(320,48,26), `<path d="M0 132 q90 -42 200 -10 t200 -14 v92 H0z" fill="#C9B36B"/>`,
-        `<path d="M0 158 q110 -34 210 -4 t190 -18 v64 H0z" fill="#8FA84F"/>`);
-      for(let i=0;i<11;i++) P.push(`<path d="M${i*40-30} 200 L${i*40+40} 152" stroke="#5C7A38" stroke-width="5" stroke-linecap="round" opacity=".8"/>`);
-      P.push(`<ellipse cx="66" cy="126" rx="30" ry="22" fill="#4F7040"/><rect x="62" y="126" width="7" height="22" fill="#6B4A32"/>`);
-      break;
-    case "lake":
-      P.push(S(316,46,24), `<path d="M-10 128 L80 52 L172 128z" fill="#59788A"/><path d="M80 52 L104 82 L80 74 L56 86z" fill="#F6FAFA"/>`,
-        `<path d="M120 128 L228 44 L336 128z" fill="#3E5F6E"/><path d="M228 44 L256 80 L228 70 L200 84z" fill="#FBFEFE"/>`,
-        `<rect y="126" width="400" height="74" fill="#2E8FA8"/>`,
-        `<g stroke="#7FCCDA" stroke-width="3" stroke-linecap="round" opacity=".75"><path d="M40 148h58"/><path d="M120 164h84"/><path d="M240 152h72"/><path d="M74 180h96"/><path d="M250 184h84"/></g>`,
-        pine(16,130,44,"#2C5735"), pine(50,132,32,"#37693F"), pine(348,132,40,"#2C5735"), pine(378,134,30,"#37693F"));
-      break;
-    case "canyon":
-      P.push(S(78,46,26), `<path d="M0 96 L60 70 L130 96 L210 62 L300 92 L400 66 v134 H0z" fill="#C4744C"/>`,
-        `<path d="M0 124 L70 106 L150 128 L240 100 L330 126 L400 108 v92 H0z" fill="#A8562F"/>`,
-        `<path d="M0 156 L90 142 L180 160 L280 140 L400 158 v42 H0z" fill="#D89A62"/>`,
-        `<path d="M0 186 q100 -14 200 0 t200 0 v14 H0z" fill="#3FA0B8"/>`);
-      break;
-    case "granite":
-      P.push(S(66,42,22), `<path d="M-10 200 L60 92 L140 200z" fill="#8C99A0"/>`,
-        `<path d="M150 200 L150 88 q52 -66 106 -2 L262 200z" fill="#A9B4B8"/>`,
-        `<path d="M186 200 L186 116 h16 v84z" fill="#F2F7F8" opacity=".92"/>`,
-        `<path d="M182 198 q12 8 26 0 q-4 -10 -26 0z" fill="#E4F0F2"/>`,
-        `<path d="M280 200 L340 108 L400 200z" fill="#7E8C93"/>`,
-        `<rect y="184" width="400" height="16" fill="#3E6B45"/>`,
-        pine(30,190,38,"#2C5735"), pine(96,192,34,"#38693F"), pine(300,190,40,"#2C5735"), pine(342,194,28,"#38693F"));
-      break;
-    case "oasis":
-      P.push(S(322,50,28), `<path d="M-10 128 L96 54 L210 128z" fill="#9C7F76"/><path d="M150 128 L268 60 L400 128z" fill="#7E6259"/>`,
-        `<rect y="124" width="400" height="76" fill="#E7D6BC"/>`,
-        `<rect x="40" y="158" width="320" height="42" rx="12" fill="#3FBBD4"/>`,
-        `<g stroke="#7EE0EE" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M70 172h50"/><path d="M180 184h64"/><path d="M262 170h58"/></g>`,
-        palm(48,152,72,"#2F6B4F"), palm(342,156,64,"#2F6B4F"), palm(96,148,50,"#3C8058"));
-      break;
-    case "garden":
-      P.push(S(330,46,24), `<path d="M0 118 q100 -34 200 -6 t200 -18 v106 H0z" fill="#7FA85A"/>`,
-        `<path d="M0 150 q120 -28 210 0 t190 -12 v62 H0z" fill="#5E8C46"/>`);
-      for(let i=0;i<26;i++){ const x=(i*37)%396+6, y=140+((i*29)%54), c=["#EE6C4D","#F4A259","#E86AA0","#F7D060","#FFFFFF"][i%5];
-        P.push(`<path d="M${x} ${y+11} v-11" stroke="#3E6B37" stroke-width="2.4"/><circle cx="${x}" cy="${y-2}" r="5" fill="${c}"/><circle cx="${x}" cy="${y-2}" r="1.8" fill="#FFF3C4"/>`); }
-      break;
-    case "snow":
-      P.push(`<rect width="400" height="200" fill="#DCE9EF"/>`, S(318,42,22),
-        `<path d="M-10 200 L86 60 L190 200z" fill="#B7C9D2"/><path d="M86 60 L114 96 L86 88 L58 100z" fill="#FFF"/>`,
-        `<path d="M130 200 L242 40 L360 200z" fill="#9FB4C0"/><path d="M242 40 L274 84 L242 74 L210 88z" fill="#FFF"/>`,
-        `<path d="M0 170 q100 -22 200 0 t200 -8 v38 H0z" fill="#F6FBFD"/>`,
-        pine(30,186,44,"#2F5B3E"), pine(70,190,32,"#3A6D48"), pine(320,188,40,"#2F5B3E"), pine(360,192,30,"#3A6D48"));
-      break;
-    case "castle":
-      P.push(S(64,44,20), `<rect y="164" width="400" height="36" fill="#5E8C46"/>`);
-      [[150,96,34],[186,132,28],[218,150,30],[252,124,26],[282,92,32]].forEach(t=>{
-        P.push(`<rect x="${t[0]}" y="${164-t[1]}" width="${t[2]}" height="${t[1]}" fill="#EDE6F2"/>`,
-          `<path d="M${t[0]-6} ${164-t[1]} L${t[0]+t[2]/2} ${140-t[1]} L${t[0]+t[2]+6} ${164-t[1]}z" fill="#6E7FC4"/>`); });
-      P.push(`<rect x="228" y="130" width="18" height="34" rx="9" fill="#8B6FB5"/>`);
-      for(let i=0;i<12;i++){ const a=i*30*Math.PI/180, x=326+Math.cos(a)*26, y=58+Math.sin(a)*26;
-        P.push(`<path d="M326 58 L${x} ${y}" stroke="#F7D060" stroke-width="2.2" stroke-linecap="round" opacity=".9"/><circle cx="${x}" cy="${y}" r="2.6" fill="#EE6C4D"/>`); }
-      break;
-    case "bridge":
-      P.push(S(58,46,22), `<rect y="140" width="400" height="60" fill="#3E8CA8"/>`,
-        `<rect y="128" width="400" height="10" fill="#C0472B"/>`,
-        `<rect x="88" y="34" width="14" height="106" fill="#C0472B"/><rect x="286" y="34" width="14" height="106" fill="#C0472B"/>`,
-        `<path d="M0 84 Q 48 128 95 128 Q 190 128 293 128 Q 340 128 400 88" stroke="#C0472B" stroke-width="4" fill="none"/>`,
-        `<rect y="94" width="400" height="30" fill="#FFF" opacity=".45"/>`);
-      break;
-    default:
-      P.push(S(320,48,26), `<path d="M0 140 q100 -30 200 -4 t200 -14 v78 H0z" fill="#6F9A5B"/>`);
-  }
-  return `<svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">${P.join("")}</svg>`;
-}
-
 /* ---------------- helpers ---------------- */
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const dirUrl = t => "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(ORIGIN) + "&destination=" + encodeURIComponent(t.maps || (t.name + ", CA"));
+const dirUrl = t => "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(ORIGIN) +
+  "&destination=" + encodeURIComponent(t.maps || (t.name + ", CA"));
 const lookup = (r, t) => "https://www.google.com/search?q=" + encodeURIComponent(r.name + " " + (r.city || t.name) + " menu");
 const placeUrl = (r, t) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(r.name + " " + (r.city || t.name));
+
 const ZONES = [
-  {z:1, max:30,  t:"Basically our neighborhood", s:"under 30 minutes"},
-  {z:2, max:60,  t:"A casual half-hour-ish", s:"30 to 60 minutes"},
-  {z:3, max:120, t:"Real day-trip territory", s:"1 to 2 hours"},
-  {z:4, max:240, t:"Leave early, stay late", s:"2 to 4 hours"},
-  {z:5, max:9e9, t:"Book a hotel, honestly", s:"4 hours and beyond"}
+  {max:30,  t:"Close to home",        s:"Under 30 minutes"},
+  {max:60,  t:"Across town",          s:"30 to 60 minutes"},
+  {max:120, t:"An easy morning drive",s:"One to two hours"},
+  {max:240, t:"A whole day out",      s:"Two to four hours"},
+  {max:9e9, t:"Worth an overnight",   s:"Four hours and beyond"}
 ];
 const VIBES = [
-  ["beach","🌊 Beach"],["hike","🥾 Hikes & views"],["food","🍽 Food trip"],["shop","🛍 Shopping"],
-  ["wine","🍷 Wine"],["park","🌲 State & national parks"],["desert","🌵 Desert"],["snow","🏔 Snow"],
-  ["cute","🧁 Cute downtown"],["water","⛵️ On the water"],["culture","🎨 Museums & culture"],["kid","🎡 Big fun"]
+  ["beach","Beach"],["hike","Hikes & views"],["food","Food"],["shop","Shopping"],
+  ["wine","Wine"],["park","Parks"],["desert","Desert"],["snow","Snow"],
+  ["cute","Small downtown"],["water","On the water"],["culture","Museums"],["kid","Big fun"]
 ];
 
-let state = { q:"", dist:null, vibes:new Set(), mich:false, open:new Set(), done:new Set() };
+let state = {q:"", dist:null, vibes:new Set(), mich:false, open:new Set(), done:new Set()};
 try{ state.done = new Set(JSON.parse(localStorage.getItem("pv-daytrips-stamps") || "[]")); }catch(e){}
 const save = () => { try{ localStorage.setItem("pv-daytrips-stamps", JSON.stringify([...state.done])); }catch(e){} };
 
 function matches(t){
   if(state.dist !== null){
-    const z = ZONES[state.dist], prev = state.dist ? ZONES[state.dist-1].max : 0;
-    if(!(t.mins > prev && t.mins <= z.max)) return false;
+    const prev = state.dist ? ZONES[state.dist-1].max : 0;
+    if(!(t.mins > prev && t.mins <= ZONES[state.dist].max)) return false;
   }
   if(state.mich && !t.mich && !t.eat.some(r => r.m)) return false;
   for(const v of state.vibes) if(!t.tags.includes(v)) return false;
   if(state.q){
     const hay = (t.name + " " + t.region + " " + t.blurb + " " + t.hero + " " + t.see.join(" ") + " " +
-      (t.shop||"") + " " + t.eat.map(r=>r.name+" "+r.d).join(" ") + " " + (t.mich||"") + " " + t.tip).toLowerCase();
+      (t.shop || "") + " " + t.eat.map(r => r.name + " " + r.d).join(" ") + " " + (t.mich || "") + " " + t.tip).toLowerCase();
     if(!hay.includes(state.q)) return false;
   }
   return true;
 }
 
-function restRow(r, t){
-  const n = r.stars || 1;
-  const badge = r.m === "star"
-      ? `<span class="mich star">${"★".repeat(n)} ${n === 1 ? "Michelin star" : n + " Michelin stars"}</span>`
-    : r.m === "bib" ? `<span class="mich bib">Bib Gourmand</span>` : "";
-  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${badge}</div>
-    <div class="rest-d">${esc(r.d)}</div></div><div class="rest-l">
-    <a class="mbtn" href="${esc(lookup(r,t))}" target="_blank" rel="noopener">🍴 Menu</a>
-    <a class="mbtn ghost" href="${esc(placeUrl(r,t))}" target="_blank" rel="noopener">📍 Map</a>
-    </div></div>`;
-}
-
-function card(t){
-  const done = state.done.has(t.id), open = state.open.has(t.id), pc = photoCount(t.id);
-  const tags = t.tags.slice(0,3).map(v => {
-    const f = VIBES.find(x => x[0] === v); return f ? `<span class="tag vibe">${esc(f[1].split(" ").slice(1).join(" "))}</span>` : "";
-  }).join("");
-  const starred = t.eat.some(r => r.m === "star") ? `<span class="tag star">★ Michelin</span>`
-    : t.eat.some(r => r.m === "bib") ? `<span class="tag star">Bib Gourmand</span>`
-    : t.mich ? `<span class="tag star">★ nearby</span>` : "";
-  return `<article class="trip${open?" open":""}" id="trip-${t.id}">
-    <button class="t-head" type="button" data-t="${t.id}" aria-expanded="${open}">
-      <span class="t-thumb">${scene(t.scene, t.tone)}</span>
-      <span class="t-body">
-        <span class="t-top"><span class="t-name">${esc(t.name)}</span><span class="t-region">${esc(t.region)}</span></span>
-        <span class="t-blurb">${esc(t.blurb)}</span>
-        <span class="t-meta"><span class="drive">🚗 ${esc(t.drive)}</span>${pc ? `<span class="tag star">📸 ${pc}</span>` : ""}${tags}${starred}</span>
-      </span>
-      <span class="t-caret" aria-hidden="true">▾</span>
-    </button>
-    <div class="t-panel">
-      ${open ? `<div class="t-banner">${scene(t.scene, t.tone)}</div>
-      <div class="t-inner">
-        ${done ? albumSec(t) : ""}
-        <div class="sec hero-sec"><h4>The main event</h4><p class="lead">${esc(t.hero)}</p></div>
-        <div class="sec"><h4>Parks, viewpoints &amp; must-sees</h4><ul>${t.see.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
-        ${t.shop ? `<div class="sec"><h4>Downtown &amp; shopping</h4><p>${esc(t.shop)}</p></div>` : ""}
-        <div class="sec"><h4>Where to eat</h4><div class="eat">${t.eat.map(r=>restRow(r,t)).join("")}</div></div>
-        ${t.mich ? `<div class="sec"><h4>Michelin in the area</h4><p>${esc(t.mich)}</p></div>` : ""}
-        <div class="sec"><h4>Parking</h4><p>${esc(t.parking)}</p></div>
-        <div class="sec"><h4>Pro tip</h4><p>${esc(t.tip)}</p>${t.pair?`<p class="pair" style="margin-top:6px">↳ ${esc(t.pair)}</p>`:""}</div>
-      </div>
-      <div class="t-foot">
-        <a class="foot-b" href="${esc(dirUrl(t))}" target="_blank" rel="noopener">🧭 Directions from home</a>
-        <button class="foot-b${done?" on":""}" type="button" data-done="${t.id}">${done?"✓ Been there":"Mark as been there"}</button>
-      </div>` : ""}
-    </div>
-  </article>`;
-}
-
-function render(){
-  const road = document.getElementById("road");
-  const been = t => state.done.has(t.id);
-  const list = TRIPS.filter(matches).filter(t => VIEW === "been" ? been(t) : !been(t));
-  let html = "";
-
-  if(VIEW === "been"){
-    list.sort((a, b) => (visits[b.id] || "").localeCompare(visits[a.id] || "") || a.mins - b.mins);
-    let last = null;
-    for(const t of list){
-      const m = monthLabel(visits[t.id]);
-      if(m !== last){ last = m;
-        const n = list.filter(x => monthLabel(visits[x.id]) === m).length;
-        html += `<div class="zone" data-z="6"><div class="zone-sign"><span class="z1">${esc(m)}</span>` +
-                `<span class="z2">${n} stop${n === 1 ? "" : "s"}</span></div></div>`; }
-      html += card(t);
-    }
-  } else {
-    list.sort((a, b) => a.mins - b.mins || a.name.localeCompare(b.name));
-    let zi = -1;
-    for(const t of list){
-      const z = ZONES.findIndex(x => t.mins <= x.max);
-      if(z !== zi){ zi = z; const Z = ZONES[z];
-        html += `<div class="zone" data-z="${Z.z}"><div class="zone-sign"><span class="z1">${esc(Z.t)}</span>` +
-                `<span class="z2">${esc(Z.s)} from home</span></div></div>`; }
-      html += card(t);
-    }
-  }
-  road.innerHTML = html;
-
-  const empty = document.getElementById("empty");
-  empty.hidden = list.length > 0;
-  if(!list.length) empty.innerHTML = VIEW === "been"
-    ? "<b>No stamped trips yet.</b>Open any stop, hit <em>Mark as been there</em>, and it moves here with room for your photos."
-    : "<b>Nothing matches that.</b>Try clearing a filter — or hit Surprise and let the road decide.";
-
-  const total = TRIPS.filter(t => VIEW === "been" ? been(t) : !been(t)).length;
-  document.getElementById("count").textContent = list.length +
-    (list.length === 1 ? " trip" : " trips") +
-    (list.length < total ? " of " + total : VIEW === "been" ? " visited — newest first" : " to go — closest first");
-
-  const n = state.done.size;
-  document.getElementById("stamped").textContent = n;
-  document.getElementById("barfill").style.width = (TRIPS.length ? n / TRIPS.length * 100 : 0) + "%";
-}
-
-/* ---------------- photo album: on-device store + optional page-kept copies ---------------- */
-const KEPT = (() => { try { const k = JSON.parse(document.getElementById("kept-state").textContent);
+/* ---------------- photo album ---------------- */
+const KEPT = (() => { try{ const k = JSON.parse(document.getElementById("kept-state").textContent);
   return {photos: Array.isArray(k.photos) ? k.photos : [], visits: (k.visits && typeof k.visits === "object") ? k.visits : {}};
-} catch(e){ return {photos:[], visits:{}}; } })();
+}catch(e){ return {photos:[], visits:{}}; } })();
 
 let visits = {};
 try{ visits = JSON.parse(localStorage.getItem("pv-daytrips-visits") || "{}") || {}; }catch(e){}
@@ -1973,28 +1563,22 @@ function monthLabel(iso){
   const d = new Date(iso + "T12:00:00");
   return isNaN(d) ? "No date yet" : d.toLocaleDateString(undefined, {month:"long", year:"numeric"});
 }
-function prettyDate(iso){
-  if(!iso) return "";
-  const d = new Date(iso + "T12:00:00");
-  return isNaN(d) ? "" : d.toLocaleDateString(undefined, {month:"short", day:"numeric", year:"numeric"});
-}
 
 let _toastT;
 function toast(msg){
   const el = document.getElementById("toast");
   el.textContent = msg; el.classList.add("on");
-  clearTimeout(_toastT); _toastT = setTimeout(() => el.classList.remove("on"), 3200);
+  clearTimeout(_toastT); _toastT = setTimeout(() => el.classList.remove("on"), 3400);
 }
 
-/* --- IndexedDB --- */
 let _db;
 function idb(){
   if(_db) return _db;
-  _db = new Promise((res, rej) => {
+  _db = new Promise(res => {
     if(!self.indexedDB) return res(null);
     const r = indexedDB.open("pv-daytrips", 1);
     r.onupgradeneeded = () => { const d = r.result;
-      if(!d.objectStoreNames.contains("photos")){ const st = d.createObjectStore("photos", {keyPath:"id"}); st.createIndex("trip", "trip"); } };
+      if(!d.objectStoreNames.contains("photos")){ const st = d.createObjectStore("photos", {keyPath:"id"}); st.createIndex("trip","trip"); } };
     r.onsuccess = () => res(r.result);
     r.onerror = () => res(null);
   }).catch(() => null);
@@ -2003,14 +1587,13 @@ function idb(){
 function tx(mode, fn, fallback){
   return idb().then(d => { if(!d) return fallback;
     return new Promise(res => { try{
-      const t = d.transaction("photos", mode), st = t.objectStore("photos");
-      let out = fallback; const rq = fn(st); if(rq) rq.onsuccess = () => { out = rq.result; };
+      const t = d.transaction("photos", mode); let out = fallback;
+      const rq = fn(t.objectStore("photos")); if(rq) rq.onsuccess = () => { out = rq.result; };
       t.oncomplete = () => res(out); t.onerror = () => res(fallback); t.onabort = () => res(fallback);
     }catch(e){ res(fallback); } });
   });
 }
 
-/* --- photo cache --- */
 const PHOTOS = {};
 const urlCache = new Map();
 function photoSrc(r){
@@ -2033,7 +1616,6 @@ async function loadPhotos(){
 }
 const photoCount = id => (PHOTOS[id] || []).length;
 
-/* --- image downscaling --- */
 async function shrink(file, max, q){
   const bmp = await createImageBitmap(file);
   const sc = Math.min(1, max / Math.max(bmp.width, bmp.height));
@@ -2055,8 +1637,8 @@ async function addPhotos(tripId, files){
     try{
       const blob = await shrink(f, 1600, 0.82);
       if(!blob) continue;
-      const rec = {id:"p" + Date.now().toString(36) + Math.random().toString(36).slice(2,7), trip:tripId, ts:Date.now(), cap:"", blob};
-      await tx("readwrite", st => st.put(rec));
+      await tx("readwrite", st => st.put({id:"p" + Date.now().toString(36) + Math.random().toString(36).slice(2,7),
+        trip:tripId, ts:Date.now(), cap:"", blob}));
       n++;
     }catch(e){}
   }
@@ -2066,14 +1648,12 @@ async function addPhotos(tripId, files){
   await loadPhotos(); render();
   toast(n === 1 ? "Photo added" : n + " photos added");
 }
-
 async function deletePhoto(rec){
   await tx("readwrite", st => st.delete(rec.id));
   if(rec.kept){ KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id); await publishKept(); }
   await loadPhotos(); render(); toast("Photo deleted");
 }
 
-/* --- keeping photos in the page itself (syncs across devices) --- */
 let _art;
 function artifactApi(){
   if(_art !== undefined) return _art;
@@ -2089,25 +1669,20 @@ async function publishKept(){
     (m, a, b) => a + json + b);
   if(doc.length > 14e6){ toast("The page is full — unkeep a few photos first"); return false; }
   try{ await api.publish(doc); return true; }
-  catch(e){
-    toast(e && e.code === "conflict" ? "Saved elsewhere first — reload and try again" : "Couldn't save into the page");
-    return false;
-  }
+  catch(e){ toast(e && e.code === "conflict" ? "Saved elsewhere first — reload and try again" : "Couldn't save into the page"); return false; }
 }
 async function setKept(rec, on){
   const api = await artifactApi();
   if(!api){ toast("Keeping photos in the page isn't available in this view"); return; }
   const backup = KEPT.photos.slice();
   if(on){
-    if(KEPT.photos.length >= 60){ toast("60 kept photos is the ceiling — unkeep one first"); return; }
+    if(KEPT.photos.length >= 50){ toast("Fifty kept photos is the ceiling — unkeep one first"); return; }
     toast("Saving into the page…");
     let src = rec.src;
-    if(!src){ const small = await shrink(rec.blob, 1200, 0.7); src = await toDataURL(small); }
+    if(!src){ src = await toDataURL(await shrink(rec.blob, 1100, 0.68)); }
     KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id);
     KEPT.photos.push({id:rec.id, trip:rec.trip, ts:rec.ts, cap:rec.cap || "", src});
-  } else {
-    KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id);
-  }
+  } else KEPT.photos = KEPT.photos.filter(p => p.id !== rec.id);
   const ok = await publishKept();
   if(!ok){ KEPT.photos = backup; return; }
   rec.kept = on;
@@ -2115,57 +1690,167 @@ async function setKept(rec, on){
   render();
 }
 
-/* --- album markup --- */
 function albumSec(t){
   const list = PHOTOS[t.id] || [];
-  const tiles = list.map(r => `<button class="photo" type="button" data-photo="${esc(r.id)}" title="${esc(r.cap || "Photo")}">
+  const tiles = list.map(r => `<button class="photo" type="button" data-photo="${esc(r.id)}">
       <img src="${esc(photoSrc(r))}" alt="${esc(r.cap || ("Photo from " + t.name))}" loading="lazy">
-      ${r.kept ? '<span class="pin" title="Kept in the page">★</span>' : ""}</button>`).join("");
-  return `<div class="sec album">
-    <h4>📸 The day we went</h4>
-    <div class="visitrow"><label for="d-${esc(t.id)}">We went on</label>
+      ${r.kept ? '<span class="kept">In the page</span>' : ""}</button>`).join("");
+  return `<div class="sec"><h3>The day we went</h3>
+    <div class="visitrow"><label for="d-${esc(t.id)}">Date</label>
       <input id="d-${esc(t.id)}" type="date" value="${esc(visits[t.id] || "")}" data-visit="${esc(t.id)}" max="${todayISO()}">
-      ${list.length ? `<span>· ${list.length} photo${list.length === 1 ? "" : "s"}</span>` : ""}</div>
-    <div class="photos">${tiles}
-      <button class="addphoto" type="button" data-add="${esc(t.id)}"><span>＋</span>Add photos</button>
-    </div>
-    <p class="albnote">Photos stay <b>on this device</b>. Tap one and hit <b>Keep in the page</b> to carry it to your other phone or laptop.</p>
+      ${list.length ? `<span>${list.length} photo${list.length === 1 ? "" : "s"}</span>` : ""}</div>
+    <div class="photos">${tiles}<button class="addphoto" type="button" data-add="${esc(t.id)}">Add photos</button></div>
+    <p class="albnote">Photos stay on this device. Open one and choose <strong>Keep in the page</strong> to carry it to your other phone or laptop.</p>
   </div>`;
 }
 
-/* ---------------- controls ---------------- */
-const dc = document.getElementById("distchips"), vc = document.getElementById("vibechips");
-dc.innerHTML = `<button class="chip" type="button" data-d="all" aria-pressed="true">All distances</button>` +
-  ZONES.map((z,i)=>`<button class="chip" type="button" data-d="${i}" aria-pressed="false">${esc(z.s)}</button>`).join("");
-vc.innerHTML = VIBES.map(v=>`<button class="chip" type="button" data-v="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("") +
-  `<button class="chip acc" type="button" data-v="__mich" aria-pressed="false">★ Michelin only</button>`;
+/* ---------------- rendering ---------------- */
+function restRow(r, t){
+  const badge = r.m === "star"
+      ? `<span class="mich">${(r.stars || 1) === 1 ? "Michelin star" : (r.stars) + " Michelin stars"}</span>`
+    : r.m === "bib" ? `<span class="mich">Bib Gourmand</span>` : "";
+  return `<div class="rest"><div class="rest-b"><div class="rest-n">${esc(r.name)}${badge}</div>
+    <div class="rest-d">${esc(r.d)}</div></div><div class="rest-l">
+    <a href="${esc(lookup(r,t))}" target="_blank" rel="noopener">Menu</a>
+    <a href="${esc(placeUrl(r,t))}" target="_blank" rel="noopener">Map</a></div></div>`;
+}
 
-const vt = document.getElementById("viewtabs");
-vt.addEventListener("click", e => { const b = e.target.closest("[data-view]"); if(!b) return;
+function card(t){
+  const done = state.done.has(t.id), open = state.open.has(t.id), pc = photoCount(t.id);
+  const vibes = t.tags.slice(0,3).map(v => { const f = VIBES.find(x => x[0] === v); return f ? f[1] : ""; })
+    .filter(Boolean).join(" &middot; ");
+  const mich = t.eat.some(r => r.m === "star") ? "Michelin star"
+    : t.eat.some(r => r.m === "bib") ? "Bib Gourmand" : t.mich ? "Michelin nearby" : "";
+  return `<article class="entry${open ? " open" : ""}" id="trip-${t.id}">
+    <button class="row" type="button" data-t="${t.id}" aria-expanded="${open}">
+      <span class="time">${esc(t.drive)}</span>
+      <span class="main">
+        <span class="hd"><span class="name">${esc(t.name)}</span><span class="mark" aria-hidden="true">${open ? "&minus;" : "+"}</span></span>
+        <span class="blurb">${esc(t.blurb)}</span>
+        <span class="meta"><span class="lbl">${esc(t.region)}</span><span class="lbl vibes">${vibes}</span>
+          ${mich ? `<span class="lbl mich-flag">${mich}</span>` : ""}
+          ${pc ? `<span class="lbl">${pc} photo${pc === 1 ? "" : "s"}</span>` : ""}</span>
+      </span>
+    </button>
+    <div class="panel">${open ? `
+      ${done ? albumSec(t) : ""}
+      <div class="sec"><h3>The main event</h3><p class="lead">${esc(t.hero)}</p></div>
+      <div class="sec"><h3>Parks, viewpoints and must-sees</h3><ul>${t.see.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      ${t.shop ? `<div class="sec"><h3>Downtown and shopping</h3><p>${esc(t.shop)}</p></div>` : ""}
+      <div class="sec"><h3>Where to eat</h3>${t.eat.map(r => restRow(r,t)).join("")}</div>
+      ${t.mich ? `<div class="sec"><h3>Michelin in the area</h3><p>${esc(t.mich)}</p></div>` : ""}
+      <div class="sec"><h3>Parking</h3><p>${esc(t.parking)}</p></div>
+      <div class="sec"><h3>Worth knowing</h3><p>${esc(t.tip)}</p>${t.pair ? `<p class="pair">${esc(t.pair)}</p>` : ""}</div>
+      <div class="acts">
+        <a class="btn" href="${esc(dirUrl(t))}" target="_blank" rel="noopener">Directions</a>
+        <button class="btn${done ? " on" : ""}" type="button" data-done="${t.id}">${done ? "Visited" : "Mark as visited"}</button>
+      </div>` : ""}</div>
+  </article>`;
+}
+
+function render(){
+  const road = document.getElementById("road");
+  const been = t => state.done.has(t.id);
+  const list = TRIPS.filter(matches).filter(t => VIEW === "been" ? been(t) : !been(t));
+  let html = "";
+
+  if(VIEW === "been"){
+    list.sort((a,b) => (visits[b.id] || "").localeCompare(visits[a.id] || "") || a.mins - b.mins);
+    let last = null;
+    for(const t of list){
+      const m = monthLabel(visits[t.id]);
+      if(m !== last){ last = m;
+        const n = list.filter(x => monthLabel(visits[x.id]) === m).length;
+        html += `<div class="zone"><h2>${esc(m)}</h2><span class="lbl">${n} stop${n === 1 ? "" : "s"}</span></div>`; }
+      html += card(t);
+    }
+  } else {
+    list.sort((a,b) => a.mins - b.mins || a.name.localeCompare(b.name));
+    let zi = -1;
+    for(const t of list){
+      const z = ZONES.findIndex(x => t.mins <= x.max);
+      if(z !== zi){ zi = z;
+        html += `<div class="zone"><h2>${esc(ZONES[z].t)}</h2><span class="lbl">${esc(ZONES[z].s)}</span></div>`; }
+      html += card(t);
+    }
+  }
+  road.innerHTML = html;
+
+  const empty = document.getElementById("empty");
+  empty.hidden = list.length > 0;
+  empty.innerHTML = VIEW === "been"
+    ? "<b>Nothing stamped yet.</b>Open any entry, choose Mark as visited, and it moves here with room for the date and your photos."
+    : "<b>Nothing matches that.</b>Try clearing a filter, or let the page pick one for you.";
+
+  const total = TRIPS.filter(t => VIEW === "been" ? been(t) : !been(t)).length;
+  document.getElementById("count").textContent = list.length + (list.length === 1 ? " place" : " places") +
+    (list.length < total ? " of " + total : VIEW === "been" ? ", most recent first" : ", nearest first");
+  document.getElementById("stampline").textContent = state.done.size + " of " + TRIPS.length + " visited";
+}
+
+/* ---------------- controls ---------------- */
+const dc = document.getElementById("distchips"), vc = document.getElementById("vibechips"),
+      tabs = document.getElementById("tabs");
+dc.innerHTML = `<button class="chip" type="button" data-d="all" aria-pressed="true">Any distance</button>` +
+  ZONES.map((z,i) => `<button class="chip" type="button" data-d="${i}" aria-pressed="false">${esc(z.s)}</button>`).join("");
+vc.innerHTML = VIBES.map(v => `<button class="chip" type="button" data-v="${v[0]}" aria-pressed="false">${esc(v[1])}</button>`).join("") +
+  `<button class="chip" type="button" data-v="__mich" aria-pressed="false">Michelin only</button>`;
+
+const ftoggle = document.getElementById("ftoggle"), fpanel = document.getElementById("filters");
+function activeFilters(){ return (state.dist !== null ? 1 : 0) + state.vibes.size + (state.mich ? 1 : 0); }
+function syncFilterLabel(){
+  const n = activeFilters();
+  ftoggle.textContent = n ? "Filters (" + n + ")" : "Filters";
+}
+ftoggle.addEventListener("click", () => {
+  const open = ftoggle.getAttribute("aria-expanded") === "true";
+  ftoggle.setAttribute("aria-expanded", String(!open));
+  fpanel.hidden = open;
+});
+document.getElementById("fclear").addEventListener("click", () => {
+  state.dist = null; state.vibes.clear(); state.mich = false;
+  [...dc.children].forEach(c => c.setAttribute("aria-pressed", String(c.dataset.d === "all")));
+  [...vc.children].forEach(c => c.setAttribute("aria-pressed", "false"));
+  syncFilterLabel(); render();
+});
+
+tabs.addEventListener("click", e => { const b = e.target.closest("[data-view]"); if(!b) return;
   VIEW = b.dataset.view;
-  [...vt.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+  [...tabs.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
   render(); scrollTo({top:0, behavior:"smooth"}); });
 
 dc.addEventListener("click", e => { const b = e.target.closest("[data-d]"); if(!b) return;
   state.dist = b.dataset.d === "all" ? null : +b.dataset.d;
-  [...dc.children].forEach(c => c.setAttribute("aria-pressed", c === b));
-  render(); });
+  [...dc.children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+  syncFilterLabel(); render(); });
 
 vc.addEventListener("click", e => { const b = e.target.closest("[data-v]"); if(!b) return;
   const v = b.dataset.v, on = b.getAttribute("aria-pressed") === "true";
   if(v === "__mich") state.mich = !on; else on ? state.vibes.delete(v) : state.vibes.add(v);
-  b.setAttribute("aria-pressed", String(!on)); render(); });
+  b.setAttribute("aria-pressed", String(!on)); syncFilterLabel(); render(); });
 
-let qt; document.getElementById("q").addEventListener("input", e => {
+let qt;
+document.getElementById("q").addEventListener("input", e => {
   clearTimeout(qt); const v = e.target.value.trim().toLowerCase();
   qt = setTimeout(() => { state.q = v; render(); }, 130); });
 
-document.getElementById("road").addEventListener("click", e => {
+document.getElementById("lucky").addEventListener("click", () => {
+  const pool = TRIPS.filter(matches).filter(t => VIEW === "been" ? state.done.has(t.id) : !state.done.has(t.id));
+  if(!pool.length) return;
+  const t = pool[Math.floor(Math.random() * pool.length)];
+  state.open.add(t.id); render();
+  document.getElementById("trip-" + t.id).scrollIntoView({behavior:"smooth", block:"center"});
+});
+
+const road = document.getElementById("road");
+road.addEventListener("click", e => {
   const h = e.target.closest("[data-t]");
-  if(h){ const id = h.dataset.t; state.open.has(id) ? state.open.delete(id) : state.open.add(id); render();
+  if(h){ const id = h.dataset.t;
+    state.open.has(id) ? state.open.delete(id) : state.open.add(id);
+    render();
     const el = document.getElementById("trip-" + id);
     if(el && state.open.has(id)){ const y = el.getBoundingClientRect().top;
-      if(y < 70 || y > innerHeight - 140) el.scrollIntoView({behavior:"smooth", block:"start"}); }
+      if(y < 80 || y > innerHeight - 140) el.scrollIntoView({behavior:"smooth", block:"start"}); }
     return; }
   const d = e.target.closest("[data-done]");
   if(d){ const id = d.dataset.done;
@@ -2174,29 +1859,22 @@ document.getElementById("road").addEventListener("click", e => {
     save(); render();
     if(state.done.has(id) && VIEW === "todo") toast("Moved to Been there — add photos over there");
     return; }
-
-  const ph = e.target.closest("[data-photo]");
-  if(ph){ openLightbox(ph.dataset.photo); return; }
-
-  const ad = e.target.closest("[data-add]");
-  if(ad){ pickFiles(ad.dataset.add); return; }
+  const ph = e.target.closest("[data-photo]"); if(ph){ openLightbox(ph.dataset.photo); return; }
+  const ad = e.target.closest("[data-add]"); if(ad){ pickFiles(ad.dataset.add); }
 });
-
-document.getElementById("road").addEventListener("change", e => {
-  const dv = e.target.closest("[data-visit]");
-  if(!dv) return;
-  const id = dv.dataset.visit;
-  if(dv.value) visits[id] = dv.value; else delete visits[id];
+road.addEventListener("change", e => {
+  const dv = e.target.closest("[data-visit]"); if(!dv) return;
+  if(dv.value) visits[dv.dataset.visit] = dv.value; else delete visits[dv.dataset.visit];
   saveVisits(); render();
 });
 
-/* ---------------- photo picking + lightbox ---------------- */
+/* ---------------- photo picking and lightbox ---------------- */
 let _fileInput;
 function pickFiles(tripId){
   if(!_fileInput){
     _fileInput = document.createElement("input");
-    _fileInput.type = "file"; _fileInput.accept = "image/*"; _fileInput.multiple = true;
-    _fileInput.hidden = true; document.body.appendChild(_fileInput);
+    _fileInput.type = "file"; _fileInput.accept = "image/*"; _fileInput.multiple = true; _fileInput.hidden = true;
+    document.body.appendChild(_fileInput);
     _fileInput.addEventListener("change", () => {
       const id = _fileInput.dataset.trip;
       const files = [..._fileInput.files];   // copy before clearing: .files is live
@@ -2211,26 +1889,22 @@ function pickFiles(tripId){
 const lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img"),
       lbCap = document.getElementById("lb-cap"), lbPin = document.getElementById("lb-pin");
 let lbRec = null;
-
 async function openLightbox(id){
   const r = findPhoto(id); if(!r) return;
   lbRec = r;
-  lbImg.src = photoSrc(r);
-  lbImg.alt = r.cap || "Photo";
+  lbImg.src = photoSrc(r); lbImg.alt = r.cap || "Photo";
   lbCap.value = r.cap || "";
-  lbPin.textContent = r.kept ? "★ Kept in the page" : "☆ Keep in the page";
+  lbPin.textContent = r.kept ? "Kept in the page" : "Keep in the page";
   lbPin.classList.toggle("on", !!r.kept);
-  const api = await artifactApi();
-  lbPin.hidden = !api;
-  lb.classList.add("on");
-  document.body.style.overflow = "hidden";
+  lbPin.hidden = !await artifactApi();
+  lb.classList.add("on"); document.body.style.overflow = "hidden";
 }
 async function closeLightbox(){
   if(lbRec){
     const cap = lbCap.value.trim();
     if(cap !== (lbRec.cap || "")){
       lbRec.cap = cap;
-      if(!lbRec.remote) await tx("readwrite", st => st.put(Object.assign({}, lbRec, {kept:undefined, remote:undefined})));
+      if(!lbRec.remote) await tx("readwrite", st => st.put({id:lbRec.id, trip:lbRec.trip, ts:lbRec.ts, cap, blob:lbRec.blob}));
       const k = KEPT.photos.find(p => p.id === lbRec.id);
       if(k){ k.cap = cap; await publishKept(); }
       render();
@@ -2242,24 +1916,14 @@ document.getElementById("lb-close").addEventListener("click", closeLightbox);
 lb.addEventListener("click", e => { if(e.target === lb || e.target.classList.contains("lb-img")) closeLightbox(); });
 addEventListener("keydown", e => { if(e.key === "Escape" && lb.classList.contains("on")) closeLightbox(); });
 lbPin.addEventListener("click", async () => { const r = lbRec; if(!r) return; await closeLightbox(); setKept(r, !r.kept); });
-document.getElementById("lb-del").addEventListener("click", async () => {
+document.getElementById("lb-del").addEventListener("click", () => {
   const r = lbRec; if(!r) return;
   if(!confirm("Delete this photo? This can't be undone.")) return;
   lbRec = null; lb.classList.remove("on"); lbImg.src = ""; document.body.style.overflow = "";
   deletePhoto(r);
 });
 
-document.getElementById("lucky").addEventListener("click", () => {
-  const pool = TRIPS.filter(matches); if(!pool.length) return;
-  const t = pool[Math.floor(Math.random() * pool.length)];
-  state.open.add(t.id); render();
-  document.getElementById("trip-" + t.id).scrollIntoView({behavior:"smooth", block:"center"});
-});
-
-const topBtn = document.getElementById("top");
-topBtn.addEventListener("click", () => scrollTo({top:0, behavior:"smooth"}));
-addEventListener("scroll", () => topBtn.classList.toggle("show", scrollY > 900), {passive:true});
-
+syncFilterLabel();
 render();
 loadPhotos().then(render);
 </script>
